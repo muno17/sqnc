@@ -12,7 +12,10 @@
         <title>sqnc</title>
         <meta charset="utf-8" />
         <link href="style/style.css" type="text/css" rel="stylesheet" />
-        <script src="js/sqnc.js"></script>
+        <script src="http://unpkg.com/tone"></script>
+        <script src="js/audio-engine.js"></script>
+        <script src="js/sequencer.js"></script>
+        <script src="js/ui-controls.js"></script>
     </head>
 
     <body>

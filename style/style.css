@@ -19,11 +19,88 @@ footer {
 body {
     align-items: center;
     justify-content: center;
+
+}
+
+button {
+    border-radius: 5px;
+    box-shadow: 1px 1px 2px black;
+    font-family: ubuntu, "sans-serif", "sans";
+    font-size: 20px;
+}
+
+h2 {
+    padding: 0;
+    margin: 0;
 }
 
 #sqnc {
-    width: 1300px;
-    height: 700px;
+    width: 1200px;
+    height: 600px;
+    padding: 50px;
     background-color: #C7C6C6;
     box-shadow: 1px 1px 8px black;
+    display:flex;
+    flex-direction: column;
+}
+
+
+#tracks {
+    display: flex;
+    min-height: 400px;
+}
+
+#trackButtons {
+    display:flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+#trackButtons button {
+    width: 120px;
+    height: 60px;
+}
+
+#globalParam {
+    display: flex;
+    justify-content: space-evenly;
+    min-height: 100px;
+}
+
+#globalParam button{
+    width: 120px;
+    height: 60px;
+}
+
+#tempoHouse {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#tempoDisplay {
+    background-color: black;
+    color: white;
+    width: 70px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+}
+
+#sequencer {
+    display: flex;
+    justify-content: space-evenly;
+    min-height: 100px;
+}
+
+#sequencer button {
+    width: 70px;
+    height: 70px;
+}
+
+.active {
+    background-color: #ECC987;
+    color: white;
 }
