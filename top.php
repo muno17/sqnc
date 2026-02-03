@@ -11,8 +11,8 @@
     <head>
         <title>sqnc</title>
         <meta charset="utf-8" />
-        <link href="style.css" type="text/css" rel="stylesheet" />
-        <script src="sqnc.js"></script>
+        <link href="style/style.css" type="text/css" rel="stylesheet" />
+        <script src="js/sqnc.js"></script>
     </head>
 
     <body>
