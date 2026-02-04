@@ -27,14 +27,30 @@ button {
     box-shadow: 1px 1px 2px black;
     font-family: ubuntu, "sans-serif", "sans";
     font-size: 20px;
+
 }
 
 h2 {
     padding: 0;
     margin: 0;
+    margin-bottom: 5px;
 }
 
 #sqnc {
+    display: flex;
+    height: 725px;
+    align-items: center;
+}
+
+.wood {
+    width: 35px;
+    min-height: 100%;
+    box-shadow: 3px 3px 10px black;
+    background-color: #363532;
+    border-radius: 4px;
+}
+
+#sqncBody {
     width: 1200px;
     height: 600px;
     padding: 50px;
@@ -42,6 +58,7 @@ h2 {
     box-shadow: 1px 1px 8px black;
     display:flex;
     flex-direction: column;
+    margin: 0;
 }
 
 
@@ -58,7 +75,7 @@ h2 {
 
 #trackButtons button {
     width: 120px;
-    height: 60px;
+    height: 50px;
 }
 
 #globalParams {
@@ -71,6 +88,11 @@ h2 {
 #globalParams button{
     width: 120px;
     height: 60px;
+}
+
+#pages .page {
+    width: 40px;
+    height: 40px;
 }
 
 .house {
@@ -90,6 +112,19 @@ h2 {
     font-size: 24px;
 }
 
+#parameters {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.paramRow {
+    display: flex;
+    margin-left: 50px;
+    margin-bottom: 20px;
+    gap: 40px;
+}
+
 #sequencer {
     display: flex;
     justify-content: space-evenly;
@@ -101,7 +136,17 @@ h2 {
     height: 70px;
 }
 
-.active {
+.current {
     background-color: #ECC987;
+    color: white;
+}
+
+.active {
+    background-color: #BC81BF;
+    color: white;
+}
+
+.selected {
+    background-color: #5F9F89;
     color: white;
 }

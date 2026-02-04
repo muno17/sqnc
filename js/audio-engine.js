@@ -15,6 +15,7 @@ const projectData = {
 window.onload = function() {
  initGlobalControls();
  initTransport();
+ initTrackSelectors();
 // initSequencer();
 
 
