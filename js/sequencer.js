@@ -33,9 +33,14 @@ function initTrackSelectors() {
             currentTrack = parseInt(this.dataset.index);
 
             renderSequencer();
-            //renderParams();
+            renderParams();
         });
     });
+}
+
+// update all params to track's saved value
+function renderParams() {
+        updateVolumeUI(projectData.tracks[currentTrack].volume, true);
 }
 
 function renderSequencer() {
@@ -54,10 +59,6 @@ function renderSequencer() {
     // update track specific sliders
 }
 
-function initTrackParams() {
-
-}
-
 // code to update sequencer UI position
 function updateUIPlayHead(step) {
     const previous = document.querySelector('.step.current');
@@ -69,4 +70,35 @@ function updateUIPlayHead(step) {
     if (current) {
         current.classList.add("current");
     }
+}
+
+// initialize all of the track parameters and event listeners
+function initTrackParams() {
+    const volume = document.getElementById("volume");
+
+    if (volume) {
+        volume.addEventListener("input", function () {
+            const val = parseFloat(this.value);
+            projectData.tracks[currentTrack].volume = val;
+            updateVolumeUI(val);
+        });
+    }
+}
+
+// instant when switching tracks, not instant when just sliding slider
+
+function updateVolumeUI(val, instant = false) {
+    const volume = document.getElementById("volume");
+    const volumeDisplay = document.getElementById("volumeDisplay");
+
+    if (volume) {
+            volume.value = val;
+            volumeDisplay.innerHTML = val + "dB";
+
+            if (instant) {
+            instruments[currentTrack].volume.value = val;
+            } else {
+                instruments[currentTrack].volume.rampTo(val, 0.05);
+            }
+    };
 }

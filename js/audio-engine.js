@@ -1,6 +1,8 @@
 var currentTrack = 0;
 var currentStep = 0;
 var length = '1m'
+var running = false;
+const instruments = [];
 
 Tone.Transport.loop = true;
 Tone.Transport.loopEnd = length;
@@ -14,78 +16,65 @@ const projectData = {
         {
             id: 0,
             //sample: test,
-            volume: 0,
+            volume: -6,
             steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         },
         {
             id: 1,
             //sample: test,
-            volume: 0,
+            volume: -6,
             steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         },
         {
             id: 2,
             //sample: test,
-            volume: 0,
+            volume: -6,
             steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         },
         {
             id: 3,
             //sample: test,
-            volume: 0,
+            volume: -6,
             steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         },
         {
             id: 4,
             //sample: test,
-            volume: 0,
+            volume: -6,
             steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         },
         {
             id: 5,
             //sample: test,
-            volume: 0,
+            volume: -6,
             steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         },
     ],
 };
-
-
-const instruments = [];
 
 // load samples into tone.js samplers
 function initInstruments() {
     instruments[0] = new Tone.Sampler({
         urls: {
             C1: "samples/Marshalls Kick.wav",
-        },
-        onload: () => {console.log("kick loaded")}
+        }
     }).toDestination();
 
     instruments[1] = new Tone.Sampler({
         urls: {
             C1: "samples/Marshalls Open.wav",
-        },
-        onload: () => {
-            console.log("kick loaded");
-        },
+        }
     }).toDestination();
 
     instruments[2] = new Tone.Sampler({
         urls: {
             C1: "samples/Marshalls Clap.wav",
-        },
-        onload: () => {
-            console.log("kick loaded");
-        },
+        }
     }).toDestination();
 
     instruments[3] = new Tone.Sampler({
         urls: {
             C1: "samples/OB Nebula Pad.wav",
-        },
-        onload: () => {
-            console.log("kick loaded");
         },
     }).toDestination();
 }
@@ -100,6 +89,7 @@ window.onload = function() {
  initTrackSelectors();
  initPageSelectors();
  initSequencer();
+ initTrackParams();
 }
 
 // schedule the loop

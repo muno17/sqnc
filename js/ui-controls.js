@@ -1,29 +1,30 @@
 function initTransport() {
-    const play = document.getElementById("play");
-    const stop = document.getElementById("stop");
-    const record = document.getElementById("record");
-
+    const transport = document.getElementById("transport");
     setupAudioLoop();
 
-    if (play) {
-        play.addEventListener('click', async function() {
-            await Tone.start();
-            Tone.Transport.start();
-        })
-    }
-
-    if (stop) {
-        stop.addEventListener("click", function () {
-            Tone.Transport.stop();
-            currentStep = 0;
-            updateUIPlayHead(-1);
+    if (transport) {
+        transport.addEventListener('click', async function() {
+            if (running) {
+                // functionality to stop
+                running = false;
+                Tone.Transport.stop();
+                currentStep = 0;
+                updateUIPlayHead(-1);
+                transport.innerHTML = "Play";
+            } else {
+                // functionality to play
+                await Tone.start();
+                Tone.Transport.start();
+                running = true;
+                 transport.innerHTML = "Stop";
+            }
         });
     }
+}
 
+function initRecord() {
     if (record) {
-        record.addEventListener("click", function () {
-            
-        });
+        record.addEventListener("click", function () {});
     }
 }
 
@@ -39,19 +40,17 @@ function initGlobalControls() {
         });
     }
 
-    const vol = document.getElementById("vol");
-    const volDisplay = document.getElementById("volDisplay");
+    const master = document.getElementById("master");
+    const masterDisplay = document.getElementById("masterDisplay");
 
-    if (vol) {
-        vol.addEventListener("input", function () {
+    if (master) {
+        master.addEventListener("input", function () {
             projectData.masterVolume = this.value;
-            volDisplay.innerHTML = this.value + "db";
+            masterDisplay.innerHTML = this.value + "dB";
             Tone.Destination.volume.rampTo(this.value, 0.1);
         });
     }
     
-// master volume
-
 // reset
 
 // swing
