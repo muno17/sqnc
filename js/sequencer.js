@@ -72,7 +72,8 @@ function updateUIPlayHead(step) {
     }
 }
 
-// initialize all of the track parameters and event listeners
+/////// initialize all of the track parameters and event listeners ///////
+// instant when switching tracks, not instant when just sliding slider
 function initTrackParams() {
     const volume = document.getElementById("volume");
 
@@ -84,8 +85,6 @@ function initTrackParams() {
         });
     }
 }
-
-// instant when switching tracks, not instant when just sliding slider
 
 function updateVolumeUI(val, instant = false) {
     const volume = document.getElementById("volume");

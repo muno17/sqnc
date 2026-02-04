@@ -27,7 +27,6 @@ button {
     box-shadow: 1px 1px 2px black;
     font-family: ubuntu, "sans-serif", "sans";
     font-size: 20px;
-
 }
 
 h2 {
@@ -52,8 +51,8 @@ h2 {
 
 #sqncBody {
     width: 1200px;
-    height: 600px;
-    padding: 50px;
+    height: 700px;
+    padding: 10px;
     background-color: #C7C6C6;
     box-shadow: 1px 1px 8px black;
     display:flex;
@@ -61,32 +60,65 @@ h2 {
     margin: 0;
 }
 
-
-#tracks {
+#top {
     display: flex;
-    min-height: 400px;
 }
 
-#trackButtons {
+#tracks {
     display:flex;
     flex-direction: column;
     justify-content: space-evenly;
+    margin-right: 30px;
+    margin-left: 30px;
+    margin-top: 20px;
 }
 
-#trackButtons button {
-    width: 120px;
-    height: 50px;
+.trackBtn {
+    width: 100px;
+    height: 45px;
+}
+
+#params {
+    flex-grow: 1;
+    display:flex;
+    flex-direction: column;
+}
+
+#topParams {
+    display:flex;
+    width: 100%;
+    min-height: 500px;
+}
+
+#trackParams {
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 70%;
+    margin-top: 20px;
+}
+
+#masterParams {
+    flex: 0 0 30%;
+    display: flex;
+}
+
+.paramRow {
+    display: flex;
+    margin-left: 50px;
+    margin-bottom: 20px;
+    gap: 40px;
 }
 
 #globalParams {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    min-height: 140px;
+    min-height: 80px;
+    gap: 20px;
 }
 
 #globalParams button{
-    width: 120px;
+    width: 100px;
     height: 60px;
 }
 
@@ -118,18 +150,11 @@ h2 {
     justify-content: center;
 }
 
-.paramRow {
-    display: flex;
-    margin-left: 50px;
-    margin-bottom: 20px;
-    gap: 40px;
-}
-
 #sequencer {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    min-height: 100px;
+    height: 80px;
     gap: 5px;
 }
 
@@ -162,4 +187,13 @@ h2 {
 .selected {
     background-color: #5F9F89;
     color: white;
+}
+
+#logo {
+    margin-left: auto; /* This pushes the element to the far right in a flex row */
+    font-size: 70px;
+    font-weight: bold;
+    align-self: flex-start;
+    text-shadow: 1px 1px 8px black;
+    margin-right: 10px;
 }
