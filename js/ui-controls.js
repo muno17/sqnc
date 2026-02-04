@@ -3,6 +3,8 @@ function initTransport() {
     const stop = document.getElementById("stop");
     const record = document.getElementById("record");
 
+    setupAudioLoop();
+
     if (play) {
         play.addEventListener('click', async function() {
             await Tone.start();
@@ -13,6 +15,8 @@ function initTransport() {
     if (stop) {
         stop.addEventListener("click", function () {
             Tone.Transport.stop();
+            currentStep = 0;
+            updateUIPlayHead(-1);
         });
     }
 

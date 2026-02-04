@@ -144,13 +144,18 @@ h2 {
     display: inline-block; 
 }
 
-.current {
+.step.current {
     background-color: #ECC987;
     color: white;
 }
 
 .step.active {
     background-color: #BC81BF;
+    color: white;
+}
+
+.step.active.current {
+    background-color: #ECC987;
     color: white;
 }
 

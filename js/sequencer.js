@@ -50,4 +50,23 @@ function renderSequencer() {
             stepBtn.classList.remove("active");
         }
     });
+
+    // update track specific sliders
+}
+
+function initTrackParams() {
+
+}
+
+// code to update sequencer UI position
+function updateUIPlayHead(step) {
+    const previous = document.querySelector('.step.current');
+    if (previous) {
+        previous.classList.remove('current');
+    }
+
+    const current = document.querySelector(`.step[data-step="${step}"]`);
+    if (current) {
+        current.classList.add("current");
+    }
 }
