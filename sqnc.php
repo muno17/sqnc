@@ -17,73 +17,73 @@
                     <div class="house">
                         <h2>Volume</h2>
                         <div class="display">0</div>
-                        <input type="range" min="0" max="100" value="0" class="slider" id="vol">
+                        <input type="range" min="0" max="100" value="0" class="slider" id="volume">
                     </div>
                     <div class="house">
                         <h2>Balance</h2>
                         <div class="display">0</div>
-                        <input type="range" min="0" max="100" value="0" class="slider" id="vol">
+                        <input type="range" min="0" max="100" value="0" class="slider" id="balance">
                     </div>
                     <div class="house">
                         <h2>Rate</h2>
                         <div class="display">0</div>
-                        <input type="range" min="0" max="100" value="0" class="slider" id="vol">
+                        <input type="range" min="0" max="100" value="0" class="slider" id="rate">
                     </div>
                     <div class="house">
                         <h2>Pitch</h2>
                         <div class="display">0</div>
-                        <input type="range" min="0" max="100" value="0" class="slider" id="vol">
+                        <input type="range" min="0" max="100" value="0" class="slider" id="pitch">
                     </div>
                 </div>
                 <div class="paramRow">
                     <div class="house">
                         <h2>Start</h2>
                         <div class="display">0</div>
-                        <input type="range" min="0" max="100" value="0" class="slider" id="vol">
+                        <input type="range" min="0" max="100" value="0" class="slider" id="start">
                     </div>
                     <div class="house">
                         <h2>Attack</h2>
                         <div class="display">0</div>
-                        <input type="range" min="0" max="100" value="0" class="slider" id="vol">
+                        <input type="range" min="0" max="100" value="0" class="slider" id="attack">
                     </div>
                     <div class="house">
                         <h2>Hold</h2>
                         <div class="display">0</div>
-                        <input type="range" min="0" max="100" value="0" class="slider" id="vol">
+                        <input type="range" min="0" max="100" value="0" class="slider" id="hold">
                     </div>
                     <div class="house">
                         <h2>Release</h2>
                         <div class="display">0</div>
-                        <input type="range" min="0" max="100" value="0" class="slider" id="vol">
+                        <input type="range" min="0" max="100" value="0" class="slider" id="release">
                     </div>
                 </div>
                 <div class="paramRow">
                     <div class="house">
                         <h2>Base</h2>
                         <div class="display">0</div>
-                        <input type="range" min="0" max="100" value="0" class="slider" id="vol">
+                        <input type="range" min="0" max="100" value="0" class="slider" id="base">
                     </div>
                     <div class="house">
                         <h2>Width</h2>
                         <div class="display">0</div>
-                        <input type="range" min="0" max="100" value="0" class="slider" id="vol">
+                        <input type="range" min="0" max="100" value="0" class="slider" id="width">
                     </div>
                     <div class="house">
                         <h2>Resonance</h2>
                         <div class="display">0</div>
-                        <input type="range" min="0" max="100" value="0" class="slider" id="vol">
+                        <input type="range" min="0" max="100" value="0" class="slider" id="res">
                     </div>
                     <div class="house">
                         <h2>Distortion</h2>
                         <div class="display">0</div>
-                        <input type="range" min="0" max="100" value="0" class="slider" id="vol">
+                        <input type="range" min="0" max="100" value="0" class="slider" id="dist">
                     </div>
                 </div>
             </div>
         </div>
         <div id="globalParams">
             <div class="house">
-                <h2>Volume</h2>
+                <h2>Master Vol</h2>
                 <div class="display" id="volDisplay">-6db</div>
                 <input type="range" min="-60" max="0" value="-6" class="slider" id="vol">
             </div>
@@ -96,10 +96,10 @@
             <button id="stop" class="global">Stop</button>
             <button id="record" class="global">Record</button>
             <div id="pages">
-                <button id="page1" class="page selected">1:4</button>
-                <button id="page2" class="page">2:4</button>
-                <button id="page3" class="page">3:4</button>
-                <button id="page4" class="page">4:4</button>
+                <button id="page1" class="page selected" data-index="0">1:4</button>
+                <button id="page2" class="page" data-index="1">2:4</button>
+                <button id="page3" class="page" data-index="2">3:4</button>
+                <button id="page4" class="page" data-index="3">4:4</button>
             </div>
         </div>
         <div id="sequencer">
@@ -107,14 +107,17 @@
             <button class="step" data-step="1">1</button>
             <button class="step" data-step="2">2</button>
             <button class="step" data-step="3">3</button>
+            <div class="divider"></div>
             <button class="step" data-step="4">4</button>
             <button class="step" data-step="5">5</button>
             <button class="step" data-step="6">6</button>
             <button class="step" data-step="7">7</button>
+            <div class="divider"></div>
             <button class="step" data-step="8">8</button>
             <button class="step" data-step="9">9</button>
             <button class="step" data-step="10">10</button>
             <button class="step" data-step="11">11</button>
+            <div class="divider"></div>
             <button class="step" data-step="12">12</button>
             <button class="step" data-step="13">13</button>
             <button class="step" data-step="14">14</button>

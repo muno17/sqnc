@@ -55,6 +55,15 @@ function initGlobalControls() {
 // effects
 }
 
-function initSequencer() {
+function initPageSelectors() {
+    const pageBtns = document.querySelectorAll(".page");
 
+    pageBtns.forEach((btn) => {
+        btn.addEventListener("click", function () {
+            pageBtns.forEach((b) => b.classList.remove("selected"));
+            this.classList.add("selected");
+
+            currentPage = parseInt(this.dataset.index);
+        });
+    });
 }
