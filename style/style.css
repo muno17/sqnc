@@ -61,32 +61,33 @@ h2 {
     height: 60px;
 }
 
-#globalParam {
+#globalParams {
     display: flex;
     justify-content: space-evenly;
-    min-height: 100px;
+    align-items: center;
+    min-height: 140px;
 }
 
-#globalParam button{
+#globalParams button{
     width: 120px;
     height: 60px;
 }
 
-#tempoHouse {
+.house {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-#tempoDisplay {
+.display {
     background-color: black;
     color: white;
-    width: 70px;
-    height: 70px;
+    width: 80px;
+    height: 45px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 25px;
+    font-size: 24px;
 }
 
 #sequencer {
@@ -95,7 +96,7 @@ h2 {
     min-height: 100px;
 }
 
-#sequencer button {
+.step {
     width: 70px;
     height: 70px;
 }

@@ -13,32 +13,38 @@
 
         </div>
     </div>
-    <div id="globalParam">
-        <div id="tempoHouse">
+    <div id="globalParams">
+        <div class="house">
+            <h2>Volume</h2>
+            <div class="display" id="volDisplay">-6db</div>
+            <input type="range" min="-60" max="0" value="-6" class="slider" id="vol">
+        </div>
+        <div class="house">
             <h2>Tempo</h2>
-            <div id="tempoDisplay">120</div>
+            <div class="display" id="tempoDisplay">120</div>
             <input type="range" min="1" max="300" value="120" class="slider" id="tempo">
         </div>
-        <button>Play</button>
-        <button>Record</button>
+        <button id="play" class="global">Play</button>
+        <button id="stop" class="global">Stop</button>
+        <button id="record" class="global">Record</button>
     </div>
     <div id="sequencer">
-        <button>1</button>
-        <button>2</button>
-        <button>3</button>
-        <button>4</button>
-        <button>5</button>
-        <button>6</button>
-        <button>7</button>
-        <button>8</button>
-        <button>9</button>
-        <button>10</button>
-        <button>11</button>
-        <button>12</button>
-        <button>13</button>
-        <button>14</button>
-        <button>15</button>
-        <button>16</button>
+        <button class="step" data-step="0">0</button>
+        <button class="step" data-step="1">1</button>
+        <button class="step" data-step="2">2</button>
+        <button class="step" data-step="3">3</button>
+        <button class="step" data-step="4">4</button>
+        <button class="step" data-step="5">5</button>
+        <button class="step" data-step="6">6</button>
+        <button class="step" data-step="7">7</button>
+        <button class="step" data-step="8">8</button>
+        <button class="step" data-step="9">9</button>
+        <button class="step" data-step="10">10</button>
+        <button class="step" data-step="11">11</button>
+        <button class="step" data-step="12">12</button>
+        <button class="step" data-step="13">13</button>
+        <button class="step" data-step="14">14</button>
+        <button class="step" data-step="15">15</button>
     </div>
 </div>
 
