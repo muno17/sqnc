@@ -8,11 +8,59 @@ body {
     min-height: 100vh;
 }
 
+header {
+    display: flex;
+    justify-content: space-between;
+}
+
+header,
 footer {
-    padding: 10px;
-    padding-right: 0px;
-    margin: 0;
+    background-color: #5f9f89;
+    height: 100%;
+    width: 100%;
+}
+
+header {
+    top: 0;
+    padding: 1px;
+    box-shadow: 1px 1px 1px black;
+    display: flex;
+    gap: 20pt;
+    align-items: center;
+}
+
+header a {
+    text-decoration: none;
+    font-size: 20px;
+    color: white;
+    margin-right: 10px;
+}
+
+#header-logo {
+    text-shadow: 1px 1px 12px black;
+    color: white;
+    font-size: 30px;
+    margin-left: 50px;
+}
+
+#home {
+    background-color: #5f9f89;
+    align-items: center;
+}
+
+#heading-house {
+    color: white;
+    margin: 20px;
+    text-shadow: 1px 1px 8px black;
     text-align: center;
+}
+
+#home-heading {
+    font-size: 150px;
+    text-decoration: none;
+}
+
+#home-heading:visited {
     color: white;
 }
 
@@ -33,17 +81,20 @@ h2 {
     padding: 0;
     margin: 0;
     margin-bottom: 5px;
+    text-shadow: 1px 1px 3px black;
 }
+
 
 #sqnc {
     display: flex;
-    height: 725px;
+    height: 760px;
     align-items: center;
+    flex-grow: 1;
 }
 
 .wood {
     width: 35px;
-    min-height: 100%;
+    min-height: 760px;
     box-shadow: 3px 3px 10px black;
     background-color: #363532;
     border-radius: 4px;
@@ -125,6 +176,12 @@ h2 {
 #pages .page {
     width: 40px;
     height: 40px;
+    margin-right: 5px;
+}
+
+button.page {
+    text-align: center;
+    font-size: 20px;
 }
 
 .house {
@@ -190,10 +247,18 @@ h2 {
 }
 
 #logo {
-    margin-left: auto; /* This pushes the element to the far right in a flex row */
+    margin-left: auto;
     font-size: 70px;
     font-weight: bold;
     align-self: flex-start;
     text-shadow: 1px 1px 8px black;
     margin-right: 10px;
+}
+
+footer {
+    padding: 10px;
+    padding-right: 0px;
+    margin: 0;
+    text-align: center;
+    color: white;
 }
