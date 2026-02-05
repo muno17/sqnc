@@ -1,57 +1,67 @@
 <?php
 session_start();
-$username = $_POST["username"];
-# Open users.txt and create an array with each line in the file
-# being a user
-$userDb = file_get_contents(__DIR__ . "/db/users.txt");
-$users = explode("\n", $userDb);
-
-$userFlag = 0;
-# Loop through the array of users to see if the username already exists
-foreach($users as $user) {
-    # Create an array containing the user's info
-    $user_info = explode(",", $user);
-
-    # If the current line's username matches, update the flag 
-    if ($user_info[3] == $username) {
-        $userFlag = 1;
-
-        # Break if username is found
-        break;
-    } 
-}
-
-if ($userFlag == 1) {
-    # Username exists, reload Sign Up screen with error message
+if (isset($_POST["username"]) && isset($_POST["password"])) {
+    $username = $_POST["username"];
+    $pw = $_POST["password"];
+} else {
     $error = "username";
     $url = "/sqnc/signup.php?error=" . urlencode($error);
     header("Location: /sqnc/signup.php?error=$error");
     exit;
 }
-?>
-<!--
-<strong>Thank you!</strong>
-<p>Welcome to smpld, <?=$_POST["username"]?>!</p>
-<p>You are now logged in.</p>
--->
-<?php
-    # Create a string containing the user's account info using the POST query
-    # parameters in the format: firstname, lastname, email, username, password,
-    # date signed up
-    $userInfo = $_POST["firstname"].",".$_POST["lastname"].",".$_POST["email"].","
-    .$_POST["username"].",".$_POST["password"].",".date("m/d/y")."\n";
-    
-    # Append the user info string to the users.txt db file
-    # Each user has their own line in the file
-file_put_contents(__DIR__ . "/db/users.txt", $userInfo, FILE_APPEND);
 
-# Password matches, log user in
-        $_SESSION['username'] = $username;
-        $_SESSION['logged_in'] = true;
+########********* validate *********########
 
-        // Redirect to a protected page
-        #header("Location: dashboard.php");
-        #exit;
-        header("Location: /sqnc/sqnc.php");
 
+########********* query the db for the username and email address provided *********########
+try {
+    $host = "localhost";
+    $dbn = "sqnc_db";
+    $user = "root";
+    $pass = "";
+
+    $db = new PDO("mysql:host=$host;dbname=$dbn", $user, $pass);
+    $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
+
+    # query for the user
+    $selectquery = $db->prepare("SELECT id FROM users
+                        WHERE username = ?");
+    $selectquery->execute(array($username));
+
+    ########********* send back error if user already exists *********########
+    if ($selectquery->fetch()) {
+        # Username exists, reload Sign Up screen with error message
+        $error = "username";
+        $url = "/sqnc/signup.php?error=" . urlencode($error);
+        header("Location: /sqnc/signup.php?error=$error");
+        exit;
+    } else {
+        # hash the pw for security
+        $hpw = password_hash($pw, PASSWORD_DEFAULT);
+        ########********* insert user info to db *********########
+        $insertquery = "INSERT INTO users (username, password) VALUES (?, ?)";
+        $insert = $db->prepare($insertquery);
+
+        if ($insert->execute([$username, $hpw])) {
+            # get the user's id
+            $selectquery->execute(array($username));
+            $user_id = $selectquery->fetch();
+
+            #********* log user in, user id is their identifier *********#
+            $_SESSION['user_id'] = $user_id['id'];
+            $_SESSION['logged_in'] = true;
+
+            // redirect 
+            header("Location: /sqnc/sqnc.php");
+        }
+    }
+
+} catch(PDOException $ex) {
+    # redirect with error
+    die("Database error: " . $ex->getMessage());
+    $error = "username";
+    $url = "/sqnc/signup.php?error=" . urlencode($error);
+    header("Location: /sqnc/signup.php?error=$error");
+    exit;
+}
 ?>

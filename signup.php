@@ -7,6 +7,7 @@
     </head>
 <!-- Check if an error has been passed via GET (if wrong login info used) -->
 <?php
+$error = false;
 if(isset($_GET['error'])) {
     $error = $_GET['error'];
 }
@@ -15,27 +16,12 @@ if(isset($_GET['error'])) {
     <div id="main">
         <div id="heading-house">
         <a href="sqnc.php" id="home-heading">sqnc</a>
-        <h2>Audio Sample Library</h2>
+        <h2>Virtual Drum Machine</h2>
     </div>
         <div id="login-page">
             <form action="api/signup-submit.php" method="post">
                 <fieldset class="login-fieldset">
                     <h1>Sign Up</h1>
-                    <div class="form-group">
-                        <label for="firstname"><strong>First Name:</strong></label>
-                        <input type="text" name="firstname" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="lastname"><strong>Last Name:</strong></label>
-                        <input type="text" name="lastname" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email"><strong>Email:</strong></label>
-                        <input type="text" name="email" required>
-                    </div>
-
                     <div class="form-group">
                         <label for="username"><strong>Username:</strong></label>
                         <input type="text" name="username" required>
