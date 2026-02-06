@@ -1,5 +1,5 @@
 // global controls
-
+// modify based on if user is logged in or not
 
 function initTransport() {
     const transport = document.getElementById("transport");
@@ -76,7 +76,9 @@ function initPageSelectors() {
 
 
 // init for save
-// save projectData
+// save currentData
+// assign a copy of currentData to projectData on success
+// 'glow' if there are changes to be made, remove if saved or if reloaded
 
 // init for reload
 // revert back to last loaded projectData

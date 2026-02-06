@@ -191,9 +191,10 @@ select {
 }
 
 #globalParams button,
+#stateRow button,
 #selectorRow button {
     width: 100px;
-    height: 60px;
+    height: 50px;
 }
 
 #pages .page {

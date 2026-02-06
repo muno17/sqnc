@@ -9,7 +9,8 @@ const instruments = [];
 Tone.Transport.loop = true;
 Tone.Transport.loopEnd = length;
 
-// massive JSON object to contain all information
+// massive JSON objects to contain all information
+const currentData = {};
 const projectData = {
     bpm: 120,
     masterVolume: -6,

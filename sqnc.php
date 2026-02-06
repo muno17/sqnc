@@ -28,9 +28,6 @@
                                     <option value="t3">test3</option>
                                 </select>
                             </div>
-                            <button>Save</button>
-                            <button>Reload</button>
-                            <button>New</button>
                         </div>
                         <div class="paramRow">
                             <div class="house">
@@ -97,6 +94,11 @@
                                 <div class="display">0</div>
                                 <input type="range" min="0" max="100" value="0" class="slider" id="dist">
                             </div>
+                        </div>
+                        <div class="paramRow" id="stateRow">
+                            <button>Save</button>
+                            <button>Reload</button>
+                            <button>New</button>
                         </div>
                     </div>
                     <div id="masterParams">
