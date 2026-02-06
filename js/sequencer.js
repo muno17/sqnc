@@ -103,3 +103,7 @@ function updateVolumeUI(val, instant = false) {
             }
     };
 }
+
+function updateProjectData() {
+    projectData = Object.clone(currentData);
+}

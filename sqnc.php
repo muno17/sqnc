@@ -20,7 +20,7 @@
                 <div id="topParams">
                     <div id="trackParams">
                         <div class="paramRow" id="selectorRow">
-                            <div id="sampleSelector">
+                            <div id="selector">
                                 <label for="samples">Sample</label>
                                 <select name="samples" id="samples">
                                     <option value="t1">test1</option>
@@ -97,6 +97,14 @@
                             </div>
                         </div>
                         <div class="paramRow" id="stateRow">
+                            <div id="selector">
+                                <label for="patterns">Pattern</label>
+                                <select name="patterns" id="patterns">
+                                    <option value="t1">test1</option>
+                                    <option value="t2">test2</option>
+                                    <option value="t3">test3</option>
+                                </select>
+                            </div>
                             <button id="save">Save</button>
                             <button id="reload">Reload</button>
                             <button id="new">New</button>

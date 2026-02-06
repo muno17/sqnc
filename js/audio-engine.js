@@ -13,6 +13,7 @@ Tone.Transport.loopEnd = length;
 // massive JSON objects to contain all information
 const currentData = {};
 const projectData = {
+    name: test1,
     bpm: 120,
     masterVolume: -6,
     length: length,

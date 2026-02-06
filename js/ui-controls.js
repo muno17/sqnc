@@ -96,7 +96,7 @@ function initSave() {
     }
 }
 
-// init for reload
+// init for reload **************
 // revert back to last loaded projectData
 function initReload() {
     const reloadBtn = document.getElementById("reload");
@@ -106,14 +106,14 @@ function initReload() {
             // don't do anything if there aren't any changes
             if (changes) {
                 saveBtn.classList.remove("changes");
-                // copy projectData into currentData **************
+                currentData = Object.clone(projectData);
                 changes = false;
             }
         });
     }
 }
 
-// init for new
+// init for new ************
 function initNew() {
     const newBtn = document.getElementById("new");
     const saveBtn = document.getElementById("save");
@@ -125,9 +125,7 @@ function initNew() {
                 // copy projectData into currentData
                 changes = false;
             }
-
+            // create completely new empty projectData, set to currentData
         });
     }
 }
-
-// create completely new empty projectData
