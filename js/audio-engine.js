@@ -4,6 +4,7 @@ var currentTrack = 0;
 var currentStep = 0;
 var length = '1m'
 var running = false;
+var changes = false;
 const instruments = [];
 
 Tone.Transport.loop = true;
@@ -120,7 +121,7 @@ window.onload = function() {
  initGlobalControls();
  initTransport();
  initTrackSelectors();
- initPageSelectors();
+ //initPageSelectors();
  initSequencer();
  initTrackParams();
 }

@@ -28,6 +28,7 @@
                                     <option value="t3">test3</option>
                                 </select>
                             </div>
+                            <button>Upload</button>
                         </div>
                         <div class="paramRow">
                             <div class="house">
@@ -96,9 +97,9 @@
                             </div>
                         </div>
                         <div class="paramRow" id="stateRow">
-                            <button>Save</button>
-                            <button>Reload</button>
-                            <button>New</button>
+                            <button id="save">Save</button>
+                            <button id="reload">Reload</button>
+                            <button id="new">New</button>
                         </div>
                     </div>
                     <div id="masterParams">

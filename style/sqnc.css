@@ -160,12 +160,12 @@ label {
 .paramRow {
     display: flex;
     margin-left: 50px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
     gap: 40px;
 }
 
 #selectorRow {
-    justify-content: space-evenly;
+    /*justify-content: space-evenly;*/
     align-items: center;
 }
 
@@ -194,7 +194,7 @@ select {
 #stateRow button,
 #selectorRow button {
     width: 100px;
-    height: 50px;
+    height: 40px;
 }
 
 #pages .page {
@@ -237,6 +237,7 @@ button.page {
     align-items: center;
     height: 80px;
     gap: 5px;
+    margin-top: 10px;
 }
 
 .step {
@@ -268,6 +269,12 @@ button.page {
 .selected {
     background-color: #5F9F89;
     color: white;
+}
+
+.changes {
+    box-shadow: 1px 1px 40px #e2ab45;
+    text-shadow: 1px 1px 20px #e2ab45;
+    border-color: #ECC987;
 }
 
 #logo {
