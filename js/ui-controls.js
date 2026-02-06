@@ -3,20 +3,20 @@ function initTransport() {
     setupAudioLoop();
 
     if (transport) {
-        transport.addEventListener('click', async function() {
+        transport.addEventListener("click", async function () {
             if (running) {
                 // functionality to stop
                 running = false;
                 Tone.Transport.stop();
                 currentStep = 0;
-                updateUIPlayHead(-1);
+                updateUIPlayHead(-1); // figure out why this isn't always working
                 transport.innerHTML = "Play";
             } else {
                 // functionality to play
                 await Tone.start();
                 Tone.Transport.start();
                 running = true;
-                 transport.innerHTML = "Stop";
+                transport.innerHTML = "Stop";
             }
         });
     }
@@ -50,12 +50,12 @@ function initGlobalControls() {
             Tone.Destination.volume.rampTo(this.value, 0.1);
         });
     }
-    
-// reset
 
-// swing
+    // reset
 
-// effects
+    // swing
+
+    // effects
 }
 
 function initPageSelectors() {

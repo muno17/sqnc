@@ -7,6 +7,8 @@
     </head>
 <!-- Check if an error has been passed via GET (if wrong login info used) -->
 <?php
+$error = false;
+$logerror = false;
 if(isset($_GET['error'])) {
     $error = $_GET['error'];
 }

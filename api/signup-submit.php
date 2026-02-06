@@ -13,7 +13,7 @@ if (isset($_POST["username"]) && isset($_POST["password"])) {
 ########********* validate *********########
 
 
-########********* query the db for the username and email address provided *********########
+########********* connect to db and query  *********########
 try {
     $host = "localhost";
     $dbn = "sqnc_db";
@@ -25,7 +25,7 @@ try {
 
     # query for the user
     $selectquery = $db->prepare("SELECT id FROM users
-                        WHERE username = ?");
+                                WHERE username = ?");
     $selectquery->execute(array($username));
 
     ########********* send back error if user already exists *********########
