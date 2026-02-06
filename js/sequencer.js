@@ -1,3 +1,5 @@
+// sequencer functionality
+
 function initSequencer() {
     const sequence = document.getElementById("sequencer");
 

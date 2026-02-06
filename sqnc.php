@@ -19,6 +19,18 @@
             <div id="params">
                 <div id="topParams">
                     <div id="trackParams">
+                        <div class="paramRow" id="selectorRow">
+                            <div id="sampleSelector">
+                                <label for="samples">Sample</label>
+                                <select name="samples" id="samples">
+                                    <option value="t1">test1</option>
+                                    <option value="t2">test2</option>
+                                    <option value="t3">test3</option>
+                                </select>
+                            </div>
+                            <button>Save</button>
+                            <button>Reload</button>
+                        </div>
                         <div class="paramRow">
                             <div class="house">
                                 <h2>Volume</h2>

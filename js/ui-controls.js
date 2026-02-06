@@ -1,3 +1,6 @@
+// global controls
+
+
 function initTransport() {
     const transport = document.getElementById("transport");
     setupAudioLoop();

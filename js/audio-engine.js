@@ -1,3 +1,5 @@
+// audio functionality
+
 var currentTrack = 0;
 var currentStep = 0;
 var length = '1m'

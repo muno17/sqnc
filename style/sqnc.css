@@ -77,13 +77,16 @@ button {
     font-size: 20px;
 }
 
-h2 {
+h2, label {
     padding: 0;
     margin: 0;
     margin-bottom: 5px;
     text-shadow: 1px 1px 3px black;
 }
 
+label {
+    font-size: 30px;
+}
 
 #sqnc {
     display: flex;
@@ -135,6 +138,7 @@ h2 {
     flex-direction: column;
 }
 
+
 #topParams {
     display:flex;
     width: 100%;
@@ -160,6 +164,24 @@ h2 {
     gap: 40px;
 }
 
+#selectorRow {
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#sampleSelector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40%;
+}
+
+select {
+    width: 100%;
+    height: 30px;
+    font-size: 16px;
+}
+
 #globalParams {
     display: flex;
     justify-content: space-evenly;
@@ -168,7 +190,8 @@ h2 {
     gap: 20px;
 }
 
-#globalParams button{
+#globalParams button,
+#selectorRow button {
     width: 100px;
     height: 60px;
 }
