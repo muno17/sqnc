@@ -73,3 +73,13 @@ function initPageSelectors() {
         });
     });
 }
+
+
+// init for save
+// save projectData
+
+// init for reload
+// revert back to last loaded projectData
+
+// init for new
+// create completely new empty projectData

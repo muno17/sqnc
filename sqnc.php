@@ -30,6 +30,7 @@
                             </div>
                             <button>Save</button>
                             <button>Reload</button>
+                            <button>New</button>
                         </div>
                         <div class="paramRow">
                             <div class="house">
