@@ -15,11 +15,27 @@ function saveSequence() {
             onFailure: ajaxFailed
         }
     )
+    console.log('saved');
+}
+
+function updateProjectData(ajaxResponse) {
+    var ajax = ajaxResponse.responseText.evalJSON();
+    projectData = Object.clone(currentData);
+    if (ajax && ajax.id) {
+        projectData.id = ajax.id;
+        currentData.id = ajax.id;
+    }
+
+    // update pattern selector to add new?
 }
 
 // when user logs in, load correct patterns
 function loadUserData() {
     // load projectData -> copy into currentData
+
+    // stop if running
+    // disable start button
+    // renable once loaded
 }
 
 // when user logs in, load correct samples
