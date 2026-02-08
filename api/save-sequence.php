@@ -8,7 +8,7 @@ if (!isset($_SESSION['logged_in'])) {
 }
 
 $user_id = $_SESSION['user_id'];
-$json = file_get_contents('php://input');
+$json = file_get_contents('php://input'); // access to raw data from the request body
 $data = json_decode($json, true);
 $name = $data['name'];
 
