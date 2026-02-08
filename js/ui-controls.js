@@ -146,6 +146,22 @@ function initTrackSelectors() {
     });
 }
 
+function initSequenceSelector() {
+    var selector = document.getElementById('sequences');
+
+    if (selector) {
+        selector.addEventListener('change', function() {
+            var selectedId = this.value;
+
+            if (value != 'new') {
+                getSequences(selectedId);
+            } else {
+                // ****** CALL FUNCTION TO RESET INTERFACE
+            }
+        })
+    }
+}
+
 // ****************** Track Parameters ****************** \\
 // listeners for all track parameters
 // update changes if any parameter is changed

@@ -135,6 +135,8 @@ window.onload = function () {
     //initPageSelectors();
     initSequencer();
     initTrackParams();
+
+    loadSequences();
     // initialize track params
 };
 

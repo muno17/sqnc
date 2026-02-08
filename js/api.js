@@ -32,7 +32,7 @@ function loadSequences() {
     // load projectData -> copy into currentData
     // stop if running
     // disable start button
-    // renable once loaded
+    // reenable once loaded
     new Ajax.Request("api/get-user-sequences.php", {
         method: "post",
         contentType: "application/json",
@@ -62,6 +62,29 @@ function updateSequences(ajaxResponse) {
     }
 }
 
+function getSequence(id) {
+    // stop if running
+    // disable start button
+    // reenable once loaded
+    new Ajax.Request("api/get-sequence.php", {
+        method: "post",
+        parameters: {id: id},
+        onSuccess: updateSequence,
+        onFailure: ajaxFailed,
+    });
+}
+
+function updateSequence(ajaxResponse) {
+    var ajax = ajaxResponse.responseText.evalJSON();
+
+    // conver the content JSON string to a JS object
+    projectData = ajax.content.evalJSON();
+    currentData = Object.clone(projectData);
+
+    renderSequencer();
+    renderParams();
+}
+
 // when user logs in, load correct samples
 function loadSamples() {
     // fetch all user uploaded samples
@@ -69,48 +92,20 @@ function loadSamples() {
 }
 
 function ajaxFailed(ajax, exception) {
-    var msg = "Error making Ajax request " + "<br />";
+    var errorTitle = "Error making Ajax request";
+    var details = "";
+
     if (exception) {
-        msg += " Exception: " + exception.message + "\n";
+        details = "Exception: " + exception.message;
     } else {
-        msg +=
-            "Server Status: " +
-            ajax.status +
-            "<br />" +
-            "Status text: " +
-            ajax.statusText +
-            "<br />" +
-            "Server response text: " +
-            ajax.responseText;
+        // see if the server sent a JSON error message
+        try {
+            var response = ajax.responseText.evalJSON();
+            details = response.error ? response.error : "Unknown Server Error";
+        } catch (e) {
+            // if not JSON, fallback to status text
+            details = "Status: " + ajax.status + " (" + ajax.statusText + ")";
+        }
     }
-    console.log(msg);
+    console.error(errorTitle + ": " + details);
 }
-
-
-
-/* example from hw 5
-function fetchNames() {
-    new Ajax.Request(
-        "https://webhome.auburn.edu/~tzt0062/babynames/babynames.php?type=list",
-        {
-            method: "get",
-            onSuccess: showNames,
-            onFailure: ajaxFailed,
-            onException: ajaxFailed,
-        },
-    );
-}
-
-// sort the names alphabetically and add as option to the dropdown
-function showNames(ajax) {
-    var names = ajax.responseText.trim().split("\n");
-    names.sort();
-    for (var i = 0; i < names.length; i++) {
-        var option = document.createElement("option");
-        option.innerHTML = names[i];
-        option.value = names[i];
-        $("allnames").appendChild(option);
-    }
-    $("allnames").disabled = false;
-    $("loadingnames").hide();
-} */
