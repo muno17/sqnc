@@ -1,4 +1,6 @@
 <?php
+###### save a sequence into the db
+
 session_start();
 
 # If user is not logged in don't do anything

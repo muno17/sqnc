@@ -1,4 +1,6 @@
 <?php
+###### log a user in, perform validation
+
 session_start();
 
 # If username or password missing

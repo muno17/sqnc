@@ -1,4 +1,6 @@
 <?php
+###### log a user out
+
 // start the session
 session_start();
 

@@ -156,7 +156,7 @@ function initSequenceSelector() {
             if (value != 'new') {
                 getSequences(selectedId);
             } else {
-                // ****** CALL FUNCTION TO RESET INTERFACE
+                // ****** CALL FUNCTION TO RESET INTERFACE **********
             }
         })
     }
