@@ -9,9 +9,6 @@ if (!isset($_SESSION['logged_in'])) {
 }
 
 $user_id = $_SESSION['user_id'];
-$json = file_get_contents('php://input');  // access to raw data from the request body
-$data = json_decode($json, true);
-$name = $data['name'];
 
 ###*********### **** connect to db and get user's sequences**** ###*********### 
 try {
@@ -32,11 +29,12 @@ try {
 
         $sequences = $getquery->fetchAll(PDO::FETCH_ASSOC);
 
+        header('Content-Type: application/json');
         echo json_encode($sequences);
 } catch(PDOException $ex) {
     # redirect with error
-    die("Database error: " . $ex->getMessage());
-    header("Location: /sqnc/sqnc.php");
+    header("HTTP/1.1 500 Internal Server Error");
+    echo json_encode(["error" => $ex->getMessage()]);
     exit;
 }
 ?>

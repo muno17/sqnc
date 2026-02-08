@@ -33,6 +33,7 @@ try {
         $updatequery = $db->prepare("UPDATE sequences SET name = ?, content = ?
                                     WHERE id = ? AND user_id = ?");
         $updatequery->execute(array($name, $json, $seq_id, $user_id));
+        header('Content-Type: application/json');
         echo json_encode(["id" => $seq_id]);
     } else {
         # add a new sequence
@@ -43,13 +44,14 @@ try {
         
         # add auto created id to json object
         $id = $db->lastInsertId();
+        header('Content-Type: application/json');
         echo json_encode(["id" => $id]);
     }
 
 } catch(PDOException $ex) {
     # redirect with error
-    die("Database error: " . $ex->getMessage());
-    header("Location: /sqnc/sqnc.php");
+    header("HTTP/1.1 500 Internal Server Error");
+    echo json_encode(["error" => $ex->getMessage()]);
     exit;
 }
 ?>
