@@ -24,12 +24,6 @@ function initSequencer() {
     }
 }
 
-// update all params to track's saved value
-function renderParams() {
-    // get current track and update params from currentData ********
-    updateVolumeUI(currentData.tracks[currentTrack].volume, true);
-}
-
 function renderSequencer() {
     // look at currentdata and add values to sequence for current track
     const steps = document.querySelectorAll(".step");

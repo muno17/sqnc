@@ -7,7 +7,10 @@ var currentStep = 0;
 var length = "1m";
 var running = false;
 var changes = false;
+
+// arrays for instruments and all parameters
 const instruments = [];
+const panVols = []
 
 Tone.Transport.loop = true;
 Tone.Transport.loopEnd = length;
@@ -30,7 +33,7 @@ var initData = {
             volume: -6,
             rate: 100,
             pitch: 0,
-            balance: 0,
+            pan: 0,
             start: 0,
             attack: 0,
             release: 100,
@@ -46,7 +49,7 @@ var initData = {
             volume: -6,
             rate: 100,
             pitch: 0,
-            balance: 0,
+            pan: 0,
             start: 0,
             attack: 0,
             release: 100,
@@ -62,7 +65,7 @@ var initData = {
             volume: -6,
             rate: 100,
             pitch: 0,
-            balance: 0,
+            pan: 0,
             start: 0,
             attack: 0,
             release: 100,
@@ -78,7 +81,7 @@ var initData = {
             volume: -6,
             rate: 100,
             pitch: 0,
-            balance: 0,
+            pan: 0,
             start: 0,
             attack: 0,
             release: 100,
@@ -94,7 +97,7 @@ var initData = {
             volume: -6,
             rate: 100,
             pitch: 0,
-            balance: 0,
+            pan: 0,
             start: 0,
             attack: 0,
             release: 100,
@@ -110,7 +113,7 @@ var initData = {
             volume: -6,
             rate: 100,
             pitch: 0,
-            balance: 0,
+            pan: 0,
             start: 0,
             attack: 0,
             release: 100,
@@ -126,7 +129,7 @@ var initData = {
             volume: -6,
             rate: 100,
             pitch: 0,
-            balance: 0,
+            pan: 0,
             start: 0,
             attack: 0,
             release: 100,
@@ -142,7 +145,7 @@ var initData = {
             volume: -6,
             rate: 100,
             pitch: 0,
-            balance: 0,
+            pan: 0,
             start: 0,
             attack: 0,
             release: 100,
@@ -158,7 +161,7 @@ var initData = {
             volume: -6,
             rate: 100,
             pitch: 0,
-            balance: 0,
+            pan: 0,
             start: 0,
             attack: 0,
             release: 100,
@@ -174,7 +177,7 @@ var initData = {
             volume: -6,
             rate: 100,
             pitch: 0,
-            balance: 0,
+            pan: 0,
             start: 0,
             attack: 0,
             release: 100,
@@ -200,7 +203,7 @@ var currentData = {
             volume: -6,
             rate: 100,
             pitch: 0,
-            balance: 0,
+            pan: 0,
             start: 0,
             attack: 0,
             release: 100,
@@ -216,7 +219,7 @@ var currentData = {
             volume: -6,
             rate: 100,
             pitch: 0,
-            balance: 0,
+            pan: 0,
             start: 0,
             attack: 0,
             release: 100,
@@ -232,7 +235,7 @@ var currentData = {
             volume: -6,
             rate: 100,
             pitch: 0,
-            balance: 0,
+            pan: 0,
             start: 0,
             attack: 0,
             release: 100,
@@ -248,7 +251,7 @@ var currentData = {
             volume: -6,
             rate: 100,
             pitch: 0,
-            balance: 0,
+            pan: 0,
             start: 0,
             attack: 0,
             release: 100,
@@ -264,7 +267,7 @@ var currentData = {
             volume: -6,
             rate: 100,
             pitch: 0,
-            balance: 0,
+            pan: 0,
             start: 0,
             attack: 0,
             release: 100,
@@ -280,7 +283,7 @@ var currentData = {
             volume: -6,
             rate: 100,
             pitch: 0,
-            balance: 0,
+            pan: 0,
             start: 0,
             attack: 0,
             release: 100,
@@ -296,7 +299,7 @@ var currentData = {
             volume: -6,
             rate: 100,
             pitch: 0,
-            balance: 0,
+            pan: 0,
             start: 0,
             attack: 0,
             release: 100,
@@ -312,7 +315,7 @@ var currentData = {
             volume: -6,
             rate: 100,
             pitch: 0,
-            balance: 0,
+            pan: 0,
             start: 0,
             attack: 0,
             release: 100,
@@ -328,7 +331,7 @@ var currentData = {
             volume: -6,
             rate: 100,
             pitch: 0,
-            balance: 0,
+            pan: 0,
             start: 0,
             attack: 0,
             release: 100,
@@ -344,7 +347,7 @@ var currentData = {
             volume: -6,
             rate: 100,
             pitch: 0,
-            balance: 0,
+            pan: 0,
             start: 0,
             attack: 0,
             release: 100,
@@ -370,7 +373,7 @@ var projectData = {
             volume: -6,
             rate: 100,
             pitch: 0,
-            balance: 0,
+            pan: 0,
             start: 0,
             attack: 0,
             release: 100,
@@ -386,7 +389,7 @@ var projectData = {
             volume: -6,
             rate: 100,
             pitch: 0,
-            balance: 0,
+            pan: 0,
             start: 0,
             attack: 0,
             release: 100,
@@ -402,7 +405,7 @@ var projectData = {
             volume: -6,
             rate: 100,
             pitch: 0,
-            balance: 0,
+            pan: 0,
             start: 0,
             attack: 0,
             release: 100,
@@ -418,7 +421,7 @@ var projectData = {
             volume: -6,
             rate: 100,
             pitch: 0,
-            balance: 0,
+            pan: 0,
             start: 0,
             attack: 0,
             release: 100,
@@ -434,7 +437,7 @@ var projectData = {
             volume: -6,
             rate: 100,
             pitch: 0,
-            balance: 0,
+            pan: 0,
             start: 0,
             attack: 0,
             release: 100,
@@ -450,7 +453,7 @@ var projectData = {
             volume: -6,
             rate: 100,
             pitch: 0,
-            balance: 0,
+            pan: 0,
             start: 0,
             attack: 0,
             release: 100,
@@ -466,7 +469,7 @@ var projectData = {
             volume: -6,
             rate: 100,
             pitch: 0,
-            balance: 0,
+            pan: 0,
             start: 0,
             attack: 0,
             release: 100,
@@ -482,7 +485,7 @@ var projectData = {
             volume: -6,
             rate: 100,
             pitch: 0,
-            balance: 0,
+            pan: 0,
             start: 0,
             attack: 0,
             release: 100,
@@ -498,7 +501,7 @@ var projectData = {
             volume: -6,
             rate: 100,
             pitch: 0,
-            balance: 0,
+            pan: 0,
             start: 0,
             attack: 0,
             release: 100,
@@ -514,7 +517,7 @@ var projectData = {
             volume: -6,
             rate: 100,
             pitch: 0,
-            balance: 0,
+            pan: 0,
             start: 0,
             attack: 0,
             release: 100,
@@ -527,7 +530,98 @@ var projectData = {
     ],
 };
 
-// load samples into tone.js samplers
+// create tone.js samplers
+function initInstruments() {
+    for (var i = 0; i < 10; i++) {
+        // create all instrument modules here
+        var panVol = new Tone.PanVol(0, -12).toDestination();
+        panVols[i] = panVol
+
+
+        if (i % 2 == 0) {
+            instruments[i] = new Tone.Sampler({
+            urls: { C1: "samples/Marshalls_Kick.wav" },
+            })
+            .connect(panVols[i]);
+        } else {
+            instruments[i] = new Tone.Sampler({
+            urls: { C1: "samples/OB_Nebula_Pad.wav" },
+            })
+            .connect(panVols[i]);
+        }
+    }
+}
+
+// initialize everything here
+window.onload = function () {
+    initInstruments();
+
+    initGlobalControls();
+    initTransport();
+    initTrackSelectors();
+    //initPageSelectors();
+    initSequencer();
+    initTrackParams();
+
+    //loadSequences(); REENABLE
+    // initialize track params
+    setupAudioLoop();
+};
+
+// schedule the loop
+function setupAudioLoop() {
+    // eventually pass whatever the note's stored time value is after params ***
+    Tone.Transport.scheduleRepeat((time) => {
+        if (!running) return;
+
+        // loop through each track
+        currentData.tracks.forEach((track, index) => {
+            if (track.steps[currentStep] == 1) {
+                playTrackSound(index, time);
+            }
+        });
+
+        updateUIPlayHead(currentStep);
+
+        // loop back to 0 when currentStep gets to 16
+        currentStep = (currentStep + 1) % 16;
+    }, "16n");
+}
+
+function playTrackSound(index, time) {
+    const instrument = instruments[index];
+    if (!instrument) return;
+
+    try {
+        if (instrument.loaded) {
+            instrument.triggerAttackRelease("C1", "8n", time);
+        }
+    } catch (e) {
+        console.error("Playback error:", e);
+    }
+}
+
+////////////////////////// Track Parameters \\\\\\\\\\\\\\\\\\\\\\\\\\
+// functions to update audio for each parameter
+
+// instant when switching tracks, not instant when just sliding slider
+function setTrackVolume(val, instant = false) {
+    if (instant) {
+        panVols[currentTrack].volume.value = val;
+    } else {
+        panVols[currentTrack].volume.rampTo(val, 0.05);
+    }
+}
+
+function setTrackPan(val, instant = false) {
+    if (instant) {
+        panVols[currentTrack].pan.value = val
+    } else {
+        panVols[currentTrack].pan.rampTo(val, 0.05);
+    }
+}
+
+/*
 function initInstruments() {
     instruments[0] = new Tone.Sampler({
         urls: { C1: "samples/Marshalls_Kick.wav" },
@@ -587,75 +681,4 @@ function initInstruments() {
         },
     }).toDestination();
 }
-
-// initialize everything here
-window.onload = function () {
-    initInstruments();
-
-    initGlobalControls();
-    initTransport();
-    initTrackSelectors();
-    //initPageSelectors();
-    initSequencer();
-    initTrackParams();
-
-    //loadSequences(); REENABLE
-    // initialize track params
-    setupAudioLoop();
-};
-
-// schedule the loop
-function setupAudioLoop() {
-    // eventually pass whatever the note's stored time value is after params ***
-    Tone.Transport.scheduleRepeat((time) => {
-        if (!running) return;
-
-        // loop through each track
-        currentData.tracks.forEach((track, index) => {
-            if (track.steps[currentStep] == 1) {
-                playTrackSound(index, time);
-            }
-        });
-
-        updateUIPlayHead(currentStep);
-
-        // loop back to 0 when currentStep gets to 16
-        currentStep = (currentStep + 1) % 16;
-    }, "16n");
-}
-
-function playTrackSound(index, time) {
-    const instrument = instruments[index];
-    if (!instrument) return;
-
-    try {
-        if (instrument.loaded) {
-            // If it's the Sampler
-            instrument.triggerAttackRelease("C1", "8n", time);
-        }
-    } catch (e) {
-        console.error("Playback error:", e);
-    }
-
-    /*
-    // ensure the instrument is loaded
-    if (instrument && instrument.ready) {
-        const trackVol = currentData.tracks[index].volume;
-        instrument.volume.value = trackData.volume;
-        console.log(`Track ${index}: Triggering sound!`);
-        instrument.triggerAttackRelease("C1", "8n", time);
-    }
-        */
-}
-
-////////////////////////// Track Parameters \\\\\\\\\\\\\\\\\\\\\\\\\\
-// functions to update audio for each parameter
-
-// instant when switching tracks, not instant when just sliding slider
-function setTrackVolume(val, instant = false) {
-    if (instant) {
-        instruments[currentTrack].volume.value = val;
-    } else {
-        instruments[currentTrack].volume.rampTo(val, 0.05);
-    }
-}
+    */

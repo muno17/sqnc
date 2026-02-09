@@ -84,13 +84,13 @@ session_start();
                                 <div class="paramRow">
                                     <div class="house">
                                         <h2>Volume</h2>
-                                        <div id="volumeDisplay" class="display">-6dB</div>
-                                        <input type="range" min="-60" max="0" value="-6" class="slider" id="volume">
+                                        <div id="volumeDisplay" class="display">-12dB</div>
+                                        <input type="range" min="-60" max="6" step="1" value="-12" class="slider" id="volume">
                                     </div>
                                     <div class="house">
-                                        <h2>Balance</h2>
-                                        <div class="display">0</div>
-                                        <input type="range" min="0" max="100" value="0" class="slider" id="balance">
+                                        <h2>Pan</h2>
+                                        <div id="panDisplay" class="display">0</div>
+                                        <input type="range" min="-1" max="1" step="0.02" value="0" class="slider" id="pan">
                                     </div>
                                     <div class="house">
                                         <h2>Rate</h2>

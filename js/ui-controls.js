@@ -174,14 +174,25 @@ function initSequenceSelector() {
     }
 }
 
+// update all params to track's saved value ***
+function renderParams() {
+    // get current track and update params from currentData ********
+    updateVolumeUI(data.volume);
+    setTrackVolume(data.volume, true); // Use 'true' for instant snap
+
+    updatePanUI(data.pan);
+    setTrackPan(data.pan, true);
+}
 ///////////////////////// Track Parameters \\\\\\\\\\\\\\\\\\\\\\\\\\
 // listeners for all track parameters
 // update changes if any parameter is changed
 
 function initTrackParams() {
     initVol();
+    initPan();
 }
 
+// update UI based on what track is selected ***
 function syncUI(data) {}
 
 function initVol() {
@@ -191,13 +202,13 @@ function initVol() {
         volume.addEventListener("input", function () {
             const val = parseFloat(this.value);
             currentData.tracks[currentTrack].volume = val;
+
             updateVolumeUI(val);
             setTrackVolume(val);
         });
     }
 }
 
-// instant when switching tracks, not instant when just sliding slider
 function updateVolumeUI(val) {
     const volume = document.getElementById("volume");
     const volumeDisplay = document.getElementById("volumeDisplay");
@@ -205,5 +216,30 @@ function updateVolumeUI(val) {
     if (volume) {
         volume.value = val;
         volumeDisplay.innerHTML = val + "dB";
+    }
+}
+
+function initPan() {
+    const pan = document.getElementById("pan");
+
+
+    if (pan) {
+        pan.addEventListener("input", function () {
+            const val = parseFloat(this.value);
+            currentData.tracks[currentTrack].pan = val;
+
+            updatePanUI(val);
+            setTrackPan(val);
+        })
+    }
+}
+
+function updatePanUI(val) {
+    const pan = document.getElementById("pan");
+    const panDisplay = document.getElementById("panDisplay");
+
+    if (pan) {
+        pan.value = val;
+        panDisplay.innerHTML = parseInt(val * 50);
     }
 }
