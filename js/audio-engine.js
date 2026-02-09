@@ -14,9 +14,10 @@ Tone.Transport.loopEnd = length;
 
 // currentData is the live object
 // projectData is the master object that interacts with the api
+// defaultData is an init object ***
 
 // massive JSON objects to contain all information
-const currentData = {
+var currentData = {
     id: 0,
     name: "New Sequence",
     bpm: 120,
@@ -187,7 +188,7 @@ const currentData = {
 };
 
 // defaultData = JSON - use this as default, projectData gets initialized to this if no pattern selected
-const projectData = {
+var projectData = {
     id: 0,
     name: "New Sequence",
     bpm: 120,
@@ -436,7 +437,7 @@ window.onload = function () {
 
 // schedule the loop
 function setupAudioLoop() {
-    // *** eventually pass whatever the note's stored time value is after params
+    // eventually pass whatever the note's stored time value is after params ***
     Tone.Transport.scheduleRepeat((time) => {
         //console.log("Tick - Step:", currentStep);
         // loop through each track
@@ -477,7 +478,7 @@ function playTrackSound(index, time) {
         */
 }
 
-// ****************** Track Parameters ****************** \\
+////////////////////////// Track Parameters \\\\\\\\\\\\\\\\\\\\\\\\\\
 // functions to update audio for each parameter
 
 // instant when switching tracks, not instant when just sliding slider

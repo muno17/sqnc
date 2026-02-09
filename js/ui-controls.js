@@ -1,7 +1,7 @@
 // UI event listeners
 // modify based on whether user is logged in or not
 
-// ****************** Global Parameters ****************** \\
+////////////////////////// Global Parameters \\\\\\\\\\\\\\\\\\\\\\\\\\
 function initTransport() {
     const transport = document.getElementById("transport");
 
@@ -85,7 +85,7 @@ function initPageSelectors() {
 
 // init for save
 // save currentData
-// ********** assign a copy of currentData to projectData on success
+// assign a copy of currentData to projectData on success ***
 // 'glow' if there are changes to be made, remove if saved or if reloaded
 function initSave() {
     const saveBtn = document.getElementById("save");
@@ -101,7 +101,7 @@ function initSave() {
     }
 }
 
-// init for reload **************
+// init for reload ***
 // revert back to last loaded projectData
 function initReload() {
     const reloadBtn = document.getElementById("reload");
@@ -122,7 +122,7 @@ function initReload() {
     }
 }
 
-// init for new ************
+// init for new ***
 function initNew() {
     const newBtn = document.getElementById("new");
     const saveBtn = document.getElementById("save");
@@ -131,10 +131,11 @@ function initNew() {
             // show warning before reseting
             if (changes) {
                 saveBtn.classList.remove("changes");
-                //  ********** copy projectData into currentData
+                // copy projectData into currentData
+                projectData = JSON.parse(JSON.stringify(currentData));
                 changes = false;
             }
-            // ********** create completely new empty projectData, set to currentData
+            // create completely new empty data object, set to currentData ***
         });
     }
 }
@@ -165,13 +166,13 @@ function initSequenceSelector() {
             if (selectedId != 'new') {
                 // getSequence(selectedId); REENABLE
             } else {
-                // ****** CALL FUNCTION TO RESET INTERFACE **********
+                // CALL FUNCTION TO RESET INTERFACE ***
             }
         })
     }
 }
 
-// ****************** Track Parameters ****************** \\
+///////////////////////// Track Parameters \\\\\\\\\\\\\\\\\\\\\\\\\\
 // listeners for all track parameters
 // update changes if any parameter is changed
 

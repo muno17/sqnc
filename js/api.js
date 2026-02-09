@@ -1,6 +1,7 @@
 // ****************** communication with the server ****************** \\
-// use fetch api
-// check if user logged in
+// use fetch api for AJAX requests
+
+// check if user logged in ***************
 
 // send projectData when save button is pressed
 async function saveSequence() {
@@ -13,13 +14,14 @@ async function saveSequence() {
             body: JSON.stringify(currentData)
         });
         
-        const data = await response.json();
+        const ajax = await response.json();
         
-        // Update projectData on success
+        // update projectData and currentData on success
         projectData = JSON.parse(JSON.stringify(currentData));
-        if (data && data.id) {
-            projectData.id = data.id;
-            currentData.id = data.id;
+        currentData = JSON.parse(JSON.stringify(projectData));
+        if (ajax && ajax.id) {
+            projectData.id = ajax.id;
+            currentData.id = ajax.id;
         }
         console.log("Saved successfully");
     } catch (err) {
@@ -36,16 +38,23 @@ async function loadSequences() {
     // reenable once loaded
     try {
         const response = await fetch("api/get-user-sequences.php", {
-            method: "POST"
+            method: "POST",
         });
         const ajax = await response.json();
         const sequences = document.getElementById("sequences");
 
-        // Clear and add default
-        sequences.innerHTML = '<option value="new">New Sequence</option>';
+        // create default option
+        var newSeq = document.createElement("option");
+        newSeq.value = "new";
+        newSeq.innerHTML = "New Sequence";
 
-        ajax.forEach(seq => {
-            const option = document.createElement('option');
+        // clear and add default
+        sequences.innerHTML = "";
+        sequences.appendChild(newSeq);
+
+        // add fetched options
+        ajax.forEach((seq) => {
+            const option = document.createElement("option");
             option.value = seq.id;
             option.innerHTML = seq.name;
             sequences.appendChild(option);
@@ -56,28 +65,40 @@ async function loadSequences() {
 }
 
 
-function getSequence(id) {
+async function getSequence(id) {
     // stop if running
-    // disable start button
-    // reenable once loaded
-    new Ajax.Request("api/get-sequence.php", {
-        method: "post",
-        parameters: {id: id},
-        onSuccess: updateSequence,
-        onFailure: ajaxFailed,
-    });
+    // disable start button ***
+    // reenable once loaded ***
+    if (running) {
+        Tone.Transport.stop();
+        running = false;
+        document.getElementById("transport").innerHTML = "Play";
+    }
+
+    try {
+        // prepare data to be able to send
+        const formData = new FormData();
+        formData.append("id", id);
+
+        const response = await fetch("api/get-sequence.php", {
+            method: "POST",
+            body: formData,
+        });
+        const ajax = await response.json();
+
+        // load sequence into projectDat and currentData
+        // might need to be just projectData = ajax.content;
+        projectData = JSON.parse(ajax.content);
+        currentData = JSON.parse(JSON.stringify(projectData));
+
+        // update the UI
+        renderSequencer();
+        renderParams();
+    } catch (err) {
+        console.error("Failed to load sequences:", err);
+    }
 }
 
-function updateSequence(ajaxResponse) {
-    var ajax = ajaxResponse.responseText.evalJSON();
-
-    // conver the content JSON string to a JS object
-    projectData = ajax.content.evalJSON();
-    currentData = Object.clone(projectData);
-
-    renderSequencer();
-    renderParams();
-}
 
 // when user logs in, load correct samples
 function loadSamples() {
@@ -152,6 +173,30 @@ function updateSequences(ajaxResponse) {
     }
 }
 
+
+async function getSequence(id) {
+    // stop if running
+    // disable start button
+    // reenable once loaded
+
+    new Ajax.Request("api/get-sequence.php", {
+        method: "post",
+        parameters: {id: id},
+        onSuccess: updateSequence,
+        onFailure: ajaxFailed,
+    });
+}
+
+function updateSequence(ajaxResponse) {
+    var ajax = ajaxResponse.responseText.evalJSON();
+
+    // conver the content JSON string to a JS object
+    projectData = ajax.content.evalJSON();
+    currentData = Object.clone(projectData);
+
+    renderSequencer();
+    renderParams();
+}
 
 function ajaxFailed(ajax, exception) {
     var errorTitle = "Error making Ajax request";
