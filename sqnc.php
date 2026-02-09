@@ -1,7 +1,6 @@
 <?php
 // start session
 session_start();
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,8 +10,8 @@ session_start();
         <title>sqnc</title>
         <meta charset="utf-8" />
         <link href="style/sqnc.css" type="text/css" rel="stylesheet" />
-        <script src="http://unpkg.com/tone"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/prototype/1.7.3.0/prototype.js" type="text/javascript"></script>
+        <script src="https://unpkg.com/tone@14.7.77/build/Tone.js"></script>
+        <!--<script src="https://ajax.googleapis.com/ajax/libs/prototype/1.7.3.0/prototype.js" type="text/javascript"></script>-->
         <script src="js/audio-engine.js"></script>
         <script src="js/sequencer.js"></script>
         <script src="js/api.js"></script>
@@ -57,7 +56,7 @@ session_start();
                         <button class="trackBtn" data-index="6">T7</button>
                         <button class="trackBtn" data-index="7">T8</button>
                         <button class="trackBtn" data-index="8">T9</button>
-                        <button class="trackBtn" data-index="10">T10</button>
+                        <button class="trackBtn" data-index="9">T10</button>
                     </div>
                     <div id="params">
                         <div id="topParams">
@@ -65,11 +64,7 @@ session_start();
                                 <div class="paramRow" id="stateRow">
                                     <div id="selector">
                                         <label for="sequences">Sequence</label>
-                                        <select name="sequences" id="sequences">
-                                            <option value="t1">test1</option>
-                                            <option value="t2">test2</option>
-                                            <option value="t3">test3</option>
-                                        </select>
+                                        <select name="sequences" id="sequences">Log in to save sequences</select>
                                     </div>
                                     <button id="save">Save</button>
                                     <button id="reload">Reload</button>
@@ -203,6 +198,6 @@ session_start();
             </div>
             <img class="wood" src="style/wood-pattern.png">
         </div>
-		<!--<footer>CPSC 5210 - Danny Muñoz</footer>-->
+        <footer></footer>
 	</body>
 </html>

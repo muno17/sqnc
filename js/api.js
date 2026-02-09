@@ -19,6 +19,7 @@ function saveSequence() {
 function updateProjectData(ajaxResponse) {
     var ajax = ajaxResponse.responseText.evalJSON();
     projectData = Object.clone(currentData);
+    
     if (ajax && ajax.id) {
         projectData.id = ajax.id;
         currentData.id = ajax.id;

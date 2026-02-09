@@ -4,7 +4,6 @@
 // ****************** Global Parameters ****************** \\
 function initTransport() {
     const transport = document.getElementById("transport");
-    setupAudioLoop();
 
     if (transport) {
         transport.addEventListener("click", async function () {
@@ -13,14 +12,20 @@ function initTransport() {
                 running = false;
                 currentStep = 0;
                 Tone.Transport.stop();
-                updateUIPlayHead(-1); // figure out why this isn't always working
+                //updateUIPlayHead(-1);
+                document
+                    .querySelectorAll(".step.current")
+                    .forEach((el) => el.classList.remove("current"));
                 transport.innerHTML = "Play";
             } else {
                 // functionality to play
                 await Tone.start();
+                await Tone.loaded();
+
                 Tone.Transport.start();
                 running = true;
                 transport.innerHTML = "Stop";
+                console.log("Sequencer started - all mappings verified.");
             }
         });
     }
@@ -38,7 +43,7 @@ function initGlobalControls() {
 
     if (tempo) {
         tempo.addEventListener("input", function () {
-            projectData.bpm = this.value;
+            currentData.bpm = this.value;
             tempoDisplay.innerHTML = this.value;
             Tone.Transport.bpm.value = this.value;
         });
@@ -49,7 +54,7 @@ function initGlobalControls() {
 
     if (master) {
         master.addEventListener("input", function () {
-            projectData.masterVolume = this.value;
+            currentData.masterVolume = this.value;
             masterDisplay.innerHTML = this.value + "dB";
             Tone.Destination.volume.rampTo(this.value, 0.1);
         });
@@ -80,7 +85,7 @@ function initPageSelectors() {
 
 // init for save
 // save currentData
-// assign a copy of currentData to projectData on success
+// ********** assign a copy of currentData to projectData on success
 // 'glow' if there are changes to be made, remove if saved or if reloaded
 function initSave() {
     const saveBtn = document.getElementById("save");
@@ -88,7 +93,7 @@ function initSave() {
         saveBtn.addEventListener("click", function () {
             // don't do anything if there isn't anything to save;
             if (changes) {
-                saveSequence();
+                //saveSequence(); REENABLE
                 saveBtn.classList.remove("changes");
                 changes = false;
             }
@@ -108,6 +113,10 @@ function initReload() {
                 saveBtn.classList.remove("changes");
                 currentData = Object.clone(projectData);
                 changes = false;
+
+                // redraw the UI
+                renderSequencer();
+                renderParams();
             }
         });
     }
@@ -122,10 +131,10 @@ function initNew() {
             // show warning before reseting
             if (changes) {
                 saveBtn.classList.remove("changes");
-                // copy projectData into currentData
+                //  ********** copy projectData into currentData
                 changes = false;
             }
-            // create completely new empty projectData, set to currentData
+            // ********** create completely new empty projectData, set to currentData
         });
     }
 }
@@ -153,8 +162,8 @@ function initSequenceSelector() {
         selector.addEventListener('change', function() {
             var selectedId = this.value;
 
-            if (value != 'new') {
-                getSequences(selectedId);
+            if (selectedId != 'new') {
+                // getSequence(selectedId); REENABLE
             } else {
                 // ****** CALL FUNCTION TO RESET INTERFACE **********
             }
@@ -178,7 +187,7 @@ function initVol() {
     if (volume) {
         volume.addEventListener("input", function () {
             const val = parseFloat(this.value);
-            projectData.tracks[currentTrack].volume = val;
+            currentData.tracks[currentTrack].volume = val;
             updateVolumeUI(val);
             setTrackVolume(val);
         });

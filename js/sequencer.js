@@ -11,11 +11,11 @@ function initSequencer() {
                 const step = parseInt(e.target.dataset.step);
 
                 // toggle the data in the master object
-                const currentVal = projectData.tracks[currentTrack].steps[step];
+                const currentVal = currentData.tracks[currentTrack].steps[step];
                 if (currentVal === 0) {
-                    projectData.tracks[currentTrack].steps[step] = 1;
+                    currentData.tracks[currentTrack].steps[step] = 1;
                 } else {
-                    projectData.tracks[currentTrack].steps[step] = 0;
+                    currentData.tracks[currentTrack].steps[step] = 0;
                 }
 
                 e.target.classList.toggle("active");
@@ -26,17 +26,17 @@ function initSequencer() {
 
 // update all params to track's saved value
 function renderParams() {
-    // get current track and update params from projectData ********
-    updateVolumeUI(projectData.tracks[currentTrack].volume, true);
+    // get current track and update params from currentData ********
+    updateVolumeUI(currentData.tracks[currentTrack].volume, true);
 }
 
 function renderSequencer() {
-    // look at project data and add values to sequence for currnet track
+    // look at currentdata and add values to sequence for current track
     const steps = document.querySelectorAll(".step");
-    const currentData = projectData.tracks[currentTrack].steps;
+    const currentSeq = currentData.tracks[currentTrack].steps;
 
     steps.forEach((stepBtn, index) => {
-        if (currentData[index] === 1) {
+        if (currentSeq[index] === 1) {
             stepBtn.classList.add("active");
         } else {
             stepBtn.classList.remove("active");
