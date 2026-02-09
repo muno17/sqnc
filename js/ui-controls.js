@@ -111,7 +111,7 @@ function initReload() {
             // don't do anything if there aren't any changes
             if (changes) {
                 saveBtn.classList.remove("changes");
-                currentData = Object.clone(projectData);
+                currentData = JSON.parse(JSON.stringify(projectData));
                 changes = false;
 
                 // redraw the UI

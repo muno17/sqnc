@@ -1,11 +1,100 @@
 // ****************** communication with the server ****************** \\
-
+// use fetch api
 // check if user logged in
 
 // send projectData when save button is pressed
+async function saveSequence() {
+    // send currentData to the server
+    // on success, projectData gets a copy of currentData assigned to it
+    try {
+        const response = await fetch("api/save-sequence.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(currentData)
+        });
+        
+        const data = await response.json();
+        
+        // Update projectData on success
+        projectData = JSON.parse(JSON.stringify(currentData));
+        if (data && data.id) {
+            projectData.id = data.id;
+            currentData.id = data.id;
+        }
+        console.log("Saved successfully");
+    } catch (err) {
+        console.error("Save failed:", err);
+    }
+}
+
+
+// when user logs in, load correct sequences
+async function loadSequences() {
+    // load projectData -> copy into currentData
+    // stop if running
+    // disable start button
+    // reenable once loaded
+    try {
+        const response = await fetch("api/get-user-sequences.php", {
+            method: "POST"
+        });
+        const ajax = await response.json();
+        const sequences = document.getElementById("sequences");
+
+        // Clear and add default
+        sequences.innerHTML = '<option value="new">New Sequence</option>';
+
+        ajax.forEach(seq => {
+            const option = document.createElement('option');
+            option.value = seq.id;
+            option.innerHTML = seq.name;
+            sequences.appendChild(option);
+        });
+    } catch (err) {
+        console.error("Failed to load sequences:", err);
+    }
+}
+
+
+function getSequence(id) {
+    // stop if running
+    // disable start button
+    // reenable once loaded
+    new Ajax.Request("api/get-sequence.php", {
+        method: "post",
+        parameters: {id: id},
+        onSuccess: updateSequence,
+        onFailure: ajaxFailed,
+    });
+}
+
+function updateSequence(ajaxResponse) {
+    var ajax = ajaxResponse.responseText.evalJSON();
+
+    // conver the content JSON string to a JS object
+    projectData = ajax.content.evalJSON();
+    currentData = Object.clone(projectData);
+
+    renderSequencer();
+    renderParams();
+}
+
+// when user logs in, load correct samples
+function loadSamples() {
+    // fetch all user uploaded samples
+    // return list of file paths
+}
+
+
+
+/*
+
+
 function saveSequence() {
     // send currentData to the server
     // on success, projectData gets a copy of currentData assigned to it
+
+
     new Ajax.Request("api/save-sequence.php", {
         method: "post",
         contentType: "application/json",
@@ -16,10 +105,11 @@ function saveSequence() {
     console.log("saved");
 }
 
+
 function updateProjectData(ajaxResponse) {
     var ajax = ajaxResponse.responseText.evalJSON();
     projectData = Object.clone(currentData);
-    
+
     if (ajax && ajax.id) {
         projectData.id = ajax.id;
         currentData.id = ajax.id;
@@ -28,7 +118,6 @@ function updateProjectData(ajaxResponse) {
     // update pattern selector to add new?
 }
 
-// when user logs in, load correct sequences
 function loadSequences() {
     // load projectData -> copy into currentData
     // stop if running
@@ -63,34 +152,6 @@ function updateSequences(ajaxResponse) {
     }
 }
 
-function getSequence(id) {
-    // stop if running
-    // disable start button
-    // reenable once loaded
-    new Ajax.Request("api/get-sequence.php", {
-        method: "post",
-        parameters: {id: id},
-        onSuccess: updateSequence,
-        onFailure: ajaxFailed,
-    });
-}
-
-function updateSequence(ajaxResponse) {
-    var ajax = ajaxResponse.responseText.evalJSON();
-
-    // conver the content JSON string to a JS object
-    projectData = ajax.content.evalJSON();
-    currentData = Object.clone(projectData);
-
-    renderSequencer();
-    renderParams();
-}
-
-// when user logs in, load correct samples
-function loadSamples() {
-    // fetch all user uploaded samples
-    // return list of file paths
-}
 
 function ajaxFailed(ajax, exception) {
     var errorTitle = "Error making Ajax request";
@@ -110,3 +171,4 @@ function ajaxFailed(ajax, exception) {
     }
     console.error(errorTitle + ": " + details);
 }
+*/
