@@ -12,11 +12,181 @@ const instruments = [];
 Tone.Transport.loop = true;
 Tone.Transport.loopEnd = length;
 
+// massive JSON objects to contain all information
 // currentData is the live object
 // projectData is the master object that interacts with the api
-// defaultData is an init object ***
+// initData is an init object with default parameters
 
-// massive JSON objects to contain all information
+var initData = {
+    id: 0,
+    name: "New Sequence",
+    bpm: 120,
+    masterVolume: -6,
+    length: "1m",
+    tracks: [
+        {
+            id: 0,
+            //sample: test,
+            volume: -6,
+            rate: 100,
+            pitch: 0,
+            balance: 0,
+            start: 0,
+            attack: 0,
+            release: 100,
+            filterBase: 0,
+            filterWidth: 100,
+            resonance: 0,
+            distortion: 0,
+            steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        },
+        {
+            id: 1,
+            //sample: test,
+            volume: -6,
+            rate: 100,
+            pitch: 0,
+            balance: 0,
+            start: 0,
+            attack: 0,
+            release: 100,
+            filterBase: 0,
+            filterWidth: 100,
+            resonance: 0,
+            distortion: 0,
+            steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        },
+        {
+            id: 2,
+            //sample: test,
+            volume: -6,
+            rate: 100,
+            pitch: 0,
+            balance: 0,
+            start: 0,
+            attack: 0,
+            release: 100,
+            filterBase: 0,
+            filterWidth: 100,
+            resonance: 0,
+            distortion: 0,
+            steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        },
+        {
+            id: 3,
+            //sample: test,
+            volume: -6,
+            rate: 100,
+            pitch: 0,
+            balance: 0,
+            start: 0,
+            attack: 0,
+            release: 100,
+            filterBase: 0,
+            filterWidth: 100,
+            resonance: 0,
+            distortion: 0,
+            steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        },
+        {
+            id: 4,
+            //sample: test,
+            volume: -6,
+            rate: 100,
+            pitch: 0,
+            balance: 0,
+            start: 0,
+            attack: 0,
+            release: 100,
+            filterBase: 0,
+            filterWidth: 100,
+            resonance: 0,
+            distortion: 0,
+            steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        },
+        {
+            id: 5,
+            //sample: test,
+            volume: -6,
+            rate: 100,
+            pitch: 0,
+            balance: 0,
+            start: 0,
+            attack: 0,
+            release: 100,
+            filterBase: 0,
+            filterWidth: 100,
+            resonance: 0,
+            distortion: 0,
+            steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        },
+        {
+            id: 6,
+            //sample: test,
+            volume: -6,
+            rate: 100,
+            pitch: 0,
+            balance: 0,
+            start: 0,
+            attack: 0,
+            release: 100,
+            filterBase: 0,
+            filterWidth: 100,
+            resonance: 0,
+            distortion: 0,
+            steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        },
+        {
+            id: 7,
+            //sample: test,
+            volume: -6,
+            rate: 100,
+            pitch: 0,
+            balance: 0,
+            start: 0,
+            attack: 0,
+            release: 100,
+            filterBase: 0,
+            filterWidth: 100,
+            resonance: 0,
+            distortion: 0,
+            steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        },
+        {
+            id: 8,
+            //sample: test,
+            volume: -6,
+            rate: 100,
+            pitch: 0,
+            balance: 0,
+            start: 0,
+            attack: 0,
+            release: 100,
+            filterBase: 0,
+            filterWidth: 100,
+            resonance: 0,
+            distortion: 0,
+            steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        },
+        {
+            id: 9,
+            //sample: test,
+            volume: -6,
+            rate: 100,
+            pitch: 0,
+            balance: 0,
+            start: 0,
+            attack: 0,
+            release: 100,
+            filterBase: 0,
+            filterWidth: 100,
+            resonance: 0,
+            distortion: 0,
+            steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        },
+    ],
+};
+
 var currentData = {
     id: 0,
     name: "New Sequence",
@@ -187,7 +357,6 @@ var currentData = {
     ],
 };
 
-// defaultData = JSON - use this as default, projectData gets initialized to this if no pattern selected
 var projectData = {
     id: 0,
     name: "New Sequence",
@@ -439,7 +608,8 @@ window.onload = function () {
 function setupAudioLoop() {
     // eventually pass whatever the note's stored time value is after params ***
     Tone.Transport.scheduleRepeat((time) => {
-        //console.log("Tick - Step:", currentStep);
+        if (!running) return;
+
         // loop through each track
         currentData.tracks.forEach((track, index) => {
             if (track.steps[currentStep] == 1) {

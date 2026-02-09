@@ -8,10 +8,10 @@ function initTransport() {
     if (transport) {
         transport.addEventListener("click", async function () {
             if (running) {
-                // functionality to stop
                 running = false;
-                currentStep = 0;
+                // functionality to stop
                 Tone.Transport.stop();
+                //currentStep = 0;
                 //updateUIPlayHead(-1);
                 document
                     .querySelectorAll(".step.current")
@@ -22,8 +22,10 @@ function initTransport() {
                 await Tone.start();
                 await Tone.loaded();
 
-                Tone.Transport.start();
+                currentStep = 0;
+
                 running = true;
+                Tone.Transport.start();
                 transport.innerHTML = "Stop";
                 console.log("Sequencer started - all mappings verified.");
             }
