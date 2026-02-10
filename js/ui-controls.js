@@ -160,18 +160,18 @@ function initTrackSelectors() {
 }
 
 function initSequenceSelector() {
-    var selector = document.getElementById('sequences');
+    var selector = document.getElementById("sequences");
 
     if (selector) {
-        selector.addEventListener('change', function() {
+        selector.addEventListener("change", function () {
             var selectedId = this.value;
 
-            if (selectedId != 'new') {
+            if (selectedId != "new") {
                 // getSequence(selectedId); REENABLE
             } else {
                 // CALL FUNCTION TO RESET INTERFACE ***
             }
-        })
+        });
     }
 }
 
@@ -189,6 +189,18 @@ function renderParams() {
 
     updatePitchUI(track.pitch);
     setTrackPitch(track.pitch);
+
+    updateAttackUI(track.attack);
+    setTrackAttack(track.attack);
+
+    updateDecayUI(track.decay);
+    setTrackDecay(track.decay);
+
+    updateSustainUI(track.sustain);
+    setTrackSustain(track.sustain);
+
+    updateReleaseUI(track.release);
+    setTrackRelease(track.release);
 }
 ///////////////////////// Track Parameters \\\\\\\\\\\\\\\\\\\\\\\\\\
 // listeners for all track parameters
@@ -198,6 +210,10 @@ function initTrackParams() {
     initVol();
     initPan();
     initPitch();
+    initAttack();
+    initDecay();
+    initSustain();
+    initRelease();
 }
 
 // update UI based on what track is selected ***
@@ -232,13 +248,14 @@ function initPan() {
 
         updatePanUI(val);
         setTrackPan(val);
-    })
+    });
 }
 
 function updatePanUI(val) {
     const pan = document.getElementById("pan");
     const panDisplay = document.getElementById("panDisplay");
 
+    // format the value so it displays 0-100
     pan.value = val;
     panDisplay.innerHTML = parseInt(val * 50);
 }
@@ -252,12 +269,12 @@ function initPitch() {
 
         updatePitchUI(val);
         setTrackPitch(val);
-    })
+    });
 }
 
 function updatePitchUI(val) {
     const pitch = document.getElementById("pitch");
-    const pitchDisplay = document.getElementById("pitchDisplay")
+    const pitchDisplay = document.getElementById("pitchDisplay");
 
     // format the value so it displays from -12 to +12 in .1 increments
     const formattedVal = parseFloat(val).toFixed(1);
@@ -267,5 +284,89 @@ function updatePitchUI(val) {
     }
 
     pitch.value = val;
-    pitchDisplay.innerHTML = sign + formattedVal;   
+    pitchDisplay.innerHTML = sign + formattedVal;
+}
+
+function initAttack() {
+    const attack = document.getElementById("attack");
+
+    attack.addEventListener("input", function () {
+        const val = parseFloat(this.value);
+        currentData.tracks[currentTrack].attack = val;
+
+        updateAttackUI(val);
+        setTrackAttack(val);
+    });
+}
+
+function updateAttackUI(val) {
+    const attack = document.getElementById("attack");
+    const attackDisplay = document.getElementById("attackDisplay");
+
+    // format the value so it displays 0-100
+    attack.value = val;
+    attackDisplay.innerHTML = parseInt(val * 50);
+}
+
+function initDecay() {
+    const decay = document.getElementById("decay");
+
+    decay.addEventListener("input", function () {
+        const val = parseFloat(this.value);
+        currentData.tracks[currentTrack].decay = val;
+
+        updateDecayUI(val);
+        setTrackDecay(val);
+    });
+}
+
+function updateDecayUI(val) {
+    const decay = document.getElementById("decay");
+    const decayDisplay = document.getElementById("decayDisplay");
+
+    // format the value so it displays 0-100
+    decay.value = val;
+    decayDisplay.innerHTML = parseInt(val * 50);
+}
+
+function initSustain() {
+    const sustain = document.getElementById("sustain");
+
+    sustain.addEventListener("input", function () {
+        const val = parseFloat(this.value);
+        currentData.tracks[currentTrack].sustain = val;
+
+        updateSustainUI(val);
+        setTrackSustain(val);
+    });
+}
+
+function updateSustainUI(val) {
+    const sustain = document.getElementById("sustain");
+    const sustainDisplay = document.getElementById("sustainDisplay");
+
+    // format the value so it displays 0-100
+    sustain.value = val;
+    sustainDisplay.innerHTML = parseInt(val * 100);
+}
+
+function initRelease() {
+    const release = document.getElementById("release");
+
+    release.addEventListener("input", function () {
+        const val = parseFloat(this.value);
+        currentData.tracks[currentTrack].release = val;
+
+        updateReleaseUI(val);
+        setTrackRelease(val);
+    });
+}
+
+function updateReleaseUI(val) {
+    const release = document.getElementById("release");
+    const releaseDisplay = document.getElementById("releaseDisplay");
+
+    // format the value so it displays 0-100
+    release.value = val;
+    releaseDisplay.innerHTML = parseInt(val * 20);
 }

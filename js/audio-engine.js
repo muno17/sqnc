@@ -9,7 +9,7 @@ var changes = false;
 // arrays for instruments and all parameters
 const instruments = [];
 const panVols = [];
-const ampEnvs = []
+const ampEnvs = [];
 
 Tone.Transport.loop = true;
 Tone.Transport.loopEnd = length;
@@ -200,11 +200,12 @@ var currentData = {
             id: 0,
             //sample: test,
             volume: -12,
-            rate: 100,
             pitch: 1,
             pan: 0,
             start: 0,
             attack: 0,
+            decay: 0,
+            sustain: 0,
             release: 100,
             filterBase: 0,
             filterWidth: 100,
@@ -216,11 +217,12 @@ var currentData = {
             id: 1,
             //sample: test,
             volume: -12,
-            rate: 100,
             pitch: 1,
             pan: 0,
             start: 0,
             attack: 0,
+            decay: 0,
+            sustain: 0,
             release: 100,
             filterBase: 0,
             filterWidth: 100,
@@ -232,11 +234,12 @@ var currentData = {
             id: 2,
             //sample: test,
             volume: -6,
-            rate: 100,
             pitch: 0,
             pan: 0,
             start: 0,
             attack: 0,
+            decay: 0,
+            sustain: 0,
             release: 100,
             filterBase: 0,
             filterWidth: 100,
@@ -248,11 +251,12 @@ var currentData = {
             id: 3,
             //sample: test,
             volume: -6,
-            rate: 100,
             pitch: 0,
             pan: 0,
             start: 0,
             attack: 0,
+            decay: 0,
+            sustain: 0,
             release: 100,
             filterBase: 0,
             filterWidth: 100,
@@ -264,11 +268,12 @@ var currentData = {
             id: 4,
             //sample: test,
             volume: -6,
-            rate: 100,
             pitch: 0,
             pan: 0,
             start: 0,
             attack: 0,
+            decay: 0,
+            sustain: 0,
             release: 100,
             filterBase: 0,
             filterWidth: 100,
@@ -280,11 +285,12 @@ var currentData = {
             id: 5,
             //sample: test,
             volume: -6,
-            rate: 100,
             pitch: 0,
             pan: 0,
             start: 0,
             attack: 0,
+            decay: 0,
+            sustain: 0,
             release: 100,
             filterBase: 0,
             filterWidth: 100,
@@ -296,11 +302,12 @@ var currentData = {
             id: 6,
             //sample: test,
             volume: -6,
-            rate: 100,
             pitch: 0,
             pan: 0,
             start: 0,
             attack: 0,
+            decay: 0,
+            sustain: 0,
             release: 100,
             filterBase: 0,
             filterWidth: 100,
@@ -312,11 +319,12 @@ var currentData = {
             id: 7,
             //sample: test,
             volume: -6,
-            rate: 100,
             pitch: 0,
             pan: 0,
             start: 0,
             attack: 0,
+            decay: 0,
+            sustain: 0,
             release: 100,
             filterBase: 0,
             filterWidth: 100,
@@ -328,11 +336,12 @@ var currentData = {
             id: 8,
             //sample: test,
             volume: -6,
-            rate: 100,
             pitch: 0,
             pan: 0,
             start: 0,
             attack: 0,
+            decay: 0,
+            sustain: 0,
             release: 100,
             filterBase: 0,
             filterWidth: 100,
@@ -344,11 +353,12 @@ var currentData = {
             id: 9,
             //sample: test,
             volume: -6,
-            rate: 100,
             pitch: 0,
             pan: 0,
             start: 0,
             attack: 0,
+            decay: 0,
+            sustain: 0,
             release: 100,
             filterBase: 0,
             filterWidth: 100,
@@ -533,31 +543,27 @@ var projectData = {
 function initInstruments() {
     for (var i = 0; i < 10; i++) {
         // initialize parameter components/effects
+        var panVol = new Tone.PanVol(0, -12).toDestination();
+        panVols[i] = panVol;
+
         var ampEnv = new Tone.AmplitudeEnvelope({
             attack: 0.0,
             decay: 0.1,
             sustain: 1.0,
-            release: 1.0
-        });
-
-        var panVol = new Tone.PanVol(0, -12).toDestination();
-
-        // store references
-        panVols[i] = panVol;
-        ampEnvs[i] = ampEnv
+            release: 1.0,
+        }).connect(panVols[i]);
+        ampEnvs[i] = ampEnv;
 
         if (i % 2 == 0) {
             instruments[i] = new Tone.Player({
                 url: "samples/Marshalls_Kick.wav",
                 autostart: false,
-            })
-            .connect(ampEnvs[i])
-            .connect(panVols[i]);
+            }).connect(ampEnvs[i]);
         } else {
             instruments[i] = new Tone.Player({
                 url: "samples/OB_Nebula_Pad.wav",
                 autostart: false,
-            }).connect(panVols[i]);
+            }).connect(ampEnvs[i]);
         }
     }
 }
@@ -577,6 +583,8 @@ window.onload = function () {
     // initialize track params
     setupAudioLoop();
 };
+
+////////////////////////// Loop Parameters \\\\\\\\\\\\\\\\\\\\\\\\\\
 
 // schedule the loop
 function setupAudioLoop() {
@@ -600,10 +608,29 @@ function setupAudioLoop() {
 
 function playTrackSound(index, time) {
     const player = instruments[index];
-    
+    const env = ampEnvs[index];
+    const now = time || Tone.now();
     try {
         if (player && player.buffer && player.buffer.loaded) {
+            // stop the player immediately so the next .start() is a fresh trigger
+            player.stop(now);
+
+            // reset the envelope
+            env.triggerRelease(now);
+
+            // restart the player and the envelope
+            player.start(now);
+
+            // Using a short gate (0.1) lets the Attack/Decay/Release sliders
+            // stay in control without the "Sustain" getting stuck open.
+            env.triggerAttackRelease(0.1, now);
+
+            /*
+            env.cancel(time);
+            //player.start(time);
             player.start(time);
+            env.triggerAttackRelease(0.1, time);
+            */
         }
     } catch (e) {
         console.error("Playback error:", e);
@@ -642,4 +669,20 @@ function setTrackPan(val, instant = false) {
 function setTrackPitch(val) {
     const rate = Math.pow(2, val / 12);
     instruments[currentTrack].playbackRate = rate;
+}
+
+function setTrackAttack(val) {
+    ampEnvs[currentTrack].attack = val;
+}
+
+function setTrackDecay(val) {
+    ampEnvs[currentTrack].decay = val;
+}
+
+function setTrackSustain(val) {
+    ampEnvs[currentTrack].sustain = val;
+}
+
+function setTrackRelease(val) {
+    ampEnvs[currentTrack].release = val;
 }
