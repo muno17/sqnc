@@ -204,8 +204,8 @@ var currentData = {
             pan: 0,
             start: 0,
             attack: 0,
-            decay: 0.01,
-            sustain: 0,
+            decay: 2,
+            sustain: 1,
             release: 0,
             filterBase: 0,
             filterWidth: 100,
@@ -221,8 +221,8 @@ var currentData = {
             pan: 0,
             start: 0,
             attack: 0,
-            decay: 0.01,
-            sustain: 0,
+            decay: 2,
+            sustain: 1,
             release: 0,
             filterBase: 0,
             filterWidth: 100,
@@ -233,13 +233,13 @@ var currentData = {
         {
             id: 2,
             //sample: test,
-            volume: -6,
+            volume: -12,
             pitch: 0,
             pan: 0,
             start: 0,
             attack: 0,
-            decay: 0,
-            sustain: 0,
+            decay: 2,
+            sustain: 1,
             release: 0,
             filterBase: 0,
             filterWidth: 100,
@@ -250,13 +250,13 @@ var currentData = {
         {
             id: 3,
             //sample: test,
-            volume: -6,
+            volume: -12,
             pitch: 0,
             pan: 0,
             start: 0,
             attack: 0,
-            decay: 0,
-            sustain: 0,
+            decay: 2,
+            sustain: 1,
             release: 0,
             filterBase: 0,
             filterWidth: 100,
@@ -267,13 +267,13 @@ var currentData = {
         {
             id: 4,
             //sample: test,
-            volume: -6,
+            volume: -12,
             pitch: 0,
             pan: 0,
             start: 0,
             attack: 0,
-            decay: 0,
-            sustain: 0,
+            decay: 2,
+            sustain: 1,
             release: 0,
             filterBase: 0,
             filterWidth: 100,
@@ -284,13 +284,13 @@ var currentData = {
         {
             id: 5,
             //sample: test,
-            volume: -6,
+            volume: -12,
             pitch: 0,
             pan: 0,
             start: 0,
             attack: 0,
-            decay: 0,
-            sustain: 0,
+            decay: 2,
+            sustain: 1,
             release: 0,
             filterBase: 0,
             filterWidth: 100,
@@ -301,13 +301,13 @@ var currentData = {
         {
             id: 6,
             //sample: test,
-            volume: -6,
+            volume: -12,
             pitch: 0,
             pan: 0,
             start: 0,
             attack: 0,
-            decay: 0,
-            sustain: 0,
+            decay: 2,
+            sustain: 1,
             release: 0,
             filterBase: 0,
             filterWidth: 100,
@@ -318,13 +318,13 @@ var currentData = {
         {
             id: 7,
             //sample: test,
-            volume: -6,
+            volume: -12,
             pitch: 0,
             pan: 0,
             start: 0,
             attack: 0,
-            decay: 0,
-            sustain: 0,
+            decay: 2,
+            sustain: 1,
             release: 0,
             filterBase: 0,
             filterWidth: 100,
@@ -335,13 +335,13 @@ var currentData = {
         {
             id: 8,
             //sample: test,
-            volume: -6,
+            volume: -12,
             pitch: 0,
             pan: 0,
             start: 0,
             attack: 0,
-            decay: 0,
-            sustain: 0,
+            decay: 2,
+            sustain: 1,
             release: 0,
             filterBase: 0,
             filterWidth: 100,
@@ -352,13 +352,13 @@ var currentData = {
         {
             id: 9,
             //sample: test,
-            volume: -6,
+            volume: -12,
             pitch: 0,
             pan: 0,
             start: 0,
             attack: 0,
-            decay: 0,
-            sustain: 0,
+            decay: 2,
+            sustain: 1,
             release: 0,
             filterBase: 0,
             filterWidth: 100,
@@ -612,27 +612,19 @@ function playTrackSound(index, time) {
     const now = time || Tone.now();
     try {
         if (player && player.buffer && player.buffer.loaded) {
-            // stop the player immediately so the next .start() is a fresh trigger
+            // stop the player and current env immediately
             player.stop(now);
+            env.cancel(now);
 
-            // 2. IMPORTANT: We use the buffer duration as the "gate"
-            // This ensures the Sustain and Release parameters you set in the UI
-            // have time to actually happen before the envelope "gives up".
+            // use the buffer duration as a "gate"
+            // allows sustain and release to actually happen
             const duration = player.buffer.duration;
 
             // restart the player and the envelope
             player.start(now);
 
-            // Using a short gate (0.1) lets the Attack/Decay/Release sliders
-            // stay in control without the "Sustain" getting stuck open.
+            // starts next attack phase
             env.triggerAttackRelease(duration, now);
-
-            /*
-            env.cancel(time);
-            //player.start(time);
-            player.start(time);
-            env.triggerAttackRelease(0.1, time);
-            */
         }
     } catch (e) {
         console.error("Playback error:", e);
