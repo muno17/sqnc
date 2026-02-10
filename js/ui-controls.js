@@ -11,6 +11,7 @@ function initTransport() {
                 running = false;
                 // functionality to stop
                 Tone.Transport.stop();
+                stopAllSounds();
                 //currentStep = 0;
                 //updateUIPlayHead(-1);
                 document
@@ -177,11 +178,17 @@ function initSequenceSelector() {
 // update all params to track's saved value ***
 function renderParams() {
     // get current track and update params from currentData ********
-    updateVolumeUI(data.volume);
-    setTrackVolume(data.volume, true); // Use 'true' for instant snap
+    // true = instant snap to value
+    const track = currentData.tracks[currentTrack];
 
-    updatePanUI(data.pan);
-    setTrackPan(data.pan, true);
+    updateVolumeUI(track.volume);
+    setTrackVolume(track.volume, true);
+
+    updatePanUI(track.pan);
+    setTrackPan(track.pan, true);
+
+    updatePitchUI(track.pitch);
+    setTrackPitch(track.pitch, true);
 }
 ///////////////////////// Track Parameters \\\\\\\\\\\\\\\\\\\\\\\\\\
 // listeners for all track parameters
@@ -190,6 +197,7 @@ function renderParams() {
 function initTrackParams() {
     initVol();
     initPan();
+    initPitch();
 }
 
 // update UI based on what track is selected ***
@@ -241,5 +249,31 @@ function updatePanUI(val) {
     if (pan) {
         pan.value = val;
         panDisplay.innerHTML = parseInt(val * 50);
+    }
+}
+
+function initPitch() {
+    const pitch = document.getElementById("pitch");
+
+    if (pitch) {
+        pitch.addEventListener("input", function () {
+            const val = parseFloat(this.value);
+            console.log(val)
+            currentData.tracks[currentTrack].pitch = val;
+
+            updatePitchUI(val);
+            setTrackPitch(val);
+        })
+    }
+
+}
+
+function updatePitchUI(val) {
+    const pitch = document.getElementById("pitch");
+    const pitchDisplay = document.getElementById("pitchDisplay")
+
+    if (pitch) {
+        pitch.value = val;
+        pitchDisplay.innerHTML = val;
     }
 }

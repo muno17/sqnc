@@ -10,7 +10,7 @@ var changes = false;
 
 // arrays for instruments and all parameters
 const instruments = [];
-const panVols = []
+const panVols = [];
 
 Tone.Transport.loop = true;
 Tone.Transport.loopEnd = length;
@@ -200,9 +200,9 @@ var currentData = {
         {
             id: 0,
             //sample: test,
-            volume: -6,
+            volume: -12,
             rate: 100,
-            pitch: 0,
+            pitch: 1,
             pan: 0,
             start: 0,
             attack: 0,
@@ -216,9 +216,9 @@ var currentData = {
         {
             id: 1,
             //sample: test,
-            volume: -6,
+            volume: -12,
             rate: 100,
-            pitch: 0,
+            pitch: 1,
             pan: 0,
             start: 0,
             attack: 0,
@@ -533,21 +533,22 @@ var projectData = {
 // create tone.js samplers
 function initInstruments() {
     for (var i = 0; i < 10; i++) {
-        // create all instrument modules here
+        // initialize parameter components/effects
         var panVol = new Tone.PanVol(0, -12).toDestination();
-        panVols[i] = panVol
 
+        // store references
+        panVols[i] = panVol;
 
         if (i % 2 == 0) {
-            instruments[i] = new Tone.Sampler({
-            urls: { C1: "samples/Marshalls_Kick.wav" },
-            })
-            .connect(panVols[i]);
+            instruments[i] = new Tone.Player({
+                url: "samples/Marshalls_Kick.wav",
+                autostart: false,
+            }).connect(panVols[i]);
         } else {
-            instruments[i] = new Tone.Sampler({
-            urls: { C1: "samples/OB_Nebula_Pad.wav" },
-            })
-            .connect(panVols[i]);
+            instruments[i] = new Tone.Player({
+                url: "samples/OB_Nebula_Pad.wav",
+                autostart: false,
+            }).connect(panVols[i]);
         }
     }
 }
@@ -589,16 +590,24 @@ function setupAudioLoop() {
 }
 
 function playTrackSound(index, time) {
-    const instrument = instruments[index];
-    if (!instrument) return;
-
+    const player = instruments[index];
+    
     try {
-        if (instrument.loaded) {
-            instrument.triggerAttackRelease("C1", "8n", time);
+        if (player && player.buffer && player.buffer.loaded) {
+            player.start(time);
         }
     } catch (e) {
         console.error("Playback error:", e);
     }
+}
+
+function stopAllSounds() {
+    instruments.forEach((player) => {
+        if (player) {
+            // stops the audio buffer immediately
+            player.stop();
+        }
+    });
 }
 
 ////////////////////////// Track Parameters \\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -615,9 +624,17 @@ function setTrackVolume(val, instant = false) {
 
 function setTrackPan(val, instant = false) {
     if (instant) {
-        panVols[currentTrack].pan.value = val
+        panVols[currentTrack].pan.value = val;
     } else {
         panVols[currentTrack].pan.rampTo(val, 0.05);
+    }
+}
+
+function setTrackPitch(val, instant = false) {
+    if (instant) {
+        instruments[currentTrack].playbackRate = val;
+    } else {
+        instruments[currentTrack].playbackRate= val;
     }
 }
 
