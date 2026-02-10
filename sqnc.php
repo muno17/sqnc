@@ -127,24 +127,24 @@ session_start();
                                 </div>
                                 <div class="paramRow">
                                     <div class="house">
-                                        <h2>Base*</h2>
-                                        <div class="display">0</div>
-                                        <input type="range" min="0" max="100" value="0" class="slider" id="base">
+                                        <h2>LP Width</h2>
+                                        <div id="lpWidthDisplay" class="display">20000</div>
+                                        <input type="range" min="0" max="20000" value="20000" class="slider" id="lpWidth">
                                     </div>
                                     <div class="house">
-                                        <h2>Width*</h2>
-                                        <div class="display">100</div>
-                                        <input type="range" min="0" max="100" value="100" class="slider" id="width">
+                                        <h2>LP Q</h2>
+                                        <div id="lpqDisplay" class="display">0</div>
+                                        <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="lpq">
                                     </div>
                                     <div class="house">
-                                        <h2>Resonance*</h2>
-                                        <div class="display">0</div>
-                                        <input type="range" min="0" max="100" value="0" class="slider" id="res">
+                                        <h2>HP Width</h2>
+                                        <div id="hpWidthDisplay" class="display">10</div>
+                                        <input type="range" min="10" max="20000" value="1" class="slider" id="hpWidth">
                                     </div>
                                     <div class="house">
-                                        <h2>Distortion*</h2>
-                                        <div class="display">0</div>
-                                        <input type="range" min="0" max="100" value="0" class="slider" id="dist">
+                                        <h2>HP Q</h2>
+                                        <div id="hpqDisplay" class="display">0</div>
+                                        <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="hpq">
                                     </div>
                                 </div>
                             </div>

@@ -10,6 +10,8 @@ var changes = false;
 const instruments = [];
 const panVols = [];
 const ampEnvs = [];
+const lpFilters = [];
+const hpFilters = [];
 
 Tone.Transport.loop = true;
 Tone.Transport.loopEnd = length;
@@ -210,9 +212,10 @@ var currentData = {
             decay: 2,
             sustain: 1,
             release: 0,
-            filterBase: 0,
-            filterWidth: 100,
-            resonance: 0,
+            lpWidth: 20000,
+            lpq: 0,
+            hpWidth: 1,
+            hpq: 0,
             distortion: 0,
             steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         },
@@ -227,9 +230,10 @@ var currentData = {
             decay: 2,
             sustain: 1,
             release: 0,
-            filterBase: 0,
-            filterWidth: 100,
-            resonance: 0,
+            lpWidth: 20000,
+            lpq: 0,
+            hpWidth: 1,
+            hpq: 0,
             distortion: 0,
             steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         },
@@ -237,16 +241,17 @@ var currentData = {
             id: 2,
             //sample: test,
             volume: -12,
-            pitch: 0,
+            pitch: 1,
             pan: 0,
             start: 0,
             attack: 0,
             decay: 2,
             sustain: 1,
             release: 0,
-            filterBase: 0,
-            filterWidth: 100,
-            resonance: 0,
+            lpWidth: 20000,
+            lpq: 0,
+            hpWidth: 1,
+            hpq: 0,
             distortion: 0,
             steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         },
@@ -254,16 +259,17 @@ var currentData = {
             id: 3,
             //sample: test,
             volume: -12,
-            pitch: 0,
+            pitch: 1,
             pan: 0,
             start: 0,
             attack: 0,
             decay: 2,
             sustain: 1,
             release: 0,
-            filterBase: 0,
-            filterWidth: 100,
-            resonance: 0,
+            lpWidth: 20000,
+            lpq: 0,
+            hpWidth: 1,
+            hpq: 0,
             distortion: 0,
             steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         },
@@ -271,16 +277,17 @@ var currentData = {
             id: 4,
             //sample: test,
             volume: -12,
-            pitch: 0,
+            pitch: 1,
             pan: 0,
             start: 0,
             attack: 0,
             decay: 2,
             sustain: 1,
             release: 0,
-            filterBase: 0,
-            filterWidth: 100,
-            resonance: 0,
+            lpWidth: 20000,
+            lpq: 0,
+            hpWidth: 1,
+            hpq: 0,
             distortion: 0,
             steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         },
@@ -288,16 +295,17 @@ var currentData = {
             id: 5,
             //sample: test,
             volume: -12,
-            pitch: 0,
+            pitch: 1,
             pan: 0,
             start: 0,
             attack: 0,
             decay: 2,
             sustain: 1,
             release: 0,
-            filterBase: 0,
-            filterWidth: 100,
-            resonance: 0,
+            lpWidth: 20000,
+            lpq: 0,
+            hpWidth: 1,
+            hpq: 0,
             distortion: 0,
             steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         },
@@ -305,16 +313,17 @@ var currentData = {
             id: 6,
             //sample: test,
             volume: -12,
-            pitch: 0,
+            pitch: 1,
             pan: 0,
             start: 0,
             attack: 0,
             decay: 2,
             sustain: 1,
             release: 0,
-            filterBase: 0,
-            filterWidth: 100,
-            resonance: 0,
+            lpWidth: 20000,
+            lpq: 0,
+            hpWidth: 1,
+            hpq: 0,
             distortion: 0,
             steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         },
@@ -322,16 +331,17 @@ var currentData = {
             id: 7,
             //sample: test,
             volume: -12,
-            pitch: 0,
+            pitch: 1,
             pan: 0,
             start: 0,
             attack: 0,
             decay: 2,
             sustain: 1,
             release: 0,
-            filterBase: 0,
-            filterWidth: 100,
-            resonance: 0,
+            lpWidth: 20000,
+            lpq: 0,
+            hpWidth: 1,
+            hpq: 0,
             distortion: 0,
             steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         },
@@ -339,16 +349,17 @@ var currentData = {
             id: 8,
             //sample: test,
             volume: -12,
-            pitch: 0,
+            pitch: 1,
             pan: 0,
             start: 0,
             attack: 0,
             decay: 2,
             sustain: 1,
             release: 0,
-            filterBase: 0,
-            filterWidth: 100,
-            resonance: 0,
+            lpWidth: 20000,
+            lpq: 0,
+            hpWidth: 1,
+            hpq: 0,
             distortion: 0,
             steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         },
@@ -356,16 +367,17 @@ var currentData = {
             id: 9,
             //sample: test,
             volume: -12,
-            pitch: 0,
+            pitch: 1,
             pan: 0,
             start: 0,
             attack: 0,
             decay: 2,
             sustain: 1,
             release: 0,
-            filterBase: 0,
-            filterWidth: 100,
-            resonance: 0,
+            lpWidth: 20000,
+            lpq: 0,
+            hpWidth: 1,
+            hpq: 0,
             distortion: 0,
             steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         },
@@ -554,8 +566,14 @@ function initInstruments() {
             decay: 0.1,
             sustain: 1.0,
             release: 1.0,
-        }).connect(panVols[i]);
+        }).connect(panVol);
         ampEnvs[i] = ampEnv;
+
+        var hpFilter = new Tone.Filter(1, "highpass").connect(ampEnv);
+        hpFilters[i] = hpFilter;
+
+        var lpFilter = new Tone.Filter(20000, "lowpass").connect(hpFilter);
+        lpFilters[i] = lpFilter;
 
         if (i % 2 == 0) {
             instruments[i] = new Tone.Player({
@@ -569,7 +587,7 @@ function initInstruments() {
             });
         }
 
-        instruments[i].connect(ampEnvs[i]);
+        instruments[i].connect(lpFilter);
     }
 }
 
@@ -693,4 +711,20 @@ function setTrackSustain(val) {
 
 function setTrackRelease(val) {
     ampEnvs[currentTrack].release = val;
+}
+
+function setTrackLpWidth(val) {
+    lpFilters[currentTrack].frequency.rampTo(val, 0.05);
+}
+
+function setTrackLpQ(val) {
+    lpFilters[currentTrack].Q.rampTo(val, 0.05);
+}
+
+function setTrackHpWidth(val) {
+    hpFilters[currentTrack].frequency.rampTo(val, 0.05);
+}
+
+function setTrackHpQ(val) {
+    hpFilters[currentTrack].Q.rampTo(val, 0.05);
 }

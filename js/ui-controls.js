@@ -204,6 +204,18 @@ function renderParams() {
 
     updateReleaseUI(track.release);
     setTrackRelease(track.release);
+
+    updateLpWidthUI(track.lpWidth);
+    setTrackLpWidth(track.lpWidth);
+
+    updateLpQUI(track.lpq);
+    setTrackLpQ(track.lpq);
+
+    updateHpWidthUI(track.hpWidth);
+    setTrackHpWidth(track.hpWidth);
+
+    updateHpQUI(track.hpq);
+    setTrackHpQ(track.hpq);
 }
 ///////////////////////// Track Parameters \\\\\\\\\\\\\\\\\\\\\\\\\\
 // listeners for all track parameters
@@ -218,6 +230,10 @@ function initTrackParams() {
     initDecay();
     initSustain();
     initRelease();
+    initLpWidth();
+    initLpQ();
+    initHpWidth();
+    initHpQ();
 }
 
 // update UI based on what track is selected ***
@@ -300,16 +316,16 @@ function initStart() {
 
         updateStartUI(val);
         setTrackStart(val);
-    })
+    });
 }
 
 function updateStartUI(val) {
-        const start = document.getElementById("start");
-        const startDisplay = document.getElementById("startDisplay");
+    const start = document.getElementById("start");
+    const startDisplay = document.getElementById("startDisplay");
 
-        // format the value so it displays 0-100
-        start.value = val;
-        startDisplay.innerHTML = parseInt(val * 100);
+    // format the value so it displays 0-100
+    start.value = val;
+    startDisplay.innerHTML = parseInt(val * 100);
 }
 
 function initAttack() {
@@ -394,4 +410,86 @@ function updateReleaseUI(val) {
     // format the value so it displays 0-100
     release.value = val;
     releaseDisplay.innerHTML = parseInt(val * 20);
+}
+
+function initLpWidth() {
+    const lp = document.getElementById("lpWidth");
+
+    lp.addEventListener("input", function () {
+        const val = parseFloat(this.value);
+        currentData.tracks[currentTrack].lpWidth = val;
+
+        updateLpWidthUI(val);
+        setTrackLpWidth(val);
+    });
+}
+
+function updateLpWidthUI(val) {
+    const lp = document.getElementById("lpWidth");
+    const lpWidthDisplay = document.getElementById("lpWidthDisplay");
+
+    lp.value = val;
+    lpWidthDisplay.innerHTML = val;
+}
+
+function initLpQ() {
+    const q = document.getElementById("lpq");
+
+    q.addEventListener("input", function () {
+        const val = parseFloat(this.value);
+        currentData.tracks[currentTrack].lpq = val;
+
+        updateLpQUI(val);
+        setTrackLpQ(val);
+    });
+}
+
+function updateLpQUI(val) {
+    const q = document.getElementById("lpq");
+    const qWidthDisplay = document.getElementById("lpqDisplay");
+
+    // format the value so it displays 0-100
+    q.value = val;
+    qWidthDisplay.innerHTML = parseInt(val * 5);
+}
+
+function initHpWidth() {
+    const hp = document.getElementById("hpWidth");
+
+    hp.addEventListener("input", function () {
+        const val = parseFloat(this.value);
+        currentData.tracks[currentTrack].hpWidth = val;
+
+        updateHpWidthUI(val);
+        setTrackHpWidth(val);
+    });
+}
+
+function updateHpWidthUI(val) {
+    const hp = document.getElementById("hpWidth");
+    const hpWidthDisplay = document.getElementById("hpWidthDisplay");
+
+    hp.value = val;
+    hpWidthDisplay.innerHTML = val;
+}
+
+function initHpQ() {
+    const q = document.getElementById("hpq");
+
+    q.addEventListener("input", function () {
+        const val = parseFloat(this.value);
+        currentData.tracks[currentTrack].hpq = val;
+
+        updateHpQUI(val);
+        setTrackHpQ(val);
+    });
+}
+
+function updateHpQUI(val) {
+    const q = document.getElementById("hpq");
+    const qWidthDisplay = document.getElementById("hpqDisplay");
+
+    // format the value so it displays 0-100
+    q.value = val;
+    qWidthDisplay.innerHTML = parseInt(val * 5);
 }
