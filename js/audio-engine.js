@@ -212,7 +212,7 @@ var currentData = {
             decay: 2,
             sustain: 1,
             release: 0,
-            lpWidth: 20000,
+            lpWidth: 5000,
             lpq: 0,
             hpWidth: 1,
             hpq: 0,
@@ -230,7 +230,7 @@ var currentData = {
             decay: 2,
             sustain: 1,
             release: 0,
-            lpWidth: 20000,
+            lpWidth: 5000,
             lpq: 0,
             hpWidth: 1,
             hpq: 0,
@@ -248,7 +248,7 @@ var currentData = {
             decay: 2,
             sustain: 1,
             release: 0,
-            lpWidth: 20000,
+            lpWidth: 5000,
             lpq: 0,
             hpWidth: 1,
             hpq: 0,
@@ -266,7 +266,7 @@ var currentData = {
             decay: 2,
             sustain: 1,
             release: 0,
-            lpWidth: 20000,
+            lpWidth: 5000,
             lpq: 0,
             hpWidth: 1,
             hpq: 0,
@@ -284,7 +284,7 @@ var currentData = {
             decay: 2,
             sustain: 1,
             release: 0,
-            lpWidth: 20000,
+            lpWidth: 5000,
             lpq: 0,
             hpWidth: 1,
             hpq: 0,
@@ -302,7 +302,7 @@ var currentData = {
             decay: 2,
             sustain: 1,
             release: 0,
-            lpWidth: 20000,
+            lpWidth: 5000,
             lpq: 0,
             hpWidth: 1,
             hpq: 0,
@@ -320,7 +320,7 @@ var currentData = {
             decay: 2,
             sustain: 1,
             release: 0,
-            lpWidth: 20000,
+            lpWidth: 5000,
             lpq: 0,
             hpWidth: 1,
             hpq: 0,
@@ -338,7 +338,7 @@ var currentData = {
             decay: 2,
             sustain: 1,
             release: 0,
-            lpWidth: 20000,
+            lpWidth: 5000,
             lpq: 0,
             hpWidth: 1,
             hpq: 0,
@@ -356,7 +356,7 @@ var currentData = {
             decay: 2,
             sustain: 1,
             release: 0,
-            lpWidth: 20000,
+            lpWidth: 5000,
             lpq: 0,
             hpWidth: 1,
             hpq: 0,
@@ -374,7 +374,7 @@ var currentData = {
             decay: 2,
             sustain: 1,
             release: 0,
-            lpWidth: 20000,
+            lpWidth: 5000,
             lpq: 0,
             hpWidth: 1,
             hpq: 0,
@@ -572,7 +572,7 @@ function initInstruments() {
         var hpFilter = new Tone.Filter(10, "highpass").connect(ampEnv);
         hpFilters[i] = hpFilter;
 
-        var lpFilter = new Tone.Filter(20000, "lowpass").connect(hpFilter);
+        var lpFilter = new Tone.Filter(5000, "lowpass").connect(hpFilter);
         lpFilters[i] = lpFilter;
 
         if (i % 2 == 0) {

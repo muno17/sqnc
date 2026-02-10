@@ -128,8 +128,8 @@ session_start();
                                 <div class="paramRow">
                                     <div class="house">
                                         <h2>LP Width</h2>
-                                        <div id="lpWidthDisplay" class="display">20.0kHz</div>
-                                        <input type="range" min="0" max="20000" value="20000" class="slider" id="lpWidth">
+                                        <div id="lpWidthDisplay" class="display">5.0kHz</div>
+                                        <input type="range" min="0" max="5000" value="20000" class="slider" id="lpWidth">
                                     </div>
                                     <div class="house">
                                         <h2>LP Q</h2>
@@ -139,7 +139,7 @@ session_start();
                                     <div class="house">
                                         <h2>HP Width</h2>
                                         <div id="hpWidthDisplay" class="display">10Hz</div>
-                                        <input type="range" min="10" max="20000" value="10" class="slider" id="hpWidth">
+                                        <input type="range" min="10" max="5000" value="10" class="slider" id="hpWidth">
                                     </div>
                                     <div class="house">
                                         <h2>HP Q</h2>
