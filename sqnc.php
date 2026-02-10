@@ -112,7 +112,7 @@ session_start();
                                      <div class="house">
                                         <h2>Decay</h2>
                                         <div id="decayDisplay" class="display">100</div>
-                                        <input type="range" min="0" max="2" step="0.01" value="2" class="slider" id="decay">
+                                        <input type="range" min="0.01" max="2" step="0.01" value="2" class="slider" id="decay">
                                     </div>
                                     <div class="house">
                                         <h2>Sustain</h2>

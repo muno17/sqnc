@@ -204,9 +204,9 @@ var currentData = {
             pan: 0,
             start: 0,
             attack: 0,
-            decay: 0,
+            decay: 0.01,
             sustain: 0,
-            release: 100,
+            release: 0,
             filterBase: 0,
             filterWidth: 100,
             resonance: 0,
@@ -221,9 +221,9 @@ var currentData = {
             pan: 0,
             start: 0,
             attack: 0,
-            decay: 0,
+            decay: 0.01,
             sustain: 0,
-            release: 100,
+            release: 0,
             filterBase: 0,
             filterWidth: 100,
             resonance: 0,
@@ -240,7 +240,7 @@ var currentData = {
             attack: 0,
             decay: 0,
             sustain: 0,
-            release: 100,
+            release: 0,
             filterBase: 0,
             filterWidth: 100,
             resonance: 0,
@@ -257,7 +257,7 @@ var currentData = {
             attack: 0,
             decay: 0,
             sustain: 0,
-            release: 100,
+            release: 0,
             filterBase: 0,
             filterWidth: 100,
             resonance: 0,
@@ -274,7 +274,7 @@ var currentData = {
             attack: 0,
             decay: 0,
             sustain: 0,
-            release: 100,
+            release: 0,
             filterBase: 0,
             filterWidth: 100,
             resonance: 0,
@@ -291,7 +291,7 @@ var currentData = {
             attack: 0,
             decay: 0,
             sustain: 0,
-            release: 100,
+            release: 0,
             filterBase: 0,
             filterWidth: 100,
             resonance: 0,
@@ -308,7 +308,7 @@ var currentData = {
             attack: 0,
             decay: 0,
             sustain: 0,
-            release: 100,
+            release: 0,
             filterBase: 0,
             filterWidth: 100,
             resonance: 0,
@@ -325,7 +325,7 @@ var currentData = {
             attack: 0,
             decay: 0,
             sustain: 0,
-            release: 100,
+            release: 0,
             filterBase: 0,
             filterWidth: 100,
             resonance: 0,
@@ -342,7 +342,7 @@ var currentData = {
             attack: 0,
             decay: 0,
             sustain: 0,
-            release: 100,
+            release: 0,
             filterBase: 0,
             filterWidth: 100,
             resonance: 0,
@@ -359,7 +359,7 @@ var currentData = {
             attack: 0,
             decay: 0,
             sustain: 0,
-            release: 100,
+            release: 0,
             filterBase: 0,
             filterWidth: 100,
             resonance: 0,
@@ -615,15 +615,17 @@ function playTrackSound(index, time) {
             // stop the player immediately so the next .start() is a fresh trigger
             player.stop(now);
 
-            // reset the envelope
-            env.triggerRelease(now);
+            // 2. IMPORTANT: We use the buffer duration as the "gate"
+            // This ensures the Sustain and Release parameters you set in the UI
+            // have time to actually happen before the envelope "gives up".
+            const duration = player.buffer.duration;
 
             // restart the player and the envelope
             player.start(now);
 
             // Using a short gate (0.1) lets the Attack/Decay/Release sliders
             // stay in control without the "Sustain" getting stuck open.
-            env.triggerAttackRelease(0.1, now);
+            env.triggerAttackRelease(duration, now);
 
             /*
             env.cancel(time);
