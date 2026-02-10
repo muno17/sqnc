@@ -1,5 +1,3 @@
-console.log("Audio Engine Script Loaded!");
-
 // audio functionality
 
 var currentTrack = 0;
@@ -11,6 +9,7 @@ var changes = false;
 // arrays for instruments and all parameters
 const instruments = [];
 const panVols = [];
+const ampEnvs = []
 
 Tone.Transport.loop = true;
 Tone.Transport.loopEnd = length;
@@ -534,16 +533,26 @@ var projectData = {
 function initInstruments() {
     for (var i = 0; i < 10; i++) {
         // initialize parameter components/effects
+        var ampEnv = new Tone.AmplitudeEnvelope({
+            attack: 0.0,
+            decay: 0.1,
+            sustain: 1.0,
+            release: 1.0
+        });
+
         var panVol = new Tone.PanVol(0, -12).toDestination();
 
         // store references
         panVols[i] = panVol;
+        ampEnvs[i] = ampEnv
 
         if (i % 2 == 0) {
             instruments[i] = new Tone.Player({
                 url: "samples/Marshalls_Kick.wav",
                 autostart: false,
-            }).connect(panVols[i]);
+            })
+            .connect(ampEnvs[i])
+            .connect(panVols[i]);
         } else {
             instruments[i] = new Tone.Player({
                 url: "samples/OB_Nebula_Pad.wav",
@@ -634,65 +643,3 @@ function setTrackPitch(val) {
     const rate = Math.pow(2, val / 12);
     instruments[currentTrack].playbackRate = rate;
 }
-
-/*
-function initInstruments() {
-    instruments[0] = new Tone.Sampler({
-        urls: { C1: "samples/Marshalls_Kick.wav" },
-    }).toDestination();
-
-    instruments[1] = new Tone.Sampler({
-        urls: {
-            C1: "./samples/Marshalls_Open.wav",
-        },
-    }).toDestination();
-
-    instruments[2] = new Tone.Sampler({
-        urls: {
-            C1: "./samples/Marshalls_Clap.wav",
-        },
-    }).toDestination();
-
-    instruments[3] = new Tone.Sampler({
-        urls: {
-            C1: "./samples/OB_Nebula_Pad.wav",
-        },
-    }).toDestination();
-
-    instruments[4] = new Tone.Sampler({
-        urls: {
-            C1: "./samples/Marshalls_Kick.wav",
-        },
-    }).toDestination();
-
-    instruments[5] = new Tone.Sampler({
-        urls: {
-            C1: "./samples/Marshalls_Open.wav",
-        },
-    }).toDestination();
-
-    instruments[6] = new Tone.Sampler({
-        urls: {
-            C1: "./samples/Marshalls_Clap.wav",
-        },
-    }).toDestination();
-
-    instruments[7] = new Tone.Sampler({
-        urls: {
-            C1: "./samples/OB_Nebula_Pad.wav",
-        },
-    }).toDestination();
-
-    instruments[8] = new Tone.Sampler({
-        urls: {
-            C1: "./samples/Marshalls_Clap.wav",
-        },
-    }).toDestination();
-
-    instruments[9] = new Tone.Sampler({
-        urls: {
-            C1: "./samples/OB_Nebula_Pad.wav",
-        },
-    }).toDestination();
-}
-    */

@@ -93,56 +93,56 @@ session_start();
                                         <input type="range" min="-1" max="1" step="0.02" value="0" class="slider" id="pan">
                                     </div>
                                     <div class="house">
-                                        <h2>Rate</h2>
-                                        <div class="display">100</div>
-                                        <input type="range" min="0" max="100" value="100" class="slider" id="rate">
-                                    </div>
-                                    <div class="house">
                                         <h2>Pitch</h2>
                                         <div id="pitchDisplay" class="display">1.0</div>
                                         <input type="range" min="-12" max="12" step="0.01" value="0" class="slider" id="pitch">
                                     </div>
-                                </div>
-                                <div class="paramRow">
                                     <div class="house">
-                                        <h2>Start</h2>
+                                        <h2>Start*</h2>
                                         <div class="display">0</div>
                                         <input type="range" min="0" max="100" value="0" class="slider" id="start">
                                     </div>
+                                </div>
+                                <div class="paramRow">
                                     <div class="house">
-                                        <h2>Attack</h2>
+                                        <h2>Attack*</h2>
                                         <div class="display">0</div>
                                         <input type="range" min="0" max="100" value="0" class="slider" id="attack">
                                     </div>
-                                    <div class="house">
-                                        <h2>Hold</h2>
-                                        <div class="display">0</div>
-                                        <input type="range" min="0" max="100" value="0" class="slider" id="hold">
+                                     <div class="house">
+                                        <h2>Decay*</h2>
+                                        <div class="display">100</div>
+                                        <input type="range" min="0" max="100" value="100" class="slider" id="decay">
                                     </div>
                                     <div class="house">
-                                        <h2>Release</h2>
+                                        <h2>Sustain*</h2>
+                                        <div class="display">0</div>
+                                        <input type="range" min="0" max="100" value="0" class="slider" id="sustain">
+                                    </div>
+                                    <div class="house">
+                                        <h2>Release*</h2>
                                         <div class="display">100</div>
                                         <input type="range" min="0" max="100" value="100" class="slider" id="release">
                                     </div>
                                 </div>
                                 <div class="paramRow">
                                     <div class="house">
-                                        <h2>Base</h2>
+                                        <h2>Base*</h2>
                                         <div class="display">0</div>
                                         <input type="range" min="0" max="100" value="0" class="slider" id="base">
                                     </div>
                                     <div class="house">
-                                        <h2>Width</h2>
+                                        <h2>Width*</h2>
                                         <div class="display">100</div>
                                         <input type="range" min="0" max="100" value="100" class="slider" id="width">
                                     </div>
                                     <div class="house">
-                                        <h2>Resonance</h2>
+                                        <h2>Resonance*</h2>
                                         <div class="display">0</div>
                                         <input type="range" min="0" max="100" value="0" class="slider" id="res">
                                     </div>
                                     <div class="house">
-                                        <h2>Distortion</h2>
+                                        <h2>Distortion*</h2>
                                         <div class="display">0</div>
                                         <input type="range" min="0" max="100" value="0" class="slider" id="dist">
                                     </div>
