@@ -98,9 +98,9 @@ session_start();
                                         <input type="range" min="-12" max="12" step="0.01" value="0" class="slider" id="pitch">
                                     </div>
                                     <div class="house">
-                                        <h2>Start*</h2>
-                                        <div class="display">0</div>
-                                        <input type="range" min="0" max="100" value="0" class="slider" id="start">
+                                        <h2>Start</h2>
+                                        <div id="startDisplay" class="display">0</div>
+                                        <input type="range" min="0" max="1" step="0.01" value="0" class="slider" id="start">
                                     </div>
                                 </div>
                                 <div class="paramRow">

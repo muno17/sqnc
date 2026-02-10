@@ -190,6 +190,9 @@ function renderParams() {
     updatePitchUI(track.pitch);
     setTrackPitch(track.pitch);
 
+    updateStartUI(track.start);
+    setTrackStart(track.start);
+
     updateAttackUI(track.attack);
     setTrackAttack(track.attack);
 
@@ -210,6 +213,7 @@ function initTrackParams() {
     initVol();
     initPan();
     initPitch();
+    initStart();
     initAttack();
     initDecay();
     initSustain();
@@ -285,6 +289,27 @@ function updatePitchUI(val) {
 
     pitch.value = val;
     pitchDisplay.innerHTML = sign + formattedVal;
+}
+
+function initStart() {
+    const start = document.getElementById("start");
+
+    start.addEventListener("input", function () {
+        const val = parseFloat(this.value);
+        currentData.tracks[currentTrack].start = val;
+
+        updateStartUI(val);
+        setTrackStart(val);
+    })
+}
+
+function updateStartUI(val) {
+        const start = document.getElementById("start");
+        const startDisplay = document.getElementById("startDisplay");
+
+        // format the value so it displays 0-100
+        start.value = val;
+        startDisplay.innerHTML = parseInt(val * 100);
 }
 
 function initAttack() {

@@ -14,6 +14,9 @@ const ampEnvs = [];
 Tone.Transport.loop = true;
 Tone.Transport.loopEnd = length;
 
+// master output to apply master effects
+var master = Tone.getDestination();
+
 // massive JSON objects to contain all information
 // currentData is the live object
 // projectData is the master object that interacts with the api
@@ -558,13 +561,15 @@ function initInstruments() {
             instruments[i] = new Tone.Player({
                 url: "samples/Marshalls_Kick.wav",
                 autostart: false,
-            }).connect(ampEnvs[i]);
+            });
         } else {
             instruments[i] = new Tone.Player({
                 url: "samples/OB_Nebula_Pad.wav",
                 autostart: false,
-            }).connect(ampEnvs[i]);
+            });
         }
+
+        instruments[i].connect(ampEnvs[i]);
     }
 }
 
@@ -609,22 +614,27 @@ function setupAudioLoop() {
 function playTrackSound(index, time) {
     const player = instruments[index];
     const env = ampEnvs[index];
+    const track = currentData.tracks[index];
     const now = time || Tone.now();
+
     try {
         if (player && player.buffer && player.buffer.loaded) {
             // stop the player and current env immediately
             player.stop(now);
             env.cancel(now);
 
-            // use the buffer duration as a "gate"
-            // allows sustain and release to actually happen
-            const duration = player.buffer.duration;
+            // get the start point of the sample and the time to play 
+            const offset = player.buffer.duration * (track.start || 0);
+            const safeOffset = Math.min(offset, player.buffer.duration - 0.005);
+
+            // don't try to play past the length of the sample if start has been offset
+            const remainingTime = (player.buffer.duration - safeOffset) / player.playbackRate;
 
             // restart the player and the envelope
-            player.start(now);
+            player.start(now, safeOffset);
 
             // starts next attack phase
-            env.triggerAttackRelease(duration, now);
+            env.triggerAttackRelease(remainingTime, now);
         }
     } catch (e) {
         console.error("Playback error:", e);
@@ -663,6 +673,10 @@ function setTrackPan(val, instant = false) {
 function setTrackPitch(val) {
     const rate = Math.pow(2, val / 12);
     instruments[currentTrack].playbackRate = rate;
+}
+
+function setTrackStart(val) {
+    currentData.tracks[currentTrack].start = val;
 }
 
 function setTrackAttack(val) {
