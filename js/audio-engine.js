@@ -563,13 +563,13 @@ function initInstruments() {
 
         var ampEnv = new Tone.AmplitudeEnvelope({
             attack: 0.0,
-            decay: 0.1,
+            decay: 2.0,
             sustain: 1.0,
             release: 1.0,
         }).connect(panVol);
         ampEnvs[i] = ampEnv;
 
-        var hpFilter = new Tone.Filter(1, "highpass").connect(ampEnv);
+        var hpFilter = new Tone.Filter(10, "highpass").connect(ampEnv);
         hpFilters[i] = hpFilter;
 
         var lpFilter = new Tone.Filter(20000, "lowpass").connect(hpFilter);
@@ -694,7 +694,7 @@ function setTrackPitch(val) {
 }
 
 function setTrackStart(val) {
-    currentData.tracks[currentTrack].start = val;
+    currentData.tracks[currentTrack].start = parseFloat(val);
 }
 
 function setTrackAttack(val) {
@@ -714,17 +714,17 @@ function setTrackRelease(val) {
 }
 
 function setTrackLpWidth(val) {
-    lpFilters[currentTrack].frequency.rampTo(val, 0.05);
+    lpFilters[currentTrack].frequency.rampTo(parseFloat(val), 0.05);
 }
 
 function setTrackLpQ(val) {
-    lpFilters[currentTrack].Q.rampTo(val, 0.05);
+    lpFilters[currentTrack].Q.rampTo(parseFloat(val), 0.05);
 }
 
 function setTrackHpWidth(val) {
-    hpFilters[currentTrack].frequency.rampTo(val, 0.05);
+    hpFilters[currentTrack].frequency.rampTo(parseFloat(val), 0.05);
 }
 
 function setTrackHpQ(val) {
-    hpFilters[currentTrack].Q.rampTo(val, 0.05);
+    hpFilters[currentTrack].Q.rampTo(parseFloat(val), 0.05);
 }

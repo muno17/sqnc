@@ -57,7 +57,7 @@ function initGlobalControls() {
 
     if (master) {
         master.addEventListener("input", function () {
-            currentData.masterVolume = this.value;
+            currentData.masterVolume = parseFloat(this.value);
             masterDisplay.innerHTML = this.value + "dB";
             Tone.Destination.volume.rampTo(this.value, 0.1);
         });
@@ -297,9 +297,10 @@ function updatePitchUI(val) {
     const pitchDisplay = document.getElementById("pitchDisplay");
 
     // format the value so it displays from -12 to +12 in .1 increments
-    const formattedVal = parseFloat(val).toFixed(1);
+    const num = parseFloat(val)
+    const formattedVal = num.toFixed(1);
     var sign = "";
-    if (val > 0) {
+    if (num > 0) {
         sign = "+";
     }
 
@@ -429,7 +430,12 @@ function updateLpWidthUI(val) {
     const lpWidthDisplay = document.getElementById("lpWidthDisplay");
 
     lp.value = val;
-    lpWidthDisplay.innerHTML = val;
+
+    if (val >= 1000) {
+        lpWidthDisplay.innerHTML = (val / 1000).toFixed(1) + "kHz";
+    } else {
+        lpWidthDisplay.innerHTML = Math.round(val) + "Hz";
+    }
 }
 
 function initLpQ() {
@@ -470,7 +476,12 @@ function updateHpWidthUI(val) {
     const hpWidthDisplay = document.getElementById("hpWidthDisplay");
 
     hp.value = val;
-    hpWidthDisplay.innerHTML = val;
+
+    if (val >= 1000) {
+        hpWidthDisplay.innerHTML = (val / 1000).toFixed(1) + "kHz";
+    } else {
+        hpWidthDisplay.innerHTML = Math.round(val) + "Hz";
+    }
 }
 
 function initHpQ() {
