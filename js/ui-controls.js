@@ -188,7 +188,7 @@ function renderParams() {
     setTrackPan(track.pan, true);
 
     updatePitchUI(track.pitch);
-    setTrackPitch(track.pitch, true);
+    setTrackPitch(track.pitch);
 }
 ///////////////////////// Track Parameters \\\\\\\\\\\\\\\\\\\\\\\\\\
 // listeners for all track parameters
@@ -206,74 +206,66 @@ function syncUI(data) {}
 function initVol() {
     const volume = document.getElementById("volume");
 
-    if (volume) {
-        volume.addEventListener("input", function () {
-            const val = parseFloat(this.value);
-            currentData.tracks[currentTrack].volume = val;
+    volume.addEventListener("input", function () {
+        const val = parseFloat(this.value);
+        currentData.tracks[currentTrack].volume = val;
 
-            updateVolumeUI(val);
-            setTrackVolume(val);
-        });
-    }
+        updateVolumeUI(val);
+        setTrackVolume(val);
+    });
 }
 
 function updateVolumeUI(val) {
     const volume = document.getElementById("volume");
     const volumeDisplay = document.getElementById("volumeDisplay");
 
-    if (volume) {
-        volume.value = val;
-        volumeDisplay.innerHTML = val + "dB";
-    }
+    volume.value = val;
+    volumeDisplay.innerHTML = val + "dB";
 }
 
 function initPan() {
     const pan = document.getElementById("pan");
 
+    pan.addEventListener("input", function () {
+        const val = parseFloat(this.value);
+        currentData.tracks[currentTrack].pan = val;
 
-    if (pan) {
-        pan.addEventListener("input", function () {
-            const val = parseFloat(this.value);
-            currentData.tracks[currentTrack].pan = val;
-
-            updatePanUI(val);
-            setTrackPan(val);
-        })
-    }
+        updatePanUI(val);
+        setTrackPan(val);
+    })
 }
 
 function updatePanUI(val) {
     const pan = document.getElementById("pan");
     const panDisplay = document.getElementById("panDisplay");
 
-    if (pan) {
-        pan.value = val;
-        panDisplay.innerHTML = parseInt(val * 50);
-    }
+    pan.value = val;
+    panDisplay.innerHTML = parseInt(val * 50);
 }
 
 function initPitch() {
     const pitch = document.getElementById("pitch");
 
-    if (pitch) {
-        pitch.addEventListener("input", function () {
-            const val = parseFloat(this.value);
-            console.log(val)
-            currentData.tracks[currentTrack].pitch = val;
+    pitch.addEventListener("input", function () {
+        const val = parseFloat(this.value);
+        currentData.tracks[currentTrack].pitch = val;
 
-            updatePitchUI(val);
-            setTrackPitch(val);
-        })
-    }
-
+        updatePitchUI(val);
+        setTrackPitch(val);
+    })
 }
 
 function updatePitchUI(val) {
     const pitch = document.getElementById("pitch");
     const pitchDisplay = document.getElementById("pitchDisplay")
 
-    if (pitch) {
-        pitch.value = val;
-        pitchDisplay.innerHTML = val;
+    // format the value so it displays from -12 to +12 in .1 increments
+    const formattedVal = parseFloat(val).toFixed(1);
+    var sign = "";
+    if (val > 0) {
+        sign = "+";
     }
+
+    pitch.value = val;
+    pitchDisplay.innerHTML = sign + formattedVal;   
 }

@@ -100,7 +100,7 @@ session_start();
                                     <div class="house">
                                         <h2>Pitch</h2>
                                         <div id="pitchDisplay" class="display">1.0</div>
-                                        <input type="range" min="0.5" max="2.0" step="0.01" value="1.0" class="slider" id="pitch">
+                                        <input type="range" min="-12" max="12" step="0.01" value="0" class="slider" id="pitch">
                                     </div>
                                 </div>
                                 <div class="paramRow">

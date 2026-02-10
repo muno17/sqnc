@@ -630,12 +630,9 @@ function setTrackPan(val, instant = false) {
     }
 }
 
-function setTrackPitch(val, instant = false) {
-    if (instant) {
-        instruments[currentTrack].playbackRate = val;
-    } else {
-        instruments[currentTrack].playbackRate= val;
-    }
+function setTrackPitch(val) {
+    const rate = Math.pow(2, val / 12);
+    instruments[currentTrack].playbackRate = rate;
 }
 
 /*
