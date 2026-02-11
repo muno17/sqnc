@@ -80,9 +80,11 @@ session_start();
                                             <option value="t3">test3</option>
                                         </select>
                                     </div>
-                                    <label for="file" id="upload-button">Upload</label>
-                                    <input type="file" name="file" id="file" value="Upload"
-                        enctype="multipart/form-data" accept=".wav,.mp3">
+                                    <form action="upload-sample.php" method="post" enctype="multipart/form-data">
+                                        <label for="file" id="upload-button">Upload</label>
+                                        <input type="file" name="file" id="file" value="Upload"
+                            enctype="multipart/form-data" accept=".wav,.mp3">
+                                    </form>
                                 </div>
                                 <div class="paramRow">
                                     <div class="house">

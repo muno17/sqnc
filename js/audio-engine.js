@@ -216,14 +216,14 @@ var initData = {
 
 var currentData = {
     id: 0,
-    name: "New Sequence",
     bpm: 120,
     masterVolume: -6,
     length: "1m",
     tracks: [
         {
             id: 0,
-            //sample: test,
+            samplePath: "",
+            sampleName: "New Sequence",
             volume: -12,
             pitch: 1,
             pan: 0,
@@ -241,7 +241,8 @@ var currentData = {
         },
         {
             id: 1,
-            //sample: test,
+            samplePath: "",
+            sampleName: "New Sequence",
             volume: -12,
             pitch: 1,
             pan: 0,
@@ -259,7 +260,8 @@ var currentData = {
         },
         {
             id: 2,
-            //sample: test,
+            samplePath: "",
+            sampleName: "New Sequence",
             volume: -12,
             pitch: 1,
             pan: 0,
@@ -277,7 +279,8 @@ var currentData = {
         },
         {
             id: 3,
-            //sample: test,
+            samplePath: "",
+            sampleName: "New Sequence",
             volume: -12,
             pitch: 1,
             pan: 0,
@@ -295,7 +298,8 @@ var currentData = {
         },
         {
             id: 4,
-            //sample: test,
+            samplePath: "",
+            sampleName: "New Sequence",
             volume: -12,
             pitch: 1,
             pan: 0,
@@ -313,7 +317,8 @@ var currentData = {
         },
         {
             id: 5,
-            //sample: test,
+            samplePath: "",
+            sampleName: "New Sequence",
             volume: -12,
             pitch: 1,
             pan: 0,
@@ -331,7 +336,8 @@ var currentData = {
         },
         {
             id: 6,
-            //sample: test,
+            samplePath: "",
+            sampleName: "New Sequence",
             volume: -12,
             pitch: 1,
             pan: 0,
@@ -349,7 +355,8 @@ var currentData = {
         },
         {
             id: 7,
-            //sample: test,
+            samplePath: "",
+            sampleName: "New Sequence",
             volume: -12,
             pitch: 1,
             pan: 0,
@@ -367,7 +374,8 @@ var currentData = {
         },
         {
             id: 8,
-            //sample: test,
+            samplePath: "",
+            sampleName: "New Sequence",
             volume: -12,
             pitch: 1,
             pan: 0,
@@ -385,7 +393,8 @@ var currentData = {
         },
         {
             id: 9,
-            //sample: test,
+            samplePath: "",
+            sampleName: "New Sequence",
             volume: -12,
             pitch: 1,
             pan: 0,

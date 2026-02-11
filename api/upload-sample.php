@@ -4,74 +4,66 @@
 
 session_start();
 
-$sampleDir = __DIR__ . "/samples/";
+# if user is not logged in don't do anything
+if (!isset($_SESSION['logged_in'])) {
+    header("Location: /sqnc/sqnc.php");
+    exit;
+}
 
-# Double check that accepted file type was uploaded
 $allowedExt = ['wav', 'mp3'];
-$uploadSuccess = false;
-$error = '';
+$sampleDir = __DIR__ . "/samples/";
+$user_id = $_SESSION['user_id'];
 
 
-
-
-# Check if a file was uploaded
+# check if a file was uploaded
 if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
     $fileTmpPath = $_FILES['file']['tmp_name'];
     $fileName = basename($_FILES['file']['name']);
     $fileExt = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
 
-    # Check file type is valid
+    # check file type is valid
     if (!in_array($fileExt, $allowedExt)) {
-        $error = "invalid_type";
-    } else {
-        $targetFilePath = $sampleDir . $fileName;
+        echo json_encode(["error" => "invalid_type"]);
+        exit;
+    }
+    
+    # create a unique name to prevent overwriting existing files
+    $newFileName = uniqid("sample_", true) . "." . $fileExt;
+    $targetFilePath = $sampleDir . $newFileName;
 
-        # Move uploaded file
-        if (move_uploaded_file($fileTmpPath, $targetFilePath)) {
-            $uploadSuccess = true;
+    # move uploaded file
+    if (move_uploaded_file($fileTmpPath, $targetFilePath)) {
+        $relative_url_path = "samples/" . $newFileName;
 
-            # Create a unique id for the sample to reference easily
-            $current_id = uniqid("");
+        # add sample info to db
+        try {
+            $host = "localhost";
+            $dbn = "sqnc_db";
+            $user = "root";
+            $pass = "";
 
-            # Clean up the file path to the file to only get the relative URL path
-            $site_root_path = __DIR__ . "/";
-            $relative_url_path = str_replace($site_root_path, "", $targetFilePath);
+            $db = new PDO("mysql:host=$host;dbname=$dbn", $user, $pass);
+            $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
 
-            # Get the file size in bytes
-            $file_size_bytes = $_FILES['file']['size'];
-
-            if ($file_size_bytes < 1048576) {
-                // If less than 1 MB, calculate size in KB
-                // Round to nearest KB
-                $file_size_display = round($file_size_bytes / 1024, 0);
-                $unit = "KB";
-            } else {
-                // Calculate size in MB
-                $file_size_display = round($file_size_bytes / 1048576, 2);
-                $unit = "MB";
-            }
-
-            # Add info to the sample db, this will be used by the libraries and packs
-            $sampleInfo = $_SESSION['username'].",".$_POST["name"].",".$_POST["notes"].","
-            .$_POST["visibility"].",".$relative_url_path.",".date("m/d/y").",".
-            $file_size_display . " " . $unit . "," . $current_id ."\n";
-
-            file_put_contents(__DIR__ . "/db/samples.txt", $sampleInfo, FILE_APPEND);
-        } else {
-            $error = "move_failed";
+            # add a new sample entry
+            # id (auto), user_id, file_path
+            $insertquery = $db->prepare("INSERT INTO samples (user_id, name, file_path) 
+                                        VALUES(?, ?)");
+            $insertquery->execute(array($user_id, $fileName, $relative_url_path));
+            
+            echo json_encode([
+                "success" => true,
+                "id" => $db->lastInsertId(),
+                "path" => $relative_url_path,
+                "name" => $fileName
+            ]);
+        } catch(PDOException $ex) {
+            echo json_encode(["error" => "db_error"]);
         }
+    } else {
+        echo json_encode(["error" => "move_failed"]);
     }
 } else {
-    $error = "no_file";
+    echo json_encode(["error" => "upload_error"]);
 }
-
-// Redirect back to update page
-if ($uploadSuccess) {
-    header("Location: upload.php?success=1");
-} else {
-    header("Location: upload.php?error=$error");
-}
-exit;
-
-
 ?>
