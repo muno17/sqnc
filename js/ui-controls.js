@@ -96,11 +96,19 @@ function initSave() {
         saveBtn.addEventListener("click", function () {
             // don't do anything if there isn't anything to save;
             if (changes) {
-                //saveSequence(); REENABLE
                 saveBtn.classList.remove("changes");
                 changes = false;
             }
         });
+    }
+}
+
+// make the save button glow when changes have been made
+function markAsChanged() {
+    changes = true;
+    const saveBtn = document.getElementById("save");
+    if (saveBtn) {
+        saveBtn.classList.add("changes");
     }
 }
 
@@ -183,6 +191,11 @@ function renderParams() {
     // true = instant snap to value
     const track = currentData.tracks[currentTrack];
 
+    const nameDisplay = document.getElementById("sampleNameDisplay");
+    if (nameDisplay) {
+        nameDisplay.innerText = track.sampleName || "No Sample Loaded";
+    }
+
     updateVolumeUI(track.volume);
     setTrackVolume(track.volume, true);
 
@@ -250,6 +263,8 @@ function initVol() {
 
         updateVolumeUI(val);
         setTrackVolume(val);
+
+        markAsChanged();
     });
 }
 
@@ -270,6 +285,8 @@ function initPan() {
 
         updatePanUI(val);
         setTrackPan(val);
+
+        markAsChanged();
     });
 }
 
@@ -291,6 +308,8 @@ function initPitch() {
 
         updatePitchUI(val);
         setTrackPitch(val);
+
+        markAsChanged();
     });
 }
 
@@ -319,6 +338,8 @@ function initStart() {
 
         updateStartUI(val);
         setTrackStart(val);
+
+        markAsChanged();
     });
 }
 
@@ -340,6 +361,8 @@ function initAttack() {
 
         updateAttackUI(val);
         setTrackAttack(val);
+
+        markAsChanged();
     });
 }
 
@@ -361,6 +384,8 @@ function initDecay() {
 
         updateDecayUI(val);
         setTrackDecay(val);
+
+        markAsChanged();
     });
 }
 
@@ -382,6 +407,8 @@ function initSustain() {
 
         updateSustainUI(val);
         setTrackSustain(val);
+
+        markAsChanged();
     });
 }
 
@@ -403,6 +430,8 @@ function initRelease() {
 
         updateReleaseUI(val);
         setTrackRelease(val);
+
+        markAsChanged();
     });
 }
 
@@ -424,6 +453,8 @@ function initLpWidth() {
 
         updateLpWidthUI(val);
         setTrackLpWidth(val);
+
+        markAsChanged();
     });
 }
 
@@ -449,6 +480,8 @@ function initLpQ() {
 
         updateLpQUI(val);
         setTrackLpQ(val);
+
+        markAsChanged();
     });
 }
 
@@ -470,6 +503,8 @@ function initHpWidth() {
 
         updateHpWidthUI(val);
         setTrackHpWidth(val);
+
+        markAsChanged();
     });
 }
 
@@ -495,6 +530,8 @@ function initHpQ() {
 
         updateHpQUI(val);
         setTrackHpQ(val);
+
+        markAsChanged();
     });
 }
 

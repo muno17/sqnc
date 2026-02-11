@@ -99,6 +99,39 @@ async function getSequence(id) {
     }
 }
 
+// add sample to db and samples folder
+async function uploadSample(file) {
+    const formData = new FormData();
+    formData.append('file', file);
+    try {
+        const response = await fetch("api/upload-sample.php", {
+            method: "POST",
+            body: formData,
+        });
+
+        const ajax = await response.json();
+
+        if (ajax.success) {
+            // update the current track
+            currentData.tracks[currentTrack].samplePath = ajax.path;
+            currentData.tracks[currentTrack].sampleName = ajax.name;
+
+            // load the new sample into the player
+            instruments[currentTrack].load(ajax.path, () => {
+                console.log(ajax.name + " loaded successfully");
+            });
+
+            // update the UI
+            markAsChanged();
+            renderParams();
+        } else {
+            alert("Upload failed: " + ajax.error);
+        }
+    } catch (err) {
+        console.error("Upload error:", err);
+    }
+}
+
 
 // when user logs in, load correct samples
 function loadSamples() {
