@@ -93,9 +93,11 @@ function initPageSelectors() {
 function initSave() {
     const saveBtn = document.getElementById("save");
     if (saveBtn) {
-        saveBtn.addEventListener("click", function () {
+        saveBtn.addEventListener("click", async function () {
             // don't do anything if there isn't anything to save;
             if (changes) {
+                await saveSequence();
+
                 saveBtn.classList.remove("changes");
                 changes = false;
             }
@@ -149,6 +151,30 @@ function initNew() {
             // create completely new empty data object, set to currentData ***
         });
     }
+}
+
+function initSampleSelector() {
+    const selector = document.getElementById("samples");
+
+    selector.addEventListener("change", function() {
+            if (this.value === "upload") {
+                return;
+            }
+
+            // update data
+            const path = this.value;
+            const name = this.options[this.selectedIndex].dataset.name;
+            currentData.tracks[currentTrack].samplePath = path;
+            currentData.tracks[currentTrack].name = name;
+
+            // update audio engine
+            instruments[currentTrack].load(path, () => {
+                console.log("Loaded: " + name);
+                renderParams();
+                markAsChanged();
+            })
+        }
+    )
 }
 
 function initTrackSelectors() {

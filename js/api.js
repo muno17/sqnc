@@ -23,9 +23,9 @@ async function saveSequence() {
             projectData.id = ajax.id;
             currentData.id = ajax.id;
         }
-        console.log("Saved successfully");
+        console.log("Saved sequence successfully");
     } catch (err) {
-        console.error("Save failed:", err);
+        console.error("Sequence save failed:", err);
     }
 }
 
@@ -134,9 +134,57 @@ async function uploadSample(file) {
 
 
 // when user logs in, load correct samples
-function loadSamples() {
+// add event listener to the options
+async function loadSamples() {
     // fetch all user uploaded samples
     // return list of file paths
+        try {
+        const response = await fetch("api/get-user-samples.php", {
+            method: "POST",
+        });
+        const ajax = await response.json();
+        const samples = document.getElementById("samples");
+
+        // create default option
+        const defaultOpt = document.createElement("option");
+        defaultOpt.value = "upload";
+        defaultOpt.innerHTML = "-- Upload New Sample --";
+
+        // clear and add default
+        samples.innerHTML = "";
+        samples.appendChild(defaultOpt);
+
+        // add fetched options
+        ajax.forEach((sample) => {
+            const option = document.createElement("option");
+            option.value = sample.file_path;
+            option.dataset.name = sample.name;
+            option.innerHTML = sample.name;
+            samples.appendChild(option);
+        });
+
+        // event listener for loading sample into player
+        samples.onchange() = function() {
+            if (this.value === "upload") {
+                return;
+            }
+
+            const path = this.value;
+            const name = this.options[this.selectedIndex].dataset.name;
+            currentData.tracks[currentTrack].samplePath = path;
+            currentData.tracks[currentTrack].name = name;
+
+            instruments[currentTrack].load(path, () => {
+                console.log("Loaded: " + name);
+                renderParams();
+                markAsChanged();
+            })
+        }
+
+
+    } catch (err) {
+        console.error("Failed to load sequences:", err);
+    }
 }
 
 

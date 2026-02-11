@@ -631,7 +631,9 @@ window.onload = function () {
     initSequencer();
     initTrackParams();
 
-    //loadSequences(); REENABLE
+    //loadSequences(); REENABLE ***
+    //loadSamples(); REENABLE ***
+
     // initialize track params
     setupAudioLoop();
 };
