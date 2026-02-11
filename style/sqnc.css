@@ -129,7 +129,11 @@ h2, label {
 
 .trackBtn {
     width: 100px;
-    height: 45px;
+    height: 35px;
+}
+
+#master {
+    background-color: #A3D4C3;
 }
 
 #params {
@@ -183,6 +187,29 @@ select {
     font-size: 16px;
     color: white;
     background-color: black;
+}
+
+#file {
+    display: none;
+}
+
+#upload-button {
+    color: black;
+    display: inline-block;
+    border-radius: 4px;
+    border: 2px solid ButtonText;
+    width: 88px;
+    height: 38px;
+    border-radius: 5px;
+    text-shadow: 0px 0px 0px black;
+    box-shadow: 1px 1px 2px black;
+    font-size: 20px;
+    margin-bottom: 0px;
+    background-color: ButtonFace;
+    text-align: center;
+    display: flex;         
+    justify-content: center;
+    align-items: center;
 }
 
 #globalParams {

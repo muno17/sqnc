@@ -57,6 +57,7 @@ session_start();
                         <button class="trackBtn" data-index="7">T8</button>
                         <button class="trackBtn" data-index="8">T9</button>
                         <button class="trackBtn" data-index="9">T10</button>
+                        <button id="master" class="trackBtn" data-index="99">Master</button>
                     </div>
                     <div id="params">
                         <div id="topParams">
@@ -79,7 +80,9 @@ session_start();
                                             <option value="t3">test3</option>
                                         </select>
                                     </div>
-                                    <button>Upload</button>
+                                    <label for="file" id="upload-button">Upload</label>
+                                    <input type="file" name="file" id="file" value="Upload"
+                        enctype="multipart/form-data" accept=".wav,.mp3">
                                 </div>
                                 <div class="paramRow">
                                     <div class="house">

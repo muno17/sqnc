@@ -146,6 +146,8 @@ function initNew() {
 function initTrackSelectors() {
     const trackBtns = document.querySelectorAll(".trackBtn");
 
+    // init master track ***
+
     trackBtns.forEach((btn) => {
         btn.addEventListener("click", function () {
             trackBtns.forEach((b) => b.classList.remove("selected"));
