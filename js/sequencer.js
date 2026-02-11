@@ -50,3 +50,22 @@ function updateUIPlayHead(step) {
         current.classList.add("current");
     }
 }
+
+function disableSequencer(message) {
+    const playBtn = document.getElementById("transport");
+
+    Tone.Transport.stop();
+    Tone.Transport.cancel();
+    Tone.Transport.position = 0;
+    running = false;
+    currentStep = 0;
+
+    playBtn.disabled = true;
+    playBtn.innerHTML = message;
+}
+
+function enableSequencer() {
+    const playBtn = document.getElementById("transport");
+    playBtn.disabled = false;
+    playBtn.innerHTML = "Play";
+}

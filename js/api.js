@@ -64,16 +64,9 @@ async function loadSequences() {
     }
 }
 
-
 async function getSequence(id) {
-    // stop if running
-    // disable start button ***
-    // reenable once loaded ***
-    if (running) {
-        Tone.Transport.stop();
-        running = false;
-        document.getElementById("transport").innerHTML = "Play";
-    }
+    // disable sequencer and stop if running
+    disableSequencer("Loading...");
 
     try {
         // prepare data to be able to send
@@ -91,12 +84,32 @@ async function getSequence(id) {
         projectData = JSON.parse(ajax.content);
         currentData = JSON.parse(JSON.stringify(projectData));
 
-        // update the UI
+        
+        // add logic for stopping and disabling play until loaded? ***
+
+        // load samples for the sequence
+        loadSequenceSamples();
+
+        // update the sequencer UI
         renderSequencer();
-        renderParams();
     } catch (err) {
         console.error("Failed to load sequences:", err);
     }
+}
+
+// function to load samples
+function loadSequenceSamples() {
+    currentData.tracks.forEach((track, index) => {
+        if (track.samplePath) {
+            instruments[index].load(track.samplePath);
+        }
+    });
+
+    // reenable once everything is loaded
+    Tone.loaded().then(() => {
+        enableSequencer();
+        renderParams();
+    });
 }
 
 // add sample to db and samples folder
@@ -134,7 +147,6 @@ async function uploadSample(file) {
 
 
 // when user logs in, load correct samples
-// add event listener to the options
 async function loadSamples() {
     // fetch all user uploaded samples
     // return list of file paths
@@ -162,26 +174,6 @@ async function loadSamples() {
             option.innerHTML = sample.name;
             samples.appendChild(option);
         });
-
-        // event listener for loading sample into player
-        samples.onchange() = function() {
-            if (this.value === "upload") {
-                return;
-            }
-
-            const path = this.value;
-            const name = this.options[this.selectedIndex].dataset.name;
-            currentData.tracks[currentTrack].samplePath = path;
-            currentData.tracks[currentTrack].name = name;
-
-            instruments[currentTrack].load(path, () => {
-                console.log("Loaded: " + name);
-                renderParams();
-                markAsChanged();
-            })
-        }
-
-
     } catch (err) {
         console.error("Failed to load sequences:", err);
     }

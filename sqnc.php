@@ -74,11 +74,7 @@ session_start();
                                 <div class="paramRow" id="selectorRow">
                                     <div id="selector">
                                         <label for="samples">Sample</label>
-                                        <select name="samples" id="samples">
-                                            <option value="t1">test1</option>
-                                            <option value="t2">test2</option>
-                                            <option value="t3">test3</option>
-                                        </select>
+                                        <select name="samples" id="samples"></select>
                                     </div>
                                     <form action="upload-sample.php" method="post" enctype="multipart/form-data">
                                         <label for="file" id="upload-button">Upload</label>
