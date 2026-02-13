@@ -227,6 +227,10 @@ select {
     height: 40px;
 }
 
+#download {
+    font-size: 16px;
+}
+
 #selectorRow button,
 #stateRow button {
     margin-top: 20px;
@@ -309,6 +313,12 @@ button.page {
 .changes {
     box-shadow: 1px 1px 40px #e2ab45;
     text-shadow: 1px 1px 20px #e2ab45;
+    border-color: #ECC987;
+}
+
+.recording {
+    box-shadow: 1px 1px 40px #EE9ABD;
+    text-shadow: 1px 1px 20px #EE9ABD;
     border-color: #ECC987;
 }
 

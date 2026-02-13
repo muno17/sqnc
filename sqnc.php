@@ -156,8 +156,8 @@ session_start();
                         <div id="globalParams">
                             <div class="house">
                                 <h2>Master Vol</h2>
-                                <div class="display" id="masterDisplay">-6dB</div>
-                                <input type="range" min="-60" max="0" value="-6" class="slider" id="master">
+                                <div class="display" id="masterVolDisplay">-6dB</div>
+                                <input type="range" min="-60" max="0" value="-6" class="slider" id="masterVol">
                             </div>
                             <div class="house">
                                 <h2>Tempo</h2>
@@ -166,6 +166,7 @@ session_start();
                             </div>
                             <button id="transport" class="global">Play</button>
                             <button id="record" class="global">Record</button>
+                            <button id="download" class="global">Download</button>
                             <div id="pages">
                                 <button id="page1" class="page selected" data-index="0">1:4</button>
                                 <button id="page2" class="page" data-index="1">2:4</button>

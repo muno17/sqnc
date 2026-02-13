@@ -16,6 +16,10 @@ const hpFilters = [];
 Tone.Transport.loop = true;
 Tone.Transport.loopEnd = length;
 
+const recorder = new Tone.Recorder();
+Tone.Destination.connect(recorder);
+var recording = false;
+
 // master output to apply master effects
 var master = Tone.getDestination();
 

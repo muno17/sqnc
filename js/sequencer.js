@@ -19,6 +19,7 @@ function initSequencer() {
                 }
 
                 e.target.classList.toggle("active");
+                markAsChanged();
             }
         });
     }

@@ -5,39 +5,84 @@
 function initTransport() {
     const transport = document.getElementById("transport");
 
-    if (transport) {
-        transport.addEventListener("click", async function () {
-            if (running) {
-                running = false;
-                // functionality to stop
-                Tone.Transport.stop();
-                stopAllSounds();
-                //currentStep = 0;
-                //updateUIPlayHead(-1);
-                document
-                    .querySelectorAll(".step.current")
-                    .forEach((el) => el.classList.remove("current"));
-                transport.innerHTML = "Play";
-            } else {
-                // functionality to play
-                await Tone.start();
-                await Tone.loaded();
+    transport.addEventListener("click", async function () {
+        if (running) {
+            stopTransport();
+        } else {
+            startTransport();
+        }
+    });
+}
 
-                currentStep = 0;
+async function startTransport() {
+    const transport = document.getElementById("transport");
+    // functionality to play
+    await Tone.start();
+    await Tone.loaded();
 
-                running = true;
-                Tone.Transport.start();
-                transport.innerHTML = "Stop";
-                console.log("Sequencer started - all mappings verified.");
-            }
-        });
-    }
+    currentStep = 0;
+
+    running = true;
+    Tone.Transport.start();
+    transport.innerHTML = "Stop";
+}
+
+function stopTransport() {
+    const transport = document.getElementById("transport");
+    running = false;
+    // functionality to stop
+    Tone.Transport.stop();
+    stopAllSounds();
+
+    document
+        .querySelectorAll(".step.current")
+        .forEach((el) => el.classList.remove("current"));
+    transport.innerHTML = "Play";
 }
 
 function initRecord() {
-    if (record) {
-        record.addEventListener("click", function () {});
-    }
+    const record = document.getElementById('record');
+
+    const transport = document.getElementById("transport");
+
+    record.addEventListener("click", async function () {
+        if (recording) {
+            // stop recording
+            stopTransport();
+
+            recording = false;
+            record.innerHTML = "Record";
+            record.classList.remove("recording");
+
+            const recordedAudio = await recorder.stop();
+
+            // create a link and click it automatically to start download
+            const url = URL.createObjectURL(recordedAudio);
+            const anchor = document.createElement("a");
+            anchor.download = "recording.webm";
+            anchor.href = url;
+            anchor.click();
+
+            transport.disabled = false;
+        } else {
+            // countdown with metronome 
+
+
+            // start recording
+            transport.disabled = true;
+            recording = true;
+            record.innerHTML = "Stop";
+            record.classList.add("recording");
+
+            // reset the transport
+            stopTransport();
+            startTransport();
+
+
+            
+        }
+        recorder.start();
+    });
 }
 
 function initGlobalControls() {
@@ -49,17 +94,19 @@ function initGlobalControls() {
             currentData.bpm = this.value;
             tempoDisplay.innerHTML = this.value;
             Tone.Transport.bpm.value = this.value;
+            markAsChanged();
         });
     }
 
-    const master = document.getElementById("master");
-    const masterDisplay = document.getElementById("masterDisplay");
+    const masterVol = document.getElementById("masterVol");
+    const masterVolDisplay = document.getElementById("masterVolDisplay");
 
-    if (master) {
-        master.addEventListener("input", function () {
+    if (masterVol) {
+        masterVol.addEventListener("input", function () {
             currentData.masterVolume = parseFloat(this.value);
-            masterDisplay.innerHTML = this.value + "dB";
+            masterVolDisplay.innerHTML = this.value + "dB";
             Tone.Destination.volume.rampTo(this.value, 0.1);
+            markAsChanged();
         });
     }
 
@@ -67,6 +114,7 @@ function initGlobalControls() {
     initSave();
     initReload();
     initNew();
+    initRecord();
 
     // swing
 
