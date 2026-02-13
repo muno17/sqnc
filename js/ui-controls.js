@@ -76,10 +76,7 @@ function initRecord() {
 
             // reset the transport
             stopTransport();
-            startTransport();
-
-
-            
+            startTransport();            
         }
         recorder.start();
     });

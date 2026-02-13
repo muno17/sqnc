@@ -1,4 +1,4 @@
-// audio functionality
+////////////////////////// Audio Functionality \\\\\\\\\\\\\\\\\\\\\\\\\\
 
 var currentTrack = 0;
 var currentStep = 0;
@@ -16,6 +16,7 @@ const hpFilters = [];
 Tone.Transport.loop = true;
 Tone.Transport.loopEnd = length;
 
+// recording functionality
 const recorder = new Tone.Recorder();
 Tone.Destination.connect(recorder);
 var recording = false;
@@ -676,12 +677,13 @@ function playTrackSound(index, time) {
             player.stop(now);
             env.cancel(now);
 
-            // get the start point of the sample and the time to play 
+            // get the start point of the sample and the time to play
             const offset = player.buffer.duration * (track.start || 0);
             const safeOffset = Math.min(offset, player.buffer.duration - 0.005);
 
             // don't try to play past the length of the sample if start has been offset
-            const remainingTime = (player.buffer.duration - safeOffset) / player.playbackRate;
+            const remainingTime =
+                (player.buffer.duration - safeOffset) / player.playbackRate;
 
             // restart the player and the envelope
             player.start(now, safeOffset);
