@@ -16,9 +16,6 @@ const ampEnvs = [];
 const lpFilters = [];
 const hpFilters = [];
 
-// for mutes
-const preMuteVols = [];
-
 // recording functionality
 const recorder = new Tone.Recorder();
 Tone.Destination.connect(recorder);
@@ -713,9 +710,9 @@ function setupAudioLoop() {
         currentData.tracks.forEach((track, index) => {
             if (track.steps[currentStep] == 1) {
                 playTrackSound(index, time);
-                toggleTrackFlash(index);
+                toggleTrackHit(index);
             } else {
-                untoggleTrackFlash(index);
+                untoggleTrackHit(index);
             }
         });
 
@@ -771,10 +768,13 @@ function stopAllSounds() {
 
 // instant when switching tracks, not instant when just sliding slider
 function setTrackVolume(val, instant = false) {
-    if (instant) {
-        panVols[currentTrack].volume.value = val;
-    } else {
-        panVols[currentTrack].volume.rampTo(val, 0.05);
+    // only apply volume if not muted
+    if (!panVols[currentTrack].mute) {
+        if (instant) {
+            panVols[currentTrack].volume.value = val;
+        } else {
+            panVols[currentTrack].volume.rampTo(val, 0.05);
+        }
     }
 }
 

@@ -230,29 +230,29 @@ function initTrackSelectors() {
 
     // init master track ***
 
-    // for single clicks, display the track's parameters
     trackBtns.forEach((btn) => {
+        const index = parseInt(btn.dataset.index);
+        // for single clicks, display the track's parameters
         btn.addEventListener("click", function () {
             trackBtns.forEach((b) => b.classList.remove("selected"));
             this.classList.add("selected");
 
-            currentTrack = parseInt(this.dataset.index);
+            currentTrack = index;
 
             renderSequencer();
             renderParams();
         });
-    });
 
-    // for double clicks, mute the track
-    trackBtns.forEach((btn) => {
+        // for double clicks, mute the track
         btn.addEventListener("dblclick", function () {
-            if (currentData.tracks[this.dataset.index].muted) {
-                currentData.tracks[this.dataset.index].muted = false;
-                panVols[this.dataset.index].mute = false;
+            console.log("triggered");
+            if (currentData.tracks[index].muted) {
+                currentData.tracks[index].muted = false;
+                panVols[index].mute = false;
                 this.classList.remove("muted");
             } else {
-                currentData.tracks[this.dataset.index].muted = true;
-                panVols[this.dataset.index].mute = true;
+                currentData.tracks[index].muted = true;
+                panVols[index].mute = true;
                 this.classList.add("muted");
             }
         });
@@ -286,12 +286,12 @@ function initClear() {
     });
 }
 
-function toggleTrackFlash(index) {
+function toggleTrackHit(index) {
     const trackBtns = document.querySelectorAll(".trackBtn");
     trackBtns[index].classList.add("flash")
 }
 
-function untoggleTrackFlash(index) {
+function untoggleTrackHit(index) {
     const trackBtns = document.querySelectorAll(".trackBtn");
     trackBtns[index].classList.remove("flash");
 }
