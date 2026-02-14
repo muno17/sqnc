@@ -65,7 +65,7 @@ function initRecord() {
 
             transport.disabled = false;
         } else {
-            // countdown with metronome 
+            // countdown with metronome ***
 
 
             // start recording
@@ -164,20 +164,25 @@ function markAsChanged() {
 function initReload() {
     const reloadBtn = document.getElementById("reload");
     const saveBtn = document.getElementById("save");
-    if (reloadBtn && saveBtn) {
-        reloadBtn.addEventListener("click", function () {
-            // don't do anything if there aren't any changes
-            if (changes) {
-                saveBtn.classList.remove("changes");
-                currentData = JSON.parse(JSON.stringify(projectData));
-                changes = false;
 
-                // redraw the UI
-                renderSequencer();
-                renderParams();
-            }
-        });
-    }
+    reloadBtn.addEventListener("click", function () {
+        // don't do anything if there aren't any changes
+        if (changes) {
+            saveBtn.classList.remove("changes");
+            currentData = JSON.parse(JSON.stringify(projectData));
+            changes = false;
+
+            // stop the current audio
+            stopAllSounds();
+
+            // reload instruments
+            loadInstruments();
+
+            // redraw the UI
+            renderSequencer();
+            renderParams();
+        }
+    });
 }
 
 // init for new ***
@@ -189,8 +194,8 @@ function initNew() {
             // show warning before reseting
             if (changes) {
                 saveBtn.classList.remove("changes");
-                // copy projectData into currentData
-                projectData = JSON.parse(JSON.stringify(currentData));
+                // copy initData into projectData
+                projectData = JSON.parse(JSON.stringify(initData));
                 changes = false;
             }
             // create completely new empty data object, set to currentData ***

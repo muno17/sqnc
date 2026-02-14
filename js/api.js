@@ -99,16 +99,20 @@ async function getSequence(id) {
 
 // function to load samples
 function loadSequenceSamples() {
-    currentData.tracks.forEach((track, index) => {
-        if (track.samplePath) {
-            instruments[index].load(track.samplePath);
-        }
-    });
+    loadInstruments();
 
     // reenable once everything is loaded
     Tone.loaded().then(() => {
         enableSequencer();
         renderParams();
+    });
+}
+
+function loadInstruments() {
+    currentData.tracks.forEach((track, index) => {
+        if (track.samplePath) {
+            instruments[index].load(track.samplePath);
+        }
     });
 }
 
