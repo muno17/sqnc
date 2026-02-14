@@ -40,9 +40,8 @@ function stopTransport() {
     transport.innerHTML = "Play";
 }
 
-/*
 function initRecord() {
-    const record = document.getElementById('record');
+    const record = document.getElementById("record");
 
     const transport = document.getElementById("transport");
 
@@ -68,7 +67,6 @@ function initRecord() {
         } else {
             // countdown with metronome ***
 
-
             // start recording
             transport.disabled = true;
             recording = true;
@@ -77,23 +75,10 @@ function initRecord() {
 
             // reset the transport
             stopTransport();
-            startTransport();            
+            startTransport();
         }
         recorder.start();
     });
-}*/
-
-function initGlobalControls() {
-    initTempo();
-    initMasterVol();
-    initSwing();
-    initPageSelectors();
-    initSave();
-    initReload();
-    initNew();
-    //initRecord();
-
-    // effects
 }
 
 function initTempo() {
@@ -277,66 +262,44 @@ function initTrackSelectors() {
 function initSequenceSelector() {
     var selector = document.getElementById("sequences");
 
-    if (selector) {
-        selector.addEventListener("change", function () {
-            var selectedId = this.value;
+    selector.addEventListener("change", function () {
+        var selectedId = this.value;
 
-            if (selectedId != "new") {
-                // getSequence(selectedId); REENABLE
-            } else {
-                // CALL FUNCTION TO RESET INTERFACE ***
-            }
-        });
-    }
+        if (selectedId != "new") {
+            // getSequence(selectedId); REENABLE
+        } else {
+            // CALL FUNCTION TO RESET INTERFACE ***
+        }
+    });
 }
 
-// update all params to track's saved value ***
-function renderParams() {
-    // get current track and update params from currentData ********
-    // true = instant snap to value
-    const track = currentData.tracks[currentTrack];
+// clear sequence for current track
+function initClear() {
+    var clear = document.getElementById("clear");
 
-    const nameDisplay = document.getElementById("sampleNameDisplay");
-    if (nameDisplay) {
-        nameDisplay.innerText = track.sampleName || "No Sample Loaded";
-    }
-
-    updateVolumeUI(track.volume);
-    setTrackVolume(track.volume, true);
-
-    updatePanUI(track.pan);
-    setTrackPan(track.pan, true);
-
-    updatePitchUI(track.pitch);
-    setTrackPitch(track.pitch);
-
-    updateStartUI(track.start);
-    setTrackStart(track.start);
-
-    updateAttackUI(track.attack);
-    setTrackAttack(track.attack);
-
-    updateDecayUI(track.decay);
-    setTrackDecay(track.decay);
-
-    updateSustainUI(track.sustain);
-    setTrackSustain(track.sustain);
-
-    updateReleaseUI(track.release);
-    setTrackRelease(track.release);
-
-    updateLpWidthUI(track.lpWidth);
-    setTrackLpWidth(track.lpWidth);
-
-    updateLpQUI(track.lpq);
-    setTrackLpQ(track.lpq);
-
-    updateHpWidthUI(track.hpWidth);
-    setTrackHpWidth(track.hpWidth);
-
-    updateHpQUI(track.hpq);
-    setTrackHpQ(track.hpq);
+    clear.addEventListener("click", function () {
+        currentData.tracks[currentTrack].steps = [
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        ];
+        renderSequencer();
+        markAsChanged();
+    });
 }
+
+function initGlobalControls() {
+    initTempo();
+    initMasterVol();
+    initSwing();
+    initPageSelectors();
+    initSave();
+    initReload();
+    initNew();
+    initRecord();
+    initClear();
+
+    // effects
+}
+
 ///////////////////////// Track Parameters \\\\\\\\\\\\\\\\\\\\\\\\\\
 // listeners for all track parameters
 // update changes if any parameter is changed
@@ -647,4 +610,52 @@ function updateHpQUI(val) {
     // format the value so it displays 0-100
     q.value = val;
     qWidthDisplay.innerHTML = parseInt(val * 5);
+}
+
+// update all params to track's saved value ***
+function renderParams() {
+    // get current track and update params from currentData ********
+    // true = instant snap to value
+    const track = currentData.tracks[currentTrack];
+
+    const nameDisplay = document.getElementById("sampleNameDisplay");
+    if (nameDisplay) {
+        nameDisplay.innerText = track.sampleName || "No Sample Loaded";
+    }
+
+    updateVolumeUI(track.volume);
+    setTrackVolume(track.volume, true);
+
+    updatePanUI(track.pan);
+    setTrackPan(track.pan, true);
+
+    updatePitchUI(track.pitch);
+    setTrackPitch(track.pitch);
+
+    updateStartUI(track.start);
+    setTrackStart(track.start);
+
+    updateAttackUI(track.attack);
+    setTrackAttack(track.attack);
+
+    updateDecayUI(track.decay);
+    setTrackDecay(track.decay);
+
+    updateSustainUI(track.sustain);
+    setTrackSustain(track.sustain);
+
+    updateReleaseUI(track.release);
+    setTrackRelease(track.release);
+
+    updateLpWidthUI(track.lpWidth);
+    setTrackLpWidth(track.lpWidth);
+
+    updateLpQUI(track.lpq);
+    setTrackLpQ(track.lpq);
+
+    updateHpWidthUI(track.hpWidth);
+    setTrackHpWidth(track.hpWidth);
+
+    updateHpQUI(track.hpq);
+    setTrackHpQ(track.hpq);
 }

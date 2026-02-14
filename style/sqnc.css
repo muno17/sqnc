@@ -318,6 +318,8 @@ button.page {
     color: gray;
 }
 
+
+
 .muted.selected {
     background-color: color-mix(in srgb, #5F9F89 75%, #8E90A4);
 }
