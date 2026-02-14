@@ -713,6 +713,9 @@ function setupAudioLoop() {
         currentData.tracks.forEach((track, index) => {
             if (track.steps[currentStep] == 1) {
                 playTrackSound(index, time);
+                toggleTrackFlash(index);
+            } else {
+                untoggleTrackFlash(index);
             }
         });
 

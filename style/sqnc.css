@@ -318,7 +318,9 @@ button.page {
     color: gray;
 }
 
-
+.flash {
+    color: #e2ab45;
+}
 
 .muted.selected {
     background-color: color-mix(in srgb, #5F9F89 75%, #8E90A4);

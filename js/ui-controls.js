@@ -286,6 +286,16 @@ function initClear() {
     });
 }
 
+function toggleTrackFlash(index) {
+    const trackBtns = document.querySelectorAll(".trackBtn");
+    trackBtns[index].classList.add("flash")
+}
+
+function untoggleTrackFlash(index) {
+    const trackBtns = document.querySelectorAll(".trackBtn");
+    trackBtns[index].classList.remove("flash");
+}
+
 function initGlobalControls() {
     initTempo();
     initMasterVol();
