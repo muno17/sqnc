@@ -83,39 +83,54 @@ function initRecord() {
 }
 
 function initGlobalControls() {
-    const tempo = document.getElementById("tempo");
-    const tempoDisplay = document.getElementById("tempoDisplay");
-
-    if (tempo) {
-        tempo.addEventListener("input", function () {
-            currentData.bpm = this.value;
-            tempoDisplay.innerHTML = this.value;
-            Tone.Transport.bpm.value = this.value;
-            markAsChanged();
-        });
-    }
-
-    const masterVol = document.getElementById("masterVol");
-    const masterVolDisplay = document.getElementById("masterVolDisplay");
-
-    if (masterVol) {
-        masterVol.addEventListener("input", function () {
-            currentData.masterVolume = parseFloat(this.value);
-            masterVolDisplay.innerHTML = this.value + "dB";
-            Tone.Destination.volume.rampTo(this.value, 0.1);
-            markAsChanged();
-        });
-    }
-
+    initTempo();
+    initMasterVol();
+    initSwing();
     initPageSelectors();
     initSave();
     initReload();
     initNew();
     initRecord();
 
-    // swing
-
     // effects
+}
+
+function initTempo() {
+    const tempo = document.getElementById("tempo");
+    const tempoDisplay = document.getElementById("tempoDisplay");
+
+    tempo.addEventListener("input", function () {
+        currentData.bpm = this.value;
+        tempoDisplay.innerHTML = this.value;
+        Tone.Transport.bpm.value = this.value;
+        markAsChanged();
+    });
+}
+
+function initMasterVol() {
+    const masterVol = document.getElementById("masterVol");
+    const masterVolDisplay = document.getElementById("masterVolDisplay");
+
+    masterVol.addEventListener("input", function () {
+        currentData.masterVolume = parseFloat(this.value);
+        masterVolDisplay.innerHTML = this.value + "dB";
+        Tone.Destination.volume.rampTo(this.value, 0.1);
+        markAsChanged();
+    });
+}
+
+function initSwing() {
+    const swing = document.getElementById("swing");
+    const swingDisplay = document.getElementById("swingDisplay");
+
+    swing.addEventListener("input", function () {
+        currentData.swing = this.value;
+        Tone.Transport.swing = this.value;
+
+        // calculate value to display 0-100
+        swingDisplay.innerHTML = parseInt(this.value * 100);
+        markAsChanged();
+    });
 }
 
 function initPageSelectors() {

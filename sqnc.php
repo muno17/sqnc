@@ -164,14 +164,19 @@ session_start();
                                 <div class="display" id="tempoDisplay">120</div>
                                 <input type="range" min="1" max="300" value="120" class="slider" id="tempo">
                             </div>
+                            <div class="house">
+                                <h2>Swing</h2>
+                                <div class="display" id="swingDisplay">0</div>
+                                <input type="range" min="0" max="1" step=".01" value="0" class="slider" id="swing">
+                            </div>
                             <button id="transport" class="global">Play</button>
                             <button id="record" class="global">Record</button>
                             <button id="clear" class="global">Clear</button>
                             <div id="pages">
-                                <button id="page1" class="page selected" data-index="0">1:4</button>
-                                <button id="page2" class="page" data-index="1">2:4</button>
+                                <button id="page1" class="global selected" data-index="0">Page</button>
+                                <!--<button id="page2" class="page" data-index="1">2:4</button>
                                 <button id="page3" class="page" data-index="2">3:4</button>
-                                <button id="page4" class="page" data-index="3">4:4</button>
+                                <button id="page4" class="page" data-index="3">4:4</button>-->
                             </div>
                         </div>
                     </div>

@@ -1,4 +1,7 @@
 ////////////////////////// Audio Functionality \\\\\\\\\\\\\\\\\\\\\\\\\\
+Tone.Transport.loop = true;
+Tone.Transport.loopEnd = length;
+Tone.Transport.swingSubdivision = "16n";
 
 var currentTrack = 0;
 var currentStep = 0;
@@ -12,9 +15,6 @@ const panVols = [];
 const ampEnvs = [];
 const lpFilters = [];
 const hpFilters = [];
-
-Tone.Transport.loop = true;
-Tone.Transport.loopEnd = length;
 
 // recording functionality
 const recorder = new Tone.Recorder();
@@ -31,8 +31,9 @@ var master = Tone.getDestination();
 
 var initData = {
     id: 0,
-    name: "New Sequence",
+    name: "",
     bpm: 120,
+    swing: 0,
     masterVolume: -6,
     length: "1m",
     tracks: [
@@ -221,7 +222,8 @@ var initData = {
 
 var currentData = {
     id: 0,
-    bpm: 120,
+    name: "",
+    swing: 0,
     masterVolume: -6,
     length: "1m",
     tracks: [
@@ -420,7 +422,9 @@ var currentData = {
 
 var projectData = {
     id: 0,
+    name: "",
     bpm: 120,
+    swing: 0,
     masterVolume: -6,
     length: "1m",
     tracks: [
@@ -502,7 +506,7 @@ var projectData = {
         },
         {
             id: 4,
-            samplePath: "",
+            samplePath: "samples/Grain_Drone.wav",
             sampleName: "New Sequence",
             volume: -12,
             pitch: 0,
@@ -521,7 +525,7 @@ var projectData = {
         },
         {
             id: 5,
-            samplePath: "",
+            samplePath: "samples/Space_Station.wav",
             sampleName: "New Sequence",
             volume: -12,
             pitch: 0,
@@ -540,7 +544,7 @@ var projectData = {
         },
         {
             id: 6,
-            samplePath: "",
+            samplePath: "samples/canto.wav",
             sampleName: "New Sequence",
             volume: -12,
             pitch: 0,
