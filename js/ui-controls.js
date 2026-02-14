@@ -40,6 +40,7 @@ function stopTransport() {
     transport.innerHTML = "Play";
 }
 
+/*
 function initRecord() {
     const record = document.getElementById('record');
 
@@ -80,7 +81,7 @@ function initRecord() {
         }
         recorder.start();
     });
-}
+}*/
 
 function initGlobalControls() {
     initTempo();
@@ -90,7 +91,7 @@ function initGlobalControls() {
     initSave();
     initReload();
     initNew();
-    initRecord();
+    //initRecord();
 
     // effects
 }
@@ -100,7 +101,8 @@ function initTempo() {
     const tempoDisplay = document.getElementById("tempoDisplay");
 
     tempo.addEventListener("input", function () {
-        currentData.bpm = this.value;
+        console.log(this.value)
+        currentData.bpm = parseInt(this.value);
         tempoDisplay.innerHTML = this.value;
         Tone.Transport.bpm.value = this.value;
         markAsChanged();
@@ -120,6 +122,7 @@ function initMasterVol() {
 }
 
 function initSwing() {
+    Tone.Transport.swingSubdivision = "16n";
     const swing = document.getElementById("swing");
     const swingDisplay = document.getElementById("swingDisplay");
 

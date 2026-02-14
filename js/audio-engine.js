@@ -1,13 +1,13 @@
 ////////////////////////// Audio Functionality \\\\\\\\\\\\\\\\\\\\\\\\\\
-Tone.Transport.loop = true;
-Tone.Transport.loopEnd = length;
-Tone.Transport.swingSubdivision = "16n";
-
 var currentTrack = 0;
 var currentStep = 0;
 var length = "1m";
 var running = false;
 var changes = false;
+
+Tone.Transport.loop = true;
+Tone.Transport.loopEnd = length;
+Tone.Transport.swingSubdivision = "16n";
 
 // arrays for instruments and all parameters
 const instruments = [];
@@ -223,6 +223,7 @@ var initData = {
 var currentData = {
     id: 0,
     name: "",
+    bpm: 120,
     swing: 0,
     masterVolume: -6,
     length: "1m",
@@ -669,8 +670,9 @@ function loadInstruments() {
 
 // initialize all controls and api
 window.onload = function () {
-    initInstruments();
+Tone.Transport.bpm.value = currentData.bpm;
 
+    initInstruments();
     initGlobalControls();
     initTransport();
     initTrackSelectors();
@@ -689,6 +691,7 @@ window.onload = function () {
 
 // schedule the loop
 function setupAudioLoop() {
+    
     // eventually pass whatever the note's stored time value is after params ***
     Tone.Transport.scheduleRepeat((time) => {
         if (!running) return;
