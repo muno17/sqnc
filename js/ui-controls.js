@@ -131,7 +131,6 @@ function initPageSelectors() {
     });
 }
 
-// init for save
 // save currentData
 // assign a copy of currentData to projectData on success ***
 // 'glow' if there are changes to be made, remove if saved or if reloaded
@@ -159,7 +158,7 @@ function markAsChanged() {
     }
 }
 
-// init for reload ***
+
 // revert back to last loaded projectData
 function initReload() {
     const reloadBtn = document.getElementById("reload");
@@ -172,10 +171,8 @@ function initReload() {
             currentData = JSON.parse(JSON.stringify(projectData));
             changes = false;
 
-            // stop the current audio
+            // stop the current audio and reload instruments
             stopAllSounds();
-
-            // reload instruments
             loadInstruments();
 
             // redraw the UI

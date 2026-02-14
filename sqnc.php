@@ -166,7 +166,7 @@ session_start();
                             </div>
                             <button id="transport" class="global">Play</button>
                             <button id="record" class="global">Record</button>
-                            <button id="download" class="global">Download</button>
+                            <button id="clear" class="global">Clear</button>
                             <div id="pages">
                                 <button id="page1" class="page selected" data-index="0">1:4</button>
                                 <button id="page2" class="page" data-index="1">2:4</button>
