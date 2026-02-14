@@ -310,6 +310,18 @@ button.page {
     color: white;
 }
 
+.muted {
+    background-color: color-mix(in srgb, #5F9F89 50%, white);
+    box-shadow: 1px 1px 40px #8795E8;
+    text-shadow: 1px 1px 20px #8795E8;
+    border-color: #8795E8;
+    color: gray;
+}
+
+.muted.selected {
+    background-color: color-mix(in srgb, #5F9F89 75%, #8E90A4);
+}
+
 .changes {
     box-shadow: 1px 1px 40px #e2ab45;
     text-shadow: 1px 1px 20px #e2ab45;

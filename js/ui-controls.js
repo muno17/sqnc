@@ -101,7 +101,7 @@ function initTempo() {
     const tempoDisplay = document.getElementById("tempoDisplay");
 
     tempo.addEventListener("input", function () {
-        console.log(this.value)
+        console.log(this.value);
         currentData.bpm = parseInt(this.value);
         tempoDisplay.innerHTML = this.value;
         Tone.Transport.bpm.value = this.value;
@@ -176,7 +176,6 @@ function markAsChanged() {
     }
 }
 
-
 // revert back to last loaded projectData
 function initReload() {
     const reloadBtn = document.getElementById("reload");
@@ -221,25 +220,24 @@ function initNew() {
 function initSampleSelector() {
     const selector = document.getElementById("samples");
 
-    selector.addEventListener("change", function() {
-            if (this.value === "upload") {
-                return;
-            }
-
-            // update data
-            const path = this.value;
-            const name = this.options[this.selectedIndex].dataset.name;
-            currentData.tracks[currentTrack].samplePath = path;
-            currentData.tracks[currentTrack].name = name;
-
-            // update audio engine
-            instruments[currentTrack].load(path, () => {
-                console.log("Loaded: " + name);
-                renderParams();
-                markAsChanged();
-            })
+    selector.addEventListener("change", function () {
+        if (this.value === "upload") {
+            return;
         }
-    )
+
+        // update data
+        const path = this.value;
+        const name = this.options[this.selectedIndex].dataset.name;
+        currentData.tracks[currentTrack].samplePath = path;
+        currentData.tracks[currentTrack].name = name;
+
+        // update audio engine
+        instruments[currentTrack].load(path, () => {
+            console.log("Loaded: " + name);
+            renderParams();
+            markAsChanged();
+        });
+    });
 }
 
 function initTrackSelectors() {
@@ -247,6 +245,7 @@ function initTrackSelectors() {
 
     // init master track ***
 
+    // for single clicks, display the track's parameters
     trackBtns.forEach((btn) => {
         btn.addEventListener("click", function () {
             trackBtns.forEach((b) => b.classList.remove("selected"));
@@ -256,6 +255,21 @@ function initTrackSelectors() {
 
             renderSequencer();
             renderParams();
+        });
+    });
+
+    // for double clicks, mute the track
+    trackBtns.forEach((btn) => {
+        btn.addEventListener("dblclick", function () {
+            if (currentData.tracks[this.dataset.index].muted) {
+                currentData.tracks[this.dataset.index].muted = false;
+                panVols[this.dataset.index].mute = false;
+                this.classList.remove("muted");
+            } else {
+                currentData.tracks[this.dataset.index].muted = true;
+                panVols[this.dataset.index].mute = true;
+                this.classList.add("muted");
+            }
         });
     });
 }
@@ -409,7 +423,7 @@ function updatePitchUI(val) {
     const pitchDisplay = document.getElementById("pitchDisplay");
 
     // format the value so it displays from -12 to +12 in .1 increments
-    const num = parseFloat(val)
+    const num = parseFloat(val);
     const formattedVal = num.toFixed(1);
     var sign = "";
     if (num > 0) {

@@ -16,6 +16,9 @@ const ampEnvs = [];
 const lpFilters = [];
 const hpFilters = [];
 
+// for mutes
+const preMuteVols = [];
+
 // recording functionality
 const recorder = new Tone.Recorder();
 Tone.Destination.connect(recorder);
@@ -233,6 +236,7 @@ var currentData = {
             samplePath: "",
             sampleName: "New Sequence",
             volume: -12,
+            muted: false,
             pitch: 0,
             pan: 0,
             start: 0,
@@ -252,6 +256,7 @@ var currentData = {
             samplePath: "",
             sampleName: "New Sequence",
             volume: -12,
+            muted: false,
             pitch: 0,
             pan: 0,
             start: 0,
@@ -271,6 +276,7 @@ var currentData = {
             samplePath: "",
             sampleName: "New Sequence",
             volume: -12,
+            muted: false,
             pitch: 0,
             pan: 0,
             start: 0,
@@ -290,6 +296,7 @@ var currentData = {
             samplePath: "",
             sampleName: "New Sequence",
             volume: -12,
+            muted: false,
             pitch: 0,
             pan: 0,
             start: 0,
@@ -309,6 +316,7 @@ var currentData = {
             samplePath: "",
             sampleName: "New Sequence",
             volume: -12,
+            muted: false,
             pitch: 0,
             pan: 0,
             start: 0,
@@ -328,6 +336,7 @@ var currentData = {
             samplePath: "",
             sampleName: "New Sequence",
             volume: -12,
+            muted: false,
             pitch: 0,
             pan: 0,
             start: 0,
@@ -347,6 +356,7 @@ var currentData = {
             samplePath: "",
             sampleName: "New Sequence",
             volume: -12,
+            muted: false,
             pitch: 0,
             pan: 0,
             start: 0,
@@ -366,6 +376,7 @@ var currentData = {
             samplePath: "",
             sampleName: "New Sequence",
             volume: -12,
+            muted: false,
             pitch: 0,
             pan: 0,
             start: 0,
@@ -385,6 +396,7 @@ var currentData = {
             samplePath: "",
             sampleName: "New Sequence",
             volume: -12,
+            muted: false,
             pitch: 0,
             pan: 0,
             start: 0,
@@ -404,6 +416,7 @@ var currentData = {
             samplePath: "",
             sampleName: "New Sequence",
             volume: -12,
+            muted: false,
             pitch: 0,
             pan: 0,
             start: 0,
