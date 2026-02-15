@@ -295,7 +295,6 @@ function initTrackSelectors() {
 
         // for double clicks, mute the track
         btn.addEventListener("dblclick", function () {
-            console.log("triggered");
             if (currentData.tracks[index].muted) {
                 currentData.tracks[index].muted = false;
                 panVols[index].mute = false;
@@ -420,6 +419,9 @@ function initTrackParams() {
     // effects
     initDistortion();
     initBitcrusher();
+    initChorusRate();
+    initChorusDepth();
+    initChorusMix();
 }
 
 // update UI based on what track is selected ***
@@ -762,6 +764,74 @@ function updateBitcrusherUI(val) {
     bcDisplay.innerHTML = parseInt(val * 100);
 }
 
+function initChorusRate() {
+    const rate = document.getElementById("chorusRate");
+
+    rate.addEventListener("input", function () {
+        const val = parseFloat(this.value);
+        currentData.tracks[currentTrack].chorusRate = val;
+
+        updateChorusRateUI(val);
+        setTrackChorusRate(val);
+
+        markAsChanged();
+    });
+}
+
+function updateChorusRateUI(val) {
+    const rate = document.getElementById("chorusRate");
+    const rateDisplay = document.getElementById("chorusRateDisplay");
+
+    // format the value so it displays 0-100
+    rate.value = val;
+    rateDisplay.innerHTML = parseInt(val * 20);
+}
+
+function initChorusDepth() {
+    const depth = document.getElementById("chorusDepth");
+
+    depth.addEventListener("input", function () {
+        const val = parseFloat(this.value);
+        currentData.tracks[currentTrack].chorusDepth = val;
+
+        updateChorusDepthUI(val);
+        setTrackChorusDepth(val);
+
+        markAsChanged();
+    });
+}
+
+function updateChorusDepthUI(val) {
+    const depth = document.getElementById("chorusDepth");
+    const depthDisplay = document.getElementById("chorusDepthDisplay");
+
+    // format the value so it displays 0-100
+    depth.value = val;
+    depthDisplay.innerHTML = parseInt(val * 100);
+}
+
+function initChorusMix() {
+    const mix = document.getElementById("chorusMix");
+
+    mix.addEventListener("input", function () {
+        const val = parseFloat(this.value);
+        currentData.tracks[currentTrack].chorusMix = val;
+
+        updateChorusMixUI(val);
+        setTrackChorusMix(val);
+
+        markAsChanged();
+    });
+}
+
+function updateChorusMixUI(val) {
+    const mix = document.getElementById("chorusMix");
+    const mixDisplay = document.getElementById("chorusMixDisplay");
+
+    // format the value so it displays 0-100
+    mix.value = val;
+    mixDisplay.innerHTML = parseInt(val * 100);
+}
 
 // update all params to track's saved value ***
 function renderParams() {
@@ -810,9 +880,24 @@ function renderParams() {
     updateHpQUI(track.hpq);
     setTrackHpQ(track.hpq);
 
+    // upate effects first
+    document.getElementById("distortion").value = track.distortion;
     updateDistortionUI(track.distortion);
     setTrackDistortion(track.distortion);
 
+    document.getElementById("bc").value = track.bitcrusher;
     updateBitcrusherUI(track.bitcrusher);
     setTrackBitcrusher(track.bitcrusher);
+
+    document.getElementById("chorusRate").value = track.chorusRate;
+    updateChorusRateUI(track.chorusRate);
+    setTrackChorusRate(track.chorusRate);
+
+    document.getElementById("chorusDepth").value = track.chorusDepth;
+    updateChorusDepthUI(track.chorusDepth);
+    setTrackChorusDepth(track.chorusDepth);
+
+    document.getElementById("chorusMix").value = track.chorusMix;
+    updateChorusMixUI(track.chorusMix);
+    setTrackChorusMix(track.chorusMix);
 }

@@ -174,18 +174,18 @@ session_start();
                                     <div class="paramRow">
                                         <div class="house">
                                             <h2>Chorus Rate</h2>
-                                            <div id="chorRateDisplay" class="display">0</div>
-                                            <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="chorRate">
+                                            <div id="chorusRateDisplay" class="display">0</div>
+                                            <input type="range" min="0" max="5" step="0.01" value="0" class="slider" id="chorusRate">
                                         </div>
                                         <div class="house">
                                             <h2>Chorus Depth</h2>
-                                            <div id="chorDepthDisplay" class="display">0</div>
-                                            <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="chorDepth">
+                                            <div id="chorusDepthDisplay" class="display">0</div>
+                                            <input type="range" min="0" max="1" step="0.01" value="0" class="slider" id="chorusDepth">
                                         </div>
                                         <div class="house">
                                             <h2>Chorus Mix</h2>
-                                            <div id="chorMixDisplay" class="display">0</div>
-                                            <input type="range" min="0" max="1" step="0.01" value="0" class="slider" id="chorMix">
+                                            <div id="chorusMixDisplay" class="display">0</div>
+                                            <input type="range" min="0" max="1" step="0.01" value="0" class="slider" id="chorusMix">
                                         </div>
                                     </div>
                                     <div class="paramRow">

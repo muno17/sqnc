@@ -702,6 +702,17 @@ var projectData = {
             hpWidth: 1,
             hpq: 0,
             distortion: 0,
+            bitcrusher: 0,
+            reverb: 0,
+            chorusRate: 0,
+            chorusDepth: 0,
+            chorusMix: 0,
+            tremRate: 0,
+            tremDepth: 0,
+            tremMix: 0,
+            delTime: 0,
+            delFback: 0,
+            delMix: 0,
             steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         },
         {
@@ -721,6 +732,17 @@ var projectData = {
             hpWidth: 1,
             hpq: 0,
             distortion: 0,
+            bitcrusher: 0,
+            reverb: 0,
+            chorusRate: 0,
+            chorusDepth: 0,
+            chorusMix: 0,
+            tremRate: 0,
+            tremDepth: 0,
+            tremMix: 0,
+            delTime: 0,
+            delFback: 0,
+            delMix: 0,
             steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         },
         {
@@ -740,6 +762,17 @@ var projectData = {
             hpWidth: 1,
             hpq: 0,
             distortion: 0,
+            bitcrusher: 0,
+            reverb: 0,
+            chorusRate: 0,
+            chorusDepth: 0,
+            chorusMix: 0,
+            tremRate: 0,
+            tremDepth: 0,
+            tremMix: 0,
+            delTime: 0,
+            delFback: 0,
+            delMix: 0,
             steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         },
         {
@@ -759,6 +792,17 @@ var projectData = {
             hpWidth: 1,
             hpq: 0,
             distortion: 0,
+            bitcrusher: 0,
+            reverb: 0,
+            chorusRate: 0,
+            chorusDepth: 0,
+            chorusMix: 0,
+            tremRate: 0,
+            tremDepth: 0,
+            tremMix: 0,
+            delTime: 0,
+            delFback: 0,
+            delMix: 0,
             steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         },
         {
@@ -778,6 +822,17 @@ var projectData = {
             hpWidth: 1,
             hpq: 0,
             distortion: 0,
+            bitcrusher: 0,
+            reverb: 0,
+            chorusRate: 0,
+            chorusDepth: 0,
+            chorusMix: 0,
+            tremRate: 0,
+            tremDepth: 0,
+            tremMix: 0,
+            delTime: 0,
+            delFback: 0,
+            delMix: 0,
             steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         },
         {
@@ -797,6 +852,17 @@ var projectData = {
             hpWidth: 1,
             hpq: 0,
             distortion: 0,
+            bitcrusher: 0,
+            reverb: 0,
+            chorusRate: 0,
+            chorusDepth: 0,
+            chorusMix: 0,
+            tremRate: 0,
+            tremDepth: 0,
+            tremMix: 0,
+            delTime: 0,
+            delFback: 0,
+            delMix: 0,
             steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         },
         {
@@ -816,6 +882,17 @@ var projectData = {
             hpWidth: 1,
             hpq: 0,
             distortion: 0,
+            bitcrusher: 0,
+            reverb: 0,
+            chorusRate: 0,
+            chorusDepth: 0,
+            chorusMix: 0,
+            tremRate: 0,
+            tremDepth: 0,
+            tremMix: 0,
+            delTime: 0,
+            delFback: 0,
+            delMix: 0,
             steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         },
         {
@@ -835,6 +912,17 @@ var projectData = {
             hpWidth: 1,
             hpq: 0,
             distortion: 0,
+            bitcrusher: 0,
+            reverb: 0,
+            chorusRate: 0,
+            chorusDepth: 0,
+            chorusMix: 0,
+            tremRate: 0,
+            tremDepth: 0,
+            tremMix: 0,
+            delTime: 0,
+            delFback: 0,
+            delMix: 0,
             steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         },
         {
@@ -854,6 +942,17 @@ var projectData = {
             hpWidth: 1,
             hpq: 0,
             distortion: 0,
+            bitcrusher: 0,
+            reverb: 0,
+            chorusRate: 0,
+            chorusDepth: 0,
+            chorusMix: 0,
+            tremRate: 0,
+            tremDepth: 0,
+            tremMix: 0,
+            delTime: 0,
+            delFback: 0,
+            delMix: 0,
             steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         },
         {
@@ -873,6 +972,17 @@ var projectData = {
             hpWidth: 1,
             hpq: 0,
             distortion: 0,
+            bitcrusher: 0,
+            reverb: 0,
+            chorusRate: 0,
+            chorusDepth: 0,
+            chorusMix: 0,
+            tremRate: 0,
+            tremDepth: 0,
+            tremMix: 0,
+            delTime: 0,
+            delFback: 0,
+            delMix: 0,
             steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         },
     ],
@@ -906,6 +1016,7 @@ function initInstruments() {
         bitcrushers[i].wet.value = 0;
         distortions[i].wet.value = 0;
         choruses[i].wet.value = 0;
+        choruses[i].spread = 180;
         tremolos[i].wet.value = 0;
         delays[i].wet.value = 0;
 
@@ -949,6 +1060,7 @@ window.onload = function () {
     //loadSamples(); REENABLE ***
 
     // initialize track params
+    renderParams();
     setupAudioLoop();
 };
 
@@ -982,6 +1094,12 @@ function playTrackSound(index, time) {
     const env = ampEnvs[index];
     const track = currentData.tracks[index];
     const now = time || Tone.now();
+
+    /*
+    if (choruses[index].state !== "started") {
+        choruses[index].start();
+    }
+        */
 
     try {
         if (player && player.buffer && player.buffer.loaded) {
@@ -1088,4 +1206,17 @@ function setTrackDistortion(val) {
 
 function setTrackBitcrusher(val) {
     bitcrushers[currentTrack].wet.value = val;
+}
+
+
+function setTrackChorusRate(val) {
+    choruses[currentTrack].frequency.value = val;
+}
+
+function setTrackChorusDepth(val) {
+    choruses[currentTrack].depth = val;
+}
+
+function setTrackChorusMix(val) {
+    choruses[currentTrack].wet.value = val;
 }
