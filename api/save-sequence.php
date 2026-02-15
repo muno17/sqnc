@@ -5,7 +5,9 @@ session_start();
 
 # If user is not logged in don't do anything
 if (!isset($_SESSION['logged_in'])) {
-    header("Location: /sqnc/sqnc.php");
+    header('Content-Type: application/json');
+    http_response_code(401);
+    echo json_encode(["error" => "Not logged in"]);
     exit;
 }
 
@@ -16,9 +18,9 @@ $name = $data['name'];
 
 # check if sequence already exists
 $seq_id = null;
-if (isset($data['id'])) {
+if (!empty($data['id'])) {
     $seq_id = $data['id'];
-} 
+}
 
 ###*********### **** connect to db and update/insert**** ###*********### 
 try {

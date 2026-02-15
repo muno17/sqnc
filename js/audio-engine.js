@@ -30,7 +30,7 @@ var master = Tone.getDestination();
 // initData is an init object with default parameters
 
 var initData = {
-    id: 0,
+    id: null,
     name: "",
     bpm: 120,
     swing: 0,

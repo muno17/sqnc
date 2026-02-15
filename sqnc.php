@@ -15,7 +15,7 @@ session_start();
         <script src="js/sequencer.js"></script>
         <script src="js/api.js"></script>
         <script src="js/ui-controls.js"></script>
-        <script src="js/modals.js"></script>
+       <!--<script src="js/modals.js"></script>-->
     </head>
     <body>
         <header>
@@ -81,7 +81,7 @@ session_start();
                                         <input type="file" name="file" id="file" value="Upload"
                             enctype="multipart/form-data" accept=".wav,.mp3">
                                     </form>
-                                    <button id="sampleManager">Manager</button>
+                                    <!--<button id="sampleManager">Manager</button>-->
                                 </div>
                                 <div class="paramRow">
                                     <div class="house">
@@ -210,18 +210,19 @@ session_start();
         <!-- Modal Screens -->
 
         <!-- Sample Manager Modal -->
-        <div id="sample-overlay" class="modal-overlay modal-hidden">
+        <div id="sequence-overlay" class="modal-overlay modal-hidden">
             <div class="modal-box">
-                <h3>Save Sequence</h3>
-                <input type="text" id="seq-name" placeholder="Name your track...">
+                <h3>New Sequence</h3>
+                <input type="text" id="seq-name" placeholder="Name your sequence">
                 <div class="modal-footer">
-                    <button id="sample-close-btn">Cancel</button>
-                    <button class="sample-save-btn">Save</button>
+                    <button id="sequence-close-btn">Cancel</button>
+                    <button id="sequence-init-btn">Save</button>
                 </div>
             </div>
         </div>
 
         <!-- Login/Sign Up Modal -->
+         <!--
         <div id="account-overlay" class="modal-overlay modal-hidden">
             <div class="modal-box">
                 <h3>Save Sequence</h3>
@@ -232,5 +233,6 @@ session_start();
                 </div>
             </div>
         </div>
+        -->
 	</body>
 </html>

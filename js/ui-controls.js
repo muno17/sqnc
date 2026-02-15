@@ -188,18 +188,68 @@ function initReload() {
 function initNew() {
     const newBtn = document.getElementById("new");
     const saveBtn = document.getElementById("save");
-    if (newBtn && saveBtn) {
-        newBtn.addEventListener("click", function () {
-            // show warning before reseting
-            if (changes) {
-                saveBtn.classList.remove("changes");
-                // copy initData into projectData
-                projectData = JSON.parse(JSON.stringify(initData));
-                changes = false;
-            }
-            // create completely new empty data object, set to currentData ***
-        });
+
+    // initiate the new sequence modal
+    const overlay = document.getElementById("sequence-overlay");
+    const closeBtn = document.getElementById("sequence-close-btn");
+    const sequenceInitBtn = document.getElementById("sequence-init-btn");
+    const seqName = document.getElementById("seq-name");
+    const sequences = document.getElementById("sequences");
+
+    function openModal() {
+        seqName.value = "";
+        overlay.classList.remove("modal-hidden");
+        document.body.style.overflow = "hidden";
+        seqName.focus();
     }
+
+    function closeModal() {
+        overlay.classList.add("modal-hidden");
+        document.body.style.overflow = "auto";
+    }
+
+    // close when clicking the "Cancel" button in the modal
+    closeBtn.addEventListener("click", closeModal);
+
+    // close when clicking outside the box (on the dimmer) while in the modal
+    overlay.addEventListener("click", (e) => {
+        if (e.target === overlay) closeModal();
+    });
+
+    // clear out current sequence and create init sequence
+    sequenceInitBtn.addEventListener("click", function () {
+        // create name for the new sequence
+        const name = seqName.value.trim() || "Untitled Sequence";
+
+        // reset changes state
+        if (changes) {
+            saveBtn.classList.remove("changes");
+            changes = false;
+        }
+
+        // update the sequences dropdown
+        var newSeq = document.createElement("option");
+        newSeq.value = "";
+        newSeq.innerHTML = name;
+        newSeq.selected = true;
+        sequences.appendChild(newSeq);
+
+        // copy initData into projectData and currentData and update with name
+        projectData = JSON.parse(JSON.stringify(initData));
+        currentData = JSON.parse(JSON.stringify(initData));
+
+        projectData.name = name;
+        currentData.name = name;
+
+        // referesh UI
+        stopTransport(); 
+        renderSequencer();
+        renderParams();
+
+        closeModal();
+    });
+
+    newBtn.addEventListener("click", openModal);
 }
 
 function initSampleSelector() {
@@ -287,6 +337,7 @@ function initClear() {
 }
 
 // sample manager modal functionality
+/*
 function initSampleManager() {
     var manager = document.getElementById("sampleManager");
 
@@ -318,6 +369,8 @@ function initSampleManager() {
 
 }
 
+*/
+
 function toggleTrackHit(index) {
     const trackBtns = document.querySelectorAll(".trackBtn");
     trackBtns[index].classList.add("flash")
@@ -338,8 +391,6 @@ function initGlobalControls() {
     initNew();
     initRecord();
     initClear();
-
-    initSampleManager();
 
     // effects
 }

@@ -7,6 +7,13 @@
 async function saveSequence() {
     // send currentData to the server
     // on success, projectData gets a copy of currentData assigned to it
+
+    // disable save button while saving
+    const saveBtn = document.getElementById("save");
+    const originalText = saveBtn.innerText;
+    saveBtn.innerText = "Saving...";
+    saveBtn.disabled = true;
+
     try {
         const response = await fetch("api/save-sequence.php", {
             method: "POST",
@@ -22,10 +29,21 @@ async function saveSequence() {
         if (ajax && ajax.id) {
             projectData.id = ajax.id;
             currentData.id = ajax.id;
+
+            // update the dropdown option if a new sequence was just saved
+            const sequences = document.getElementById("sequences");
+            const selectedOption = sequences.options[sequences.selectedIndex];
+            if (selectedOption && selectedOption.value === "") {
+                selectedOption.value = ajax.id;
+            }
         }
         console.log("Saved sequence successfully");
     } catch (err) {
         console.error("Sequence save failed:", err);
+    } finally {
+        // reenable save button once saved succesfully
+        saveBtn.innerText = originalText;
+        saveBtn.disabled = false;
     }
 }
 
