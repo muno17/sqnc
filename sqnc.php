@@ -163,7 +163,7 @@ session_start();
                                         <div class="house">
                                             <h2>Bitcrusher</h2>
                                             <div id="bcDisplay" class="display">0</div>
-                                            <input type="range" min="1" max="8" step="1" value="1" class="slider" id="bc">
+                                            <input type="range" min="0" max="1" step="0.01" value="0" class="slider" id="bc">
                                         </div>
                                         <div class="house">
                                             <h2>Reverb Send</h2>

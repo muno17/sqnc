@@ -419,6 +419,7 @@ function initTrackParams() {
 
     // effects
     initDistortion();
+    initBitcrusher();
 }
 
 // update UI based on what track is selected ***
@@ -738,6 +739,29 @@ function updateDistortionUI(val) {
     distortionDisplay.innerHTML = parseInt(val * 100);
 }
 
+function initBitcrusher() {
+    const bc = document.getElementById("bc");
+
+    bc.addEventListener("input", function () {
+        const val = parseFloat(this.value);
+        currentData.tracks[currentTrack].bitcrusher = val;
+
+        updateBitcrusherUI(val);
+        setTrackBitcrusher(val);
+
+        markAsChanged();
+    });
+}
+
+function updateBitcrusherUI(val) {
+    const bc = document.getElementById("bc");
+    const bcDisplay = document.getElementById("bcDisplay");
+
+    // format the value so it displays 0-100
+    bc.value = val;
+    bcDisplay.innerHTML = parseInt(val * 100);
+}
+
 
 // update all params to track's saved value ***
 function renderParams() {
@@ -788,4 +812,7 @@ function renderParams() {
 
     updateDistortionUI(track.distortion);
     setTrackDistortion(track.distortion);
+
+    updateBitcrusherUI(track.bitcrusher);
+    setTrackBitcrusher(track.bitcrusher);
 }

@@ -896,7 +896,7 @@ function initInstruments() {
         tremolos[i] = new Tone.Tremolo(5, 0).connect(delays[i]).start();
         choruses[i] = new Tone.Chorus(4, 2.5, 0).connect(tremolos[i]).start();
         bitcrushers[i] = new Tone.BitCrusher(4).connect(choruses[i]);
-        distortions[i] = new Tone.Distortion(.5).connect(bitcrushers[i]);
+        distortions[i] = new Tone.Distortion(0.5).connect(bitcrushers[i]);
 
         // initialize filters
         hpFilters[i] = new Tone.Filter(10, "highpass").connect(distortions[i]);
@@ -936,7 +936,7 @@ function loadInstruments() {
 
 // initialize all controls and api
 window.onload = function () {
-Tone.Transport.bpm.value = currentData.bpm;
+    Tone.Transport.bpm.value = currentData.bpm;
 
     initInstruments();
     initGlobalControls();
@@ -956,7 +956,6 @@ Tone.Transport.bpm.value = currentData.bpm;
 
 // schedule the loop
 function setupAudioLoop() {
-    
     // eventually pass whatever the note's stored time value is after params ***
     Tone.Transport.scheduleRepeat((time) => {
         if (!running) return;
@@ -1082,8 +1081,11 @@ function setTrackHpQ(val) {
     hpFilters[currentTrack].Q.rampTo(parseFloat(val), 0.05);
 }
 
-
 // effects
 function setTrackDistortion(val) {
     distortions[currentTrack].wet.value = val;
+}
+
+function setTrackBitcrusher(val) {
+    bitcrushers[currentTrack].wet.value = val;
 }
