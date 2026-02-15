@@ -3,7 +3,8 @@
 function initSequencer() {
     const sequence = document.getElementById("sequencer");
 
-    sequence.addEventListener("click", function (e) {
+    // activate the step on double click
+    sequence.addEventListener("dblclick", function (e) {
         // check if an actual step was clicked
         if (e.target.classList.contains("step")) {
             // grab the step index

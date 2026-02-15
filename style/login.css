@@ -61,6 +61,10 @@ button {
     text-decoration: none;
 }
 
+a {
+    text-decoration: none;
+}
+
 #home-heading:visited {
     color: white;
 }

@@ -685,7 +685,6 @@ Tone.Transport.bpm.value = currentData.bpm;
     initInstruments();
     initGlobalControls();
     initTransport();
-    initTrackSelectors();
     //initPageSelectors();
     initSequencer();
     initTrackParams();

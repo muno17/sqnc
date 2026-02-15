@@ -316,7 +316,7 @@ function initSequenceSelector() {
         var selectedId = this.value;
 
         if (selectedId != "new") {
-            // getSequence(selectedId); REENABLE
+            // getSequence(selectedId); REENABLE***
         } else {
             // CALL FUNCTION TO RESET INTERFACE ***
         }
@@ -391,6 +391,9 @@ function initGlobalControls() {
     initNew();
     initRecord();
     initClear();
+    initTrackSelectors();
+    initSequenceSelector();
+    initSampleSelector();
 
     // effects
 }
