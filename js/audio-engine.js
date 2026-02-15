@@ -1018,6 +1018,7 @@ function initInstruments() {
         choruses[i].wet.value = 0;
         choruses[i].spread = 180;
         tremolos[i].wet.value = 0;
+        tremolos[i].spread = 0;
         delays[i].wet.value = 0;
 
         if (i % 2 == 0) {
@@ -1219,4 +1220,16 @@ function setTrackChorusDepth(val) {
 
 function setTrackChorusMix(val) {
     choruses[currentTrack].wet.value = val;
+}
+
+function setTrackTremoloRate(val) {
+    tremolos[currentTrack].frequency.value = val;
+}
+
+function setTrackTremoloDepth(val) {
+    tremolos[currentTrack].depth.value = val;
+}
+
+function setTrackTremoloMix(val) {
+    tremolos[currentTrack].wet.value = val;
 }

@@ -422,6 +422,9 @@ function initTrackParams() {
     initChorusRate();
     initChorusDepth();
     initChorusMix();
+    initTremoloRate();
+    initTremoloDepth();
+    initTremoloMix();
 }
 
 // update UI based on what track is selected ***
@@ -833,6 +836,75 @@ function updateChorusMixUI(val) {
     mixDisplay.innerHTML = parseInt(val * 100);
 }
 
+function initTremoloRate() {
+    const rate = document.getElementById("tremRate");
+
+    rate.addEventListener("input", function () {
+        const val = parseFloat(this.value);
+        currentData.tracks[currentTrack].tremRate = val;
+
+        updateTremoloRateUI(val);
+        setTrackTremoloRate(val);
+
+        markAsChanged();
+    });
+}
+
+function updateTremoloRateUI(val) {
+    const rate = document.getElementById("tremRate");
+    const rateDisplay = document.getElementById("tremRateDisplay");
+
+    // format the value so it displays 0-100
+    rate.value = val;
+    rateDisplay.innerHTML = parseInt(val * 5);
+}
+
+function initTremoloDepth() {
+    const depth = document.getElementById("tremDepth");
+
+    depth.addEventListener("input", function () {
+        const val = parseFloat(this.value);
+        currentData.tracks[currentTrack].tremDepth = val;
+
+        updateTremoloDepthUI(val);
+        setTrackTremoloDepth(val);
+
+        markAsChanged();
+    });
+}
+
+function updateTremoloDepthUI(val) {
+    const depth = document.getElementById("tremDepth");
+    const depthDisplay = document.getElementById("tremDepthDisplay");
+
+    // format the value so it displays 0-100
+    depth.value = val;
+    depthDisplay.innerHTML = parseInt(val * 100);
+}
+
+function initTremoloMix() {
+    const mix = document.getElementById("tremMix");
+
+    mix.addEventListener("input", function () {
+        const val = parseFloat(this.value);
+        currentData.tracks[currentTrack].tremMix = val;
+
+        updateTremoloMixUI(val);
+        setTrackTremoloMix(val);
+
+        markAsChanged();
+    });
+}
+
+function updateTremoloMixUI(val) {
+    const mix = document.getElementById("tremMix");
+    const mixDisplay = document.getElementById("tremMixDisplay");
+
+    // format the value so it displays 0-100
+    mix.value = val;
+    mixDisplay.innerHTML = parseInt(val * 100);
+}
+
 // update all params to track's saved value ***
 function renderParams() {
     // get current track and update params from currentData ********
@@ -881,23 +953,27 @@ function renderParams() {
     setTrackHpQ(track.hpq);
 
     // upate effects first
-    document.getElementById("distortion").value = track.distortion;
     updateDistortionUI(track.distortion);
     setTrackDistortion(track.distortion);
 
-    document.getElementById("bc").value = track.bitcrusher;
     updateBitcrusherUI(track.bitcrusher);
     setTrackBitcrusher(track.bitcrusher);
 
-    document.getElementById("chorusRate").value = track.chorusRate;
     updateChorusRateUI(track.chorusRate);
     setTrackChorusRate(track.chorusRate);
 
-    document.getElementById("chorusDepth").value = track.chorusDepth;
     updateChorusDepthUI(track.chorusDepth);
     setTrackChorusDepth(track.chorusDepth);
 
-    document.getElementById("chorusMix").value = track.chorusMix;
     updateChorusMixUI(track.chorusMix);
     setTrackChorusMix(track.chorusMix);
+
+    updateTremoloRateUI(track.tremRate);
+    setTrackTremoloRate(track.tremRate);
+
+    updateTremoloDepthUI(track.tremDepth);
+    setTrackTremoloDepth(track.tremDepth);
+
+    updateTremoloMixUI(track.tremMix);
+    setTrackTremoloMix(track.tremMix);
 }

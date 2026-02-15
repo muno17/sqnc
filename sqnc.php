@@ -197,7 +197,7 @@ session_start();
                                         <div class="house">
                                             <h2>Tremolo Depth</h2>
                                             <div id="tremDepthDisplay" class="display">0</div>
-                                            <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="tremDepth">
+                                            <input type="range" min="0" max="1" step="0.01" value="0" class="slider" id="tremDepth">
                                         </div>
                                         <div class="house">
                                             <h2>Tremolo Mix</h2>
