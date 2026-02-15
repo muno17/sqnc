@@ -208,18 +208,18 @@ session_start();
                                     <div class="paramRow">
                                         <div class="house">
                                             <h2>Delay Time</h2>
-                                            <div id="hpqDisplay" class="display">0</div>
-                                            <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="hpq">
+                                            <div id="delTimeDisplay" class="display">0</div>
+                                            <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="delTime">
                                         </div>
                                         <div class="house">
-                                            <h2>Delay Feck</h2>
-                                            <div id="hpqDisplay" class="display">0</div>
-                                            <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="hpq">
+                                            <h2>Delay Feedback</h2>
+                                            <div id="delFbackDisplay" class="display">0</div>
+                                            <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="delFback">
                                         </div>
                                         <div class="house">
                                             <h2>Delay Mix</h2>
-                                            <div id="hpqDisplay" class="display">0</div>
-                                            <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="hpq">
+                                            <div id="delMixDisplay" class="display">0</div>
+                                            <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="delMix">
                                         </div>
                                     </div>
                                 </div>
