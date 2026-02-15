@@ -158,12 +158,12 @@ session_start();
                                         <div class="house">
                                             <h2>Distortion</h2>
                                             <div id="distortionDisplay" class="display">0</div>
-                                            <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="distortion">
+                                            <input type="range" min="0" max="1" step="0.01" value="0" class="slider" id="distortion">
                                         </div>
                                         <div class="house">
                                             <h2>Bitcrusher</h2>
                                             <div id="bcDisplay" class="display">0</div>
-                                            <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="bc">
+                                            <input type="range" min="1" max="8" step="1" value="1" class="slider" id="bc">
                                         </div>
                                         <div class="house">
                                             <h2>Reverb Send</h2>
@@ -185,7 +185,7 @@ session_start();
                                         <div class="house">
                                             <h2>Chorus Mix</h2>
                                             <div id="chorMixDisplay" class="display">0</div>
-                                            <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="chorMix">
+                                            <input type="range" min="0" max="1" step="0.01" value="0" class="slider" id="chorMix">
                                         </div>
                                     </div>
                                     <div class="paramRow">
@@ -202,7 +202,7 @@ session_start();
                                         <div class="house">
                                             <h2>Tremolo Mix</h2>
                                             <div id="tremMixDisplay" class="display">0</div>
-                                            <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="tremMix">
+                                            <input type="range" min="0" max="1" step="0.01" value="0" class="slider" id="tremMix">
                                         </div>
                                     </div>
                                     <div class="paramRow">
@@ -219,7 +219,7 @@ session_start();
                                         <div class="house">
                                             <h2>Delay Mix</h2>
                                             <div id="delMixDisplay" class="display">0</div>
-                                            <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="delMix">
+                                            <input type="range" min="0" max="0.9" step="0.01" value="0" class="slider" id="delMix">
                                         </div>
                                     </div>
                                 </div>

@@ -396,6 +396,7 @@ function initGlobalControls() {
     initSampleSelector();
 
     // effects
+    
 }
 
 ///////////////////////// Track Parameters \\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -415,6 +416,9 @@ function initTrackParams() {
     initLpQ();
     initHpWidth();
     initHpQ();
+
+    // effects
+    initDistortion();
 }
 
 // update UI based on what track is selected ***
@@ -711,7 +715,28 @@ function updateHpQUI(val) {
 }
 
 ///////////////////////// Track Effects \\\\\\\\\\\\\\\\\\\\\\\\\\
+function initDistortion() {
+    const distortion = document.getElementById("distortion");
 
+    distortion.addEventListener("input", function () {
+        const val = parseFloat(this.value);
+        currentData.tracks[currentTrack].distortion = val;
+
+        updateDistortionUI(val);
+        setTrackDistortion(val);
+
+        markAsChanged();
+    });
+}
+
+function updateDistortionUI(val) {
+    const distortion = document.getElementById("distortion");
+    const distortionDisplay = document.getElementById("distortionDisplay");
+
+    // format the value so it displays 0-100
+    distortion.value = val;
+    distortionDisplay.innerHTML = parseInt(val * 100);
+}
 
 
 // update all params to track's saved value ***
@@ -760,4 +785,7 @@ function renderParams() {
 
     updateHpQUI(track.hpq);
     setTrackHpQ(track.hpq);
+
+    updateDistortionUI(track.distortion);
+    setTrackDistortion(track.distortion);
 }

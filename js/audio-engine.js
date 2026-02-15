@@ -891,15 +891,23 @@ function initInstruments() {
             release: 1.0,
         }).connect(panVols[i]);
 
-        hpFilters[i] = new Tone.Filter(10, "highpass").connect(ampEnvs[i]);
-        lpFilters[i] = new Tone.Filter(5000, "lowpass").connect(hpFilters[i]);
-
         // initialize effects
         delays[i] = new Tone.FeedbackDelay("8n", 0).connect(ampEnvs[i]);
-        tremolos[i] = new Tone.Tremolo(5, 0).connect(choruses[i]).start();
-        choruses[i] = new Tone.Chorus(4, 2.5, 0).connect(delays[i]).start();
+        tremolos[i] = new Tone.Tremolo(5, 0).connect(delays[i]).start();
+        choruses[i] = new Tone.Chorus(4, 2.5, 0).connect(tremolos[i]).start();
         bitcrushers[i] = new Tone.BitCrusher(4).connect(choruses[i]);
-        distortions[i] = new Tone.Distortion(0).connect(bitcrushers[i]);
+        distortions[i] = new Tone.Distortion(.5).connect(bitcrushers[i]);
+
+        // initialize filters
+        hpFilters[i] = new Tone.Filter(10, "highpass").connect(distortions[i]);
+        lpFilters[i] = new Tone.Filter(5000, "lowpass").connect(hpFilters[i]);
+
+        // set initial mix values for effects
+        bitcrushers[i].wet.value = 0;
+        distortions[i].wet.value = 0;
+        choruses[i].wet.value = 0;
+        tremolos[i].wet.value = 0;
+        delays[i].wet.value = 0;
 
         if (i % 2 == 0) {
             instruments[i] = new Tone.Player({
@@ -1072,4 +1080,10 @@ function setTrackHpWidth(val) {
 
 function setTrackHpQ(val) {
     hpFilters[currentTrack].Q.rampTo(parseFloat(val), 0.05);
+}
+
+
+// effects
+function setTrackDistortion(val) {
+    distortions[currentTrack].wet.value = val;
 }
