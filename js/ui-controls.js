@@ -286,6 +286,38 @@ function initClear() {
     });
 }
 
+// sample manager modal functionality
+function initSampleManager() {
+    var manager = document.getElementById("sampleManager");
+
+    const overlay = document.getElementById("sample-overlay");
+    const closeBtn = document.getElementById("sample-close-btn");
+
+    function openModal() {
+        overlay.classList.remove("modal-hidden");
+        document.body.style.overflow = "hidden";
+    }
+
+    function closeModal() {
+        overlay.classList.add("modal-hidden");
+        document.body.style.overflow = "auto";
+    }
+
+    // Close when clicking the "Cancel" button
+    closeBtn.addEventListener("click", closeModal);
+
+    // Close when clicking outside the box (on the dimmer)
+    overlay.addEventListener("click", (e) => {
+        if (e.target === overlay) closeModal();
+    });
+
+    manager.addEventListener("click", function () {
+        console.log("manager opened")
+        openModal();
+    })
+
+}
+
 function toggleTrackHit(index) {
     const trackBtns = document.querySelectorAll(".trackBtn");
     trackBtns[index].classList.add("flash")
@@ -306,6 +338,8 @@ function initGlobalControls() {
     initNew();
     initRecord();
     initClear();
+
+    initSampleManager();
 
     // effects
 }

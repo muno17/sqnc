@@ -5,7 +5,6 @@ session_start();
 <!DOCTYPE html>
 <html lang="en">
     <!-- Web Programming, sqnc drum machine -->
-    <!-- shared page top HTML -->
     <head>
         <title>sqnc</title>
         <meta charset="utf-8" />
@@ -16,6 +15,7 @@ session_start();
         <script src="js/sequencer.js"></script>
         <script src="js/api.js"></script>
         <script src="js/ui-controls.js"></script>
+        <script src="js/modals.js"></script>
     </head>
     <body>
         <header>
@@ -81,6 +81,7 @@ session_start();
                                         <input type="file" name="file" id="file" value="Upload"
                             enctype="multipart/form-data" accept=".wav,.mp3">
                                     </form>
+                                    <button id="sampleManager">Manager</button>
                                 </div>
                                 <div class="paramRow">
                                     <div class="house">
@@ -206,5 +207,30 @@ session_start();
             <img class="wood" src="style/wood-pattern.png">
         </div>
         <footer></footer>
+        <!-- Modal Screens -->
+
+        <!-- Sample Manager Modal -->
+        <div id="sample-overlay" class="modal-overlay modal-hidden">
+            <div class="modal-box">
+                <h3>Save Sequence</h3>
+                <input type="text" id="seq-name" placeholder="Name your track...">
+                <div class="modal-footer">
+                    <button id="sample-close-btn">Cancel</button>
+                    <button class="sample-save-btn">Save</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Login/Sign Up Modal -->
+        <div id="account-overlay" class="modal-overlay modal-hidden">
+            <div class="modal-box">
+                <h3>Save Sequence</h3>
+                <input type="text" id="seq-name" placeholder="Name your track...">
+                <div class="modal-footer">
+                    <button id="account-close-btn">Cancel</button>
+                    <button class="account-save-btn">Save</button>
+                </div>
+            </div>
+        </div>
 	</body>
 </html>
