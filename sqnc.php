@@ -150,8 +150,79 @@ session_start();
                                     </div>
                                 </div>
                             </div>
-                            <div id="masterParams">
+                            <div id="paramDivider" class="divider"></div>
+                            <div id="effectParams">
                                 <div id="logo">sqnc</div>
+                                <div id="effectsHouse">
+                                    <div class="paramRow">
+                                        <div class="house">
+                                            <h2>HP Q</h2>
+                                            <div id="hpqDisplay" class="display">0</div>
+                                            <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="hpq">
+                                        </div>
+                                        <div class="house">
+                                            <h2>HP Q</h2>
+                                            <div id="hpqDisplay" class="display">0</div>
+                                            <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="hpq">
+                                        </div>
+                                        <div class="house">
+                                            <h2>HP Q</h2>
+                                            <div id="hpqDisplay" class="display">0</div>
+                                            <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="hpq">
+                                        </div>
+                                    </div>
+                                    <div class="paramRow">
+                                        <div class="house">
+                                            <h2>Distortion</h2>
+                                            <div id="distortionDisplay" class="display">0</div>
+                                            <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="hpq">
+                                        </div>
+                                        <div class="house">
+                                            <h2>HP Q</h2>
+                                            <div id="hpqDisplay" class="display">0</div>
+                                            <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="hpq">
+                                        </div>
+                                        <div class="house">
+                                            <h2>HP Q</h2>
+                                            <div id="hpqDisplay" class="display">0</div>
+                                            <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="hpq">
+                                        </div>
+                                    </div>
+                                    <div class="paramRow">
+                                        <div class="house">
+                                            <h2>HP Q</h2>
+                                            <div id="hpqDisplay" class="display">0</div>
+                                            <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="hpq">
+                                        </div>
+                                        <div class="house">
+                                            <h2>HP Q</h2>
+                                            <div id="hpqDisplay" class="display">0</div>
+                                            <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="hpq">
+                                        </div>
+                                        <div class="house">
+                                            <h2>HP Q</h2>
+                                            <div id="hpqDisplay" class="display">0</div>
+                                            <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="hpq">
+                                        </div>
+                                    </div>
+                                    <div class="paramRow">
+                                        <div class="house">
+                                            <h2>HP Q</h2>
+                                            <div id="hpqDisplay" class="display">0</div>
+                                            <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="hpq">
+                                        </div>
+                                        <div class="house">
+                                            <h2>HP Q</h2>
+                                            <div id="hpqDisplay" class="display">0</div>
+                                            <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="hpq">
+                                        </div>
+                                        <div class="house">
+                                            <h2>HP Q</h2>
+                                            <div id="hpqDisplay" class="display">0</div>
+                                            <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="hpq">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div id="globalParams">

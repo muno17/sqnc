@@ -9,12 +9,17 @@ Tone.Transport.loop = true;
 Tone.Transport.loopEnd = length;
 Tone.Transport.swingSubdivision = "16n";
 
-// arrays for instruments and all parameters
+// arrays for instruments, parameters and effects
 const instruments = [];
 const panVols = [];
 const ampEnvs = [];
 const lpFilters = [];
 const hpFilters = [];
+const distortions = [];
+const bitcrushers = [];
+const choruses = [];
+const tremolos = [];
+const delays = [];
 
 // recording functionality
 const recorder = new Tone.Recorder();
@@ -22,7 +27,8 @@ Tone.Destination.connect(recorder);
 var recording = false;
 
 // master output to apply master effects
-var master = Tone.getDestination();
+const master = Tone.getDestination();
+//const masterReverb = new Tone.Reverb({ decay: 2.5, wet: 0 }).toDestination();
 
 // massive JSON objects to contain all information
 // currentData is the live object
@@ -636,22 +642,24 @@ var projectData = {
 function initInstruments() {
     for (var i = 0; i < 10; i++) {
         // initialize parameter components/effects
-        var panVol = new Tone.PanVol(0, -12).toDestination();
-        panVols[i] = panVol;
+        panVols[i] = new Tone.PanVol(0, -12).toDestination();
 
-        var ampEnv = new Tone.AmplitudeEnvelope({
+        ampEnvs[i] = new Tone.AmplitudeEnvelope({
             attack: 0.0,
             decay: 2.0,
             sustain: 1.0,
             release: 1.0,
-        }).connect(panVol);
-        ampEnvs[i] = ampEnv;
+        }).connect(panVols[i]);
 
-        var hpFilter = new Tone.Filter(10, "highpass").connect(ampEnv);
-        hpFilters[i] = hpFilter;
+        hpFilters[i] = new Tone.Filter(10, "highpass").connect(ampEnvs[i]);
+        lpFilters[i] = new Tone.Filter(5000, "lowpass").connect(hpFilters[i]);
 
-        var lpFilter = new Tone.Filter(5000, "lowpass").connect(hpFilter);
-        lpFilters[i] = lpFilter;
+        // initialize effects
+        delays[i] = new Tone.FeedbackDelay("8n", 0).connect(ampEnvs[i]);
+        tremolos[i] = new Tone.Tremolo(5, 0).connect(choruses[i]).start();
+        choruses[i] = new Tone.Chorus(4, 2.5, 0).connect(delays[i]).start();
+        bitcrushers[i] = new Tone.BitCrusher(4).connect(choruses[i]);
+        distortions[i] = new Tone.Distortion(0).connect(bitcrushers[i]);
 
         if (i % 2 == 0) {
             instruments[i] = new Tone.Player({
@@ -665,7 +673,7 @@ function initInstruments() {
             });
         }
 
-        instruments[i].connect(lpFilter);
+        instruments[i].connect(lpFilters[i]);
     }
 }
 

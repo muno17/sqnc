@@ -710,6 +710,10 @@ function updateHpQUI(val) {
     qWidthDisplay.innerHTML = parseInt(val * 5);
 }
 
+///////////////////////// Track Effects \\\\\\\\\\\\\\\\\\\\\\\\\\
+
+
+
 // update all params to track's saved value ***
 function renderParams() {
     // get current track and update params from currentData ********

@@ -123,12 +123,12 @@ h2, label {
     flex-direction: column;
     justify-content: space-evenly;
     margin-right: 10px;
-    margin-left: 30px;
+    margin-left: 10px;
     margin-top: 20px;
 }
 
 .trackBtn {
-    width: 100px;
+    width: 80px;
     height: 35px;
 }
 
@@ -152,20 +152,25 @@ h2, label {
 #trackParams {
     display: flex;
     flex-direction: column;
-    flex: 0 0 70%;
+    flex: 0 0 55%;
     margin-top: 20px;
 }
 
-#masterParams {
-    flex: 0 0 30%;
+#effectParams {
+    flex: 0 0 45%;
     display: flex;
+    flex-direction: column;
+}
+
+#effectsHouse {
+    margin-top: 30px;
 }
 
 .paramRow {
     display: flex;
     margin-left: 30px;
     margin-bottom: 15px;
-    gap: 40px;
+    gap: 10px;
 }
 
 #selectorRow,
@@ -256,12 +261,16 @@ button.page {
 .display {
     background-color: black;
     color: white;
-    width: 80px;
+    width: 70px;
     height: 35px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 20px;
+    font-size: 18px;
+}
+
+.slider {
+    width: 80%;
 }
 
 #parameters {
@@ -288,6 +297,11 @@ button.page {
     border-left: 2px solid #7B8183;
     height: 90px;
     display: inline-block; 
+}
+
+#paramDivider {
+    margin-top: 100px;
+    height: 80%;
 }
 
 .step.current {
@@ -344,7 +358,7 @@ button.page {
     font-weight: bold;
     align-self: flex-start;
     text-shadow: 1px 1px 8px black;
-    margin-right: 10px;
+    margin-right: 30px;
 }
 
 footer {
