@@ -168,9 +168,16 @@ h2, label {
 
 .paramRow {
     display: flex;
+    justify-content: space-evenly;
     margin-left: 30px;
     margin-bottom: 15px;
     gap: 10px;
+}
+
+#selectorRow,
+#stateRow {
+    justify-content: flex-start;
+    gap: 20px;
 }
 
 #selectorRow,

@@ -156,68 +156,68 @@ session_start();
                                 <div id="effectsHouse">
                                     <div class="paramRow">
                                         <div class="house">
-                                            <h2>HP Q</h2>
-                                            <div id="hpqDisplay" class="display">0</div>
-                                            <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="hpq">
-                                        </div>
-                                        <div class="house">
-                                            <h2>HP Q</h2>
-                                            <div id="hpqDisplay" class="display">0</div>
-                                            <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="hpq">
-                                        </div>
-                                        <div class="house">
-                                            <h2>HP Q</h2>
-                                            <div id="hpqDisplay" class="display">0</div>
-                                            <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="hpq">
-                                        </div>
-                                    </div>
-                                    <div class="paramRow">
-                                        <div class="house">
                                             <h2>Distortion</h2>
                                             <div id="distortionDisplay" class="display">0</div>
-                                            <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="hpq">
+                                            <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="distortion">
                                         </div>
                                         <div class="house">
-                                            <h2>HP Q</h2>
-                                            <div id="hpqDisplay" class="display">0</div>
-                                            <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="hpq">
+                                            <h2>Bitcrusher</h2>
+                                            <div id="bcDisplay" class="display">0</div>
+                                            <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="bc">
                                         </div>
                                         <div class="house">
-                                            <h2>HP Q</h2>
-                                            <div id="hpqDisplay" class="display">0</div>
-                                            <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="hpq">
-                                        </div>
-                                    </div>
-                                    <div class="paramRow">
-                                        <div class="house">
-                                            <h2>HP Q</h2>
-                                            <div id="hpqDisplay" class="display">0</div>
-                                            <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="hpq">
-                                        </div>
-                                        <div class="house">
-                                            <h2>HP Q</h2>
-                                            <div id="hpqDisplay" class="display">0</div>
-                                            <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="hpq">
-                                        </div>
-                                        <div class="house">
-                                            <h2>HP Q</h2>
-                                            <div id="hpqDisplay" class="display">0</div>
-                                            <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="hpq">
+                                            <h2>Reverb Send</h2>
+                                            <div id="reverbSendDisplay" class="display">0</div>
+                                            <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="revSend">
                                         </div>
                                     </div>
                                     <div class="paramRow">
                                         <div class="house">
-                                            <h2>HP Q</h2>
+                                            <h2>Chorus Rate</h2>
+                                            <div id="chorRateDisplay" class="display">0</div>
+                                            <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="chorRate">
+                                        </div>
+                                        <div class="house">
+                                            <h2>Chorus Depth</h2>
+                                            <div id="chorDepthDisplay" class="display">0</div>
+                                            <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="chorDepth">
+                                        </div>
+                                        <div class="house">
+                                            <h2>Chorus Mix</h2>
+                                            <div id="chorMixDisplay" class="display">0</div>
+                                            <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="chorMix">
+                                        </div>
+                                    </div>
+                                    <div class="paramRow">
+                                        <div class="house">
+                                            <h2>Tremolo Rate</h2>
+                                            <div id="tremRateDisplay" class="display">0</div>
+                                            <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="tremRate">
+                                        </div>
+                                        <div class="house">
+                                            <h2>Tremolo Depth</h2>
+                                            <div id="tremDepthDisplay" class="display">0</div>
+                                            <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="tremDepth">
+                                        </div>
+                                        <div class="house">
+                                            <h2>Tremolo Mix</h2>
+                                            <div id="tremMixDisplay" class="display">0</div>
+                                            <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="tremMix">
+                                        </div>
+                                    </div>
+                                    <div class="paramRow">
+                                        <div class="house">
+                                            <h2>Delay Time</h2>
                                             <div id="hpqDisplay" class="display">0</div>
                                             <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="hpq">
                                         </div>
                                         <div class="house">
-                                            <h2>HP Q</h2>
+                                            <h2>Delay Feck</h2>
                                             <div id="hpqDisplay" class="display">0</div>
                                             <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="hpq">
                                         </div>
                                         <div class="house">
-                                            <h2>HP Q</h2>
+                                            <h2>Delay Mix</h2>
                                             <div id="hpqDisplay" class="display">0</div>
                                             <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="hpq">
                                         </div>
