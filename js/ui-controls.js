@@ -974,6 +974,7 @@ function initMasterParams() {
     initDirtMix();
     initSpace();
     initPredelay();
+    initReverbWidth();
 }
 
 function initDirt() {
@@ -1067,6 +1068,29 @@ function updatePredelayUI(val) {
     predelay.value = val;
     predelayDisplay.innerHTML = parseInt(val * 100);
 }
+
+function initReverbWidth() {
+    const revWidth = document.getElementById("revWidth");
+
+    revWidth.addEventListener("input", function () {
+        const val = parseFloat(this.value);
+        currentData.master.revWidth = val;
+
+        updateReverbWidthUI(val);
+        setMasterReverbWidth(val);
+
+        markAsChanged();
+    });
+}
+
+function updateReverbWidthUI(val) {
+    const revWidth = document.getElementById("revWidth");
+    const revWidthDisplay = document.getElementById("revWidthDisplay");
+
+    // format the value so it displays 0-100
+    revWidth.value = val;
+    revWidthDisplay.innerHTML = parseInt(val * 100);
+}
 ///////////////////////// Rendering \\\\\\\\\\\\\\\\\\\\\\\\\\
 
 // show/hide the track specific and master track params
@@ -1134,6 +1158,9 @@ function renderMasterParams() {
 
     updatePredelayUI(master.predelay);
     setMasterPredelay(master.predelay);
+
+    updateReverbWidthUI(master.revWidth);
+    setMasterReverbWidth(master.revWidth);
 }
 
 // update all params to track's saved value

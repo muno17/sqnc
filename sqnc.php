@@ -179,8 +179,8 @@ session_start();
                                         <div class="masterEffectRow">
                                             <div class="house">
                                                 <h2>Width</h2>
-                                                <div id="revWidthDisplay" class="display">5</div>
-                                                <input type="range" min="0" max="1" step="0.01"value=".5" class="slider" id="revWidth">
+                                                <div id="revWidthDisplay" class="display">30</div>
+                                                <input type="range" min="0" max="1" step="0.01"value=".3" class="slider" id="revWidth">
                                             </div>
                                             <div class="house">
                                                 <h2>Limit</h2>

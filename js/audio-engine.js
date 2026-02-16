@@ -58,7 +58,7 @@ function initReverbBus() {
         preDelay: 0.01,
     });
 
-    reverbWidener = new Tone.StereoWidener(0.5);
+    reverbWidener = new Tone.StereoWidener(0.3);
     reverbLimiter = new Tone.Limiter(-3);
 
     reverbHeat.chain(
@@ -725,6 +725,7 @@ var currentData = {
         dirtMix: .2,
         space:  2.0,
         predelay: 0.01,
+        revWidth: 0.3,
 
     }
 };
