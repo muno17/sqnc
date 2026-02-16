@@ -173,7 +173,7 @@ session_start();
                                             <div class="house">
                                                 <h2>Pre-Delay</h2>
                                                 <div id="predelayDisplay" class="display">1</div>
-                                                <input type="range" min="0" max="0.1" step=".01" value="0.01" class="slider" id="predelay">
+                                                <input type="range" min="0" max="1" step=".01" value="0.01" class="slider" id="predelay">
                                             </div>
                                         </div>
                                         <div class="masterEffectRow">

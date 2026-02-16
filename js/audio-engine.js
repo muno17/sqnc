@@ -722,7 +722,10 @@ var currentData = {
     ],
     master: {
         dirt: 20,
-        dirtMix: .2, 
+        dirtMix: .2,
+        space:  2.0,
+        predelay: 0.01,
+
     }
 };
 
@@ -1330,9 +1333,11 @@ function setMasterCompression(val) {
     masterCompressor.threshold.value = val;
 }
 
+/*
 function setMasterReverb(val) {
     masterReverb.wet.rampTo(val, 0.1);
 }
+    */
 
 function setMasterDirt(val) {
     reverbHeat.order = Math.floor(val);
@@ -1340,6 +1345,15 @@ function setMasterDirt(val) {
 
 function setMasterDirtMix(val) {
     reverbHeat.wet.value = val;
+}
+
+async function setMasterSpace(val) {
+    masterReverb.decay = val;
+    await masterReverb.generate();
+}
+
+function setMasterPredelay(val) {
+    masterReverb.preDelay = val;
 }
 
 function setMasterReverbWidth(val) {

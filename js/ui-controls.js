@@ -972,6 +972,8 @@ function updateReverbSendUI(val) {
 function initMasterParams() {
     initDirt();
     initDirtMix();
+    initSpace();
+    initPredelay();
 }
 
 function initDirt() {
@@ -1020,6 +1022,51 @@ function updateDirtMixUI(val) {
     dirtDisplay.innerHTML = parseInt(val * 100);
 }
 
+function initSpace() {
+    const space = document.getElementById("space");
+
+    space.addEventListener("input", function () {
+        const val = parseFloat(this.value);
+        currentData.master.space = val;
+
+        updateSpaceUI(val);
+        setMasterSpace(val);
+
+        markAsChanged();
+    });
+}
+
+function updateSpaceUI(val) {
+    const space = document.getElementById("space");
+    const spaceDisplay = document.getElementById("spaceDisplay");
+
+    // format the value so it displays 0-100
+    space.value = val;
+    spaceDisplay.innerHTML = parseInt(val * 10);
+}
+
+function initPredelay() {
+    const predelay = document.getElementById("predelay");
+
+    predelay.addEventListener("input", function () {
+        const val = parseFloat(this.value);
+        currentData.master.predelay = val;
+
+        updatePredelayUI(val);
+        setMasterPredelay(val);
+
+        markAsChanged();
+    });
+}
+
+function updatePredelayUI(val) {
+    const predelay = document.getElementById("predelay");
+    const predelayDisplay = document.getElementById("predelayDisplay");
+
+    // format the value so it displays 0-100
+    predelay.value = val;
+    predelayDisplay.innerHTML = parseInt(val * 100);
+}
 ///////////////////////// Rendering \\\\\\\\\\\\\\\\\\\\\\\\\\
 
 // show/hide the track specific and master track params
@@ -1067,12 +1114,26 @@ function renderParams() {
     }
 }
 
+// update the master track's saved values
 function renderMasterParams() {
+    const master = currentData.master;
     const masterRows = document.querySelectorAll(".master");
 
        masterRows.forEach((row) => {
             row.classList.remove("hidden");
         });
+
+    updateDirtUI(master.dirt);
+    setMasterDirt(master.dirt);
+
+    updateDirtMixUI(master.dirtMix);
+    setMasterDirtMix(master.dirtMix);
+    
+    updateSpaceUI(master.space);
+    setMasterSpace(master.space);
+
+    updatePredelayUI(master.predelay);
+    setMasterPredelay(master.predelay);
 }
 
 // update all params to track's saved value
