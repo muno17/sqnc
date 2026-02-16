@@ -378,10 +378,10 @@ session_start();
                             <button id="record" class="global">Record</button>
                             <button id="clear" class="global">Clear</button>
                             <div id="pages">
-                                <button id="page1" class="global selected" data-index="0">Page</button>
-                                <!--<button id="page2" class="page" data-index="1">2:4</button>
+                                <button id="page1" class="page selected" data-index="0">1:4</button>
+                                <button id="page2" class="page" data-index="1">2:4</button>
                                 <button id="page3" class="page" data-index="2">3:4</button>
-                                <button id="page4" class="page" data-index="3">4:4</button>-->
+                                <button id="page4" class="page" data-index="3">4:4</button>
                             </div>
                         </div>
                     </div>

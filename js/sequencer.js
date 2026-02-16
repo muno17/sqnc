@@ -33,8 +33,12 @@ function renderSequencer() {
     const steps = document.querySelectorAll(".step");
     const currentSeq = currentData.tracks[currentTrack].steps;
 
+    // calculate the current page steps
+    const offset = currentPage * 16;
+
     steps.forEach((stepBtn, index) => {
-        if (currentSeq[index] === 1) {
+        // only look at steps for the current page
+        if (trackSteps[offset + index] === 1) {
             stepBtn.classList.add("active");
         } else {
             stepBtn.classList.remove("active");
@@ -46,15 +50,24 @@ function renderSequencer() {
 function updateUIPlayHead(step) {
     if (!running) return;
 
+    // calculate which page the transport is currnetly on
+    const transportPage = Math.floor(step / 16);
+    const activeStep = step % 16;
+
     const previous = document.querySelector(".step.current");
     if (previous) {
         previous.classList.remove("current");
     }
 
-    const current = document.querySelector(`.step[data-step="${step}"]`);
-    if (current) {
-        current.classList.add("current");
+    if (transportPage == currentPage) {
+        const current = document.querySelector(`.step[data-step="${activeStep}"]`);
+        if (current) {
+            current.classList.add("current");
+        }
     }
+
+    //const current = document.querySelector(`.step[data-step="${step}"]`);
+
 }
 
 function disableSequencer(message) {
