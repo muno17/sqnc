@@ -8,6 +8,7 @@ var changes = false;
 Tone.Transport.loop = true;
 Tone.Transport.loopEnd = length;
 Tone.Transport.swingSubdivision = "16n";
+Tone.context.lookAhead = 0;
 
 // arrays for instruments, parameters and effects
 const instruments = [];
@@ -992,34 +993,49 @@ var projectData = {
 function initInstruments() {
     for (var i = 0; i < 10; i++) {
         // initialize parameter components/effects
-        panVols[i] = new Tone.PanVol(0, -12).toDestination();
-
-        ampEnvs[i] = new Tone.AmplitudeEnvelope({
-            attack: 0.0,
-            decay: 2.0,
-            sustain: 1.0,
-            release: 1.0,
-        }).connect(panVols[i]);
+        panVols[i] = new Tone.PanVol(0, -100).toDestination();
 
         // initialize effects
-        delays[i] = new Tone.FeedbackDelay("8n", 0).connect(ampEnvs[i]);
-        tremolos[i] = new Tone.Tremolo(5, 0).connect(delays[i]).start();
-        choruses[i] = new Tone.Chorus(4, 2.5, 0).connect(tremolos[i]).start();
-        bitcrushers[i] = new Tone.BitCrusher(4).connect(choruses[i]);
-        distortions[i] = new Tone.Distortion(0.5).connect(bitcrushers[i]);
+        delays[i] = new Tone.FeedbackDelay("8n", 0).connect(panVols[i]);
+        
+        tremolos[i] = new Tone.Tremolo({ frequency: 5, depth: 0, wet: 0 }).connect(delays[i]).start();
+        
+        choruses[i] = new Tone.Chorus({
+            frequency: 4,
+            delayTime: 2.5,
+            depth: 0,
+            wet: 0,
+            spread: 180
+        }).connect(tremolos[i]).start();
+        
+        bitcrushers[i] = new Tone.BitCrusher({ bits: 4, wet: 0 }).connect(choruses[i]);
+        
+        distortions[i] = new Tone.Distortion({ distortion: 0, wet: 0 }).connect(bitcrushers[i]);
 
         // initialize filters
         hpFilters[i] = new Tone.Filter(10, "highpass").connect(distortions[i]);
         lpFilters[i] = new Tone.Filter(5000, "lowpass").connect(hpFilters[i]);
 
+        // initialize the amp envelope        
+        ampEnvs[i] = new Tone.AmplitudeEnvelope({
+            attack: 0.0,
+            decay: 2.0,
+            sustain: 1.0,
+            release: 1.0,
+        }).connect(lpFilters[i]);
+
+
         // set initial mix values for effects
+        /*
         bitcrushers[i].wet.value = 0;
         distortions[i].wet.value = 0;
         choruses[i].wet.value = 0;
         choruses[i].spread = 180;
+        choruses[i].spread = 0;
         tremolos[i].wet.value = 0;
         tremolos[i].spread = 0;
         delays[i].wet.value = 0;
+        */
 
         if (i % 2 == 0) {
             instruments[i] = new Tone.Player({
@@ -1033,7 +1049,7 @@ function initInstruments() {
             });
         }
 
-        instruments[i].connect(lpFilters[i]);
+        instruments[i].connect(ampEnvs[i]);
     }
 }
 
@@ -1048,27 +1064,47 @@ function loadInstruments() {
 
 // initialize all controls and api
 window.onload = function () {
+    // core setup
     Tone.Transport.bpm.value = currentData.bpm;
-
     initInstruments();
-    initGlobalControls();
     initTransport();
-    //initPageSelectors();
+
+    // control setup
+    initGlobalControls();
     initSequencer();
     initTrackParams();
+
+    //initPageSelectors();
+
+
+    //renderParams();
+
 
     //loadSequences(); REENABLE ***
     //loadSamples(); REENABLE ***
 
     // initialize track params
-    renderParams();
-    setupAudioLoop();
+    Tone.loaded().then(() => {
+        // 1. SILENT AUDIO SYNC: Just push data to the nodes, don't touch the DOM/Sliders
+        currentData.tracks.forEach((track, i) => {
+            panVols[i].volume.value = track.volume;
+            panVols[i].pan.value = track.pan;
+            // ... add pitch/envelope/effects direct values here
+        });
+
+        // 2. UI SYNC: Now just show Track 0 on the screen
+        currentTrack = 0;
+        renderParams(); // This only runs once now, for the active track
+
+        setupAudioLoop();
+    });
 };
 
 ////////////////////////// Loop Parameters \\\\\\\\\\\\\\\\\\\\\\\\\\
 
 // schedule the loop
 function setupAudioLoop() {
+    /*
     // eventually pass whatever the note's stored time value is after params ***
     Tone.Transport.scheduleRepeat((time) => {
         if (!running) return;
@@ -1088,6 +1124,29 @@ function setupAudioLoop() {
         // loop back to 0 when currentStep gets to 16
         currentStep = (currentStep + 1) % 16;
     }, "16n");
+     */
+
+    // clear any existing loop
+    Tone.Transport.cancel();
+
+    Tone.Transport.scheduleRepeat((time) => {
+        // 1. Play the sounds for the STEP WE ARE ON
+        currentData.tracks.forEach((track, index) => {
+            if (track.steps[currentStep] == 1) {
+                playTrackSound(index, time);
+            }
+        });
+
+        // 2. Schedule the UI to move ONLY when the audio actually hits
+        // We pass the currentStep into the Draw function
+        let stepToDraw = currentStep;
+        Tone.Draw.schedule(() => {
+            updateUIPlayHead(stepToDraw);
+        }, time);
+
+        // 3. ONLY NOW increment for the next time the loop runs
+        currentStep = (currentStep + 1) % 16;
+    }, "16n");
 }
 
 function playTrackSound(index, time) {
@@ -1095,12 +1154,6 @@ function playTrackSound(index, time) {
     const env = ampEnvs[index];
     const track = currentData.tracks[index];
     const now = time || Tone.now();
-
-    /*
-    if (choruses[index].state !== "started") {
-        choruses[index].start();
-    }
-        */
 
     try {
         if (player && player.buffer && player.buffer.loaded) {
@@ -1203,6 +1256,16 @@ function setTrackHpQ(val) {
 // effects
 function setTrackDistortion(val) {
     distortions[currentTrack].wet.value = val;
+    distortions[currentTrack].distortion = val;
+    /*
+    const amount = parseFloat(val);
+    if (distortions[currentTrack]) {
+        // This is the MIX (0 to 1)
+        distortions[currentTrack].wet.value = amount;
+
+        distortions[currentTrack].distortion = amount;
+    }
+        */
 }
 
 function setTrackBitcrusher(val) {

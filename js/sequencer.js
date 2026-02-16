@@ -40,6 +40,8 @@ function renderSequencer() {
 
 // code to update sequencer UI position
 function updateUIPlayHead(step) {
+    if (!running) return;
+    
     const previous = document.querySelector(".step.current");
     if (previous) {
         previous.classList.remove("current");
@@ -59,6 +61,10 @@ function disableSequencer(message) {
     Tone.Transport.position = 0;
     running = false;
     currentStep = 0;
+
+    document.querySelectorAll(".step").forEach((el) => {
+        el.classList.remove("current");
+    });
 
     playBtn.disabled = true;
     playBtn.innerHTML = message;

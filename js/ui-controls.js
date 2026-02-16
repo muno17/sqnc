@@ -6,6 +6,7 @@ function initTransport() {
     const transport = document.getElementById("transport");
 
     transport.addEventListener("click", async function () {
+        //await Tone.start();
         if (running) {
             stopTransport();
         } else {
@@ -16,14 +17,16 @@ function initTransport() {
 
 async function startTransport() {
     const transport = document.getElementById("transport");
+    Tone.context.resume();
     // functionality to play
-    await Tone.start();
-    await Tone.loaded();
+    //await Tone.start();
+
+    //await Tone.loaded();
 
     currentStep = 0;
-
+    updateUIPlayHead(0);
     running = true;
-    Tone.Transport.start();
+    Tone.Transport.start("+0");
     transport.innerHTML = "Stop";
 }
 
@@ -33,10 +36,14 @@ function stopTransport() {
     // functionality to stop
     Tone.Transport.stop();
     stopAllSounds();
+    Tone.Draw.cancel();
 
-    document
-        .querySelectorAll(".step.current")
-        .forEach((el) => el.classList.remove("current"));
+    
+    currentStep = 0;
+
+    document.querySelectorAll(".step").forEach((el) => {
+        el.classList.remove("current");
+    });
     transport.innerHTML = "Play";
 }
 
@@ -242,7 +249,7 @@ function initNew() {
         currentData.name = name;
 
         // referesh UI
-        stopTransport(); 
+        stopTransport();
         renderSequencer();
         renderParams();
 
@@ -261,17 +268,16 @@ function initSampleSelector() {
         }
 
         // update data
+        const trackToUpdate = currentTrack;
         const path = this.value;
         const name = this.options[this.selectedIndex].dataset.name;
-        currentData.tracks[currentTrack].samplePath = path;
-        currentData.tracks[currentTrack].name = name;
+        currentData.tracks[trackToUpdate].samplePath = path;
+        currentData.tracks[trackToUpdate].sampleName = name;
 
         // update audio engine
-        instruments[currentTrack].load(path, () => {
-            console.log("Loaded: " + name);
-            renderParams();
-            markAsChanged();
-        });
+        instruments[trackToUpdate].load(path);
+
+        markAsChanged();
     });
 }
 
@@ -372,7 +378,7 @@ function initSampleManager() {
 
 function toggleTrackHit(index) {
     const trackBtns = document.querySelectorAll(".trackBtn");
-    trackBtns[index].classList.add("flash")
+    trackBtns[index].classList.add("flash");
 }
 
 function untoggleTrackHit(index) {
@@ -395,7 +401,6 @@ function initGlobalControls() {
     initSampleSelector();
 
     // effects
-    
 }
 
 ///////////////////////// Track Parameters \\\\\\\\\\\\\\\\\\\\\\\\\\
