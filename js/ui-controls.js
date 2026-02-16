@@ -376,16 +376,20 @@ function untoggleTrackHit(index) {
     trackBtns[index].classList.remove("flash");
 }
 
-function togglePageHit(index) {
-    const id = "page" + (currentPage + 1)
+function togglePageHit(step) {
+    // calculate which page the transport is actually playing
+    const transportPage = Math.floor(step / 16);
+    const id = "page" + (transportPage + 1);
+
     const page = document.getElementById(id);
 
-    page.classList.add("flash");
-}
+    if (page) {
+        page.classList.add("flash");
 
-function untogglePageHit(index) {
-    const pages = document.querySelectorAll(".page");
-    pages[currentPage].classList.remove("flash");
+        setTimeout(() => {
+            page.classList.remove("flash");
+        }, 150);
+    }
 }
 
 function initGlobalControls() {

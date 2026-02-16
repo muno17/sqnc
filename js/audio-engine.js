@@ -1259,7 +1259,6 @@ function setupAudioLoop() {
 
     Tone.Transport.scheduleRepeat((time) => {
     const totalSteps = parseInt(currentData.length) * 16;
-
         // play the sounds for the current step
         currentData.tracks.forEach((track, index) => {
             untoggleTrackHit(index);
@@ -1274,11 +1273,16 @@ function setupAudioLoop() {
         let stepToDraw = currentStep;
         Tone.Draw.schedule(() => {
             updateUIPlayHead(stepToDraw);
+
+            // flash to bpm
+            if (stepToDraw % 4 === 0) {
+                togglePageHit(stepToDraw);
+            }
         }, time);
 
         // increment for the next time the loop runs
-        //currentStep = (currentStep + 1) % 16;
         currentStep = (currentStep + 1) % totalSteps;
+                console.log("out");
     }, "16n");
 }
 
