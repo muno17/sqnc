@@ -732,6 +732,11 @@ var currentData = {
         predelay: 0.01,
         revWidth: 0.3,
         revLimit: -3,
+        compThresh: -24,
+        compRatio: 1,
+        compAttack: .05,
+        compRelease: .25,
+        compKnee: 30,
         satDrive: 0,
         satTone: 20000,
         satMix: 0,
@@ -1047,6 +1052,22 @@ var projectData = {
             steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         },
     ],
+    master: {
+        dirt: 20,
+        dirtMix: 0.2,
+        space: 2.0,
+        predelay: 0.01,
+        revWidth: 0.3,
+        revLimit: -3,
+        compThresh: -24,
+        compRatio: 1,
+        compAttack: 0.05,
+        compRelease: 0.25,
+        compKnee: 30,
+        satDrive: 0,
+        satTone: 20000,
+        satMix: 0,
+    },
 };
 
 // create tone.js samplers
@@ -1369,6 +1390,27 @@ function setMasterReverbWidth(val) {
 
 function setMasterReverbLimit(val) {
     reverbLimiter.threshold.value = val;
+}
+
+// compressor
+function setMasterCompThresh(val) {
+    masterCompressor.threshold.rampTo(val, 0.1);
+}
+
+function setMasterCompRatio(val) {
+    masterCompressor.ratio.rampTo(val, 0.1);
+}
+
+function setMasterCompAttack(val) {
+    masterCompressor.attack.rampTo(val, 0.1);
+}
+
+function setMasterCompRelease(val) {
+    masterCompressor.release.rampTo(val, 0.1);
+}
+
+function setMasterCompKnee(val) {
+    masterCompressor.knee.rampTo(val, 0.1);
 }
 
 // saturator

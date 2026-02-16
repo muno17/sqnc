@@ -979,6 +979,11 @@ function initMasterParams() {
     initReverbLimit();
     
     // compressor
+    initCompThresh();
+    initCompRatio();
+    initCompAttack();
+    initCompRelease();
+    initCompKnee();
 
     // saturator
     initSatDrive();
@@ -1191,6 +1196,116 @@ function updateSatMixUI(val) {
     satMix.value = val;
     satMixDisplay.innerHTML = parseInt(val * 100);
 }
+
+function initCompThresh() {
+    const compThresh = document.getElementById("compThresh");
+
+    compThresh.addEventListener("input", function () {
+        const val = parseFloat(this.value);
+        currentData.master.compThresh = val;
+
+        updateCompThreshUI(val);
+        setMasterCompThresh(val);
+
+        markAsChanged();
+    });
+}
+
+function updateCompThreshUI(val) {
+    const compThresh = document.getElementById("compThresh");
+    const compThreshDisplay = document.getElementById("compThreshDisplay");
+
+    compThresh.value = val;
+    compThreshDisplay.innerHTML = parseInt(val) + "db";
+}
+
+function initCompRatio() {
+    const compRatio = document.getElementById("compRatio");
+
+    compRatio.addEventListener("input", function () {
+        const val = parseFloat(this.value);
+        currentData.master.compRatio = val;
+
+        updateCompRatioUI(val);
+        setMasterCompRatio(val);
+
+        markAsChanged();
+    });
+}
+
+function updateCompRatioUI(val) {
+    const compRatio = document.getElementById("compRatio");
+    const compRatioDisplay = document.getElementById("compRatioDisplay");
+
+    compRatio.value = val;
+    compRatioDisplay.innerHTML = parseInt(val);
+}
+
+function initCompAttack() {
+    const compAttack = document.getElementById("compAttack");
+
+    compAttack.addEventListener("input", function () {
+        const val = parseFloat(this.value);
+        currentData.master.compAttack = val;
+
+        updateCompAttackUI(val);
+        setMasterCompAttack(val);
+
+        markAsChanged();
+    });
+}
+
+function updateCompAttackUI(val) {
+    const compAttack = document.getElementById("compAttack");
+    const compAttackDisplay = document.getElementById("compAttackDisplay");
+
+    compAttack.value = val;
+    compAttackDisplay.innerHTML = parseInt(val * 100);
+}
+
+function initCompRelease() {
+    const compRelease = document.getElementById("compRelease");
+
+    compRelease.addEventListener("input", function () {
+        const val = parseFloat(this.value);
+        currentData.master.compRelease = val;
+
+        updateCompReleaseUI(val);
+        setMasterCompRelease(val);
+
+        markAsChanged();
+    });
+}
+
+function updateCompReleaseUI(val) {
+    const compRelease = document.getElementById("compRelease");
+    const compReleaseDisplay = document.getElementById("compReleaseDisplay");
+
+    compRelease.value = val;
+    compReleaseDisplay.innerHTML = parseInt(val * 100);
+}
+
+function initCompKnee() {
+    const compKnee = document.getElementById("compKnee");
+
+    compKnee.addEventListener("input", function () {
+        const val = parseFloat(this.value);
+        currentData.master.compKnee = val;
+
+        updateCompKneeUI(val);
+        setMasterCompKnee(val);
+
+        markAsChanged();
+    });
+}
+
+function updateCompKneeUI(val) {
+    const compKnee = document.getElementById("compKnee");
+    const compKneeDisplay = document.getElementById("compKneeDisplay");
+
+    compKnee.value = val;
+    compKneeDisplay.innerHTML = parseInt(val);
+}
 ///////////////////////// Rendering \\\\\\\\\\\\\\\\\\\\\\\\\\
 
 // show/hide the track specific and master track params
@@ -1210,14 +1325,10 @@ function renderParams() {
         divider.classList.add("hidden");
 
         const rows = trackParams.querySelectorAll(".paramRow");
-        rows.forEach((row, index) => {
-            if (index > 1) row.classList.add("hidden");
-        });
+        rows.forEach((row) => { row.classList.add("hidden");});
 
         const effectRows = effectHouse.querySelectorAll(".paramRow");
-        effectRows.forEach((row, index) => {
-            if (index > -1) row.classList.add("hidden");
-        });
+        effectRows.forEach((row) => { row.classList.add("hidden");});
 
         trackParams.classList.add("master");
         effectParams.classList.add("master");
@@ -1286,6 +1397,21 @@ function renderMasterParams() {
 
     updateSatMixUI(master.satMix);
     setMasterSatMix(master.satMix);
+
+    updateCompThreshUI(master.compThresh);
+    setMasterCompThresh(master.compThresh);
+
+    updateCompRatioUI(master.compRatio);
+    setMasterCompRatio(master.compRatio);
+
+    updateCompAttackUI(master.compAttack);
+    setMasterCompAttack(master.compAttack);
+
+    updateCompReleaseUI(master.compRelease);
+    setMasterCompRelease(master.compRelease);
+
+    updateCompKneeUI(master.compKnee);
+    setMasterCompKnee(master.compKnee);
 }
 
 // update all params to track's saved value

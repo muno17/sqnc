@@ -193,14 +193,33 @@ session_start();
                                         <h3>Compressor</h3>
                                         <div class="masterEffectRow">
                                             <div class="house">
-                                                <h2>Reverb Size</h2>
-                                                <div id="revSizeDisplay" class="display">20</div>
-                                                <input type="range" min="0" max="1" step="0.01"value=".2" class="slider" id="revSize">
+                                                <h2>Threshold</h2>
+                                                <div id="compThreshDisplay" class="display">-24</div>
+                                                <input type="range" min="-60" max="0" step="1"value="-24" class="slider" id="compThresh">
                                             </div>
                                             <div class="house">
-                                                <h2>Reverb Damp</h2>
-                                                <div id="revDampDisplay" class="display">100</div>
-                                                <input type="range" min="0" max="5000" step="1" value="5000" class="slider" id="revDamp">
+                                                <h2>Ratio</h2>
+                                                <div id="compRatioDisplay" class="display">1</div>
+                                                <input type="range" min="1" max="20" step="1" value="1" class="slider" id="compRatio">
+                                            </div>
+                                        </div>
+                                        <div class="masterEffectRow">
+                                            <div class="house">
+                                                <h2>Attack</h2>
+                                                <div id="compAttackDisplay" class="display">5</div>
+                                                <input type="range" min="0" max="1" step=".01"value=".05" class="slider" id="compAttack">
+                                            </div>
+                                            <div class="house">
+                                                <h2>Release</h2>
+                                                <div id="compReleaseDisplay" class="display">25</div>
+                                                <input type="range" min="0" max="1" step=".01"value=".25" class="slider" id="compRelease">
+                                            </div>
+                                        </div>
+                                        <div class="masterEffectRow">
+                                            <div class="house">
+                                                <h2>Knee</h2>
+                                                <div id="compKneeDisplay" class="display">30</div>
+                                                <input type="range" min="0" max="40" step="1"value="30" class="slider" id="compKnee">
                                             </div>
                                         </div>
                                     </div>
