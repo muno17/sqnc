@@ -276,8 +276,8 @@ session_start();
                                         <div class="masterEffectRow">
                                             <div class="house">
                                                 <h2>Threshold</h2>
-                                                <div id="limitThreshDisplay" class="display">-1</div>
-                                                <input type="range" min="-30" max="0" step="1" value="-1" class="slider" id="limitThresh">
+                                                <div id="limitThreshDisplay" class="display">-3</div>
+                                                <input type="range" min="-40" max="0" step="1" value="-3" class="slider" id="limitThresh">
                                             </div>
                                         </div>
                                     </div>

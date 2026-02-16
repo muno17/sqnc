@@ -45,7 +45,7 @@ function renderSequencer() {
 // code to update sequencer UI position
 function updateUIPlayHead(step) {
     if (!running) return;
-    
+
     const previous = document.querySelector(".step.current");
     if (previous) {
         previous.classList.remove("current");
@@ -78,4 +78,9 @@ function enableSequencer() {
     const playBtn = document.getElementById("transport");
     playBtn.disabled = false;
     playBtn.innerHTML = "Play";
+}
+
+function updateSequenceLength(numPages) {
+    currentData.length = numPages + "m";
+    Tone.Transport.loopEnd = currentData.length;
 }

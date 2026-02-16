@@ -107,7 +107,7 @@ function initMasterVol() {
     masterVol.addEventListener("input", function () {
         currentData.masterVolume = parseFloat(this.value);
         masterVolDisplay.innerHTML = this.value + "dB";
-        Tone.Destination.volume.rampTo(this.value, 0.1);
+        masterVolNode.gain.rampTo(Tone.dbToGain(this.value), 0.1);
         markAsChanged();
     });
 }

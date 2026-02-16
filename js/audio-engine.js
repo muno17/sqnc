@@ -31,6 +31,7 @@ var recording = false;
 // master output to apply master effects
 const master = Tone.getDestination();
 
+var masterVolNode;
 var masterCompressor;
 var masterEQ;
 var masterSaturator;
@@ -41,6 +42,8 @@ var reverbHeat;
 var reverbLimiter;
 
 function initMasterChain() {
+    masterVolNode = new Tone.Gain(1);
+
     masterEQ = new Tone.EQ3(0, 0, 0);
     masterCompressor = new Tone.Compressor(-24, 3);
     masterSaturator = new Tone.Distortion(0.1);
@@ -53,8 +56,9 @@ function initMasterChain() {
         masterCompressor,
         masterSaturator,
         saturatorFilter,
+        masterVolNode,
         masterLimiter,
-        Tone.Destination
+        Tone.Destination,
     );
 }
 
@@ -474,7 +478,10 @@ var currentData = {
             delTime: 0,
             delFback: 0,
             delMix: 0,
-            steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,],
         },
         {
             id: 2,
@@ -747,7 +754,7 @@ var currentData = {
         satDrive: 0,
         satTone: 20000,
         satMix: 0,
-        limitThresh: -1,
+        limitThresh: -3,
     },
 };
 
