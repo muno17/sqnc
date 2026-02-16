@@ -277,7 +277,7 @@ session_start();
                                             <div class="house">
                                                 <h2>Threshold</h2>
                                                 <div id="limitThreshDisplay" class="display">-1</div>
-                                                <input type="range" min="-12" max="0" step="1" value="-1" class="slider" id="limitThresh">
+                                                <input type="range" min="-30" max="0" step="1" value="-1" class="slider" id="limitThresh">
                                             </div>
                                         </div>
                                     </div>

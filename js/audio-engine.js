@@ -54,7 +54,7 @@ function initMasterChain() {
         masterSaturator,
         saturatorFilter,
         masterLimiter,
-        Tone.Destination,
+        Tone.Destination
     );
 }
 
@@ -1160,6 +1160,7 @@ window.onload = function () {
     // core setup
     Tone.Transport.bpm.value = currentData.bpm;
     initInstruments();
+    initMasterParams();
     initTransport();
 
     // control setup
@@ -1186,6 +1187,7 @@ window.onload = function () {
 
         setupAudioLoop();
     });
+    renderMasterParams();
 };
 
 ////////////////////////// Loop Parameters \\\\\\\\\\\\\\\\\\\\\\\\\\
