@@ -136,6 +136,7 @@ function initPageSelectors() {
             this.classList.add("selected");
 
             currentPage = parseInt(this.dataset.index);
+            renderSequencer();
         });
     });
 }
@@ -349,6 +350,18 @@ function toggleTrackHit(index) {
 function untoggleTrackHit(index) {
     const trackBtns = document.querySelectorAll(".trackBtn");
     trackBtns[index].classList.remove("flash");
+}
+
+function togglePageHit(index) {
+    const id = "page" + (currentPage + 1)
+    const page = document.getElementById(id);
+
+    page.classList.add("flash");
+}
+
+function untogglePageHit(index) {
+    const pages = document.querySelectorAll(".page");
+    pages[currentPage].classList.remove("flash");
 }
 
 function initGlobalControls() {

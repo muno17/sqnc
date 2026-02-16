@@ -10,12 +10,15 @@ function initSequencer() {
             // grab the step index
             const step = parseInt(e.target.dataset.step);
 
+            const offset = currentPage * 16;
+            const actualStep = offset + step;
+
             // toggle the data in the master object
-            const currentVal = currentData.tracks[currentTrack].steps[step];
+            const currentVal = currentData.tracks[currentTrack].steps[actualStep];
             if (currentVal === 0) {
-                currentData.tracks[currentTrack].steps[step] = 1;
+                currentData.tracks[currentTrack].steps[actualStep] = 1;
             } else {
-                currentData.tracks[currentTrack].steps[step] = 0;
+                currentData.tracks[currentTrack].steps[actualStep] = 0;
             }
 
             e.target.classList.toggle("active");
@@ -38,7 +41,7 @@ function renderSequencer() {
 
     steps.forEach((stepBtn, index) => {
         // only look at steps for the current page
-        if (trackSteps[offset + index] === 1) {
+        if (currentSeq[offset + index] === 1) {
             stepBtn.classList.add("active");
         } else {
             stepBtn.classList.remove("active");
