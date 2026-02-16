@@ -970,7 +970,54 @@ function updateReverbSendUI(val) {
 }
 ///////////////////////// Master Effects \\\\\\\\\\\\\\\\\\\\\\\\\\
 function initMasterParams() {
+    initDirt();
+    initDirtMix();
+}
 
+function initDirt() {
+    const dirt = document.getElementById("dirt");
+
+    dirt.addEventListener("input", function () {
+        const val = parseFloat(this.value);
+        currentData.master.dirt = val;
+
+        updateDirtUI(val);
+        setMasterDirt(val);
+
+        markAsChanged();
+    });
+}
+
+function updateDirtUI(val) {
+    const dirt = document.getElementById("dirt");
+    const dirtDisplay = document.getElementById("dirtDisplay");
+
+    // format the value so it displays 0-100
+    dirt.value = val;
+    dirtDisplay.innerHTML = parseInt(val);
+}
+
+function initDirtMix() {
+    const dirt = document.getElementById("dirtMix");
+
+    dirt.addEventListener("input", function () {
+        const val = parseFloat(this.value);
+        currentData.master.dirtMix = val;
+
+        updateDirtMixUI(val);
+        setMasterDirtMix(val);
+
+        markAsChanged();
+    });
+}
+
+function updateDirtMixUI(val) {
+    const dirt = document.getElementById("dirtMix");
+    const dirtDisplay = document.getElementById("dirtMixDisplay");
+
+    // format the value so it displays 0-100
+    dirt.value = val;
+    dirtDisplay.innerHTML = parseInt(val * 100);
 }
 
 ///////////////////////// Rendering \\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -1000,6 +1047,12 @@ function renderParams() {
 
         renderMasterParams();
     } else {
+        // hide the master specific UI
+        const masterRows = document.querySelectorAll(".master");
+        masterRows.forEach((row) => {
+            row.classList.add("hidden");
+        })
+
         // show the track specific UI
         selectorRow.classList.remove("hidden");
         divider.classList.remove("hidden");
@@ -1015,7 +1068,11 @@ function renderParams() {
 }
 
 function renderMasterParams() {
+    const masterRows = document.querySelectorAll(".master");
 
+       masterRows.forEach((row) => {
+            row.classList.remove("hidden");
+        });
 }
 
 // update all params to track's saved value

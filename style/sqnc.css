@@ -76,16 +76,15 @@ button {
     font-family: ubuntu, "sans-serif", "sans";
     font-size: 20px;
 }
-h2 {
+h2, label {
     font-size: 20px;
 }
 
-h2, label {
+h2, h3, label {
     padding: 0;
     margin: 0;
     margin-bottom: 5px;
-    text-shadow: 1px 1px 3px black;
-    font-size: 20px;
+    text-shadow: 1px 1px 2px black;
 }
 
 #sqnc {
@@ -166,8 +165,13 @@ h2, label {
     margin-top: 30px;
 }
 
+.master {
+    display: flex;
+    justify-content: space-between;
+}
+
 .paramRow,
-.masterRow {
+.masterEffect{
     display: flex;
     justify-content: space-between;
     margin-left: 10px;
@@ -176,6 +180,14 @@ h2, label {
     gap: 10px;
 }
 
+.masterEffect {
+    flex-direction: column;
+    align-items: center;
+}
+
+.masterEffectRow {
+    display: flex;
+}
 
 #selectorRow,
 #stateRow {

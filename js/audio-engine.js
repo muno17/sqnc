@@ -720,6 +720,10 @@ var currentData = {
             steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         },
     ],
+    master: {
+        dirt: 20,
+        dirtMix: .2, 
+    }
 };
 
 var projectData = {
@@ -1322,17 +1326,20 @@ function setTrackReverbSend(val) {
     reverbSends[currentTrack].gain.rampTo(val, 0.1);
 }
 // master effects
+function setMasterCompression(val) {
+    masterCompressor.threshold.value = val;
+}
 
 function setMasterReverb(val) {
     masterReverb.wet.rampTo(val, 0.1);
 }
 
-function setMasterCompression(val) {
-    masterCompressor.threshold.value = val;
+function setMasterDirt(val) {
+    reverbHeat.order = Math.floor(val);
 }
 
-function setMasterReverbHeat(val) {
-    reverbHeat.order = Math.floor(val);
+function setMasterDirtMix(val) {
+    reverbHeat.wet.value = val;
 }
 
 function setMasterReverbWidth(val) {

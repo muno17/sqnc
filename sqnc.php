@@ -149,21 +149,60 @@ session_start();
                                     </div>
                                 </div>
                             <!-- Master Track Params -->
-                                <div class="masterRow hidden">
-                                    <div class="house">
-                                        <h2>Reverb Size</h2>
-                                        <div id="revSizeDisplay" class="display">20</div>
-                                        <input type="range" min="0" max="1" step="0.01"value=".2" class="slider" id="revSize">
+                                <div class="master">
+                                    <div class="masterEffect">
+                                        <h3>Reverb</h3>
+                                        <div class="masterEffectRow">
+                                            <div class="house">
+                                                <h2>Dirt</h2>
+                                                <div id="dirtDisplay" class="display">20</div>
+                                                <input type="range" min="0" max="100" step="1" value="20" class="slider" id="dirt">
+                                            </div>
+                                            <div class="house">
+                                                <h2>Dirt Mix</h2>
+                                                <div id="dirtMixDisplay" class="display">20</div>
+                                                <input type="range" min="0" max="1" step=".01" value=".2" class="slider" id="dirtMix">
+                                            </div>
+                                        </div>
+                                        <div class="masterEffectRow">
+                                            <div class="house">
+                                                <h2>Space</h2>
+                                                <div id="spaceDisplay" class="display">20</div>
+                                                <input type="range" min="0" max="10" step="0.1"value="2.0" class="slider" id="space">
+                                            </div>
+                                            <div class="house">
+                                                <h2>Pre-Delay</h2>
+                                                <div id="predelayDisplay" class="display">1</div>
+                                                <input type="range" min="0" max="0.1" step=".01" value="0.01" class="slider" id="predelay">
+                                            </div>
+                                        </div>
+                                        <div class="masterEffectRow">
+                                            <div class="house">
+                                                <h2>Width</h2>
+                                                <div id="revWidthDisplay" class="display">5</div>
+                                                <input type="range" min="0" max="1" step="0.01"value=".5" class="slider" id="revWidth">
+                                            </div>
+                                            <div class="house">
+                                                <h2>Limit</h2>
+                                                <div id="revLimitDisplay" class="display">-3</div>
+                                                <input type="range" min="-24" max="0" step="1" value="-3" class="slider" id="revLimit">
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="house">
-                                        <h2>Reverb Damp</h2>
-                                        <div id="revDampDisplay" class="display">100</div>
-                                        <input type="range" min="0" max="5000" step="1" value="5000" class="slider" id="revDamp">
-                                    </div>
-                                    <div class="house">
-                                        <h2>Reverb Width</h2>
-                                        <div id="revWidthDisplay" class="display">50</div>
-                                        <input type="range" min="0" max="1" value=".5" class="slider" id="revWidth">
+                                    <div class="masterEffect">
+                                        <h3>Compressor</h3>
+                                        <div class="masterEffectRow">
+                                            <div class="house">
+                                                <h2>Reverb Size</h2>
+                                                <div id="revSizeDisplay" class="display">20</div>
+                                                <input type="range" min="0" max="1" step="0.01"value=".2" class="slider" id="revSize">
+                                            </div>
+                                            <div class="house">
+                                                <h2>Reverb Damp</h2>
+                                                <div id="revDampDisplay" class="display">100</div>
+                                                <input type="range" min="0" max="5000" step="1" value="5000" class="slider" id="revDamp">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>  
                             </div>
