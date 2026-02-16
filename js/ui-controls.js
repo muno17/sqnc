@@ -978,7 +978,7 @@ function renderParams() {
         // 1. Show everything again for normal tracks
         selectorRow.classList.remove("hidden");
         divider.classList.remove("hidden");
-        
+
         const rows = trackParams.querySelectorAll(".paramRow");
         rows.forEach((row) => row.classList.remove("hidden"));
 
@@ -990,10 +990,8 @@ function renderParams() {
     }
 }
 
-// update all params to track's saved value ***
+// update all params to track's saved value
 function renderTrackParams() {
-    // get current track and update params from currentData ********
-    // true = instant snap to value
     const track = currentData.tracks[currentTrack];
 
     const nameDisplay = document.getElementById("sampleNameDisplay");
