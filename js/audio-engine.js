@@ -31,6 +31,20 @@ var recording = false;
 const master = Tone.getDestination();
 //const masterReverb = new Tone.Reverb({ decay: 2.5, wet: 0 }).toDestination();
 
+var masterLimiter;
+var masterCompressor;
+var masterReverb;
+
+function initMasterChain() {
+    masterCompressor = new Tone.Compressor(-24, 3);
+    masterReverb = new Tone.Reverb(2);
+    masterLimiter = new Tone.Limiter(-1);
+
+    masterReverb.wet.value = 0;
+
+    masterCompressor.chain(masterReverb, masterLimiter, Tone.Destination);
+}
+
 // massive JSON objects to contain all information
 // currentData is the live object
 // projectData is the master object that interacts with the api
@@ -995,9 +1009,10 @@ var projectData = {
 
 // create tone.js samplers
 function initInstruments() {
+    initMasterChain();
     for (var i = 0; i < 10; i++) {
         // initialize parameter components/effects
-        panVols[i] = new Tone.PanVol(0, -100).toDestination();
+        panVols[i] = new Tone.PanVol(0, -100).connect(masterCompressor);
 
         // initialize effects
         delays[i] = new Tone.FeedbackDelay("8n", 0).connect(panVols[i]);
@@ -1097,7 +1112,9 @@ function setupAudioLoop() {
     Tone.Transport.scheduleRepeat((time) => {
         // play the sounds for the current step
         currentData.tracks.forEach((track, index) => {
+            untoggleTrackHit(index);
             if (track.steps[currentStep] == 1) {
+                toggleTrackHit(index);
                 playTrackSound(index, time);
             }
         });
@@ -1119,6 +1136,7 @@ function playTrackSound(index, time) {
     const env = ampEnvs[index];
     const track = currentData.tracks[index];
     const now = time || Tone.now();
+
 
     try {
         if (player && player.buffer && player.buffer.loaded) {

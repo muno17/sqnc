@@ -166,7 +166,8 @@ h2, label {
     margin-top: 30px;
 }
 
-.paramRow {
+.paramRow,
+.masterRow {
     display: flex;
     justify-content: space-between;
     margin-left: 10px;

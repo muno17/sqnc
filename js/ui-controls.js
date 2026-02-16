@@ -901,7 +901,6 @@ function updateDelayTimeUI(val) {
     timeDisplay.innerHTML = parseInt(val * 100);
 }
 
-
 function initDelayFeedback() {
     const feedback = document.getElementById("delFback");
 
@@ -948,20 +947,21 @@ function updateDelayMixUI(val) {
     mixDisplay.innerHTML = parseInt(val * 100);
 }
 
+///////////////////////// Rendering \\\\\\\\\\\\\\\\\\\\\\\\\\
+
+// show/hide the track specific and master track params
 function renderParams() {
     const trackParams = document.getElementById("trackParams");
     const effectParams = document.getElementById("effectsHouse");
     const divider = document.getElementById("paramDivider");
     const selectorRow = document.getElementById("selectorRow"); // Sample selector
 
-    // Check if we are on the Master Track
+    // check if current track is master
     if (currentTrack === 99) {
-        // 1. Hide track-specific UI
+        // hide the track specific UI
         selectorRow.classList.add("hidden");
         divider.classList.add("hidden");
 
-        // Hide the middle rows of trackParams (Volume, Envelope, Filters)
-        // You can target the children paramRows specifically:
         const rows = trackParams.querySelectorAll(".paramRow");
         rows.forEach((row, index) => {
             if (index > 1) row.classList.add("hidden");
@@ -972,10 +972,9 @@ function renderParams() {
             if (index > -1) row.classList.add("hidden");
         });
 
-        // 2. Load Master values into the effects panel
-        //renderMasterEffects();
+        renderMasterParams();
     } else {
-        // 1. Show everything again for normal tracks
+        // show the track specific UI
         selectorRow.classList.remove("hidden");
         divider.classList.remove("hidden");
 
@@ -985,9 +984,12 @@ function renderParams() {
         const effectsRows = effectParams.querySelectorAll(".paramRow");
         effectsRows.forEach((row) => row.classList.remove("hidden"));
 
-        // 2. Normal track render logic (what you already have)
         renderTrackParams();
     }
+}
+
+function renderMasterParams() {
+
 }
 
 // update all params to track's saved value

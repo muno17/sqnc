@@ -68,8 +68,8 @@ session_start();
                                         <select name="sequences" id="sequences">Log in to save sequences</select>
                                     </div>
                                     <button id="save">Save</button>
-                                    <button id="reload">Reload</button>
                                     <button id="new">New</button>
+                                    <button id="reload">Reload</button>
                                 </div>
                                 <div class="paramRow" id="selectorRow">
                                     <div id="selector">
@@ -148,6 +148,10 @@ session_start();
                                         <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="hpq">
                                     </div>
                                 </div>
+                            <!-- Master Track Params -->
+                                <div class="masterRow">
+                                    
+                                </div>  
                             </div>
                             <div id="paramDivider" class="divider"></div>
                             <div id="effectParams">
