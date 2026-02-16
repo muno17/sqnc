@@ -190,6 +190,30 @@ session_start();
                                         </div>
                                     </div>
                                     <div class="masterEffect">
+                                        <h3>EQ</h3>
+                                        <div class="masterEffectRow">
+                                            <div class="house">
+                                                <h2>Low</h2>
+                                                <div id="eqLowDisplay" class="display">0db</div>
+                                                <input type="range" min="-24" max="6" step="0" value="0" class="slider" id="eqLow">
+                                            </div>
+                                        </div>
+                                        <div class="masterEffectRow">
+                                            <div class="house">
+                                                <h2>Mid</h2>
+                                                <div id="eqMidDisplay" class="display">0db</div>
+                                                <input type="range" min="-24" max="6" step="0" value="0" class="slider" id="eqMid">
+                                            </div>
+                                        </div>
+                                        <div class="masterEffectRow">
+                                            <div class="house">
+                                                <h2>High</h2>
+                                                <div id="eqHighDisplay" class="display">0db</div>
+                                                <input type="range" min="-24" max="6" step="0" value="0" class="slider" id="eqHigh">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="masterEffect">
                                         <h3>Compressor</h3>
                                         <div class="masterEffectRow">
                                             <div class="house">
@@ -244,6 +268,16 @@ session_start();
                                                 <h2>Mix</h2>
                                                 <div id="satMixDisplay" class="display">0</div>
                                                 <input type="range" min="0" max="1" step="0.1" value="0" class="slider" id="satMix">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="masterEffect">
+                                        <h3>Limiter</h3>
+                                        <div class="masterEffectRow">
+                                            <div class="house">
+                                                <h2>Threshold</h2>
+                                                <div id="limitThreshDisplay" class="display">-1</div>
+                                                <input type="range" min="-12" max="0" step="1" value="-1" class="slider" id="limitThresh">
                                             </div>
                                         </div>
                                     </div>

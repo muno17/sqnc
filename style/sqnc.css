@@ -87,6 +87,11 @@ h2, h3, label {
     text-shadow: 1px 1px 2px black;
 }
 
+h3 {
+    font-size: 30px;
+    margin-top: 0px;
+}
+
 #sqnc {
     display: flex;
     height: 760px;
@@ -464,10 +469,4 @@ footer {
 .modal-footer button {
     width: 100px;
     height: 35px;
-}
-
-h3 {
-    font-size: 40px;
-    margin-top: 0px;
-
 }

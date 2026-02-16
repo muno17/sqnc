@@ -978,6 +978,11 @@ function initMasterParams() {
     initReverbWidth();
     initReverbLimit();
     
+    // eq
+    initEqLow();
+    initEqMid();
+    initEqHigh();
+
     // compressor
     initCompThresh();
     initCompRatio();
@@ -989,8 +994,12 @@ function initMasterParams() {
     initSatDrive();
     initSatTone();
     initSatMix();
+
+    // limiter
+    initLimitThresh();
 }
 
+// reverb
 function initDirt() {
     const dirt = document.getElementById("dirt");
 
@@ -1128,75 +1137,74 @@ function updateReverbLimitUI(val) {
     revLimitDisplay.innerHTML = parseInt(val);
 }
 
-function initSatDrive() {
-    const satDrive = document.getElementById("satDrive");
+// eq
+function initEqLow() {
+    const eqLow = document.getElementById("eqLow");
 
-    satDrive.addEventListener("input", function () {
+    eqLow.addEventListener("input", function () {
         const val = parseFloat(this.value);
-        currentData.master.satDrive = val;
+        currentData.master.eqLow = val;
 
-        updateSatDriveUI(val);
-        setMasterSatDrive(val);
+        updateEqLowUI(val);
+        setMasterEqLow(val);
 
         markAsChanged();
     });
 }
 
-function updateSatDriveUI(val) {
-    const satDrive = document.getElementById("satDrive");
-    const satDriveDisplay = document.getElementById("satDriveDisplay");
+function updateEqLowUI(val) {
+    const eqLow = document.getElementById("eqLow");
+    const eqLowDisplay = document.getElementById("eqLowDisplay");
 
-    // format the value so it displays 0-100
-    satDrive.value = val;
-    satDriveDisplay.innerHTML = parseInt(val * 200);
+    eqLow.value = val;
+    eqLowDisplay.innerHTML = parseInt(val) + "db";
 }
 
-function initSatTone() {
-    const satTone = document.getElementById("satTone");
+function initEqMid() {
+    const eqMid = document.getElementById("eqMid");
 
-    satTone.addEventListener("input", function () {
+    eqMid.addEventListener("input", function () {
         const val = parseFloat(this.value);
-        currentData.master.satTone = val;
+        currentData.master.eqMid = val;
 
-        updateSatToneUI(val);
-        setMasterSatTone(val);
+        updateEqMidUI(val);
+        setMasterEqMid(val);
 
         markAsChanged();
     });
 }
 
-function updateSatToneUI(val) {
-    const satTone = document.getElementById("satTone");
-    const satToneDisplay = document.getElementById("satToneDisplay");
+function updateEqMidUI(val) {
+    const eqMid = document.getElementById("eqMid");
+    const eqMidDisplay = document.getElementById("eqMidDisplay");
 
-    // format the value so it displays 0-100
-    satTone.value = val;
-    satToneDisplay.innerHTML = parseInt(val * .005);
+    eqMid.value = val;
+    eqMidDisplay.innerHTML = parseInt(val) + "db";
 }
 
-function initSatMix() {
-    const satMix = document.getElementById("satMix");
+function initEqHigh() {
+    const eqHigh = document.getElementById("eqHigh");
 
-    satMix.addEventListener("input", function () {
+    eqHigh.addEventListener("input", function () {
         const val = parseFloat(this.value);
-        currentData.master.satMix = val;
+        currentData.master.eqHigh = val;
 
-        updateSatMixUI(val);
-        setMasterSatMix(val);
+        updateEqHighUI(val);
+        setMasterEqHigh(val);
 
         markAsChanged();
     });
 }
 
-function updateSatMixUI(val) {
-    const satMix = document.getElementById("satMix");
-    const satMixDisplay = document.getElementById("satMixDisplay");
+function updateEqHighUI(val) {
+    const eqHigh = document.getElementById("eqHigh");
+    const eqHighDisplay = document.getElementById("eqHighDisplay");
 
-    // format the value so it displays 0-100
-    satMix.value = val;
-    satMixDisplay.innerHTML = parseInt(val * 100);
+    eqHigh.value = val;
+    eqHighDisplay.innerHTML = parseInt(val) + "db";
 }
 
+// compressor
 function initCompThresh() {
     const compThresh = document.getElementById("compThresh");
 
@@ -1306,6 +1314,100 @@ function updateCompKneeUI(val) {
     compKnee.value = val;
     compKneeDisplay.innerHTML = parseInt(val);
 }
+
+//saturator
+function initSatDrive() {
+    const satDrive = document.getElementById("satDrive");
+
+    satDrive.addEventListener("input", function () {
+        const val = parseFloat(this.value);
+        currentData.master.satDrive = val;
+
+        updateSatDriveUI(val);
+        setMasterSatDrive(val);
+
+        markAsChanged();
+    });
+}
+
+function updateSatDriveUI(val) {
+    const satDrive = document.getElementById("satDrive");
+    const satDriveDisplay = document.getElementById("satDriveDisplay");
+
+    // format the value so it displays 0-100
+    satDrive.value = val;
+    satDriveDisplay.innerHTML = parseInt(val * 200);
+}
+
+function initSatTone() {
+    const satTone = document.getElementById("satTone");
+
+    satTone.addEventListener("input", function () {
+        const val = parseFloat(this.value);
+        currentData.master.satTone = val;
+
+        updateSatToneUI(val);
+        setMasterSatTone(val);
+
+        markAsChanged();
+    });
+}
+
+function updateSatToneUI(val) {
+    const satTone = document.getElementById("satTone");
+    const satToneDisplay = document.getElementById("satToneDisplay");
+
+    // format the value so it displays 0-100
+    satTone.value = val;
+    satToneDisplay.innerHTML = parseInt(val * .005);
+}
+
+function initSatMix() {
+    const satMix = document.getElementById("satMix");
+
+    satMix.addEventListener("input", function () {
+        const val = parseFloat(this.value);
+        currentData.master.satMix = val;
+
+        updateSatMixUI(val);
+        setMasterSatMix(val);
+
+        markAsChanged();
+    });
+}
+
+function updateSatMixUI(val) {
+    const satMix = document.getElementById("satMix");
+    const satMixDisplay = document.getElementById("satMixDisplay");
+
+    // format the value so it displays 0-100
+    satMix.value = val;
+    satMixDisplay.innerHTML = parseInt(val * 100);
+}
+
+//limiter
+function initLimitThresh() {
+    const limitThresh = document.getElementById("limitThresh");
+
+    limitThresh.addEventListener("input", function () {
+        const val = parseFloat(this.value);
+        currentData.master.limitThresh = val;
+
+        updateLimitThreshUI(val);
+        setMasterLimitThresh(val);
+
+        markAsChanged();
+    });
+}
+
+function updateLimitThreshUI(val) {
+    const limitThresh = document.getElementById("limitThresh");
+    const limitThreshDisplay = document.getElementById("limitThreshDisplay");
+
+    limitThresh.value = val;
+    limitThreshDisplay.innerHTML = parseInt(val);
+}
+
 ///////////////////////// Rendering \\\\\\\\\\\\\\\\\\\\\\\\\\
 
 // show/hide the track specific and master track params
@@ -1389,6 +1491,15 @@ function renderMasterParams() {
     updateReverbLimitUI(master.revLimit);
     setMasterReverbLimit(master.revLimit);
 
+    updateEqLowUI(master.eqLow);
+    setMasterEqLow(master.eqLow);
+
+    updateEqMidUI(master.eqMid);
+    setMasterEqMid(master.eqMid);
+
+    updateEqHighUI(master.eqHigh);
+    setMasterEqHigh(master.eqHigh);
+
     updateSatDriveUI(master.satDrive);
     setMasterSatDrive(master.satDrive);
 
@@ -1412,6 +1523,9 @@ function renderMasterParams() {
 
     updateCompKneeUI(master.compKnee);
     setMasterCompKnee(master.compKnee);
+
+    updateLimitThreshUI(master.limitThresh);
+    setMasterLimitThresh(master.limitThresh);
 }
 
 // update all params to track's saved value

@@ -30,17 +30,18 @@ var recording = false;
 
 // master output to apply master effects
 const master = Tone.getDestination();
-//const masterReverb = new Tone.Reverb({ decay: 2.5, wet: 0 }).toDestination();
 
-var masterLimiter;
 var masterCompressor;
-var masterReverb;
+var masterEQ;
 var masterSaturator;
+var masterLimiter;
+var masterReverb;
 var reverbWidener;
 var reverbHeat;
 var reverbLimiter;
 
 function initMasterChain() {
+    masterEQ = new Tone.EQ3(0, 0, 0);
     masterCompressor = new Tone.Compressor(-24, 3);
     masterSaturator = new Tone.Distortion(0.1);
     saturatorFilter = new Tone.Filter(20000, "lowpass");
@@ -48,10 +49,13 @@ function initMasterChain() {
 
     initReverbBus();
 
-    masterSaturator.connect(saturatorFilter);
-    saturatorFilter.connect(masterLimiter);
-    masterCompressor.connect(masterSaturator);
-    masterLimiter.toDestination();
+    masterEQ.chain(
+        masterCompressor,
+        masterSaturator,
+        saturatorFilter,
+        masterLimiter,
+        Tone.Destination,
+    );
 }
 
 function initReverbBus() {
@@ -70,7 +74,7 @@ function initReverbBus() {
         masterReverb,
         reverbWidener,
         reverbLimiter,
-        Tone.Destination,
+        masterEQ
     );
 
     masterReverb.generate();
@@ -732,14 +736,18 @@ var currentData = {
         predelay: 0.01,
         revWidth: 0.3,
         revLimit: -3,
+        eqLow: 0,
+        eqMid: 0,
+        eqHigh: 0,
         compThresh: -24,
         compRatio: 1,
-        compAttack: .05,
-        compRelease: .25,
+        compAttack: 0.05,
+        compRelease: 0.25,
         compKnee: 30,
         satDrive: 0,
         satTone: 20000,
         satMix: 0,
+        limitThresh: -1,
     },
 };
 
@@ -1059,6 +1067,9 @@ var projectData = {
         predelay: 0.01,
         revWidth: 0.3,
         revLimit: -3,
+        eqLow: 0,
+        eqMid: 0,
+        eqHigh: 0,
         compThresh: -24,
         compRatio: 1,
         compAttack: 0.05,
@@ -1067,6 +1078,7 @@ var projectData = {
         satDrive: 0,
         satTone: 20000,
         satMix: 0,
+        limitThresh: -1,
     },
 };
 
@@ -1075,7 +1087,7 @@ function initInstruments() {
     initMasterChain();
     for (var i = 0; i < 10; i++) {
         // initialize parameter components/effects
-        panVols[i] = new Tone.PanVol(0, -100).connect(masterCompressor);
+        panVols[i] = new Tone.PanVol(0, -100).connect(masterEQ);
 
         // send to master reverb
         reverbSends[i] = new Tone.Gain(0).connect(reverbHeat);
@@ -1392,6 +1404,20 @@ function setMasterReverbLimit(val) {
     reverbLimiter.threshold.value = val;
 }
 
+// eq
+
+function setMasterEqLow(val) {
+    masterEQ.low.value = val;
+}
+
+function setMasterEqMid(val) {
+    masterEQ.mid.value = val;
+}
+
+function setMasterEqHigh(val) {
+    masterEQ.high.value = val;
+}
+
 // compressor
 function setMasterCompThresh(val) {
     masterCompressor.threshold.rampTo(val, 0.1);
@@ -1424,4 +1450,10 @@ function setMasterSatTone(val) {
 
 function setMasterSatMix(val) {
     masterSaturator.wet.value = val;
+}
+
+// Limiter
+
+function setMasterLimitThresh(val) {
+    masterLimiter.threshold.value = val;
 }
