@@ -35,16 +35,40 @@ const master = Tone.getDestination();
 var masterLimiter;
 var masterCompressor;
 var masterReverb;
+var reverbWidener;
+var reverbHeat;
+var reverbLimiter;
 
 function initMasterChain() {
     masterCompressor = new Tone.Compressor(-24, 3);
     masterLimiter = new Tone.Limiter(-1);
 
-    masterReverb = new Tone.Reverb(1).connect(masterLimiter);
-    masterReverb.wet.value = 1;
+    initReverbBus();
 
-    masterCompressor.chain(masterLimiter);
+    masterCompressor.connect(masterLimiter);
     masterLimiter.toDestination();
+}
+
+function initReverbBus() {
+    reverbHeat = new Tone.Chebyshev(20);
+    reverbHeat.wet.value = 0.2;
+
+    masterReverb = new Tone.Reverb({
+        decay: 3,
+        preDelay: 0.01,
+    });
+
+    reverbWidener = new Tone.StereoWidener(0.5);
+    reverbLimiter = new Tone.Limiter(-3);
+
+    reverbHeat.chain(
+        masterReverb,
+        reverbWidener,
+        reverbLimiter,
+        Tone.Destination,
+    );
+
+    masterReverb.generate();
 }
 
 // massive JSON objects to contain all information
@@ -1017,7 +1041,7 @@ function initInstruments() {
         panVols[i] = new Tone.PanVol(0, -100).connect(masterCompressor);
 
         // send to master reverb
-        reverbSends[i] = new Tone.Gain(0).connect(masterReverb);
+        reverbSends[i] = new Tone.Gain(0).connect(reverbHeat);
         panVols[i].connect(reverbSends[i]);
 
         // initialize effects
@@ -1305,4 +1329,13 @@ function setMasterReverb(val) {
 
 function setMasterCompression(val) {
     masterCompressor.threshold.value = val;
+}
+
+function setMasterReverbHeat(val) {
+    reverbHeat.order = Math.floor(val);
+}
+
+function setMasterReverbWidth(val) {
+    // 0 = mono, 1 = very Wide
+    reverbWidener.width.rampTo(val, 0.1);
 }
