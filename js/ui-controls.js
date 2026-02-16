@@ -93,7 +93,6 @@ function initTempo() {
     const tempoDisplay = document.getElementById("tempoDisplay");
 
     tempo.addEventListener("input", function () {
-        console.log(this.value);
         currentData.bpm = parseInt(this.value);
         tempoDisplay.innerHTML = this.value;
         Tone.Transport.bpm.value = this.value;
@@ -396,6 +395,9 @@ function initTrackParams() {
     initTremoloRate();
     initTremoloDepth();
     initTremoloMix();
+    initDelayTime();
+    initDelayFeedback();
+    initDelayMix();
 }
 
 // update UI based on what track is selected ***
@@ -876,6 +878,76 @@ function updateTremoloMixUI(val) {
     mixDisplay.innerHTML = parseInt(val * 100);
 }
 
+function initDelayTime() {
+    const time = document.getElementById("delTime");
+
+    time.addEventListener("input", function () {
+        const val = parseFloat(this.value);
+        currentData.tracks[currentTrack].delTime = val;
+
+        updateDelayTimeUI(val);
+        setTrackDelayTime(val);
+
+        markAsChanged();
+    });
+}
+
+function updateDelayTimeUI(val) {
+    const time = document.getElementById("delTime");
+    const timeDisplay = document.getElementById("delTimeDisplay");
+
+    // format the value so it displays 0-100
+    time.value = val;
+    timeDisplay.innerHTML = parseInt(val * 100);
+}
+
+
+function initDelayFeedback() {
+    const feedback = document.getElementById("delFback");
+
+    feedback.addEventListener("input", function () {
+        const val = parseFloat(this.value);
+        currentData.tracks[currentTrack].delFback = val;
+
+        updateDelayFeedbackUI(val);
+        setTrackDelayFeedback(val);
+
+        markAsChanged();
+    });
+}
+
+function updateDelayFeedbackUI(val) {
+    const feedback = document.getElementById("delFback");
+    const feedbackDisplay = document.getElementById("delFbackDisplay");
+
+    // format the value so it displays 0-100
+    feedback.value = val;
+    feedbackDisplay.innerHTML = parseInt(val * 111.11);
+}
+
+function initDelayMix() {
+    const mix = document.getElementById("delMix");
+
+    mix.addEventListener("input", function () {
+        const val = parseFloat(this.value);
+        currentData.tracks[currentTrack].delMix = val;
+
+        updateDelayMixUI(val);
+        setTrackDelayMix(val);
+
+        markAsChanged();
+    });
+}
+
+function updateDelayMixUI(val) {
+    const mix = document.getElementById("delMix");
+    const mixDisplay = document.getElementById("delMixDisplay");
+
+    // format the value so it displays 0-100
+    mix.value = val;
+    mixDisplay.innerHTML = parseInt(val * 100);
+}
+
 // update all params to track's saved value ***
 function renderParams() {
     // get current track and update params from currentData ********
@@ -947,4 +1019,13 @@ function renderParams() {
 
     updateTremoloMixUI(track.tremMix);
     setTrackTremoloMix(track.tremMix);
+
+    updateDelayTimeUI(track.delTime);
+    setTrackDelayTime(track.delTime);
+
+    updateDelayFeedbackUI(track.delFback);
+    setTrackDelayFeedback(track.delFback);
+
+    updateDelayMixUI(track.delMix);
+    setTrackDelayMix(track.delMix);
 }

@@ -1050,7 +1050,7 @@ function loadInstruments() {
     });
 }
 
-// initialize all controls and api
+// initialize all controls, audio engine and api
 window.onload = function () {
     // core setup
     Tone.Transport.bpm.value = currentData.bpm;
@@ -1068,7 +1068,7 @@ window.onload = function () {
     //loadSequences(); REENABLE ***
     //loadSamples(); REENABLE ***
 
-    // initialize track params
+    // initialize track params. *** DO WE NEED THIS??? ***
     Tone.loaded().then(() => {
         currentData.tracks.forEach((track, i) => {
             panVols[i].volume.value = track.volume;
@@ -1246,4 +1246,16 @@ function setTrackTremoloDepth(val) {
 
 function setTrackTremoloMix(val) {
     tremolos[currentTrack].wet.value = val;
+}
+
+function setTrackDelayTime(val) {
+    delays[currentTrack].delayTime.rampTo(val, 0.1);
+}
+
+function setTrackDelayFeedback(val) {
+    delays[currentTrack].feedback.rampTo(val, 0.1);
+}
+
+function setTrackDelayMix(val) {
+    delays[currentTrack].wet.value = val;
 }
