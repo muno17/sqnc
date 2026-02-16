@@ -952,14 +952,13 @@ function renderParams() {
     const trackParams = document.getElementById("trackParams");
     const effectParams = document.getElementById("effectsHouse");
     const divider = document.getElementById("paramDivider");
-    const stateRow = document.getElementById("stateRow"); // Sequence selector
     const selectorRow = document.getElementById("selectorRow"); // Sample selector
 
     // Check if we are on the Master Track
     if (currentTrack === 99) {
         // 1. Hide track-specific UI
-        stateRow.classList.add("hidden");
         selectorRow.classList.add("hidden");
+        divider.classList.add("hidden");
 
         // Hide the middle rows of trackParams (Volume, Envelope, Filters)
         // You can target the children paramRows specifically:
@@ -977,8 +976,9 @@ function renderParams() {
         //renderMasterEffects();
     } else {
         // 1. Show everything again for normal tracks
-        stateRow.classList.remove("hidden");
         selectorRow.classList.remove("hidden");
+        divider.classList.remove("hidden");
+        
         const rows = trackParams.querySelectorAll(".paramRow");
         rows.forEach((row) => row.classList.remove("hidden"));
 
