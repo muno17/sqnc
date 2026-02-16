@@ -1258,6 +1258,8 @@ function setupAudioLoop() {
     Tone.Transport.cancel();
 
     Tone.Transport.scheduleRepeat((time) => {
+    const totalSteps = parseInt(currentData.length) * 16;
+
         // play the sounds for the current step
         currentData.tracks.forEach((track, index) => {
             untoggleTrackHit(index);
@@ -1275,7 +1277,8 @@ function setupAudioLoop() {
         }, time);
 
         // increment for the next time the loop runs
-        currentStep = (currentStep + 1) % 16;
+        //currentStep = (currentStep + 1) % 16;
+        currentStep = (currentStep + 1) % totalSteps;
     }, "16n");
 }
 

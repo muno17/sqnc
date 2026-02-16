@@ -68,9 +68,6 @@ function updateUIPlayHead(step) {
             current.classList.add("current");
         }
     }
-
-    //const current = document.querySelector(`.step[data-step="${step}"]`);
-
 }
 
 function disableSequencer(message) {

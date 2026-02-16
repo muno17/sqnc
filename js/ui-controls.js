@@ -18,15 +18,15 @@ function initTransport() {
 async function startTransport() {
     const transport = document.getElementById("transport");
     Tone.context.resume();
+
+    Tone.Transport.loop = true;
+    Tone.Transport.loopEnd = currentData.length;
+
     // functionality to play
-    //await Tone.start();
-
-    //await Tone.loaded();
-
     currentStep = 0;
     updateUIPlayHead(0);
     running = true;
-    Tone.Transport.start("+0");
+    Tone.Transport.start("+0.1");
     transport.innerHTML = "Stop";
 }
 
@@ -138,6 +138,30 @@ function initPageSelectors() {
             currentPage = parseInt(this.dataset.index);
             renderSequencer();
         });
+        
+        btn.addEventListener("dblclick", function () {
+            const newLength = parseInt(this.dataset.index) + 1;
+            currentData.length = newLength + "m";
+
+            Tone.Transport.setLoopPoints(0, currentData.length);
+            Tone.Transport.loop = true;
+
+            updatePageVisuals(newLength);
+
+            markAsChanged();
+        })
+    });
+}
+
+// add indicator for the pages that are on
+function updatePageVisuals(measures) {
+    const pageBtns = document.querySelectorAll(".page");
+    pageBtns.forEach((btn, index) => {
+        if (index < measures) {
+            btn.classList.add("loop");
+        } else {
+            btn.classList.remove("loop");
+        }
     });
 }
 
