@@ -149,7 +149,7 @@ session_start();
                                     </div>
                                 </div>
                             <!-- Master Track Params -->
-                                <div class="master">
+                                <div id="masterArea" class="master">
                                     <div class="masterEffect">
                                         <h3>Reverb</h3>
                                         <div class="masterEffectRow">
@@ -191,6 +191,21 @@ session_start();
                                     </div>
                                     <div class="masterEffect">
                                         <h3>Compressor</h3>
+                                        <div class="masterEffectRow">
+                                            <div class="house">
+                                                <h2>Reverb Size</h2>
+                                                <div id="revSizeDisplay" class="display">20</div>
+                                                <input type="range" min="0" max="1" step="0.01"value=".2" class="slider" id="revSize">
+                                            </div>
+                                            <div class="house">
+                                                <h2>Reverb Damp</h2>
+                                                <div id="revDampDisplay" class="display">100</div>
+                                                <input type="range" min="0" max="5000" step="1" value="5000" class="slider" id="revDamp">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="masterEffect">
+                                        <h3>Saturator</h3>
                                         <div class="masterEffectRow">
                                             <div class="house">
                                                 <h2>Reverb Size</h2>

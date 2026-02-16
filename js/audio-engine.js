@@ -726,6 +726,7 @@ var currentData = {
         space:  2.0,
         predelay: 0.01,
         revWidth: 0.3,
+        revLimit: -3,
 
     }
 };
@@ -1360,4 +1361,8 @@ function setMasterPredelay(val) {
 function setMasterReverbWidth(val) {
     // 0 = mono, 1 = very Wide
     reverbWidener.width.rampTo(val, 0.1);
+}
+
+function setMasterReverbLimit(val) {
+    reverbLimiter.threshold.value = val;
 }

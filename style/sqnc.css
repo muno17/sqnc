@@ -155,10 +155,18 @@ h2, h3, label {
     margin-top: 20px;
 }
 
+#trackParams.master {
+    flex: 0 0 100%;
+}
+
 #effectParams {
     flex: 0 0 45%;
     display: flex;
     flex-direction: column;
+}
+
+#effectParams.master {
+    flex: 0 0 0%;
 }
 
 #effectsHouse {
@@ -200,6 +208,10 @@ h2, h3, label {
     align-items: center;
 }
 
+#stateRow.master {
+    width: 55%;
+}
+
 #selector {
     display: flex;
     flex-direction: column;
@@ -208,7 +220,7 @@ h2, h3, label {
 }
 
 select {
-    width: 100%;
+    width: 250px;
     height: 30px;
     font-size: 16px;
     color: white;
@@ -374,13 +386,22 @@ button.page {
     border-color: #ECC987;
 }
 
-#logo {
+#logo,
+#masterLogo {
     margin-left: auto;
     font-size: 70px;
     font-weight: bold;
     align-self: flex-start;
     text-shadow: 1px 1px 8px black;
     margin-right: 30px;
+}
+
+#masterLogo {
+    margin-right: 500px;
+}
+
+#masterArea {
+    margin-bottom: 100;
 }
 
 footer {

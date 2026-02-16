@@ -970,11 +970,15 @@ function updateReverbSendUI(val) {
 }
 ///////////////////////// Master Effects \\\\\\\\\\\\\\\\\\\\\\\\\\
 function initMasterParams() {
+    // reverb
     initDirt();
     initDirtMix();
     initSpace();
     initPredelay();
     initReverbWidth();
+    initReverbLimit();
+    
+    // compressor
 }
 
 function initDirt() {
@@ -1091,14 +1095,39 @@ function updateReverbWidthUI(val) {
     revWidth.value = val;
     revWidthDisplay.innerHTML = parseInt(val * 100);
 }
+
+function initReverbLimit() {
+    const revLimit = document.getElementById("revLimit");
+
+    revLimit.addEventListener("input", function () {
+        const val = parseFloat(this.value);
+        currentData.master.revLimit = val;
+
+        updateReverbLimitUI(val);
+        setMasterReverbLimit(val);
+
+        markAsChanged();
+    });
+}
+
+function updateReverbLimitUI(val) {
+    const revLimit = document.getElementById("revLimit");
+    const revLimitDisplay = document.getElementById("revLimitDisplay");
+
+    revLimit.value = val;
+    revLimitDisplay.innerHTML = parseInt(val);
+}
 ///////////////////////// Rendering \\\\\\\\\\\\\\\\\\\\\\\\\\
 
 // show/hide the track specific and master track params
 function renderParams() {
     const trackParams = document.getElementById("trackParams");
-    const effectParams = document.getElementById("effectsHouse");
+    const effectParams = document.getElementById("effectParams");
+    const effectHouse = document.getElementById("effectsHouse");
     const divider = document.getElementById("paramDivider");
-    const selectorRow = document.getElementById("selectorRow"); // Sample selector
+    const selectorRow = document.getElementById("selectorRow"); // sample selector
+    const stateRow = document.getElementById("stateRow"); // sequence selector
+    const logo = document.getElementById("logo");
 
     // check if current track is master
     if (currentTrack === 99) {
@@ -1111,18 +1140,28 @@ function renderParams() {
             if (index > 1) row.classList.add("hidden");
         });
 
-        const effectsRows = effectParams.querySelectorAll(".paramRow");
-        effectsRows.forEach((row, index) => {
+        const effectRows = effectHouse.querySelectorAll(".paramRow");
+        effectRows.forEach((row, index) => {
             if (index > -1) row.classList.add("hidden");
         });
 
+        trackParams.classList.add("master");
+        effectParams.classList.add("master");
+        stateRow.classList.add("master");
+        logo.classList.add("master");
+
+
         renderMasterParams();
     } else {
+        trackParams.classList.remove("master");
+        effectParams.classList.remove("master");
+        stateRow.classList.remove("master");
+        logo.classList.remove("master");
         // hide the master specific UI
         const masterRows = document.querySelectorAll(".master");
         masterRows.forEach((row) => {
             row.classList.add("hidden");
-        })
+        });
 
         // show the track specific UI
         selectorRow.classList.remove("hidden");
@@ -1131,7 +1170,7 @@ function renderParams() {
         const rows = trackParams.querySelectorAll(".paramRow");
         rows.forEach((row) => row.classList.remove("hidden"));
 
-        const effectsRows = effectParams.querySelectorAll(".paramRow");
+        const effectsRows = effectHouse.querySelectorAll(".paramRow");
         effectsRows.forEach((row) => row.classList.remove("hidden"));
 
         renderTrackParams();
@@ -1161,6 +1200,9 @@ function renderMasterParams() {
 
     updateReverbWidthUI(master.revWidth);
     setMasterReverbWidth(master.revWidth);
+
+    updateReverbLimitUI(master.revLimit);
+    setMasterReverbLimit(master.revLimit);
 }
 
 // update all params to track's saved value
