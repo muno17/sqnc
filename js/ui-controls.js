@@ -979,6 +979,11 @@ function initMasterParams() {
     initReverbLimit();
     
     // compressor
+
+    // saturator
+    initSatDrive();
+    initSatTone();
+    initSatMix();
 }
 
 function initDirt() {
@@ -1117,6 +1122,75 @@ function updateReverbLimitUI(val) {
     revLimit.value = val;
     revLimitDisplay.innerHTML = parseInt(val);
 }
+
+function initSatDrive() {
+    const satDrive = document.getElementById("satDrive");
+
+    satDrive.addEventListener("input", function () {
+        const val = parseFloat(this.value);
+        currentData.master.satDrive = val;
+
+        updateSatDriveUI(val);
+        setMasterSatDrive(val);
+
+        markAsChanged();
+    });
+}
+
+function updateSatDriveUI(val) {
+    const satDrive = document.getElementById("satDrive");
+    const satDriveDisplay = document.getElementById("satDriveDisplay");
+
+    // format the value so it displays 0-100
+    satDrive.value = val;
+    satDriveDisplay.innerHTML = parseInt(val * 200);
+}
+
+function initSatTone() {
+    const satTone = document.getElementById("satTone");
+
+    satTone.addEventListener("input", function () {
+        const val = parseFloat(this.value);
+        currentData.master.satTone = val;
+
+        updateSatToneUI(val);
+        setMasterSatTone(val);
+
+        markAsChanged();
+    });
+}
+
+function updateSatToneUI(val) {
+    const satTone = document.getElementById("satTone");
+    const satToneDisplay = document.getElementById("satToneDisplay");
+
+    // format the value so it displays 0-100
+    satTone.value = val;
+    satToneDisplay.innerHTML = parseInt(val * .005);
+}
+
+function initSatMix() {
+    const satMix = document.getElementById("satMix");
+
+    satMix.addEventListener("input", function () {
+        const val = parseFloat(this.value);
+        currentData.master.satMix = val;
+
+        updateSatMixUI(val);
+        setMasterSatMix(val);
+
+        markAsChanged();
+    });
+}
+
+function updateSatMixUI(val) {
+    const satMix = document.getElementById("satMix");
+    const satMixDisplay = document.getElementById("satMixDisplay");
+
+    // format the value so it displays 0-100
+    satMix.value = val;
+    satMixDisplay.innerHTML = parseInt(val * 100);
+}
 ///////////////////////// Rendering \\\\\\\\\\\\\\\\\\\\\\\\\\
 
 // show/hide the track specific and master track params
@@ -1203,6 +1277,15 @@ function renderMasterParams() {
 
     updateReverbLimitUI(master.revLimit);
     setMasterReverbLimit(master.revLimit);
+
+    updateSatDriveUI(master.satDrive);
+    setMasterSatDrive(master.satDrive);
+
+    updateSatToneUI(master.satTone);
+    setMasterSatTone(master.satTone);
+
+    updateSatMixUI(master.satMix);
+    setMasterSatMix(master.satMix);
 }
 
 // update all params to track's saved value

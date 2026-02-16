@@ -35,17 +35,22 @@ const master = Tone.getDestination();
 var masterLimiter;
 var masterCompressor;
 var masterReverb;
+var masterSaturator;
 var reverbWidener;
 var reverbHeat;
 var reverbLimiter;
 
 function initMasterChain() {
     masterCompressor = new Tone.Compressor(-24, 3);
+    masterSaturator = new Tone.Distortion(0.1);
+    saturatorFilter = new Tone.Filter(20000, "lowpass");
     masterLimiter = new Tone.Limiter(-1);
 
     initReverbBus();
 
-    masterCompressor.connect(masterLimiter);
+    masterSaturator.connect(saturatorFilter);
+    saturatorFilter.connect(masterLimiter);
+    masterCompressor.connect(masterSaturator);
     masterLimiter.toDestination();
 }
 
@@ -722,13 +727,15 @@ var currentData = {
     ],
     master: {
         dirt: 20,
-        dirtMix: .2,
-        space:  2.0,
+        dirtMix: 0.2,
+        space: 2.0,
         predelay: 0.01,
         revWidth: 0.3,
         revLimit: -3,
-
-    }
+        satDrive: 0,
+        satTone: 20000,
+        satMix: 0,
+    },
 };
 
 var projectData = {
@@ -1330,16 +1337,13 @@ function setTrackDelayMix(val) {
 function setTrackReverbSend(val) {
     reverbSends[currentTrack].gain.rampTo(val, 0.1);
 }
-// master effects
+
+////////////////////////// Master Track Parameters \\\\\\\\\\\\\\\\\\\\\\\\\\
+
+// reverb
 function setMasterCompression(val) {
     masterCompressor.threshold.value = val;
 }
-
-/*
-function setMasterReverb(val) {
-    masterReverb.wet.rampTo(val, 0.1);
-}
-    */
 
 function setMasterDirt(val) {
     reverbHeat.order = Math.floor(val);
@@ -1365,4 +1369,17 @@ function setMasterReverbWidth(val) {
 
 function setMasterReverbLimit(val) {
     reverbLimiter.threshold.value = val;
+}
+
+// saturator
+function setMasterSatDrive(val) {
+    masterSaturator.distortion = val;
+}
+
+function setMasterSatTone(val) {
+    saturatorFilter.frequency.rampTo(val, 0.1);
+}
+
+function setMasterSatMix(val) {
+    masterSaturator.wet.value = val;
 }

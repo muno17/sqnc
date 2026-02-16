@@ -208,14 +208,23 @@ session_start();
                                         <h3>Saturator</h3>
                                         <div class="masterEffectRow">
                                             <div class="house">
-                                                <h2>Reverb Size</h2>
-                                                <div id="revSizeDisplay" class="display">20</div>
-                                                <input type="range" min="0" max="1" step="0.01"value=".2" class="slider" id="revSize">
+                                                <h2>Drive</h2>
+                                                <div id="satDriveDisplay" class="display">0</div>
+                                                <input type="range" min="0" max=".5" step=".01" value="0" class="slider" id="satDrive">
                                             </div>
+                                        </div>
+                                        <div class="masterEffectRow">
                                             <div class="house">
-                                                <h2>Reverb Damp</h2>
-                                                <div id="revDampDisplay" class="display">100</div>
-                                                <input type="range" min="0" max="5000" step="1" value="5000" class="slider" id="revDamp">
+                                                <h2>Tone</h2>
+                                                <div id="satToneDisplay" class="display">100</div>
+                                                <input type="range" min="0" max="20000" step="10" value="20000" class="slider" id="satTone">
+                                            </div>
+                                        </div>
+                                        <div class="masterEffectRow">
+                                            <div class="house">
+                                                <h2>Mix</h2>
+                                                <div id="satMixDisplay" class="display">0</div>
+                                                <input type="range" min="0" max="1" step="0.1" value="0" class="slider" id="satMix">
                                             </div>
                                         </div>
                                     </div>
