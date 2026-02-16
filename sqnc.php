@@ -81,7 +81,6 @@ session_start();
                                         <input type="file" name="file" id="file" value="Upload"
                             enctype="multipart/form-data" accept=".wav,.mp3">
                                     </form>
-                                    <!--<button id="sampleManager">Manager</button>-->
                                 </div>
                                 <div class="paramRow">
                                     <div class="house">
@@ -278,9 +277,7 @@ session_start();
             <img class="wood" src="style/wood-pattern.png">
         </div>
         <footer></footer>
-        <!-- Modal Screens -->
-
-        <!-- Sample Manager Modal -->
+        <!-- modal screen -->
         <div id="sequence-overlay" class="modal-overlay modal-hidden">
             <div class="modal-box">
                 <h3>New Sequence</h3>
@@ -291,19 +288,5 @@ session_start();
                 </div>
             </div>
         </div>
-
-        <!-- Login/Sign Up Modal -->
-         <!--
-        <div id="account-overlay" class="modal-overlay modal-hidden">
-            <div class="modal-box">
-                <h3>Save Sequence</h3>
-                <input type="text" id="seq-name" placeholder="Name your track...">
-                <div class="modal-footer">
-                    <button id="account-close-btn">Cancel</button>
-                    <button class="account-save-btn">Save</button>
-                </div>
-            </div>
-        </div>
-        -->
 	</body>
 </html>

@@ -1025,18 +1025,6 @@ function initInstruments() {
         }).connect(lpFilters[i]);
 
 
-        // set initial mix values for effects
-        /*
-        bitcrushers[i].wet.value = 0;
-        distortions[i].wet.value = 0;
-        choruses[i].wet.value = 0;
-        choruses[i].spread = 180;
-        choruses[i].spread = 0;
-        tremolos[i].wet.value = 0;
-        tremolos[i].spread = 0;
-        delays[i].wet.value = 0;
-        */
-
         if (i % 2 == 0) {
             instruments[i] = new Tone.Player({
                 url: "samples/Marshalls_Kick.wav",
@@ -1077,24 +1065,18 @@ window.onload = function () {
     //initPageSelectors();
 
 
-    //renderParams();
-
-
     //loadSequences(); REENABLE ***
     //loadSamples(); REENABLE ***
 
     // initialize track params
     Tone.loaded().then(() => {
-        // 1. SILENT AUDIO SYNC: Just push data to the nodes, don't touch the DOM/Sliders
         currentData.tracks.forEach((track, i) => {
             panVols[i].volume.value = track.volume;
             panVols[i].pan.value = track.pan;
-            // ... add pitch/envelope/effects direct values here
         });
 
-        // 2. UI SYNC: Now just show Track 0 on the screen
         currentTrack = 0;
-        renderParams(); // This only runs once now, for the active track
+        renderParams();
 
         setupAudioLoop();
     });
@@ -1104,47 +1086,25 @@ window.onload = function () {
 
 // schedule the loop
 function setupAudioLoop() {
-    /*
-    // eventually pass whatever the note's stored time value is after params ***
-    Tone.Transport.scheduleRepeat((time) => {
-        if (!running) return;
-
-        // loop through each track
-        currentData.tracks.forEach((track, index) => {
-            if (track.steps[currentStep] == 1) {
-                playTrackSound(index, time);
-                toggleTrackHit(index);
-            } else {
-                untoggleTrackHit(index);
-            }
-        });
-
-        updateUIPlayHead(currentStep);
-
-        // loop back to 0 when currentStep gets to 16
-        currentStep = (currentStep + 1) % 16;
-    }, "16n");
-     */
-
     // clear any existing loop
     Tone.Transport.cancel();
 
     Tone.Transport.scheduleRepeat((time) => {
-        // 1. Play the sounds for the STEP WE ARE ON
+        // play the sounds for the current step
         currentData.tracks.forEach((track, index) => {
             if (track.steps[currentStep] == 1) {
                 playTrackSound(index, time);
             }
         });
 
-        // 2. Schedule the UI to move ONLY when the audio actually hits
-        // We pass the currentStep into the Draw function
+        // schedule the UI to move ONLY when the audio actually hits
+        // pass the currentStep into the Draw function
         let stepToDraw = currentStep;
         Tone.Draw.schedule(() => {
             updateUIPlayHead(stepToDraw);
         }, time);
 
-        // 3. ONLY NOW increment for the next time the loop runs
+        // increment for the next time the loop runs
         currentStep = (currentStep + 1) % 16;
     }, "16n");
 }
@@ -1257,15 +1217,6 @@ function setTrackHpQ(val) {
 function setTrackDistortion(val) {
     distortions[currentTrack].wet.value = val;
     distortions[currentTrack].distortion = val;
-    /*
-    const amount = parseFloat(val);
-    if (distortions[currentTrack]) {
-        // This is the MIX (0 to 1)
-        distortions[currentTrack].wet.value = amount;
-
-        distortions[currentTrack].distortion = amount;
-    }
-        */
 }
 
 function setTrackBitcrusher(val) {
