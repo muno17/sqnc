@@ -21,6 +21,7 @@ const bitcrushers = [];
 const choruses = [];
 const tremolos = [];
 const delays = [];
+const reverbSends = [];
 
 // recording functionality
 const recorder = new Tone.Recorder();
@@ -37,12 +38,13 @@ var masterReverb;
 
 function initMasterChain() {
     masterCompressor = new Tone.Compressor(-24, 3);
-    masterReverb = new Tone.Reverb(2);
     masterLimiter = new Tone.Limiter(-1);
 
-    masterReverb.wet.value = 0;
+    masterReverb = new Tone.Reverb(1).connect(masterLimiter);
+    masterReverb.wet.value = 1;
 
-    masterCompressor.chain(masterReverb, masterLimiter, Tone.Destination);
+    masterCompressor.chain(masterLimiter);
+    masterLimiter.toDestination();
 }
 
 // massive JSON objects to contain all information
@@ -1014,35 +1016,46 @@ function initInstruments() {
         // initialize parameter components/effects
         panVols[i] = new Tone.PanVol(0, -100).connect(masterCompressor);
 
+        // send to master reverb
+        reverbSends[i] = new Tone.Gain(0).connect(masterReverb);
+        panVols[i].connect(reverbSends[i]);
+
         // initialize effects
         delays[i] = new Tone.FeedbackDelay("8n", 0).connect(panVols[i]);
-        
-        tremolos[i] = new Tone.Tremolo({ frequency: 5, depth: 0, wet: 0 }).connect(delays[i]).start();
-        
+
+        tremolos[i] = new Tone.Tremolo({ frequency: 5, depth: 0, wet: 0 })
+            .connect(delays[i])
+            .start();
+
         choruses[i] = new Tone.Chorus({
             frequency: 4,
             delayTime: 2.5,
             depth: 0,
             wet: 0,
-            spread: 180
-        }).connect(tremolos[i]).start();
-        
-        bitcrushers[i] = new Tone.BitCrusher({ bits: 4, wet: 0 }).connect(choruses[i]);
-        
-        distortions[i] = new Tone.Distortion({ distortion: 0, wet: 0 }).connect(bitcrushers[i]);
+            spread: 180,
+        })
+            .connect(tremolos[i])
+            .start();
+
+        bitcrushers[i] = new Tone.BitCrusher({ bits: 4, wet: 0 }).connect(
+            choruses[i],
+        );
+
+        distortions[i] = new Tone.Distortion({ distortion: 0, wet: 0 }).connect(
+            bitcrushers[i],
+        );
 
         // initialize filters
         hpFilters[i] = new Tone.Filter(10, "highpass").connect(distortions[i]);
         lpFilters[i] = new Tone.Filter(5000, "lowpass").connect(hpFilters[i]);
 
-        // initialize the amp envelope        
+        // initialize the amp envelope
         ampEnvs[i] = new Tone.AmplitudeEnvelope({
             attack: 0.0,
             decay: 2.0,
             sustain: 1.0,
             release: 1.0,
         }).connect(lpFilters[i]);
-
 
         if (i % 2 == 0) {
             instruments[i] = new Tone.Player({
@@ -1080,9 +1093,9 @@ window.onload = function () {
     initGlobalControls();
     initSequencer();
     initTrackParams();
+    initMasterParams();
 
     //initPageSelectors();
-
 
     //loadSequences(); REENABLE ***
     //loadSamples(); REENABLE ***
@@ -1136,7 +1149,6 @@ function playTrackSound(index, time) {
     const env = ampEnvs[index];
     const track = currentData.tracks[index];
     const now = time || Tone.now();
-
 
     try {
         if (player && player.buffer && player.buffer.loaded) {
@@ -1236,7 +1248,7 @@ function setTrackHpQ(val) {
     hpFilters[currentTrack].Q.rampTo(parseFloat(val), 0.05);
 }
 
-// effects
+// track effects
 function setTrackDistortion(val) {
     distortions[currentTrack].wet.value = val;
     distortions[currentTrack].distortion = val;
@@ -1245,7 +1257,6 @@ function setTrackDistortion(val) {
 function setTrackBitcrusher(val) {
     bitcrushers[currentTrack].wet.value = val;
 }
-
 
 function setTrackChorusRate(val) {
     choruses[currentTrack].frequency.value = val;
@@ -1281,4 +1292,17 @@ function setTrackDelayFeedback(val) {
 
 function setTrackDelayMix(val) {
     delays[currentTrack].wet.value = val;
+}
+
+function setTrackReverbSend(val) {
+    reverbSends[currentTrack].gain.rampTo(val, 0.1);
+}
+// master effects
+
+function setMasterReverb(val) {
+    masterReverb.wet.rampTo(val, 0.1);
+}
+
+function setMasterCompression(val) {
+    masterCompressor.threshold.value = val;
 }

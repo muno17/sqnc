@@ -149,8 +149,27 @@ session_start();
                                     </div>
                                 </div>
                             <!-- Master Track Params -->
-                                <div class="masterRow">
-                                    
+                                <div class="masterRow hidden">
+                                    <div class="house">
+                                        <h2>LP Width</h2>
+                                        <div id="lpWidthDisplay" class="display">5.0kHz</div>
+                                        <input type="range" min="0" max="5000" value="20000" class="slider" id="lpWidth">
+                                    </div>
+                                    <div class="house">
+                                        <h2>LP Q</h2>
+                                        <div id="lpqDisplay" class="display">0</div>
+                                        <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="lpq">
+                                    </div>
+                                    <div class="house">
+                                        <h2>HP Width</h2>
+                                        <div id="hpWidthDisplay" class="display">10Hz</div>
+                                        <input type="range" min="10" max="5000" value="10" class="slider" id="hpWidth">
+                                    </div>
+                                    <div class="house">
+                                        <h2>HP Q</h2>
+                                        <div id="hpqDisplay" class="display">0</div>
+                                        <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="hpq">
+                                    </div>
                                 </div>  
                             </div>
                             <div id="paramDivider" class="divider"></div>
@@ -170,8 +189,8 @@ session_start();
                                         </div>
                                         <div class="house">
                                             <h2>Reverb Send</h2>
-                                            <div id="reverbSendDisplay" class="display">0</div>
-                                            <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="revSend">
+                                            <div id="revSendDisplay" class="display">0</div>
+                                            <input type="range" min="0" max="1" step="0.01" value="0" class="slider" id="revSend">
                                         </div>
                                     </div>
                                     <div class="paramRow">

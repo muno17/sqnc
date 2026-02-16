@@ -364,8 +364,6 @@ function initGlobalControls() {
     initTrackSelectors();
     initSequenceSelector();
     initSampleSelector();
-
-    // effects
 }
 
 ///////////////////////// Track Parameters \\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -398,6 +396,7 @@ function initTrackParams() {
     initDelayTime();
     initDelayFeedback();
     initDelayMix();
+    initReverbSend();
 }
 
 // update UI based on what track is selected ***
@@ -947,6 +946,33 @@ function updateDelayMixUI(val) {
     mixDisplay.innerHTML = parseInt(val * 100);
 }
 
+function initReverbSend() {
+    const send = document.getElementById("revSend");
+
+    send.addEventListener("input", function () {
+        const val = parseFloat(this.value);
+        currentData.tracks[currentTrack].reverb = val;
+
+        updateReverbSendUI(val);
+        setTrackReverbSend(val);
+
+        markAsChanged();
+    });
+}
+
+function updateReverbSendUI(val) {
+    const send = document.getElementById("revSend");
+    const sendDisplay = document.getElementById("revSendDisplay");
+
+    // format the value so it displays 0-100
+    send.value = val;
+    sendDisplay.innerHTML = parseInt(val * 100);
+}
+///////////////////////// Master Effects \\\\\\\\\\\\\\\\\\\\\\\\\\
+function initMasterParams() {
+
+}
+
 ///////////////////////// Rendering \\\\\\\\\\\\\\\\\\\\\\\\\\
 
 // show/hide the track specific and master track params
@@ -1001,6 +1027,7 @@ function renderTrackParams() {
         nameDisplay.innerText = track.sampleName || "No Sample Loaded";
     }
 
+    // params
     updateVolumeUI(track.volume);
     setTrackVolume(track.volume, true);
 
@@ -1037,7 +1064,7 @@ function renderTrackParams() {
     updateHpQUI(track.hpq);
     setTrackHpQ(track.hpq);
 
-    // upate effects first
+    // effects
     updateDistortionUI(track.distortion);
     setTrackDistortion(track.distortion);
 
@@ -1070,4 +1097,10 @@ function renderTrackParams() {
 
     updateDelayMixUI(track.delMix);
     setTrackDelayMix(track.delMix);
+
+    updateDelayMixUI(track.delMix);
+    setTrackDelayMix(track.delMix);
+
+    updateReverbSendUI(track.reverb);
+    setTrackReverbSend(track.reverb);
 }
