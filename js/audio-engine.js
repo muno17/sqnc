@@ -675,6 +675,10 @@ var currentData = {
             delMix: 0,
             steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
         },
+        {
+            id: 99,
+            steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        },
     ],
 };
 
@@ -1071,6 +1075,7 @@ window.onload = function () {
     // initialize track params. *** DO WE NEED THIS??? ***
     Tone.loaded().then(() => {
         currentData.tracks.forEach((track, i) => {
+            if (i == 10) return;
             panVols[i].volume.value = track.volume;
             panVols[i].pan.value = track.pan;
         });

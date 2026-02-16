@@ -25,6 +25,10 @@ function initSequencer() {
 }
 
 function renderSequencer() {
+    if (currentTrack == 99) {
+        return;
+    }
+
     // look at currentdata and add values to sequence for current track
     const steps = document.querySelectorAll(".step");
     const currentSeq = currentData.tracks[currentTrack].steps;

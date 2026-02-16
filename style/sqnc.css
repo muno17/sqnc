@@ -377,6 +377,10 @@ footer {
     color: white;
 }
 
+.hidden {
+    display: none !important;
+}
+
 
 /* Modal Screen Styling */
 

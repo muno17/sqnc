@@ -948,8 +948,50 @@ function updateDelayMixUI(val) {
     mixDisplay.innerHTML = parseInt(val * 100);
 }
 
-// update all params to track's saved value ***
 function renderParams() {
+    const trackParams = document.getElementById("trackParams");
+    const effectParams = document.getElementById("effectsHouse");
+    const divider = document.getElementById("paramDivider");
+    const stateRow = document.getElementById("stateRow"); // Sequence selector
+    const selectorRow = document.getElementById("selectorRow"); // Sample selector
+
+    // Check if we are on the Master Track
+    if (currentTrack === 99) {
+        // 1. Hide track-specific UI
+        stateRow.classList.add("hidden");
+        selectorRow.classList.add("hidden");
+
+        // Hide the middle rows of trackParams (Volume, Envelope, Filters)
+        // You can target the children paramRows specifically:
+        const rows = trackParams.querySelectorAll(".paramRow");
+        rows.forEach((row, index) => {
+            if (index > 1) row.classList.add("hidden");
+        });
+
+        const effectsRows = effectParams.querySelectorAll(".paramRow");
+        effectsRows.forEach((row, index) => {
+            if (index > -1) row.classList.add("hidden");
+        });
+
+        // 2. Load Master values into the effects panel
+        //renderMasterEffects();
+    } else {
+        // 1. Show everything again for normal tracks
+        stateRow.classList.remove("hidden");
+        selectorRow.classList.remove("hidden");
+        const rows = trackParams.querySelectorAll(".paramRow");
+        rows.forEach((row) => row.classList.remove("hidden"));
+
+        const effectsRows = effectParams.querySelectorAll(".paramRow");
+        effectsRows.forEach((row) => row.classList.remove("hidden"));
+
+        // 2. Normal track render logic (what you already have)
+        renderTrackParams();
+    }
+}
+
+// update all params to track's saved value ***
+function renderTrackParams() {
     // get current track and update params from currentData ********
     // true = instant snap to value
     const track = currentData.tracks[currentTrack];
