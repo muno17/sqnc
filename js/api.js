@@ -7,7 +7,9 @@ async function checkLoginStatus() {
 
         if (ajax) {
             loggedIn = true;
+            console.log("logged in")
         } else {
+            console.log("not logged in");
             userNotLoggedIn();
         }
     } catch (err) {

@@ -1365,8 +1365,10 @@ function loadInstruments() {
 }
 
 // initialize all controls, audio engine and api
-window.onload = function () {
+window.onload = async function () {
     try {
+        await checkLoginStatus();
+
         // audio setup
         Tone.Transport.bpm.value = currentData.bpm;
         initTransport();
