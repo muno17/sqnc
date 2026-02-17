@@ -13,7 +13,7 @@ if (!isset($_SESSION['logged_in'])) {
 }
 
 $allowedExt = ['wav', 'mp3'];
-$sampleDir = __DIR__ . "/samples/";
+$sampleDir = dirname(__DIR__) . "/samples/";
 $user_id = $_SESSION['user_id'];
 
 
@@ -50,7 +50,7 @@ if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
             # add a new sample entry
             # id (auto), user_id, file_path
             $insertquery = $db->prepare("INSERT INTO samples (user_id, name, file_path) 
-                                        VALUES(?, ?)");
+                                        VALUES(?, ?, ?)");
             $insertquery->execute(array($user_id, $fileName, $relative_url_path));
             
             echo json_encode([

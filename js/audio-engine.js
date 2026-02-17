@@ -90,7 +90,6 @@ function initReverbBus() {
 // currentData is the live object
 // projectData is the master object that interacts with the api
 // initData is an init object with default parameters
-
 var initData = {
     id: null,
     name: "",
@@ -1282,6 +1281,16 @@ var projectData = {
     },
 };
 
+// init samples for when user is not logged in
+var initSamples = {
+    tracks: [
+        {
+            samplePath: "",
+            sampleName: "",
+        },
+    ],
+};
+
 // create tone.js samplers
 function initInstruments() {
     initMasterChain();
@@ -1360,7 +1369,6 @@ window.onload = function () {
     try {
         // audio setup
         Tone.Transport.bpm.value = currentData.bpm;
-        initInstruments();
         initMasterParams();
         initTransport();
 
@@ -1372,9 +1380,10 @@ window.onload = function () {
 
         // api setup
         loadSequences(); // REENABLE ***
-        //loadSamples(); // REENABLE ***
+        loadSamples(); // REENABLE ***
 
-        // initialize track params. *** DO WE NEED THIS??? ***
+        // initialize instruments and track params *** DO WE NEED THIS??? ***
+        initInstruments();
         Tone.loaded().then(() => {
             currentData.tracks.forEach((track, i) => {
                 if (i == 10) return;
@@ -1387,9 +1396,18 @@ window.onload = function () {
 
             setupAudioLoop();
         });
-        renderMasterParams();
 
-        // remove loading screen, add a bit of extra time for everything to shift into place
+        renderMasterParams();
+        removeLoadingScreen();
+
+        } catch (error) {
+            console.error("Failed to load:", error);
+            document.querySelector(".loading-box h3").innerText = "Load Failed :(";
+        }
+};
+
+function removeLoadingScreen() {
+    // remove loading screen, add a bit of extra time for everything to shift into place
         setTimeout(() => {
             const loader = document.getElementById("loading-overlay");
             loader.style.opacity = "0";
@@ -1399,12 +1417,7 @@ window.onload = function () {
                 loader.classList.add("hidden");
             }, 500);
         }, 500);
-    } catch (error) {
-        console.error("Failed to load:", error);
-        document.querySelector(".loading-box h3").innerText = "Load Failed :(";
-    }
-};
-
+}
 ////////////////////////// Loop Parameters \\\\\\\\\\\\\\\\\\\\\\\\\\
 
 // schedule the loop

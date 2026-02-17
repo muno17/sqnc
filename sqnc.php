@@ -43,13 +43,6 @@ session_start();
                     ?>
             </div>
         </header>
-    <?php
-    if(isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
-                ?>
-                <h1>hello <?= $_SESSION['username'] ?></h1>
-                <?php
-            }
-    ?>
         <div id="sqnc">
             <img class="wood" src="style/wood-pattern.png">
             <div id="sqncBody">
@@ -85,11 +78,10 @@ session_start();
                                         <label for="samples">Sample</label>
                                         <select name="samples" id="samples"></select>
                                     </div>
-                                    <form action="upload-sample.php" method="post" enctype="multipart/form-data" id="userUpload">
+                                    <div  id="userUpload">
                                         <label for="file" id="upload-button">Upload</label>
-                                        <input type="file" name="file" id="file" value="Upload"
-                                        enctype="multipart/form-data" accept=".wav,.mp3">
-                                    </form>
+                                        <input type="file" name="file" id="file" value="Upload" enctype="multipart/form-data" accept=".wav,.mp3">
+                                    </div>
                                     <div class="local-upload-container hidden" id="guestUpload">
                                         <label for="localFile" id="upload-button">Upload</label>
                                         <input type="file" id="localFile" accept=".wav,.mp3" style="display:none">

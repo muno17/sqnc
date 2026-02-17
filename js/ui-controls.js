@@ -330,14 +330,24 @@ function initSampleSelector() {
 }
 
 function initUserUpload() {
+    const upload = document.getElementById("file");
+
+    if (upload) {
+        upload.addEventListener("change", function (e) {
+            console.log("calling user upload");
+            const file = e.target.files[0];
+            uploadSample(file);
+        });
+    }
+}
+
+function initGuestUpload() {
     const upload = document.getElementById("localFile");
 
     if (upload) {
         upload.addEventListener("change", function (e) {
-                console.log("called 0");
             const file = e.target.files[0];
             handleLocalUpload(file, currentTrack);
-                console.log("called 1");
         });
     }
 }
@@ -495,6 +505,7 @@ function initGlobalControls() {
     initSequenceSelector();
     initSampleSelector();
     initUserUpload();
+    initGuestUpload();
 }
 
 ///////////////////////// Track Parameters \\\\\\\\\\\\\\\\\\\\\\\\\\

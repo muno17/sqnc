@@ -177,6 +177,14 @@ async function uploadSample(file) {
             });
 
             // update the UI
+            const samples = document.getElementById("samples");
+            var newSample = document.createElement("option");
+            newSample.value = ajax.path;
+            newSample.dataset.name = ajax.name;
+            newSample.innerHTML = ajax.name;
+            newSample.selected = true;
+            samples.appendChild(newSample);
+
             markAsChanged();
             renderParams();
         } else {
@@ -222,16 +230,12 @@ async function loadSamples() {
 
 // ****************** local uploads ****************** \\
 async function handleLocalUpload(file, trackIndex) {
-    console.log("called 2")
     if (!file) return;
-
-        console.log("called 3");
 
     // create a temporary url for the local file
     const localURL = URL.createObjectURL(file);
 
     await instruments[trackIndex].load(localURL);
-    console.log("called 4");
     currentData.tracks[trackIndex].sampleName = file.name;
     currentData.tracks[trackIndex].samplePath = localURL;
 
@@ -244,6 +248,5 @@ async function handleLocalUpload(file, trackIndex) {
     samples.appendChild(newSample);
 
     renderParams();
-    console.log("called 5");
     console.log(`Local sample loaded to track ${trackIndex}: ${file.name}`);
 }
