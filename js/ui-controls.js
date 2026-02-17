@@ -6,6 +6,9 @@ function userNotLoggedIn() {
 
     const save = document.getElementById("save");
     save.disabled = true;
+
+    const newB = document.getElementById("new");
+    newB.disabled = true;
 }
 
 ////////////////////////// Global Parameters \\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -182,8 +185,7 @@ function initSave() {
             if (changes) {
                 await saveSequence();
 
-                saveBtn.classList.remove("changes");
-                changes = false;
+                resetChanges();
             }
         });
     }
@@ -198,6 +200,12 @@ function markAsChanged() {
     }
 }
 
+function resetChanges() {
+    const saveBtn = document.getElementById("save");
+    saveBtn.classList.remove("changes");
+    changes = false;
+}
+
 // revert back to last loaded projectData
 function initReload() {
     const reloadBtn = document.getElementById("reload");
@@ -206,9 +214,8 @@ function initReload() {
     reloadBtn.addEventListener("click", function () {
         // don't do anything if there aren't any changes
         if (changes) {
-            saveBtn.classList.remove("changes");
             currentData = JSON.parse(JSON.stringify(projectData));
-            changes = false;
+            resetChanges();
 
             // stop the current audio and reload instruments
             stopAllSounds();
@@ -260,8 +267,7 @@ function initNew() {
 
         // reset changes state
         if (changes) {
-            saveBtn.classList.remove("changes");
-            changes = false;
+            resetChanges();
         }
 
         // update the sequences dropdown
@@ -378,6 +384,7 @@ function openSaveModal(id) {
     function closeModal() {
         overlay.classList.add("modal-hidden");
         document.body.style.overflow = "auto";
+        resetChanges();
     }
 
     // close when clicking either button in the modal
@@ -395,8 +402,7 @@ function resetInterface() {
     currentData = JSON.parse(JSON.stringify(initData));
     projectData = JSON.parse(JSON.stringify(initData));
 
-    saveBtn.classList.remove("changes");
-    changes = false;
+    resetChanges();
 
     Tone.Transport.stop();
     currentStep = 0;
@@ -1711,9 +1717,45 @@ function renderTrackParams() {
     updateDelayMixUI(track.delMix);
     setTrackDelayMix(track.delMix);
 
-    updateDelayMixUI(track.delMix);
-    setTrackDelayMix(track.delMix);
-
     updateReverbSendUI(track.reverb);
     setTrackReverbSend(track.reverb);
+}
+
+function syncTrackParams() {
+        currentData.tracks.forEach((track, index) => {
+            if (track.id === 99) return;
+
+            let originalViewTrack = currentTrack;
+            currentTrack = index;
+
+            // params
+            setTrackVolume(track.volume, true);
+            setTrackPan(track.pan, true);
+            setTrackPitch(track.pitch);
+            setTrackStart(track.start);
+            setTrackAttack(track.attack);
+            setTrackDecay(track.decay);
+            setTrackSustain(track.sustain);
+            setTrackRelease(track.release);
+            setTrackLpWidth(track.lpWidth);
+            setTrackLpQ(track.lpq);
+            setTrackHpWidth(track.hpWidth);
+            setTrackHpQ(track.hpq);
+
+            // effects
+            setTrackDistortion(track.distortion);
+            setTrackBitcrusher(track.bitcrusher);
+            setTrackChorusRate(track.chorusRate);
+            setTrackChorusDepth(track.chorusDepth);
+            setTrackChorusMix(track.chorusMix);
+            setTrackTremoloRate(track.tremRate);
+            setTrackTremoloDepth(track.tremDepth);
+            setTrackTremoloMix(track.tremMix);
+            setTrackDelayTime(track.delTime);
+            setTrackDelayFeedback(track.delFback);
+            setTrackDelayMix(track.delMix);
+            setTrackReverbSend(track.reverb);
+
+            currentTrack = originalViewTrack;
+        });
 }

@@ -74,7 +74,7 @@ session_start();
                                 <div class="paramRow" id="stateRow">
                                     <div id="selector">
                                         <label for="sequences">Sequence</label>
-                                        <select name="sequences" id="sequences">Log in to save sequences</select>
+                                        <select name="sequences" id="sequences"></select>
                                     </div>
                                     <button id="save">Save</button>
                                     <button id="new">New</button>

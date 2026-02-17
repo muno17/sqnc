@@ -59,7 +59,7 @@ async function loadSequences() {
 
         // check if the response is successful (status 200)
         if (!response.ok) { 
-            // user not logged in, just return in this case
+            // user not logged in, just return
             if (response.status === 401) {
                 console.warn("User is not logged in. Skipping sequence load.");
                 userNotLoggedIn();
@@ -93,9 +93,11 @@ async function loadSequences() {
     }
 }
 
+/* do we need this? ***
 function userNotLoggedIn() {
 
 }
+*/
 
 async function getSequence(id) {
     // disable sequencer and stop if running
@@ -116,16 +118,19 @@ async function getSequence(id) {
         // might need to be just projectData = ajax.content;
         projectData = JSON.parse(ajax.content);
         currentData = JSON.parse(JSON.stringify(projectData));
-        currentlyLoaded = currentData.name;
 
         
         // add logic for stopping and disabling play until loaded? ***
+        syncTrackParams(); 
+        renderMasterParams();
 
         // load samples for the sequence
-        loadSequenceSamples();
+        await loadSequenceSamples();
 
         // update the sequencer UI
         renderSequencer();
+        Tone.Transport.cancel();
+        setupAudioLoop();
         console.log("sequence loaded")
     } catch (err) {
         console.error("Failed to load sequences:", err);
