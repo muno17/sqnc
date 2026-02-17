@@ -5,6 +5,8 @@ function initSequencer() {
 
     // activate the step on double click
     sequence.addEventListener("dblclick", function (e) {
+        if (currentTrack === 99) return;
+        
         // check if an actual step was clicked
         if (e.target.classList.contains("step")) {
             // grab the step index

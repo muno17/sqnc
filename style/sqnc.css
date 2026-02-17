@@ -148,16 +148,20 @@ h3 {
 
 
 #topParams {
+    position: relative;
     display:flex;
     width: 100%;
-    min-height: 500px;
+    height: 520px;
+    overflow: hidden;
+    align-items: flex-start;
 }
 
 #trackParams {
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
     flex: 0 0 55%;
-    margin-top: 20px;
+    margin-top: 50px;
 }
 
 #trackParams.master {
@@ -168,6 +172,7 @@ h3 {
     flex: 0 0 45%;
     display: flex;
     flex-direction: column;
+    margin-top: 100px;
 }
 
 #effectParams.master {
@@ -297,6 +302,8 @@ button.page {
     align-items: center;
 }
 
+
+
 .display {
     background-color: black;
     color: white;
@@ -325,6 +332,19 @@ button.page {
     height: 80px;
     gap: 5px;
     margin-top: 10px;
+}
+
+#sequencer.read-only .step {
+    opacity: 0.4;
+    cursor: not-allowed;
+    filter: grayscale(100%);
+}
+
+
+#sequencer.read-only .step.current {
+    opacity: 1;
+    filter: none;
+    background-color: #5F9F89;
 }
 
 .step {
@@ -391,22 +411,25 @@ button.page {
     border-color: #ECC987;
 }
 
-#logo,
-#masterLogo {
-    margin-left: auto;
+#logo {
+    position: absolute;
+    top: 10px;
+    right: 25px;
     font-size: 70px;
     font-weight: bold;
-    align-self: flex-start;
+    /*align-self: flex-start;*/
     text-shadow: 1px 1px 8px black;
-    margin-right: 30px;
+    margin: 0;
 }
 
-#masterLogo {
-    margin-right: 500px;
-}
 
-#masterArea {
-    margin-bottom: 100;
+#masterArea.master {
+    display: flex;
+    flex-direction: row;      /* Keeps the effects side-by-side */
+    align-items: flex-start;  /* PULLS EVERYTHING TO THE TOP */
+    justify-content: flex-start;
+    gap: 20px;                /* Space between the blocks */
+    margin-top: 10px;
 }
 
 .loop {

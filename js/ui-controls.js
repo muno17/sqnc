@@ -1459,7 +1459,7 @@ function renderParams() {
     const divider = document.getElementById("paramDivider");
     const selectorRow = document.getElementById("selectorRow"); // sample selector
     const stateRow = document.getElementById("stateRow"); // sequence selector
-    const logo = document.getElementById("logo");
+    const sequencer = document.getElementById("sequencer");
 
     // check if current track is master
     if (currentTrack === 99) {
@@ -1476,15 +1476,14 @@ function renderParams() {
         trackParams.classList.add("master");
         effectParams.classList.add("master");
         stateRow.classList.add("master");
-        logo.classList.add("master");
 
 
         renderMasterParams();
+        sequencer.classList.add("read-only");
     } else {
         trackParams.classList.remove("master");
         effectParams.classList.remove("master");
         stateRow.classList.remove("master");
-        logo.classList.remove("master");
         // hide the master specific UI
         const masterRows = document.querySelectorAll(".master");
         masterRows.forEach((row) => {
@@ -1502,6 +1501,7 @@ function renderParams() {
         effectsRows.forEach((row) => row.classList.remove("hidden"));
 
         renderTrackParams();
+        sequencer.classList.remove("read-only");
     }
 }
 

@@ -61,6 +61,7 @@ session_start();
                     </div>
                     <div id="params">
                         <div id="topParams">
+                            <div id="logo">sqnc</div>
                             <div id="trackParams">
                                 <div class="paramRow" id="stateRow">
                                     <div id="selector">
@@ -182,7 +183,7 @@ session_start();
                                                 <div id="revWidthDisplay" class="display">30</div>
                                                 <input type="range" min="0" max="1" step="0.01"value=".3" class="slider" id="revWidth">
                                             </div>
-                                            <div class="house">
+                                            <div class="house limiter">
                                                 <h2>Limit</h2>
                                                 <div id="revLimitDisplay" class="display">-3</div>
                                                 <input type="range" min="-24" max="0" step="1" value="-3" class="slider" id="revLimit">
@@ -285,7 +286,7 @@ session_start();
                             </div>
                             <div id="paramDivider" class="divider"></div>
                             <div id="effectParams">
-                                <div id="logo">sqnc</div>
+                                <!--<div id="logo">sqnc</div>-->
                                 <div id="effectsHouse">
                                     <div class="paramRow">
                                         <div class="house">
