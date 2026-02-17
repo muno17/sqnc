@@ -219,7 +219,6 @@ function resetChanges() {
 // revert back to last loaded projectData
 function initReload() {
     const reloadBtn = document.getElementById("reload");
-    const saveBtn = document.getElementById("save");
 
     reloadBtn.addEventListener("click", function () {
         // don't do anything if there aren't any changes
@@ -317,8 +316,7 @@ function initSampleSelector() {
         // update data
         const path = this.value;
         const name = this.options[this.selectedIndex].dataset.name;
-        console.log("path: " + path);
-        console.log("name: " + name)
+
         currentData.tracks[currentTrack].samplePath = path;
         currentData.tracks[currentTrack].sampleName = name;
 
@@ -1676,11 +1674,21 @@ function renderMasterParams() {
 // update all params to track's saved value
 function renderTrackParams() {
     const track = currentData.tracks[currentTrack];
+    const samplesDropdown = document.getElementById("samples");
 
+    if (track.samplePath) {
+        samplesDropdown.value = track.samplePath;
+    } else {
+        // Fallback if no sample is loaded
+        samplesDropdown.selectedIndex = 0;
+        samplesDropdown.value = "";
+    }
+
+    /*
     const nameDisplay = document.getElementById("sampleNameDisplay");
     if (nameDisplay) {
         nameDisplay.innerText = track.sampleName || "No Sample Loaded";
-    }
+    }*/
 
     // params
     updateVolumeUI(track.volume);
