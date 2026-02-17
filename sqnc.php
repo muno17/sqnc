@@ -18,6 +18,14 @@ session_start();
        <!--<script src="js/modals.js"></script>-->
     </head>
     <body>
+                <!-- Loading Modal -->
+        <div id="loading-overlay" class="loading-overlay">
+            <div class="loading-box">
+                <div class="spinner"></div>
+                <h3>Loading...</h3>
+                <p>Prepping samples & engine</p>
+            </div>
+        </div>
         <header>
             <a href="sqnc.php" id="header-logo">sqnc</a>
             <div id="options">
@@ -415,7 +423,8 @@ session_start();
             <img class="wood" src="style/wood-pattern.png">
         </div>
         <footer></footer>
-        <!-- modal screen -->
+        <!-- modal screens -->
+        <!-- New Sequence Modal -->
         <div id="sequence-overlay" class="modal-overlay modal-hidden">
             <div class="modal-box">
                 <h3>New Sequence</h3>

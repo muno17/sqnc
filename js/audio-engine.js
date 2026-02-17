@@ -1356,37 +1356,53 @@ function loadInstruments() {
 
 // initialize all controls, audio engine and api
 window.onload = function () {
-    // core setup
-    Tone.Transport.bpm.value = currentData.bpm;
-    initInstruments();
-    initMasterParams();
-    initTransport();
+    try {
+        // core setup
+        Tone.Transport.bpm.value = currentData.bpm;
+        initInstruments();
+        initMasterParams();
+        initTransport();
 
-    // control setup
-    initGlobalControls();
-    initSequencer();
-    initTrackParams();
-    initMasterParams();
+        // control setup
+        initGlobalControls();
+        initSequencer();
+        initTrackParams();
+        initMasterParams();
 
-    //initPageSelectors();
+        //initPageSelectors();
 
-    //loadSequences(); REENABLE ***
-    //loadSamples(); REENABLE ***
+        //loadSequences(); REENABLE ***
+        //loadSamples(); REENABLE ***
 
-    // initialize track params. *** DO WE NEED THIS??? ***
-    Tone.loaded().then(() => {
-        currentData.tracks.forEach((track, i) => {
-            if (i == 10) return;
-            panVols[i].volume.value = track.volume;
-            panVols[i].pan.value = track.pan;
+        // initialize track params. *** DO WE NEED THIS??? ***
+        Tone.loaded().then(() => {
+            currentData.tracks.forEach((track, i) => {
+                if (i == 10) return;
+                panVols[i].volume.value = track.volume;
+                panVols[i].pan.value = track.pan;
+            });
+
+            currentTrack = 0;
+            renderParams();
+
+            setupAudioLoop();
         });
+        renderMasterParams();
 
-        currentTrack = 0;
-        renderParams();
+        // remove loading screen, add a bit of extra time for everything to shift into place
+        setTimeout(() => {
+            const loader = document.getElementById("loading-overlay");
+            loader.style.opacity = "0";
+            loader.style.transition = "opacity 0.5s ease";
 
-        setupAudioLoop();
-    });
-    renderMasterParams();
+            setTimeout(() => {
+                loader.classList.add("hidden");
+            }, 500);
+        }, 500);
+    } catch (error) {
+        console.error("Failed to load:", error);
+        document.querySelector(".loading-box h3").innerText = "Load Failed :(";
+    }
 };
 
 ////////////////////////// Loop Parameters \\\\\\\\\\\\\\\\\\\\\\\\\\

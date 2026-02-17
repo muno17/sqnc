@@ -38,7 +38,6 @@ function stopTransport() {
     stopAllSounds();
     Tone.Draw.cancel();
 
-
     currentStep = 0;
 
     document.querySelectorAll(".step").forEach((el) => {
@@ -138,7 +137,7 @@ function initPageSelectors() {
             currentPage = parseInt(this.dataset.index);
             renderSequencer();
         });
-        
+
         btn.addEventListener("dblclick", function () {
             const newLength = parseInt(this.dataset.index) + 1;
             currentData.length = newLength + "m";
@@ -149,7 +148,7 @@ function initPageSelectors() {
             updatePageVisuals(newLength);
 
             markAsChanged();
-        })
+        });
     });
 }
 
@@ -358,13 +357,14 @@ function initClear() {
 
     clear.addEventListener("click", function () {
         currentData.tracks[currentTrack].steps = [
-            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
         ];
         renderSequencer();
         markAsChanged();
     });
 }
-
 
 function toggleTrackHit(index) {
     const trackBtns = document.querySelectorAll(".trackBtn");
@@ -1018,7 +1018,7 @@ function initMasterParams() {
     initPredelay();
     initReverbWidth();
     initReverbLimit();
-    
+
     // eq
     initEqLow();
     initEqMid();
@@ -1400,7 +1400,7 @@ function updateSatToneUI(val) {
 
     // format the value so it displays 0-100
     satTone.value = val;
-    satToneDisplay.innerHTML = parseInt(val * .005);
+    satToneDisplay.innerHTML = parseInt(val * 0.005);
 }
 
 function initSatMix() {
@@ -1468,15 +1468,18 @@ function renderParams() {
         divider.classList.add("hidden");
 
         const rows = trackParams.querySelectorAll(".paramRow");
-        rows.forEach((row) => { row.classList.add("hidden");});
+        rows.forEach((row) => {
+            row.classList.add("hidden");
+        });
 
         const effectRows = effectHouse.querySelectorAll(".paramRow");
-        effectRows.forEach((row) => { row.classList.add("hidden");});
+        effectRows.forEach((row) => {
+            row.classList.add("hidden");
+        });
 
         trackParams.classList.add("master");
         effectParams.classList.add("master");
         stateRow.classList.add("master");
-
 
         renderMasterParams();
         sequencer.classList.add("read-only");
@@ -1510,16 +1513,16 @@ function renderMasterParams() {
     const master = currentData.master;
     const masterRows = document.querySelectorAll(".master");
 
-       masterRows.forEach((row) => {
-            row.classList.remove("hidden");
-        });
+    masterRows.forEach((row) => {
+        row.classList.remove("hidden");
+    });
 
     updateDirtUI(master.dirt);
     setMasterDirt(master.dirt);
 
     updateDirtMixUI(master.dirtMix);
     setMasterDirtMix(master.dirtMix);
-    
+
     updateSpaceUI(master.space);
     setMasterSpace(master.space);
 
