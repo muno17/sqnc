@@ -315,14 +315,15 @@ function initSampleSelector() {
         }
 
         // update data
-        const trackToUpdate = currentTrack;
         const path = this.value;
         const name = this.options[this.selectedIndex].dataset.name;
-        currentData.tracks[trackToUpdate].samplePath = path;
-        currentData.tracks[trackToUpdate].sampleName = name;
+        console.log("path: " + path);
+        console.log("name: " + name)
+        currentData.tracks[currentTrack].samplePath = path;
+        currentData.tracks[currentTrack].sampleName = name;
 
         // update audio engine
-        instruments[trackToUpdate].load(path);
+        instruments[currentTrack].load(path);
 
         markAsChanged();
     });

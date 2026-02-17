@@ -237,7 +237,8 @@ async function handleLocalUpload(file, trackIndex) {
 
     const samples = document.getElementById("samples")
     var newSample = document.createElement("option");
-    newSample.value = "";
+    newSample.value = localURL;
+    newSample.dataset.name = file.name;
     newSample.innerHTML = file.name;
     newSample.selected = true;
     samples.appendChild(newSample);
