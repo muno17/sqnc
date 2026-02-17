@@ -1,8 +1,6 @@
 // ****************** communication with the server ****************** \\
 // use fetch api for AJAX requests
 
-// check if user logged in ***************
-
 // send projectData when save button is pressed
 async function saveSequence() {
     // send currentData to the server
@@ -58,6 +56,19 @@ async function loadSequences() {
         const response = await fetch("api/get-user-sequences.php", {
             method: "POST",
         });
+
+        // check if the response is successful (status 200)
+        if (!response.ok) { 
+            // user not logged in, just return in this case
+            if (response.status === 401) {
+                console.warn("User is not logged in. Skipping sequence load.");
+                userNotLoggedIn();
+                // You could update the UI here: sequences.innerHTML = "<option>Log in to save sequences</option>";
+                return;
+            }
+            throw new Error(`Server error: ${response.status}`);
+        }
+
         const ajax = await response.json();
         const sequences = document.getElementById("sequences");
 
@@ -80,6 +91,10 @@ async function loadSequences() {
     } catch (err) {
         console.error("Failed to load sequences:", err);
     }
+}
+
+function userNotLoggedIn() {
+
 }
 
 async function getSequence(id) {

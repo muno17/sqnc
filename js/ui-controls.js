@@ -1,5 +1,12 @@
 // UI event listeners
 // modify based on whether user is logged in or not
+function userNotLoggedIn() {
+    const sequences = document.getElementById("sequences");
+    sequences.innerHTML = "<option>Log in to save sequences</option>";
+
+    const save = document.getElementById("save");
+    save.disabled = true;
+}
 
 ////////////////////////// Global Parameters \\\\\\\\\\\\\\\\\\\\\\\\\\
 function initTransport() {

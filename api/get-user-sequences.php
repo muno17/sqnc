@@ -5,7 +5,9 @@ session_start();
 
 # If user is not logged in don't do anything
 if (!isset($_SESSION['logged_in'])) {
-    header("Location: /sqnc/sqnc.php");
+    header("HTTP/1.1 401 Unauthorized");
+    header('Content-Type: application/json');
+    echo json_encode(["error" => "Not logged in"]);
     exit;
 }
 

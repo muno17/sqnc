@@ -1357,7 +1357,7 @@ function loadInstruments() {
 // initialize all controls, audio engine and api
 window.onload = function () {
     try {
-        // core setup
+        // audio setup
         Tone.Transport.bpm.value = currentData.bpm;
         initInstruments();
         initMasterParams();
@@ -1369,10 +1369,9 @@ window.onload = function () {
         initTrackParams();
         initMasterParams();
 
-        //initPageSelectors();
-
-        //loadSequences(); REENABLE ***
-        //loadSamples(); REENABLE ***
+        // api setup
+        loadSequences(); // REENABLE ***
+        //loadSamples(); // REENABLE ***
 
         // initialize track params. *** DO WE NEED THIS??? ***
         Tone.loaded().then(() => {

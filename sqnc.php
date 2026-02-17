@@ -18,7 +18,7 @@ session_start();
        <!--<script src="js/modals.js"></script>-->
     </head>
     <body>
-                <!-- Loading Modal -->
+        <!-- Loading Modal -->
         <div id="loading-overlay" class="loading-overlay">
             <div class="loading-box">
                 <div class="spinner"></div>
@@ -32,7 +32,7 @@ session_start();
                 <?php
                     if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                     ?>
-                    <a href="sqnc.php">User Library</a>
+                    <!--<a href="sqnc.php">User Library</a>-->
                     <a href="api/logout.php">Log Out</a>
                     <?php
                     }else {
@@ -279,7 +279,7 @@ session_start();
                                             <div class="house">
                                                 <h2>Mix</h2>
                                                 <div id="satMixDisplay" class="display">0</div>
-                                                <input type="range" min="0" max="1" step="0.1" value="0" class="slider" id="satMix">
+                                                <input type="range" min="0" max="1" step="0.01" value="0" class="slider" id="satMix">
                                             </div>
                                         </div>
                                     </div>
@@ -431,7 +431,7 @@ session_start();
                 <input type="text" id="seq-name" placeholder="Name your sequence">
                 <div class="modal-footer">
                     <button id="sequence-close-btn">Cancel</button>
-                    <button id="sequence-init-btn">Save</button>
+                    <button id="sequence-init-btn">Create</button>
                 </div>
             </div>
         </div>
