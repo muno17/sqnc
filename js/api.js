@@ -1,4 +1,20 @@
 // ****************** communication with the server ****************** \\
+async function checkLoginStatus() {
+    try {
+        const response = await fetch("api/check-login-status.php");
+
+        const ajax = await response.json();
+
+        if (ajax) {
+            loggedIn = true;
+        } else {
+            userNotLoggedIn();
+        }
+    } catch (err) {
+        console.error("Failed to check login status:", err);
+    }
+}
+
 // use fetch api for AJAX requests
 
 // send projectData when save button is pressed
@@ -92,11 +108,6 @@ async function loadSequences() {
     }
 }
 
-/* do we need this? ***
-function userNotLoggedIn() {
-
-}
-*/
 
 async function getSequence(id) {
     // disable sequencer and stop if running
@@ -203,6 +214,19 @@ async function loadSamples() {
         const response = await fetch("api/get-user-samples.php", {
             method: "POST",
         });
+
+        // check if the response is successful (status 200)
+        if (!response.ok) {
+            // user not logged in, just return
+            if (response.status === 401) {
+                console.warn("User is not logged in. Skipping sample loading.");
+                userNotLoggedIn();
+                return;
+            }
+            // throw error if its another status code
+            throw new Error(`Server error: ${response.status}`);
+        }
+
         const ajax = await response.json();
         const samples = document.getElementById("samples");
 

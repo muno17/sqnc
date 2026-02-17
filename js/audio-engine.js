@@ -5,7 +5,7 @@ var currentPage = 0;
 var length = "1m";
 var running = false;
 var changes = false;
-var loggedIn = true;
+var loggedIn = false;
 
 Tone.Transport.loop = true;
 Tone.Transport.loopEnd = length;
@@ -1369,7 +1369,6 @@ window.onload = function () {
     try {
         // audio setup
         Tone.Transport.bpm.value = currentData.bpm;
-        initMasterParams();
         initTransport();
 
         // control setup
@@ -1378,9 +1377,11 @@ window.onload = function () {
         initTrackParams();
         initMasterParams();
 
-        // api setup
-        loadSequences(); // REENABLE ***
-        loadSamples(); // REENABLE ***
+        // api setup for logged in users
+        if (loggedIn) {
+            loadSequences();
+            loadSamples();
+        }
 
         // initialize instruments and track params *** DO WE NEED THIS??? ***
         initInstruments();
