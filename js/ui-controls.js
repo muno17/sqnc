@@ -10,6 +10,12 @@ function userNotLoggedIn() {
     const newB = document.getElementById("new");
     newB.disabled = true;
 
+    const userUpload = document.getElementById("userUpload");
+    userUpload.classList.toggle('hidden');
+
+    const guestUpload = document.getElementById("guestUpload");
+    guestUpload.classList.toggle("hidden");
+
     loggedIn = false;
 }
 
@@ -232,7 +238,7 @@ function initReload() {
     });
 }
 
-// init for new ***
+// init for new 
 function initNew() {
     const newBtn = document.getElementById("new");
     const saveBtn = document.getElementById("save");
@@ -320,6 +326,19 @@ function initSampleSelector() {
 
         markAsChanged();
     });
+}
+
+function initUserUpload() {
+    const upload = document.getElementById("localFile");
+
+    if (upload) {
+        upload.addEventListener("change", function (e) {
+                console.log("called 0");
+            const file = e.target.files[0];
+            handleLocalUpload(file, currentTrack);
+                console.log("called 1");
+        });
+    }
 }
 
 function initTrackSelectors() {
@@ -474,6 +493,7 @@ function initGlobalControls() {
     initTrackSelectors();
     initSequenceSelector();
     initSampleSelector();
+    initUserUpload();
 }
 
 ///////////////////////// Track Parameters \\\\\\\\\\\\\\\\\\\\\\\\\\

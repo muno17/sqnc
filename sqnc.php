@@ -72,7 +72,7 @@ session_start();
                             <div id="logo">sqnc</div>
                             <div id="trackParams">
                                 <div class="paramRow" id="stateRow">
-                                    <div id="selector">
+                                    <div class="selector">
                                         <label for="sequences">Sequence</label>
                                         <select name="sequences" id="sequences"></select>
                                     </div>
@@ -81,15 +81,19 @@ session_start();
                                     <button id="reload">Reload</button>
                                 </div>
                                 <div class="paramRow" id="selectorRow">
-                                    <div id="selector">
+                                    <div class="selector">
                                         <label for="samples">Sample</label>
                                         <select name="samples" id="samples"></select>
                                     </div>
-                                    <form action="upload-sample.php" method="post" enctype="multipart/form-data">
+                                    <form action="upload-sample.php" method="post" enctype="multipart/form-data" id="userUpload">
                                         <label for="file" id="upload-button">Upload</label>
                                         <input type="file" name="file" id="file" value="Upload"
                                         enctype="multipart/form-data" accept=".wav,.mp3">
                                     </form>
+                                    <div class="local-upload-container hidden" id="guestUpload">
+                                        <label for="localFile" id="upload-button">Upload</label>
+                                        <input type="file" id="localFile" accept=".wav,.mp3" style="display:none">
+                                    </div>
                                 </div>
                                 <div class="paramRow">
                                     <div class="house">

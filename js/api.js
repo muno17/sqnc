@@ -16,11 +16,11 @@ async function saveSequence() {
         const response = await fetch("api/save-sequence.php", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(currentData)
+            body: JSON.stringify(currentData),
         });
-        
+
         const ajax = await response.json();
-        
+
         // update projectData and currentData on success
         projectData = JSON.parse(JSON.stringify(currentData));
         currentData = JSON.parse(JSON.stringify(projectData));
@@ -45,7 +45,6 @@ async function saveSequence() {
     }
 }
 
-
 // when user logs in, load correct sequences
 async function loadSequences() {
     // load projectData -> copy into currentData
@@ -58,7 +57,7 @@ async function loadSequences() {
         });
 
         // check if the response is successful (status 200)
-        if (!response.ok) { 
+        if (!response.ok) {
             // user not logged in, just return
             if (response.status === 401) {
                 console.warn("User is not logged in. Skipping sequence load.");
@@ -119,9 +118,8 @@ async function getSequence(id) {
         projectData = JSON.parse(ajax.content);
         currentData = JSON.parse(JSON.stringify(projectData));
 
-        
         // add logic for stopping and disabling play until loaded? ***
-        syncTrackParams(); 
+        syncTrackParams();
         renderMasterParams();
 
         // load samples for the sequence
@@ -131,7 +129,7 @@ async function getSequence(id) {
         renderSequencer();
         Tone.Transport.cancel();
         setupAudioLoop();
-        console.log("sequence loaded")
+        console.log("sequence loaded");
     } catch (err) {
         console.error("Failed to load sequences:", err);
     }
@@ -159,7 +157,7 @@ function loadInstruments() {
 // add sample to db and samples folder
 async function uploadSample(file) {
     const formData = new FormData();
-    formData.append('file', file);
+    formData.append("file", file);
     try {
         const response = await fetch("api/upload-sample.php", {
             method: "POST",
@@ -189,12 +187,11 @@ async function uploadSample(file) {
     }
 }
 
-
 // when user logs in, load correct samples
 async function loadSamples() {
     // fetch all user uploaded samples
     // return list of file paths
-        try {
+    try {
         const response = await fetch("api/get-user-samples.php", {
             method: "POST",
         });
@@ -221,4 +218,31 @@ async function loadSamples() {
     } catch (err) {
         console.error("Failed to load sequences:", err);
     }
+}
+
+// ****************** local uploads ****************** \\
+async function handleLocalUpload(file, trackIndex) {
+    console.log("called 2")
+    if (!file) return;
+
+        console.log("called 3");
+
+    // create a temporary url for the local file
+    const localURL = URL.createObjectURL(file);
+
+    await instruments[trackIndex].load(localURL);
+    console.log("called 4");
+    currentData.tracks[trackIndex].sampleName = file.name;
+    currentData.tracks[trackIndex].samplePath = localURL;
+
+    const samples = document.getElementById("samples")
+    var newSample = document.createElement("option");
+    newSample.value = "";
+    newSample.innerHTML = file.name;
+    newSample.selected = true;
+    samples.appendChild(newSample);
+
+    renderParams();
+    console.log("called 5");
+    console.log(`Local sample loaded to track ${trackIndex}: ${file.name}`);
 }
