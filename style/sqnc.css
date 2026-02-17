@@ -358,9 +358,14 @@ button.page {
     display: inline-block; 
 }
 
-#paramDivider {
+.paramDivider {
     margin-top: 100px;
     height: 80%;
+}
+
+.masterDivider {
+    height: 300px;
+    margin-top: 50px;
 }
 
 .step.current {

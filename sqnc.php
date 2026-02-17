@@ -190,6 +190,7 @@ session_start();
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="divider masterDivider"></div>
                                     <div class="masterEffect">
                                         <h3>EQ</h3>
                                         <div class="masterEffectRow">
@@ -214,6 +215,7 @@ session_start();
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="divider masterDivider"></div>
                                     <div class="masterEffect">
                                         <h3>Compressor</h3>
                                         <div class="masterEffectRow">
@@ -248,6 +250,7 @@ session_start();
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="divider masterDivider"></div>
                                     <div class="masterEffect">
                                         <h3>Saturator</h3>
                                         <div class="masterEffectRow">
@@ -272,6 +275,7 @@ session_start();
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="divider masterDivider"></div>
                                     <div class="masterEffect">
                                         <h3>Limiter</h3>
                                         <div class="masterEffectRow">
@@ -284,7 +288,7 @@ session_start();
                                     </div>
                                 </div>  
                             </div>
-                            <div id="paramDivider" class="divider"></div>
+                            <div id="paramDivider" class="divider paramDivider"></div>
                             <div id="effectParams">
                                 <div id="effectsHouse">
                                     <div class="paramRow">
