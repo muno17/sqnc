@@ -169,7 +169,7 @@ session_start();
                                             <div class="house">
                                                 <h2>Space</h2>
                                                 <div id="spaceDisplay" class="display">20</div>
-                                                <input type="range" min="0" max="10" step="0.1"value="2.0" class="slider" id="space">
+                                                <input type="range" min="0.001" max="10" step="0.1"value="2.0" class="slider" id="space">
                                             </div>
                                             <div class="house">
                                                 <h2>Pre-Delay</h2>
@@ -286,7 +286,6 @@ session_start();
                             </div>
                             <div id="paramDivider" class="divider"></div>
                             <div id="effectParams">
-                                <!--<div id="logo">sqnc</div>-->
                                 <div id="effectsHouse">
                                     <div class="paramRow">
                                         <div class="house">

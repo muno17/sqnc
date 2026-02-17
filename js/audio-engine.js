@@ -92,7 +92,7 @@ function initReverbBus() {
 
 var initData = {
     id: null,
-    name: "New Sequence",
+    name: "",
     bpm: 120,
     swing: 0,
     masterVolume: -6,
@@ -127,7 +127,12 @@ var initData = {
             delTime: 0,
             delFback: 0,
             delMix: 0,
-            steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            steps: [
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0,
+            ],
         },
         {
             id: 1,
@@ -158,7 +163,12 @@ var initData = {
             delTime: 0,
             delFback: 0,
             delMix: 0,
-            steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            steps: [
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0,
+            ],
         },
         {
             id: 2,
@@ -189,7 +199,12 @@ var initData = {
             delTime: 0,
             delFback: 0,
             delMix: 0,
-            steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            steps: [
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0,
+            ],
         },
         {
             id: 3,
@@ -220,7 +235,12 @@ var initData = {
             delTime: 0,
             delFback: 0,
             delMix: 0,
-            steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            steps: [
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0,
+            ],
         },
         {
             id: 4,
@@ -251,7 +271,12 @@ var initData = {
             delTime: 0,
             delFback: 0,
             delMix: 0,
-            steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            steps: [
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0,
+            ],
         },
         {
             id: 5,
@@ -282,7 +307,12 @@ var initData = {
             delTime: 0,
             delFback: 0,
             delMix: 0,
-            steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            steps: [
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0,
+            ],
         },
         {
             id: 6,
@@ -313,7 +343,12 @@ var initData = {
             delTime: 0,
             delFback: 0,
             delMix: 0,
-            steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            steps: [
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0,
+            ],
         },
         {
             id: 7,
@@ -344,7 +379,12 @@ var initData = {
             delTime: 0,
             delFback: 0,
             delMix: 0,
-            steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            steps: [
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0,
+            ],
         },
         {
             id: 8,
@@ -375,7 +415,12 @@ var initData = {
             delTime: 0,
             delFback: 0,
             delMix: 0,
-            steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            steps: [
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0,
+            ],
         },
         {
             id: 9,
@@ -406,9 +451,43 @@ var initData = {
             delTime: 0,
             delFback: 0,
             delMix: 0,
-            steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            steps: [
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0,
+            ],
+        },
+        {
+            id: 99,
+            steps: [
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0,
+            ],
         },
     ],
+    master: {
+        dirt: 20,
+        dirtMix: 0.2,
+        space: 2.0,
+        predelay: 0.01,
+        revWidth: 0.3,
+        revLimit: -3,
+        eqLow: 0,
+        eqMid: 0,
+        eqHigh: 0,
+        compThresh: -24,
+        compRatio: 1,
+        compAttack: 0.05,
+        compRelease: 0.25,
+        compKnee: 30,
+        satDrive: 0,
+        satTone: 20000,
+        satMix: 0,
+        limitThresh: -3,
+    },
 };
 
 var currentData = {
@@ -824,6 +903,7 @@ var projectData = {
             samplePath: "samples/Marshalls_Kick.wav",
             sampleName: "New Sequence",
             volume: -12,
+            muted: false,
             pitch: 0,
             pan: 0,
             start: 0,
@@ -847,13 +927,19 @@ var projectData = {
             delTime: 0,
             delFback: 0,
             delMix: 0,
-            steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            steps: [
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0,
+            ],
         },
         {
             id: 1,
             samplePath: "samples/Marshalls_Open.wav",
             sampleName: "New Sequence",
             volume: -12,
+            muted: false,
             pitch: 0,
             pan: 0,
             start: 0,
@@ -877,13 +963,19 @@ var projectData = {
             delTime: 0,
             delFback: 0,
             delMix: 0,
-            steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            steps: [
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0,
+            ],
         },
         {
             id: 2,
             samplePath: "samples/Marshalls_Clap.wav",
             sampleName: "New Sequence",
             volume: -12,
+            muted: false,
             pitch: 0,
             pan: 0,
             start: 0,
@@ -907,13 +999,19 @@ var projectData = {
             delTime: 0,
             delFback: 0,
             delMix: 0,
-            steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            steps: [
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0,
+            ],
         },
         {
             id: 3,
             samplePath: "samples/OB_Nebula_Pad.wav",
             sampleName: "New Sequence",
             volume: -12,
+            muted: false,
             pitch: 0,
             pan: 0,
             start: 0,
@@ -937,13 +1035,19 @@ var projectData = {
             delTime: 0,
             delFback: 0,
             delMix: 0,
-            steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            steps: [
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0,
+            ],
         },
         {
             id: 4,
             samplePath: "samples/Grain_Drone.wav",
             sampleName: "New Sequence",
             volume: -12,
+            muted: false,
             pitch: 0,
             pan: 0,
             start: 0,
@@ -967,13 +1071,19 @@ var projectData = {
             delTime: 0,
             delFback: 0,
             delMix: 0,
-            steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            steps: [
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0,
+            ],
         },
         {
             id: 5,
             samplePath: "samples/Space_Station.wav",
             sampleName: "New Sequence",
             volume: -12,
+            muted: false,
             pitch: 0,
             pan: 0,
             start: 0,
@@ -997,13 +1107,19 @@ var projectData = {
             delTime: 0,
             delFback: 0,
             delMix: 0,
-            steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            steps: [
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0,
+            ],
         },
         {
             id: 6,
             samplePath: "samples/canto.wav",
             sampleName: "New Sequence",
             volume: -12,
+            muted: false,
             pitch: 0,
             pan: 0,
             start: 0,
@@ -1027,13 +1143,19 @@ var projectData = {
             delTime: 0,
             delFback: 0,
             delMix: 0,
-            steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            steps: [
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0,
+            ],
         },
         {
             id: 7,
             samplePath: "",
             sampleName: "New Sequence",
             volume: -12,
+            muted: false,
             pitch: 0,
             pan: 0,
             start: 0,
@@ -1057,13 +1179,19 @@ var projectData = {
             delTime: 0,
             delFback: 0,
             delMix: 0,
-            steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            steps: [
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0,
+            ],
         },
         {
             id: 8,
             samplePath: "",
             sampleName: "New Sequence",
             volume: -12,
+            muted: false,
             pitch: 0,
             pan: 0,
             start: 0,
@@ -1087,13 +1215,19 @@ var projectData = {
             delTime: 0,
             delFback: 0,
             delMix: 0,
-            steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            steps: [
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0,
+            ],
         },
         {
             id: 9,
             samplePath: "",
             sampleName: "New Sequence",
             volume: -12,
+            muted: false,
             pitch: 0,
             pan: 0,
             start: 0,
@@ -1117,7 +1251,12 @@ var projectData = {
             delTime: 0,
             delFback: 0,
             delMix: 0,
-            steps: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+            steps: [
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0,
+            ],
         },
     ],
     master: {
@@ -1456,7 +1595,7 @@ function setMasterDirtMix(val) {
 }
 
 async function setMasterSpace(val) {
-    masterReverb.decay = val;
+    masterReverb.decay = Math.min(0.001, val);
     await masterReverb.generate();
 }
 
@@ -1489,7 +1628,7 @@ function setMasterEqHigh(val) {
 
 // compressor
 function setMasterCompThresh(val) {
-    masterCompressor.threshold.rampTo(val, 0.1);
+    masterCompressor.threshold.rampTo(Math.min(0, val), 0.1);
 }
 
 function setMasterCompRatio(val) {
@@ -1524,5 +1663,5 @@ function setMasterSatMix(val) {
 // Limiter
 
 function setMasterLimitThresh(val) {
-    masterLimiter.threshold.value = val;
+    masterLimiter.threshold.rampTo(Math.min(0, val), 0.05);
 }
