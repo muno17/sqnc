@@ -5,7 +5,7 @@ var currentPage = 0;
 var length = "1m";
 var running = false;
 var changes = false;
-var currentLoaded = null;
+var loggedIn = true;
 
 Tone.Transport.loop = true;
 Tone.Transport.loopEnd = length;

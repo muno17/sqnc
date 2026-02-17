@@ -9,6 +9,8 @@ function userNotLoggedIn() {
 
     const newB = document.getElementById("new");
     newB.disabled = true;
+
+    loggedIn = false;
 }
 
 ////////////////////////// Global Parameters \\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -193,10 +195,12 @@ function initSave() {
 
 // make the save button glow when changes have been made
 function markAsChanged() {
-    changes = true;
-    const saveBtn = document.getElementById("save");
-    if (saveBtn) {
-        saveBtn.classList.add("changes");
+    if (loggedIn) {
+        changes = true;
+        const saveBtn = document.getElementById("save");
+        if (saveBtn) {
+            saveBtn.classList.add("changes");
+        }
     }
 }
 
