@@ -284,6 +284,7 @@ function initNew() {
         renderParams();
 
         closeModal();
+        markAsChanged();
     });
 
     newBtn.addEventListener("click", openModal);
@@ -345,17 +346,68 @@ function initTrackSelectors() {
 }
 
 function initSequenceSelector() {
-    var selector = document.getElementById("sequences");
+    const selector = document.getElementById("sequences");
 
     selector.addEventListener("change", function () {
-        var selectedId = this.value;
-
-        if (selectedId != "new") {
-            // getSequence(selectedId); REENABLE***
+                var selectedId = this.value;
+        // save currentData if changes
+        if (changes) {
+            openSaveModal(selectedId);
         } else {
-            // CALL FUNCTION TO RESET INTERFACE ***
+            if (selectedId != "new") {
+                getSequence(selectedId);
+                length = currentData.length;
+            } else {
+                resetInterface();
+            }
         }
     });
+}
+
+function openSaveModal(id) {
+    // initiate the new sequence modal
+    const overlay = document.getElementById("save-overlay");
+    const noBtn = document.getElementById("sequence-nosave-btn");
+    const yesBtn = document.getElementById("sequence-save-btn");
+
+    function openModal() {
+        overlay.classList.remove("modal-hidden");
+        document.body.style.overflow = "hidden";
+    }
+
+    function closeModal() {
+        overlay.classList.add("modal-hidden");
+        document.body.style.overflow = "auto";
+    }
+
+    // close when clicking either button in the modal
+    noBtn.addEventListener("click", closeModal);
+    yesBtn.addEventListener("click", async function () {
+        await saveSequence();
+        await getSequence(id);
+        closeModal()
+    });
+
+    openModal();
+}
+
+function resetInterface() {
+    currentData = JSON.parse(JSON.stringify(initData));
+    projectData = JSON.parse(JSON.stringify(initData));
+
+    saveBtn.classList.remove("changes");
+    changes = false;
+
+    Tone.Transport.stop();
+    currentStep = 0;
+
+    renderParams();
+    renderSequencer();
+    updateUIPlayHead(0);
+
+    document.getElementById("tempo").value = currentData.bpm;
+    document.getElementById("tempoDisplay").innerText = currentData.bpm;
+    document.getElementById("masterVol").value = currentData.masterVolume;
 }
 
 // clear sequence for current track

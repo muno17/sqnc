@@ -5,6 +5,7 @@ var currentPage = 0;
 var length = "1m";
 var running = false;
 var changes = false;
+var currentLoaded = null;
 
 Tone.Transport.loop = true;
 Tone.Transport.loopEnd = length;
@@ -1436,7 +1437,6 @@ function setupAudioLoop() {
 
         // increment for the next time the loop runs
         currentStep = (currentStep + 1) % totalSteps;
-                console.log("out");
     }, "16n");
 }
 

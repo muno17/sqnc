@@ -435,5 +435,14 @@ session_start();
                 </div>
             </div>
         </div>
+        <div id="save-overlay" class="modal-overlay modal-hidden">
+            <div class="modal-box">
+                <h3>Save Current Changes?</h3>
+                <div class="modal-footer">
+                    <button id="sequence-save-btn">Yes</button>
+                    <button id="sequence-nosave-btn">No</button>
+                </div>
+            </div>
+        </div>
 	</body>
 </html>

@@ -63,9 +63,9 @@ async function loadSequences() {
             if (response.status === 401) {
                 console.warn("User is not logged in. Skipping sequence load.");
                 userNotLoggedIn();
-                // You could update the UI here: sequences.innerHTML = "<option>Log in to save sequences</option>";
                 return;
             }
+            // throw error if its another status code
             throw new Error(`Server error: ${response.status}`);
         }
 
@@ -116,6 +116,7 @@ async function getSequence(id) {
         // might need to be just projectData = ajax.content;
         projectData = JSON.parse(ajax.content);
         currentData = JSON.parse(JSON.stringify(projectData));
+        currentlyLoaded = currentData.name;
 
         
         // add logic for stopping and disabling play until loaded? ***
@@ -125,6 +126,7 @@ async function getSequence(id) {
 
         // update the sequencer UI
         renderSequencer();
+        console.log("sequence loaded")
     } catch (err) {
         console.error("Failed to load sequences:", err);
     }
