@@ -1665,7 +1665,7 @@ function renderMasterParams() {
     masterRows.forEach((row) => {
         row.classList.remove("hidden");
     });
-
+    // master UI
     updateMasterVolUI(currentData.masterVolume);
     setMasterVol(currentData.masterVolume);
 
@@ -1675,6 +1675,9 @@ function renderMasterParams() {
     updateSwingUI(currentData.swing);
     setSwing(currentData.swing);
 
+    updatePageVisuals(parseInt(currentData.length))
+
+    // master effects
     updateDirtUI(master.dirt);
     setMasterDirt(master.dirt);
 
