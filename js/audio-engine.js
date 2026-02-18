@@ -25,6 +25,7 @@ var recording = false;
 // master output to apply master effects
 const master = Tone.getDestination();
 
+// global variables for master effects
 var masterVolNode;
 var masterCompressor;
 var masterEQ;
@@ -34,44 +35,6 @@ var masterReverb;
 var reverbWidener;
 var reverbHeat;
 var reverbLimiter;
-
-function initMasterChain() {
-    masterVolNode = new Tone.Gain(1);
-
-    masterEQ = new Tone.EQ3(0, 0, 0);
-    masterCompressor = new Tone.Compressor(-24, 3);
-    masterSaturator = new Tone.Distortion(0.1);
-    saturatorFilter = new Tone.Filter(20000, "lowpass");
-    masterLimiter = new Tone.Limiter(-1);
-
-    initReverbBus();
-
-    masterEQ.chain(
-        masterCompressor,
-        masterSaturator,
-        saturatorFilter,
-        masterVolNode,
-        masterLimiter,
-        Tone.Destination,
-    );
-}
-
-function initReverbBus() {
-    reverbHeat = new Tone.Chebyshev(20);
-    reverbHeat.wet.value = 0.2;
-
-    masterReverb = new Tone.Reverb({
-        decay: 3,
-        preDelay: 0.01,
-    });
-
-    reverbWidener = new Tone.StereoWidener(0.3);
-    reverbLimiter = new Tone.Limiter(-3);
-
-    reverbHeat.chain(masterReverb, reverbWidener, reverbLimiter, masterEQ);
-
-    masterReverb.generate();
-}
 
 // init samples for when user is not logged in
 var initSamples = {
@@ -157,6 +120,45 @@ function loadInstruments() {
             instruments[index].load(track.samplePath);
         }
     });
+}
+
+// chain together effects to create a master reverb bus
+function initReverbBus() {
+    reverbHeat = new Tone.Chebyshev(20);
+    reverbHeat.wet.value = 0.2;
+
+    masterReverb = new Tone.Reverb({
+        decay: 3,
+        preDelay: 0.01,
+    });
+
+    reverbWidener = new Tone.StereoWidener(0.3);
+    reverbLimiter = new Tone.Limiter(-3);
+
+    reverbHeat.chain(masterReverb, reverbWidener, reverbLimiter, masterEQ);
+
+    masterReverb.generate();
+}
+
+function initMasterChain() {
+    masterVolNode = new Tone.Gain(1);
+
+    masterEQ = new Tone.EQ3(0, 0, 0);
+    masterCompressor = new Tone.Compressor(-24, 3);
+    masterSaturator = new Tone.Distortion(0.1);
+    saturatorFilter = new Tone.Filter(20000, "lowpass");
+    masterLimiter = new Tone.Limiter(-1);
+
+    initReverbBus();
+
+    masterEQ.chain(
+        masterCompressor,
+        masterSaturator,
+        saturatorFilter,
+        masterVolNode,
+        masterLimiter,
+        Tone.Destination,
+    );
 }
 
 // initialize all controls, audio engine and api
