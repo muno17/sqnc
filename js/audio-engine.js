@@ -2,7 +2,7 @@
 Tone.Transport.loop = true;
 Tone.Transport.loopEnd = length;
 Tone.Transport.swingSubdivision = "16n";
-Tone.context.lookAhead = 0;
+Tone.context.lookAhead = 0.1;
 
 // arrays for instruments, parameters and effects
 const instruments = [];
@@ -87,57 +87,66 @@ var initSamples = {
 function initInstruments() {
     initMasterChain();
     for (var i = 0; i < 10; i++) {
-        // initialize parameter components/effects
-        panVols[i] = new Tone.PanVol(0, -100).connect(masterEQ);
+        const track = currentData.tracks[i];
 
-        // send to master reverb
-        reverbSends[i] = new Tone.Gain(0).connect(reverbHeat);
-        panVols[i].connect(reverbSends[i]);
-
-        // initialize effects
-        delays[i] = new Tone.FeedbackDelay("8n", 0).connect(panVols[i]);
-
-        tremolos[i] = new Tone.Tremolo({ frequency: 5, depth: 0, wet: 0 })
-            .connect(delays[i])
-            .start();
-
-        choruses[i] = new Tone.Chorus({
-            frequency: 4,
-            delayTime: 2.5,
-            depth: 0,
-            wet: 0,
-            spread: 180,
-        })
-            .connect(tremolos[i])
-            .start();
-
-        bitcrushers[i] = new Tone.BitCrusher({ bits: 4, wet: 0 }).connect(
-            choruses[i],
-        );
-
-        distortions[i] = new Tone.Distortion({ distortion: 0, wet: 0 }).connect(
-            bitcrushers[i],
-        );
-
-        // initialize filters
-        hpFilters[i] = new Tone.Filter(10, "highpass").connect(distortions[i]);
-        lpFilters[i] = new Tone.Filter(5000, "lowpass").connect(hpFilters[i]);
-
-        // initialize the amp envelope
-        ampEnvs[i] = new Tone.AmplitudeEnvelope({
-            attack: 0.0,
-            decay: 2.0,
-            sustain: 1.0,
-            release: 1.0,
-        }).connect(lpFilters[i]);
-
+        // initialize the sample player
         instruments[i] = new Tone.Player({
             url: null,
             autostart: false,
-            fadeOut: "64n",
+            fadeOut: "32n",
         });
 
-        instruments[i].connect(ampEnvs[i]); // *** is this right? conecting instruments twice?
+        // initialize all of the components for the audio chain
+        ampEnvs[i] = new Tone.AmplitudeEnvelope({
+            attack: track.attack,
+            decay: track.decay,
+            sustain: track.sustain,
+            release: track.release,
+        });
+
+        lpFilters[i] = new Tone.Filter(track.lpWidth, "lowpass");
+        hpFilters[i] = new Tone.Filter(track.hpWidth, "highpass");
+
+        // initialize all of the effects for the audio chain
+        distortions[i] = new Tone.Distortion({
+            distortion: track.distortion,
+            wet: track.distortion,
+        });
+        bitcrushers[i] = new Tone.BitCrusher({
+            bits: 4,
+            wet: track.bitcrusher,
+        });
+
+        choruses[i] = new Tone.Chorus(4, 2.5, 0.5).start();
+        choruses[i].wet.value = track.chorusMix;
+
+        tremolos[i] = new Tone.Tremolo(5, 0.75).start();
+        tremolos[i].wet.value = track.tremMix;
+
+        delays[i] = new Tone.FeedbackDelay("8n", track.delFback);
+        delays[i].wet.value = track.delMix;
+
+        // final output node for the track
+        panVols[i] = new Tone.PanVol(track.pan, track.volume);
+
+        // send to reverb bus
+        reverbSends[i] = new Tone.Gain(track.reverb);
+        panVols[i].connect(reverbSends[i]);
+        reverbSends[i].connect(reverbHeat); // Sends to master reverb bus
+
+        // chain the audio path
+        instruments[i].chain(
+            ampEnvs[i],
+            lpFilters[i],
+            hpFilters[i],
+            distortions[i],
+            bitcrushers[i],
+            choruses[i],
+            tremolos[i],
+            delays[i],
+            panVols[i],
+            masterEQ, // Final Destination
+        );
     }
 }
 
@@ -156,6 +165,7 @@ window.onload = async function () {
         await checkLoginStatus();
 
         // audio setup
+        initInstruments();
         Tone.Transport.bpm.value = currentData.bpm;
         initTransport();
 
@@ -171,18 +181,10 @@ window.onload = async function () {
             loadSamples();
         }
 
-        // initialize instruments and track params *** DO WE NEED THIS??? ***
-        initInstruments();
+        // once loaded, update ui and start audio functionality
         Tone.loaded().then(() => {
-            currentData.tracks.forEach((track, i) => {
-                if (i == 10) return;
-                panVols[i].volume.value = track.volume;
-                panVols[i].pan.value = track.pan;
-            });
-
             currentTrack = 0;
             renderParams();
-
             setupAudioLoop();
         });
 
