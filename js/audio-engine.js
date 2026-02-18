@@ -901,7 +901,7 @@ var projectData = {
     tracks: [
         {
             id: 0,
-            samplePath: "samples/Marshalls_Kick.wav",
+            samplePath: "",
             sampleName: "New Sequence",
             volume: -12,
             muted: false,
@@ -937,7 +937,7 @@ var projectData = {
         },
         {
             id: 1,
-            samplePath: "samples/Marshalls_Open.wav",
+            samplePath: "",
             sampleName: "New Sequence",
             volume: -12,
             muted: false,
@@ -973,7 +973,7 @@ var projectData = {
         },
         {
             id: 2,
-            samplePath: "samples/Marshalls_Clap.wav",
+            samplePath: "",
             sampleName: "New Sequence",
             volume: -12,
             muted: false,
@@ -1009,7 +1009,7 @@ var projectData = {
         },
         {
             id: 3,
-            samplePath: "samples/OB_Nebula_Pad.wav",
+            samplePath: "",
             sampleName: "New Sequence",
             volume: -12,
             muted: false,
@@ -1045,7 +1045,7 @@ var projectData = {
         },
         {
             id: 4,
-            samplePath: "samples/Grain_Drone.wav",
+            samplePath: "",
             sampleName: "New Sequence",
             volume: -12,
             muted: false,
@@ -1081,7 +1081,7 @@ var projectData = {
         },
         {
             id: 5,
-            samplePath: "samples/Space_Station.wav",
+            samplePath: "",
             sampleName: "New Sequence",
             volume: -12,
             muted: false,
@@ -1117,7 +1117,7 @@ var projectData = {
         },
         {
             id: 6,
-            samplePath: "samples/canto.wav",
+            samplePath: "",
             sampleName: "New Sequence",
             volume: -12,
             muted: false,
@@ -1259,6 +1259,15 @@ var projectData = {
                 0,
             ],
         },
+        {
+            id: 99,
+            steps: [
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0,
+            ],
+        },
     ],
     master: {
         dirt: 20,
@@ -1278,7 +1287,7 @@ var projectData = {
         satDrive: 0,
         satTone: 20000,
         satMix: 0,
-        limitThresh: -1,
+        limitThresh: -3,
     },
 };
 
@@ -1340,6 +1349,7 @@ function initInstruments() {
             release: 1.0,
         }).connect(lpFilters[i]);
 
+        /*
         if (i % 2 == 0) {
             instruments[i] = new Tone.Player({
                 url: "samples/Marshalls_Kick.wav",
@@ -1351,6 +1361,12 @@ function initInstruments() {
                 autostart: false,
             });
         }
+        */
+       instruments[i] = new Tone.Player({
+           url: null,
+           autostart: false,
+           fadeOut: "64n",
+       });
 
         instruments[i].connect(ampEnvs[i]);
     }
