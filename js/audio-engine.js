@@ -1503,31 +1503,15 @@ function stopAllSounds() {
 
 ////// global params
 function setMasterVol(val) {
-    currentData.masterVolume = parseFloat(val);
     masterVolNode.gain.rampTo(Tone.dbToGain(val), 0.1);
-
-    const display = document.getElementById("masterVolDisplay");
-    if (display) display.innerHTML = val + "dB";
 }
 
 function setTempo(val) {
-    const bpm = parseInt(val);
-    currentData.bpm = bpm;
-
-    Tone.Transport.bpm.value = bpm;
-
-    const display = document.getElementById("tempoDisplay");
-    if (display) display.innerHTML = bpm;
+    Tone.Transport.bpm.value = val;
 }
 
 function setSwing(val) {
-    const swingVal = parseFloat(val);
-    currentData.swing = swingVal;
-
-    Tone.Transport.swing = swingVal;
-
-    const display = document.getElementById("swingDisplay");
-    if (display) display.innerHTML = Math.round(swingVal * 100);
+    Tone.Transport.swing = val;
 }
 
 // instant when switching tracks, not instant when just sliding slider

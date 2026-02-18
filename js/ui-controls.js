@@ -108,41 +108,69 @@ function initRecord() {
 
 function initTempo() {
     const tempo = document.getElementById("tempo");
-    const tempoDisplay = document.getElementById("tempoDisplay");
 
     tempo.addEventListener("input", function () {
-        currentData.bpm = parseInt(this.value);
-        tempoDisplay.innerHTML = this.value;
-        Tone.Transport.bpm.value = this.value;
+        const val = parseFloat(this.value);
+        currentData.bpm = val;
+
+        updateTempoUI(val);
+        setTempo(val);
+
         markAsChanged();
     });
 }
 
+function updateTempoUI(val) {
+    const tempo = document.getElementById("tempo");
+    const tempoDisplay = document.getElementById("tempoDisplay");
+
+    tempo.value = val;
+   tempoDisplay.innerHTML = parseInt(val);
+}
+
 function initMasterVol() {
+    const masterVol = document.getElementById("masterVol");
+
+    masterVol.addEventListener("input", function () {
+        const val = parseFloat(this.value);
+        currentData.masterVolume = val;
+
+        updateMasterVolUI(val);
+        setMasterVol(val);
+
+        markAsChanged();
+    });
+}
+
+function updateMasterVolUI(val) {
     const masterVol = document.getElementById("masterVol");
     const masterVolDisplay = document.getElementById("masterVolDisplay");
 
-    masterVol.addEventListener("input", function () {
-        currentData.masterVolume = parseFloat(this.value);
-        masterVolDisplay.innerHTML = this.value + "dB";
-        masterVolNode.gain.rampTo(Tone.dbToGain(this.value), 0.1);
-        markAsChanged();
-    });
+    masterVol.value = val;
+    masterVolDisplay.innerHTML = parseInt(val) + "dB";
 }
 
 function initSwing() {
     Tone.Transport.swingSubdivision = "16n";
     const swing = document.getElementById("swing");
-    const swingDisplay = document.getElementById("swingDisplay");
 
     swing.addEventListener("input", function () {
-        currentData.swing = this.value;
-        Tone.Transport.swing = this.value;
+        const val = parseFloat(this.value);
+        currentData.swing = val;
 
-        // calculate value to display 0-100
-        swingDisplay.innerHTML = parseInt(this.value * 100);
+        updateSwingUI(val);
+        setSwing(val);
+
         markAsChanged();
     });
+}
+
+function updateSwingUI(val) {
+    const swing = document.getElementById("swing");
+    const swingDisplay = document.getElementById("swingDisplay");
+
+    swing.value = val;
+    swingDisplay.innerHTML = parseInt(val * 100);
 }
 
 function initPageSelectors() {
@@ -184,7 +212,7 @@ function updatePageVisuals(measures) {
 }
 
 // save currentData
-// assign a copy of currentData to projectData on success ***
+// assign a copy of currentData to projectData on success
 // 'glow' if there are changes to be made, remove if saved or if reloaded
 function initSave() {
     const saveBtn = document.getElementById("save");
@@ -216,8 +244,8 @@ function initSave() {
 
 // make the save button glow when changes have been made
 function markAsChanged() {
+    changes = true;
     if (loggedIn) {
-        changes = true;
         const saveBtn = document.getElementById("save");
         if (saveBtn) {
             saveBtn.classList.add("changes");
@@ -1638,8 +1666,13 @@ function renderMasterParams() {
         row.classList.remove("hidden");
     });
 
+    updateMasterVolUI(currentData.masterVolume);
     setMasterVol(currentData.masterVolume);
+
+    updateTempoUI(currentData.bpm);
     setTempo(currentData.bpm);
+
+    updateSwingUI(currentData.swing);
     setSwing(currentData.swing);
 
     updateDirtUI(master.dirt);
