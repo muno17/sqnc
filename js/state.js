@@ -1,4 +1,13 @@
 ////////////////////////// Data States \\\\\\\\\\\\\\\\\\\\\\\\\\
+// global params
+var currentTrack = 0;
+var currentStep = 0;
+var currentPage = 0;
+var length = "1m";
+var running = false;
+var changes = false;
+var loggedIn = false;
+var openModal = null;
 
 // massive JSON objects to contain all information
 // currentData is the live object

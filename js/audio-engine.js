@@ -1,13 +1,4 @@
 ////////////////////////// Audio Functionality \\\\\\\\\\\\\\\\\\\\\\\\\\
-var currentTrack = 0;
-var currentStep = 0;
-var currentPage = 0;
-var length = "1m";
-var running = false;
-var changes = false;
-var loggedIn = false;
-var openModal = null;
-
 Tone.Transport.loop = true;
 Tone.Transport.loopEnd = length;
 Tone.Transport.swingSubdivision = "16n";
@@ -140,26 +131,13 @@ function initInstruments() {
             release: 1.0,
         }).connect(lpFilters[i]);
 
-        /*
-        if (i % 2 == 0) {
-            instruments[i] = new Tone.Player({
-                url: "samples/Marshalls_Kick.wav",
-                autostart: false,
-            });
-        } else {
-            instruments[i] = new Tone.Player({
-                url: "samples/OB_Nebula_Pad.wav",
-                autostart: false,
-            });
-        }
-        */
         instruments[i] = new Tone.Player({
             url: null,
             autostart: false,
             fadeOut: "64n",
         });
 
-        instruments[i].connect(ampEnvs[i]);
+        instruments[i].connect(ampEnvs[i]); // *** is this right? conecting instruments twice?
     }
 }
 
