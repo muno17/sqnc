@@ -36,16 +36,6 @@ var reverbWidener;
 var reverbHeat;
 var reverbLimiter;
 
-// init samples for when user is not logged in
-var initSamples = {
-    tracks: [
-        {
-            samplePath: "",
-            sampleName: "",
-        },
-    ],
-};
-
 // create tone.js samplers
 function initInstruments() {
     initMasterChain();

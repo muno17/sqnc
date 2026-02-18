@@ -415,3 +415,49 @@ var initData = {
 
 var projectData = JSON.parse(JSON.stringify(initData));
 var currentData = JSON.parse(JSON.stringify(initData));
+
+// init samples for when user is not logged in
+var initSamples = {
+    tracks: [
+        {
+            samplePath: "/samples/init/Marshalls_Kick.wav",
+            sampleName: "Marshalls Kick",
+        },
+        {
+            samplePath: "/samples/init/Marshalls_Clap.wav",
+            sampleName: "Marshalls Clap",
+        },
+        {
+            samplePath: "/samples/init/Marshalls_Open.wav",
+            sampleName: "Marshalls Open Hat",
+        },
+        {
+            samplePath: "/samples/init/Marshalls_Closed.wav",
+            sampleName: "Marshalls Closed Hat",
+        },
+        {
+            samplePath: "sqnc/samples/init/Digi Buzzy Bass.wav",
+            sampleName: "Digi Buzzy Bass",
+        },
+        {
+            samplePath: "/samples/init/canto.wav",
+            sampleName: "Canto Stab",
+        },
+        {
+            samplePath: "/samples/init/Grain_Drone.wav",
+            sampleName: "Grain Drone",
+        },
+        {
+            samplePath: "sqnc/samples/init/Digi Galactic Bass.wav",
+            sampleName: "Digi Galactic Bass",
+        },
+        {
+            samplePath: "/samples/init/OB Cosmic Pad.wav",
+            sampleName: "OB Cosmic Pad",
+        },
+        {
+            samplePath: "sqnc/samples/init/Pro 3 bass 1.wav",
+            sampleName: "Pro3 Bass",
+        },
+    ],
+};
