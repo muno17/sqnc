@@ -16,6 +16,7 @@ session_start();
         <script src="js/audio-params.js"></script>
         <script src="js/sequencer.js"></script>
         <script src="js/api.js"></script>
+        <script src="js/ui-tracks.js"></script>
         <script src="js/ui-controls.js"></script>
        <!--<script src="js/modals.js"></script>-->
     </head>

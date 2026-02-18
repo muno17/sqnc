@@ -1,4 +1,4 @@
-////////////////////////// Track Parameters \\\\\\\\\\\\\\\\\\\\\\\\\\
+////////////////////////// Audio Parameters \\\\\\\\\\\\\\\\\\\\\\\\\\
 // functions to update audio for each parameter
 
 ////// global params
