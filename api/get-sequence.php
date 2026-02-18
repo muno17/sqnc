@@ -2,6 +2,7 @@
 ###### gets content for a selected sequence
 
 session_start();
+require_once "db.php";
 
 # If user is not logged in don't do anything
 if (!isset($_SESSION['logged_in'])) {
@@ -16,16 +17,7 @@ $seq_id = $_POST['id'];
 
 ###*********### **** connect to db and get requested sequence **** ###*********### 
 try {
-    $host = "localhost";
-    $dbn = "sqnc_db";
-    $user = "root";
-    $pass = "";
-
-    $db = new PDO("mysql:host=$host;dbname=$dbn", $user, $pass);
-    $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-
-
-        # get all of the user's sequences in alphabetical order
+ # get all of the user's sequences in alphabetical order
         $getquery = $db->prepare("SELECT id, content FROM sequences 
                                 WHERE user_id = ? AND id = ?
                                 LIMIT 1");

@@ -2,6 +2,8 @@
 ###### signup an account, perform validation
 
 session_start();
+require_once "db.php";
+
 if (isset($_POST["username"]) && isset($_POST["password"])) {
     $username = $_POST["username"];
     $pw = $_POST["password"];
@@ -17,14 +19,6 @@ if (isset($_POST["username"]) && isset($_POST["password"])) {
 
 ########********* connect to db and query  *********########
 try {
-    $host = "localhost";
-    $dbn = "sqnc_db";
-    $user = "root";
-    $pass = "";
-
-    $db = new PDO("mysql:host=$host;dbname=$dbn", $user, $pass);
-    $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-
     # query for the user
     $selectquery = $db->prepare("SELECT id FROM users
                                 WHERE username = ?");

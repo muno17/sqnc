@@ -3,6 +3,7 @@
 ###### add sample to sample folder
 
 session_start();
+require_once "db.php";
 
 # if user is not logged in don't do anything
 if (!isset($_SESSION['logged_in'])) {
@@ -39,14 +40,6 @@ if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
 
         # add sample info to db
         try {
-            $host = "localhost";
-            $dbn = "sqnc_db";
-            $user = "root";
-            $pass = "";
-
-            $db = new PDO("mysql:host=$host;dbname=$dbn", $user, $pass);
-            $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-
             # add a new sample entry
             # id (auto), user_id, file_path
             $insertquery = $db->prepare("INSERT INTO samples (user_id, name, file_path) 

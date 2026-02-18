@@ -2,6 +2,7 @@
 ###### save a sequence into the db
 
 session_start();
+require_once "db.php";
 
 # If user is not logged in don't do anything
 if (!isset($_SESSION['logged_in'])) {
@@ -28,14 +29,6 @@ if ($seq_id) {
 
 ###*********### **** connect to db and update/insert**** ###*********### 
 try {
-    $host = "localhost";
-    $dbn = "sqnc_db";
-    $user = "root";
-    $pass = "";
-
-    $db = new PDO("mysql:host=$host;dbname=$dbn", $user, $pass);
-    $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-
     if ($seq_id) {
         # update an existing sequence
         $updatequery = $db->prepare("UPDATE sequences SET name = ?, content = ?

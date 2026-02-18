@@ -2,6 +2,7 @@
 ###### log a user in, perform validation
 
 session_start();
+require_once "db.php";
 
 # If username or password missing
 if (empty($_POST['username']) || empty($_POST['password'])) {
@@ -17,14 +18,6 @@ $password = $_POST["password"];
 
 ###*********### **** connect to db and query **** ###*********### 
 try {
-    $host = "localhost";
-    $dbn = "sqnc_db";
-    $user = "root";
-    $pass = "";
-
-    $db = new PDO("mysql:host=$host;dbname=$dbn", $user, $pass);
-    $db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
-
     # query for the user
     $selectquery = $db->prepare("SELECT id, username, password FROM users
                                 WHERE username = ?");

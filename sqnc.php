@@ -10,15 +10,14 @@ session_start();
         <meta charset="utf-8" />
         <link href="style/sqnc.css" type="text/css" rel="stylesheet" />
         <script src="https://unpkg.com/tone@14.7.77/build/Tone.js"></script>
-        <!--<script src="https://ajax.googleapis.com/ajax/libs/prototype/1.7.3.0/prototype.js" type="text/javascript"></script>-->
         <script src="js/state.js"></script>
         <script src="js/audio-engine.js"></script>
         <script src="js/audio-params.js"></script>
         <script src="js/sequencer.js"></script>
         <script src="js/api.js"></script>
         <script src="js/ui-tracks.js"></script>
+        <script src="js/ui-master.js"></script>
         <script src="js/ui-controls.js"></script>
-       <!--<script src="js/modals.js"></script>-->
     </head>
     <body>
         <!-- Loading Modal -->
