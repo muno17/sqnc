@@ -1,4 +1,6 @@
 // ****************** communication with the server ****************** \\
+// use fetch api for AJAX requests
+
 async function checkLoginStatus() {
     try {
         const response = await fetch("api/check-login-status.php");
@@ -14,8 +16,6 @@ async function checkLoginStatus() {
         console.error("Failed to check login status:", err);
     }
 }
-
-// use fetch api for AJAX requests
 
 // send projectData when save button is pressed
 async function saveSequence() {
@@ -38,8 +38,6 @@ async function saveSequence() {
         const ajax = await response.json();
 
         // update projectData and currentData on success
-        projectData = JSON.parse(JSON.stringify(currentData));
-        currentData = JSON.parse(JSON.stringify(projectData));
         if (ajax && ajax.id) {
             projectData.id = ajax.id;
             currentData.id = ajax.id;
@@ -47,10 +45,14 @@ async function saveSequence() {
             // update the dropdown option if a new sequence was just saved
             const sequences = document.getElementById("sequences");
             const selectedOption = sequences.options[sequences.selectedIndex];
-            if (selectedOption && selectedOption.value === "") {
+            if ( selectedOption && (selectedOption.value === "new" || selectedOption.value === "")) {
                 selectedOption.value = ajax.id;
+                selectedOption.innerHTML = currentData.name;
             }
         }
+
+        projectData = JSON.parse(JSON.stringify(currentData));
+        // currentData = JSON.parse(JSON.stringify(projectData));
         console.log("Saved sequence successfully");
     } catch (err) {
         console.error("Sequence save failed:", err);
@@ -127,6 +129,7 @@ async function getSequence(id) {
         // load sequence into projectDat and currentData
         // might need to be just projectData = ajax.content;
         projectData = JSON.parse(ajax.content);
+        projectData.id = ajax.id;
         currentData = JSON.parse(JSON.stringify(projectData));
 
         // add logic for stopping and disabling play until loaded? ***

@@ -1,4 +1,5 @@
-// UI event listeners
+// UI event listeners and logic
+
 // modify based on whether user is logged in or not
 function userNotLoggedIn() {
     const sequences = document.getElementById("sequences");
@@ -189,12 +190,26 @@ function initSave() {
     const saveBtn = document.getElementById("save");
     if (saveBtn) {
         saveBtn.addEventListener("click", async function () {
-            // don't do anything if there isn't anything to save;
-            if (changes) {
-                await saveSequence();
+        // check if its the default sequence
+        const sequencesDropdown = document.getElementById("sequences");
+        if (sequencesDropdown.value === "new") {
+            const name = await openNamingModal();
 
-                resetChanges();
+            // if user clicks the cancel button in the modal
+            if (!name) {
+                return;
             }
+
+            currentData.name = name;
+            projectData.name = name;
+        }
+
+        // don't do anything if there isn't anything to save;
+        if (changes) {
+            await saveSequence();
+
+            resetChanges();
+        }
         });
     }
 }
@@ -238,71 +253,77 @@ function initReload() {
 }
 
 // init for new 
-function initNew() {
+async function initNew() {
     const newBtn = document.getElementById("new");
-    const saveBtn = document.getElementById("save");
 
-    // initiate the new sequence modal
+    newBtn.addEventListener("click", async function () {
+        const name = await openNamingModal();
+
+        if (name) {
+            // User confirmed, now reset the data
+            stopTransport();
+
+            // Deep copy fresh data
+            projectData = JSON.parse(JSON.stringify(initData));
+            currentData = JSON.parse(JSON.stringify(initData));
+
+            projectData.name = name;
+            currentData.name = name;
+            currentData.id = null;
+
+            renderSequencer();
+            renderParams();
+            markAsChanged();
+        }
+    });
+}
+
+
+function openNamingModal() {
+    const overlay = document.getElementById("sequence-overlay");
+    const seqName = document.getElementById("seq-name");
+
+    seqName.value = "";
+    overlay.classList.remove("modal-hidden");
+    seqName.focus();
+
+    // create a promise so initSave waits
+    return new Promise((resolve) => {
+        modalResolver = resolve;
+    });
+}
+
+function initOpenModal() {
     const overlay = document.getElementById("sequence-overlay");
     const closeBtn = document.getElementById("sequence-close-btn");
     const sequenceInitBtn = document.getElementById("sequence-init-btn");
     const seqName = document.getElementById("seq-name");
-    const sequences = document.getElementById("sequences");
 
-    function openModal() {
-        seqName.value = "";
-        overlay.classList.remove("modal-hidden");
-        document.body.style.overflow = "hidden";
-        seqName.focus();
-    }
-
-    function closeModal() {
+    // cancel button
+    closeBtn.addEventListener("click", () => {
         overlay.classList.add("modal-hidden");
-        document.body.style.overflow = "auto";
-    }
-
-    // close when clicking the "Cancel" button in the modal
-    closeBtn.addEventListener("click", closeModal);
-
-    // close when clicking outside the box (on the dimmer) while in the modal
-    overlay.addEventListener("click", (e) => {
-        if (e.target === overlay) closeModal();
+        if (modalResolver) {
+            modalResolver(false);
+        }
     });
 
-    // clear out current sequence and create init sequence
+    // confirm button
     sequenceInitBtn.addEventListener("click", function () {
-        // create name for the new sequence
         const name = seqName.value.trim() || "Untitled Sequence";
 
-        // reset changes state
-        if (changes) {
-            resetChanges();
-        }
-
-        // update the sequences dropdown
-        var newSeq = document.createElement("option");
+        // logic for creating the new option
+        const sequences = document.getElementById("sequences");
+        const newSeq = document.createElement("option");
         newSeq.value = "";
         newSeq.innerHTML = name;
         newSeq.selected = true;
         sequences.appendChild(newSeq);
 
-        // copy initData into projectData and currentData and update with name
-        projectData = JSON.parse(JSON.stringify(initData));
-        currentData = JSON.parse(JSON.stringify(initData));
-
-        projectData.name = name;
-        currentData.name = name;
-
-        // referesh UI
-        stopTransport();
-        renderSequencer();
-        renderParams();
-
-        closeModal();
-        markAsChanged();
+        overlay.classList.add("modal-hidden");
+        if (modalResolver) {
+            modalResolver(name);
+         }
     });
-
-    newBtn.addEventListener("click", openModal);
 }
 
 function initSampleSelector() {
@@ -504,6 +525,7 @@ function initGlobalControls() {
     initSampleSelector();
     initUserUpload();
     initGuestUpload();
+    initOpenModal();
 }
 
 ///////////////////////// Track Parameters \\\\\\\\\\\\\\\\\\\\\\\\\\

@@ -22,6 +22,10 @@ if (!empty($data['id'])) {
     $seq_id = $data['id'];
 }
 
+if ($seq_id) {
+    $data['id'] = $seq_id;
+}
+
 ###*********### **** connect to db and update/insert**** ###*********### 
 try {
     $host = "localhost";
@@ -48,6 +52,13 @@ try {
         
         # add auto created id to json object
         $id = $db->lastInsertId();
+        $data['id'] = $id;
+        $updatedJson = json_encode($data);
+
+        # execute another update so that the id of the json content is updated with the new id
+        $insertquery = $db->prepare("UPDATE sequences SET content = ? WHERE id = ?");
+        $insertquery->execute(array($updatedJson, $id));
+
         header('Content-Type: application/json');
         echo json_encode(["id" => $id]);
     }

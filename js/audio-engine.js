@@ -6,6 +6,7 @@ var length = "1m";
 var running = false;
 var changes = false;
 var loggedIn = false;
+var openModal = null;
 
 Tone.Transport.loop = true;
 Tone.Transport.loopEnd = length;

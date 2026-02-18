@@ -26,7 +26,7 @@ try {
 
 
         # get all of the user's sequences in alphabetical order
-        $getquery = $db->prepare("SELECT content FROM sequences 
+        $getquery = $db->prepare("SELECT id, content FROM sequences 
                                 WHERE user_id = ? AND id = ?
                                 LIMIT 1");
         $getquery->execute(array($user_id, $seq_id));
