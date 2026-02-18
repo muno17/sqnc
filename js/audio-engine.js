@@ -171,6 +171,9 @@ window.onload = async function () {
         if (loggedIn) {
             loadSequences();
             loadSamples();
+        } else {
+            // load 
+            loadInitSamples();
         }
 
         // once loaded, update ui and start audio functionality

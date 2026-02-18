@@ -306,7 +306,6 @@ async function initNew() {
     });
 }
 
-
 function openNamingModal() {
     const overlay = document.getElementById("sequence-overlay");
     const seqName = document.getElementById("seq-name");

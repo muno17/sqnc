@@ -277,3 +277,28 @@ async function handleLocalUpload(file, trackIndex) {
     renderParams();
     console.log(`Local sample loaded to track ${trackIndex}: ${file.name}`);
 }
+
+// load init samples for guest users
+function loadInitSamples() {
+    const samples = document.getElementById("samples");
+
+    initSamples.samples.forEach((sample, index) => {
+        const option = document.createElement("option");
+        option.value = sample.path;
+        option.dataset.name = sample.name;
+        option.innerHTML = '📦 ' + sample.name;
+        option.classList.add("initSample");
+        samples.appendChild(option);
+
+        // automatically loads the samples in
+        /*
+        if (instruments[index]) {
+            instruments[index].load(sample.path);
+
+            // Sync the internal data so the UI knows what's loaded
+            currentData.tracks[index].samplePath = sample.path;
+            currentData.tracks[index].sampleName = sample.name;
+        }
+            */
+    })
+}

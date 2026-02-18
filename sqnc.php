@@ -34,7 +34,6 @@ session_start();
                 <?php
                     if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true) {
                     ?>
-                    <!--<a href="sqnc.php">User Library</a>-->
                     <a href="api/logout.php">Log Out</a>
                     <?php
                     }else {

@@ -418,46 +418,46 @@ var currentData = JSON.parse(JSON.stringify(initData));
 
 // init samples for when user is not logged in
 var initSamples = {
-    tracks: [
+    samples: [
         {
-            samplePath: "/samples/init/Marshalls_Kick.wav",
-            sampleName: "Marshalls Kick",
+            path: "/sqnc/samples/init/Marshalls_Kick.wav",
+            name: "Marshalls Kick",
         },
         {
-            samplePath: "/samples/init/Marshalls_Clap.wav",
-            sampleName: "Marshalls Clap",
+            path: "/sqnc/samples/init/Marshalls_Clap.wav",
+            name: "Marshalls Clap",
         },
         {
-            samplePath: "/samples/init/Marshalls_Open.wav",
-            sampleName: "Marshalls Open Hat",
+            path: "/sqnc/samples/init/Marshalls_Open.wav",
+            name: "Marshalls Open Hat",
         },
         {
-            samplePath: "/samples/init/Marshalls_Closed.wav",
-            sampleName: "Marshalls Closed Hat",
+            path: "/sqnc/samples/init/Marshalls_Closed.wav",
+            name: "Marshalls Closed Hat",
         },
         {
-            samplePath: "sqnc/samples/init/Digi Buzzy Bass.wav",
-            sampleName: "Digi Buzzy Bass",
+            path: "/sqnc/samples/init/Digi Buzz Bass.wav",
+            name: "Digi Buzz Bass",
         },
         {
-            samplePath: "/samples/init/canto.wav",
-            sampleName: "Canto Stab",
+            path: "/sqnc/samples/init/canto.wav",
+            name: "Canto Stab",
         },
         {
-            samplePath: "/samples/init/Grain_Drone.wav",
-            sampleName: "Grain Drone",
+            path: "/sqnc/samples/init/Grain_Drone.wav",
+            name: "Grain Drone",
         },
         {
-            samplePath: "sqnc/samples/init/Digi Galactic Bass.wav",
-            sampleName: "Digi Galactic Bass",
+            path: "/sqnc/samples/init/OB Cosmic Pad.wav",
+            name: "OB Cosmic Pad",
         },
         {
-            samplePath: "/samples/init/OB Cosmic Pad.wav",
-            sampleName: "OB Cosmic Pad",
+            path: "/sqnc/samples/init/Digi Galactic Bass.wav",
+            name: "Digi Galactic Bass",
         },
         {
-            samplePath: "sqnc/samples/init/Pro 3 bass 1.wav",
-            sampleName: "Pro3 Bass",
+            path: "/sqnc/samples/init/Pro 3 bass 1.wav",
+            name: "Pro3 Bass",
         },
     ],
 };

@@ -454,6 +454,10 @@ footer {
     color: white;
 }
 
+.initSample {
+    color: #e2ab45;
+}
+
 .hidden {
     display: none !important;
 }
