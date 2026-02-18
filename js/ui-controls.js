@@ -1638,6 +1638,10 @@ function renderMasterParams() {
         row.classList.remove("hidden");
     });
 
+    setMasterVol(currentData.masterVolume);
+    setTempo(currentData.bpm);
+    setSwing(currentData.swing);
+
     updateDirtUI(master.dirt);
     setMasterDirt(master.dirt);
 
