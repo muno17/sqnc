@@ -3,8 +3,8 @@
 function initSequencer() {
     const sequence = document.getElementById("sequencer");
 
-    // activate the step on double click
-    sequence.addEventListener("dblclick", function (e) {
+    // activate the step on click
+    sequence.addEventListener("click", function (e) {
         if (currentTrack === 99) return;
         
         // check if an actual step was clicked
@@ -51,19 +51,21 @@ function renderSequencer() {
     });
 }
 
-// code to update sequencer UI position
+// update sequencer UI position to make it look animated
 function updateUIPlayHead(step) {
     if (!running) return;
 
-    // calculate which page the transport is currnetly on
+    // calculate which page the transport is currently on
     const transportPage = Math.floor(step / 16);
     const activeStep = step % 16;
 
+    // remove styling from previous step
     const previous = document.querySelector(".step.current");
     if (previous) {
         previous.classList.remove("current");
     }
 
+    // add styling to current step
     if (transportPage == currentPage) {
         const current = document.querySelector(`.step[data-step="${activeStep}"]`);
         if (current) {
