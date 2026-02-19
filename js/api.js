@@ -1,5 +1,6 @@
 // ****************** communication with the server ****************** \\
 // use fetch api for AJAX requests
+// prototype was causing Tone.js to load multiple times causing audio issues
 
 async function checkLoginStatus() {
     try {
@@ -52,7 +53,6 @@ async function saveSequence() {
         }
 
         projectData = JSON.parse(JSON.stringify(currentData));
-        // currentData = JSON.parse(JSON.stringify(projectData));
         console.log("Saved sequence successfully");
     } catch (err) {
         console.error("Sequence save failed:", err);
@@ -65,10 +65,6 @@ async function saveSequence() {
 
 // when user logs in, load correct sequences
 async function loadSequences() {
-    // load projectData -> copy into currentData
-    // stop if running
-    // disable start button
-    // reenable once loaded
     try {
         const response = await fetch("api/get-user-sequences.php", {
             method: "POST",
@@ -116,7 +112,7 @@ async function getSequence(id) {
     disableSequencer("Loading...");
 
     try {
-        // prepare data to be able to send
+        // prepare data to be able to send via fetch
         const formData = new FormData();
         formData.append("id", id);
 
@@ -127,12 +123,10 @@ async function getSequence(id) {
         const ajax = await response.json();
 
         // load sequence into projectDat and currentData
-        // might need to be just projectData = ajax.content;
         projectData = JSON.parse(ajax.content);
         projectData.id = ajax.id;
         currentData = JSON.parse(JSON.stringify(projectData));
 
-        // add logic for stopping and disabling play until loaded? ***
         syncTrackParams();
         renderMasterParams();
 
@@ -143,7 +137,7 @@ async function getSequence(id) {
         renderSequencer();
         Tone.Transport.cancel();
         setupAudioLoop();
-        console.log("sequence loaded");
+        console.log("Sequence Loaded");
     } catch (err) {
         console.error("Failed to load sequences:", err);
     }
@@ -157,14 +151,6 @@ function loadSequenceSamples() {
     Tone.loaded().then(() => {
         enableSequencer();
         renderParams();
-    });
-}
-
-function loadInstruments() {
-    currentData.tracks.forEach((track, index) => {
-        if (track.samplePath) {
-            instruments[index].load(track.samplePath);
-        }
     });
 }
 
@@ -290,7 +276,7 @@ function loadInitSamples() {
         option.classList.add("initSample");
         samples.appendChild(option);
 
-        // automatically loads the samples in
+        // automatically loads the samples in - probably keep off
         /*
         if (instruments[index]) {
             instruments[index].load(sample.path);
@@ -299,6 +285,6 @@ function loadInitSamples() {
             currentData.tracks[index].samplePath = sample.path;
             currentData.tracks[index].sampleName = sample.name;
         }
-            */
+        */
     })
 }

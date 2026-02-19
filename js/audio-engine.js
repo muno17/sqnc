@@ -82,10 +82,10 @@ function initInstruments() {
         // final output node for the track
         panVols[i] = new Tone.PanVol(track.pan, track.volume);
 
-        // send to reverb bus
+        // send to master reverb bus
         reverbSends[i] = new Tone.Gain(track.reverb);
         panVols[i].connect(reverbSends[i]);
-        reverbSends[i].connect(reverbHeat); // Sends to master reverb bus
+        reverbSends[i].connect(reverbHeat);
 
         // chain the audio path
         instruments[i].chain(
@@ -98,12 +98,12 @@ function initInstruments() {
             tremolos[i],
             delays[i],
             panVols[i],
-            masterEQ, // Final Destination
+            masterEQ, // final destination
         );
     }
 }
 
-// load instruments with currentData
+// load instruments with samples from currentData
 function loadInstruments() {
     currentData.tracks.forEach((track, index) => {
         if (track.samplePath) {
@@ -114,6 +114,7 @@ function loadInstruments() {
 
 // chain together effects to create a master reverb bus
 function initReverbBus() {
+    // dirt
     reverbHeat = new Tone.Chebyshev(20);
     reverbHeat.wet.value = 0.2;
 
@@ -122,9 +123,11 @@ function initReverbBus() {
         preDelay: 0.01,
     });
 
+    // width
     reverbWidener = new Tone.StereoWidener(0.3);
     reverbLimiter = new Tone.Limiter(-3);
 
+    // chain effects from reverb bus together and send to masterEQ
     reverbHeat.chain(masterReverb, reverbWidener, reverbLimiter, masterEQ);
 
     masterReverb.generate();
@@ -133,6 +136,7 @@ function initReverbBus() {
 function initMasterChain() {
     masterVolNode = new Tone.Gain(1);
 
+    // init master effects
     masterEQ = new Tone.EQ3(0, 0, 0);
     masterCompressor = new Tone.Compressor(-24, 3);
     masterSaturator = new Tone.Distortion(0.1);
@@ -141,6 +145,7 @@ function initMasterChain() {
 
     initReverbBus();
 
+    // chain master audio and send to main output
     masterEQ.chain(
         masterCompressor,
         masterSaturator,
@@ -172,7 +177,7 @@ window.onload = async function () {
             loadSequences();
             loadSamples();
         } else {
-            // load 
+            // load init samples into sample dropdown for guests
             loadInitSamples();
         }
 
@@ -191,8 +196,8 @@ window.onload = async function () {
     }
 };
 
+// remove loading screen modal, add a bit of extra time for everything to shift into place
 function removeLoadingScreen() {
-    // remove loading screen, add a bit of extra time for everything to shift into place
     setTimeout(() => {
         const loader = document.getElementById("loading-overlay");
         loader.style.opacity = "0";
@@ -227,7 +232,7 @@ function setupAudioLoop() {
         Tone.Draw.schedule(() => {
             updateUIPlayHead(stepToDraw);
 
-            // flash to bpm
+            // flash current page to bpm
             if (stepToDraw % 4 === 0) {
                 togglePageHit(stepToDraw);
             }
@@ -238,6 +243,7 @@ function setupAudioLoop() {
     }, "16n");
 }
 
+// trigger the audio for sample playback
 function playTrackSound(index, time) {
     const player = instruments[index];
     const env = ampEnvs[index];
@@ -246,7 +252,7 @@ function playTrackSound(index, time) {
 
     try {
         if (player && player.buffer && player.buffer.loaded) {
-            // stop the player and current env immediately
+            // stop the player and current env immediately so cut off existing sound
             player.stop(now);
             env.cancel(now);
 
