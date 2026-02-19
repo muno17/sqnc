@@ -4,8 +4,11 @@ body {
     color: white;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
     margin: 0;
-    min-height: 100vh;
+    height: 100vh;
+    overflow: hidden;
 }
 
 header {
@@ -16,8 +19,9 @@ header {
 header,
 footer {
     background-color: #5f9f89;
-    height: 100%;
+    height: auto;
     width: 100%;
+    flex-shrink: 0;
 }
 
 header {
@@ -64,12 +68,6 @@ header a {
     color: white;
 }
 
-body {
-    align-items: center;
-    justify-content: center;
-
-}
-
 button {
     border-radius: 5px;
     box-shadow: 1px 1px 2px black;
@@ -96,7 +94,10 @@ h3 {
     display: flex;
     height: 760px;
     align-items: center;
+    justify-content: center;
     flex-grow: 1;
+    transform: scale(0.9);
+    transform-origin: center;
 }
 
 .wood {

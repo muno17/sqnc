@@ -88,6 +88,7 @@ session_start();
                                         <input type="file" id="localFile" accept=".wav,.mp3" style="display:none">
                                     </div>
                                 </div>
+                                <!-- Track Params -->
                                 <div class="paramRow">
                                     <div class="house">
                                         <h2>Volume</h2>
@@ -154,7 +155,7 @@ session_start();
                                         <input type="range" min="0" max="20" step="0.1" value="0" class="slider" id="hpq">
                                     </div>
                                 </div>
-                            <!-- Master Track Params -->
+                                <!-- Master Track Params -->
                                 <div id="masterArea" class="master">
                                     <div class="masterEffect">
                                         <h3>Reverb</h3>
@@ -419,8 +420,8 @@ session_start();
             </div>
             <img class="wood" src="style/wood-pattern.png">
         </div>
-        <footer></footer>
-        <!-- modal screens -->
+        <footer>Danny Muñoz - CPSC 5210</footer>
+        <!-- Modal Screens -->
         <!-- New Sequence Modal -->
         <div id="sequence-overlay" class="modal-overlay modal-hidden">
             <div class="modal-box">
@@ -432,6 +433,7 @@ session_start();
                 </div>
             </div>
         </div>
+        <!-- Save Modal -->
         <div id="save-overlay" class="modal-overlay modal-hidden">
             <div class="modal-box">
                 <h3>Save Current Changes?</h3>
