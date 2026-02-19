@@ -11,8 +11,9 @@ var openModal = null;
 
 // massive JSON objects to contain all information
 // currentData is the live object
-// projectData is the master object that interacts with the api
+// projectData is the master object that interacts with the api, contains the last saved state
 // initData is an init object with default parameters
+// initiate all to copies of initData, api calls update projectData and currentData on page load
 var initData = {
     id: null,
     name: "",
