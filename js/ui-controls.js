@@ -1,6 +1,6 @@
 // UI event listeners and logic
 
-// modify based on whether user is logged in or not
+// modify UI based on whether user is logged in or not
 function userNotLoggedIn() {
     const sequences = document.getElementById("sequences");
     sequences.innerHTML = "<option>Log in to save sequences</option>";
@@ -28,44 +28,12 @@ function initTransport() {
     const transport = document.getElementById("transport");
 
     transport.addEventListener("click", async function () {
-        //await Tone.start();
         if (running) {
             stopTransport();
         } else {
             startTransport();
         }
     });
-}
-
-async function startTransport() {
-    const transport = document.getElementById("transport");
-    Tone.context.resume();
-
-    Tone.Transport.loop = true;
-    Tone.Transport.loopEnd = currentData.length;
-
-    // functionality to play
-    currentStep = 0;
-    updateUIPlayHead(0);
-    running = true;
-    Tone.Transport.start("+0.1");
-    transport.innerHTML = "Stop";
-}
-
-function stopTransport() {
-    const transport = document.getElementById("transport");
-    running = false;
-    // functionality to stop
-    Tone.Transport.stop();
-    stopAllSounds();
-    Tone.Draw.cancel();
-
-    currentStep = 0;
-
-    document.querySelectorAll(".step").forEach((el) => {
-        el.classList.remove("current");
-    });
-    transport.innerHTML = "Play";
 }
 
 function initRecord() {
@@ -93,8 +61,6 @@ function initRecord() {
 
             transport.disabled = false;
         } else {
-            // countdown with metronome ***
-
             // start recording
             transport.disabled = true;
             recording = true;
@@ -104,8 +70,8 @@ function initRecord() {
             // reset the transport
             stopTransport();
             startTransport();
+            recorder.start();
         }
-        recorder.start();
     });
 }
 
@@ -179,6 +145,7 @@ function updateSwingUI(val) {
 function initPageSelectors() {
     const pageBtns = document.querySelectorAll(".page");
 
+    // show the sequence for the selected page
     pageBtns.forEach((btn) => {
         btn.addEventListener("click", function () {
             pageBtns.forEach((b) => b.classList.remove("selected"));
@@ -188,6 +155,7 @@ function initPageSelectors() {
             renderSequencer();
         });
 
+        // change length to whatever the page button selected was
         btn.addEventListener("dblclick", function () {
             const newLength = parseInt(this.dataset.index) + 1;
             currentData.length = newLength + "m";
@@ -262,7 +230,7 @@ function resetChanges() {
     changes = false;
 }
 
-// revert back to last loaded projectData
+// revert back to last saved state
 function initReload() {
     const reloadBtn = document.getElementById("reload");
 
@@ -283,7 +251,7 @@ function initReload() {
     });
 }
 
-// init for new 
+// create an init sequence
 async function initNew() {
     const newBtn = document.getElementById("new");
 
@@ -359,6 +327,7 @@ function initOpenModal() {
 function initSampleSelector() {
     const selector = document.getElementById("samples");
 
+    // load sample
     selector.addEventListener("change", function () {
         if (this.value === "upload") {
             return;
@@ -404,8 +373,6 @@ function initGuestUpload() {
 function initTrackSelectors() {
     const trackBtns = document.querySelectorAll(".trackBtn");
 
-    // init master track ***
-
     trackBtns.forEach((btn) => {
         const index = parseInt(btn.dataset.index);
         // for single clicks, display the track's parameters
@@ -438,7 +405,7 @@ function initSequenceSelector() {
     const selector = document.getElementById("sequences");
 
     selector.addEventListener("change", function () {
-                var selectedId = this.value;
+        var selectedId = this.value;
         // save currentData if changes
         if (changes) {
             openSaveModal(selectedId);
@@ -587,6 +554,7 @@ function renderParams() {
             row.classList.add("hidden");
         });
 
+        // show the master UI
         trackParams.classList.add("master");
         effectParams.classList.add("master");
         stateRow.classList.add("master");
@@ -702,16 +670,10 @@ function renderTrackParams() {
     if (track.samplePath) {
         samplesDropdown.value = track.samplePath;
     } else {
-        // Fallback if no sample is loaded
+        // fallback if no sample is loaded
         samplesDropdown.selectedIndex = 0;
         samplesDropdown.value = "";
     }
-
-    /*
-    const nameDisplay = document.getElementById("sampleNameDisplay");
-    if (nameDisplay) {
-        nameDisplay.innerText = track.sampleName || "No Sample Loaded";
-    }*/
 
     // params
     updateVolumeUI(track.volume);

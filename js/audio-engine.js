@@ -283,3 +283,34 @@ function stopAllSounds() {
         }
     });
 }
+
+async function startTransport() {
+    const transport = document.getElementById("transport");
+    Tone.context.resume();
+
+    Tone.Transport.loop = true;
+    Tone.Transport.loopEnd = currentData.length;
+
+    // functionality to play
+    currentStep = 0;
+    updateUIPlayHead(0);
+    running = true;
+    Tone.Transport.start("+0.1");
+    transport.innerHTML = "Stop";
+}
+
+function stopTransport() {
+    const transport = document.getElementById("transport");
+    running = false;
+    // functionality to stop
+    Tone.Transport.stop();
+    stopAllSounds();
+    Tone.Draw.cancel();
+
+    currentStep = 0;
+
+    document.querySelectorAll(".step").forEach((el) => {
+        el.classList.remove("current");
+    });
+    transport.innerHTML = "Play";
+}
