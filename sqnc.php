@@ -1,10 +1,8 @@
 <?php
-// start session
 session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
-    <!-- Web Programming, sqnc drum machine -->
     <head>
         <title>sqnc</title>
         <meta charset="utf-8" />

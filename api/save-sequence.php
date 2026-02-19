@@ -1,6 +1,5 @@
 <?php
 ###### save a sequence into the db
-
 session_start();
 require_once "db.php";
 

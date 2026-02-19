@@ -1,6 +1,5 @@
 <?php
 ###### gets all of the user's sequences
-
 session_start();
 require_once "db.php";
 

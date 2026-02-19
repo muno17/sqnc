@@ -1,6 +1,5 @@
 <?php
 ###### log a user in, perform validation
-
 session_start();
 require_once "db.php";
 

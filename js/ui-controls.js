@@ -17,6 +17,9 @@ function userNotLoggedIn() {
     const guestUpload = document.getElementById("guestUpload");
     guestUpload.classList.toggle("hidden");
 
+    const reload = document.getElementById("reload");
+    reload.innerHTML = "Reset"
+
     loggedIn = false;
 }
 

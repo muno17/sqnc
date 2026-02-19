@@ -1,6 +1,5 @@
 <?php
 ###### gets content for a selected sequence
-
 session_start();
 require_once "db.php";
 

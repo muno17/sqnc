@@ -1,6 +1,5 @@
 <?php
 ###### signup an account, perform validation
-
 session_start();
 require_once "db.php";
 
@@ -13,9 +12,6 @@ if (isset($_POST["username"]) && isset($_POST["password"])) {
     header("Location: /sqnc/signup.php?error=$error");
     exit;
 }
-
-########********* validate *********########
-
 
 ########********* connect to db and query  *********########
 try {
